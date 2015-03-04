@@ -549,42 +549,26 @@ Namespace Connection
                 Fullscreen
                 <LocalizedDescription("strRDPSmartSize")> _
                 SmartSize
-                <Description("640x480")> _
-                Res640x480
-                <Description("800x600")> _
-                Res800x600
                 <Description("1024x768")> _
                 Res1024x768
                 <Description("1152x864")> _
                 Res1152x864
-                <Description("1280x800")> _
-                Res1280x800
                 <Description("1280x1024")> _
                 Res1280x1024
-                <Description("1400x1050")> _
-                Res1400x1050
-                <Description("1440x900")> _
-                Res1440x900
-                <Description("1600x1024")> _
-                Res1600x1024
                 <Description("1600x1200")> _
                 Res1600x1200
-                <Description("1600x1280")> _
-                Res1600x1280
                 <Description("1680x1050")> _
                 Res1680x1050
-                <Description("1900x1200")> _
-                Res1900x1200
+                <Description("1920x1080")> _
+                Res1920x1080
                 <Description("1920x1200")> _
                 Res1920x1200
                 <Description("2048x1536")> _
                 Res2048x1536
                 <Description("2560x2048")> _
                 Res2560x2048
-                <Description("3200x2400")> _
-                Res3200x2400
-                <Description("3840x2400")> _
-                Res3840x2400
+                <Description("3840x2160")> _
+                Res3840x2160
             End Enum
 
             Public Enum AuthenticationLevel
