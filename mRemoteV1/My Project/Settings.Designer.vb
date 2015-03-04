@@ -1246,41 +1246,15 @@ Namespace My
             End Set
         End Property
         
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Configuration.SettingsProviderAttribute(GetType(mRemoteNG.Config.Settings.Providers.ChooseProvider)),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("EncrBasic")>  _
-        Public Property ConDefaultICAEncryptionStrength() As String
-            Get
-                Return CType(Me("ConDefaultICAEncryptionStrength"),String)
-            End Get
-            Set
-                Me("ConDefaultICAEncryptionStrength") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Configuration.SettingsProviderAttribute(GetType(mRemoteNG.Config.Settings.Providers.ChooseProvider)),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property InhDefaultICAEncryptionStrength() As Boolean
-            Get
-                Return CType(Me("InhDefaultICAEncryptionStrength"),Boolean)
-            End Get
-            Set
-                Me("InhDefaultICAEncryptionStrength") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Configuration.SettingsProviderAttribute(GetType(mRemoteNG.Config.Settings.Providers.ChooseProvider)),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        <Global.System.Configuration.UserScopedSettingAttribute(), _
+         Global.System.Configuration.SettingsProviderAttribute(GetType(mRemoteNG.Config.Settings.Providers.ChooseProvider)), _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.Configuration.DefaultSettingValueAttribute("")> _
         Public Property ConDefaultPreExtApp() As String
             Get
-                Return CType(Me("ConDefaultPreExtApp"),String)
+                Return CType(Me("ConDefaultPreExtApp"), String)
             End Get
-            Set
+            Set(value As String)
                 Me("ConDefaultPreExtApp") = value
             End Set
         End Property

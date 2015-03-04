@@ -30,8 +30,7 @@ Namespace UI
                     Dim connectionInfo As mRemoteNG.Connection.Info = TryCast(mRemoteNG.Tree.Node.SelectedNode.Tag, mRemoteNG.Connection.Info)
                     If connectionInfo Is Nothing Then Return
 
-                    If Not (connectionInfo.Protocol = mRemoteNG.Connection.Protocol.Protocols.RDP Or _
-                            connectionInfo.Protocol = mRemoteNG.Connection.Protocol.Protocols.ICA) Then Return
+                    If Not (connectionInfo.Protocol = mRemoteNG.Connection.Protocol.Protocols.RDP) Then Return
 
                     Dim data As New BackgroundData
                     With data
@@ -237,8 +236,7 @@ Namespace UI
                     sessionMenuLogoff.Enabled = False
                 End If
 
-                If connectionInfo.Protocol = mRemoteNG.Connection.Protocol.Protocols.RDP Or _
-                   connectionInfo.Protocol = mRemoteNG.Connection.Protocol.Protocols.ICA Then
+                If connectionInfo.Protocol = mRemoteNG.Connection.Protocol.Protocols.RDP Then
                     sessionMenuRetrieve.Enabled = True
                 Else
                     sessionMenuRetrieve.Enabled = False

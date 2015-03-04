@@ -1054,43 +1054,6 @@ Namespace UI
                                 strHide.Add("VNCProxyUsername")
                                 strHide.Add("VNCSmartSizeMode")
                                 strHide.Add("VNCViewOnly")
-                            Case mRemoteNG.Connection.Protocol.Protocols.ICA
-                                strHide.Add("DisplayThemes")
-                                strHide.Add("DisplayWallpaper")
-                                strHide.Add("EnableFontSmoothing")
-                                strHide.Add("EnableDesktopComposition")
-                                strHide.Add("ExtApp")
-                                strHide.Add("Port")
-                                strHide.Add("PuttySession")
-                                strHide.Add("RDGatewayDomain")
-                                strHide.Add("RDGatewayHostname")
-                                strHide.Add("RDGatewayPassword")
-                                strHide.Add("RDGatewayUsageMethod")
-                                strHide.Add("RDGatewayUseConnectionCredentials")
-                                strHide.Add("RDGatewayUsername")
-                                strHide.Add("RDPAuthenticationLevel")
-                                strHide.Add("LoadBalanceInfo")
-                                strHide.Add("RedirectDiskDrives")
-                                strHide.Add("RedirectKeys")
-                                strHide.Add("RedirectPorts")
-                                strHide.Add("RedirectPrinters")
-                                strHide.Add("RedirectSmartCards")
-                                strHide.Add("RedirectSound")
-                                strHide.Add("RenderingEngine")
-                                strHide.Add("AutomaticResize")
-                                strHide.Add("UseConsoleSession")
-                                strHide.Add("UseCredSsp")
-                                strHide.Add("VNCAuthMode")
-                                strHide.Add("VNCColors")
-                                strHide.Add("VNCCompression")
-                                strHide.Add("VNCEncoding")
-                                strHide.Add("VNCProxyIP")
-                                strHide.Add("VNCProxyPassword")
-                                strHide.Add("VNCProxyPort")
-                                strHide.Add("VNCProxyType")
-                                strHide.Add("VNCProxyUsername")
-                                strHide.Add("VNCSmartSizeMode")
-                                strHide.Add("VNCViewOnly")
                             Case mRemoteNG.Connection.Protocol.Protocols.IntApp
                                 strHide.Add("CacheBitmaps")
                                 strHide.Add("Colors")
@@ -1227,10 +1190,6 @@ Namespace UI
 
                                 If .RenderingEngine Then
                                     strHide.Add("RenderingEngine")
-                                End If
-
-                                If .ICAEncryption Then
-                                    strHide.Add("ICAEncryption")
                                 End If
 
                                 If .RDPAuthenticationLevel Then

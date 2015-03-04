@@ -35,8 +35,6 @@ Namespace Connection
             HTTP = 7
             <LocalizedDescription("strHttps")> _
             HTTPS = 8
-            <LocalizedDescription("strICA")> _
-            ICA = 9
             <LocalizedDescription("strExtApp")> _
             IntApp = 20
         End Enum

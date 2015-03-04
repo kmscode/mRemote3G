@@ -221,8 +221,7 @@ Namespace UI
                                 cMenTreeToolsTransferFile.Enabled = False
                             End If
 
-                            If Not (connectionInfo.Protocol = mRemoteNG.Connection.Protocol.Protocols.RDP Or _
-                                    connectionInfo.Protocol = mRemoteNG.Connection.Protocol.Protocols.ICA) Then
+                            If Not (connectionInfo.Protocol = mRemoteNG.Connection.Protocol.Protocols.RDP) Then
                                 cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = False
                                 cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = False
                             End If

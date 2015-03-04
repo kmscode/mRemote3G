@@ -263,6 +263,7 @@ Public Class frmMain
 #If PORTABLE Then
         Return
 #End If
+#If 0 Then
         If Not My.Settings.CheckForUpdatesAsked Then
             Dim commandButtons() As String = {My.Language.strAskUpdatesCommandRecommended, My.Language.strAskUpdatesCommandCustom, My.Language.strAskUpdatesCommandAskLater}
             cTaskDialog.ShowTaskDialogBox(Me, My.Application.Info.ProductName, My.Language.strAskUpdatesMainInstruction, String.Format(My.Language.strAskUpdatesContent, My.Application.Info.ProductName), "", "", "", "", String.Join("|", commandButtons), eTaskDialogButtons.None, eSysIcons.Question, eSysIcons.Question)
@@ -283,6 +284,8 @@ Public Class frmMain
             Startup.CheckForUpdate()
             Startup.CheckForAnnouncement()
         End If
+#End If
+
     End Sub
 
     Private Sub frmMain_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing

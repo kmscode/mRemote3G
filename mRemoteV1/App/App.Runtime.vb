@@ -752,7 +752,6 @@ Namespace App
                 My.Settings.ConDefaultDomain = .Domain
                 My.Settings.ConDefaultProtocol = .Protocol.ToString
                 My.Settings.ConDefaultPuttySession = .PuttySession
-                My.Settings.ConDefaultICAEncryptionStrength = .ICAEncryption.ToString
                 My.Settings.ConDefaultRDPAuthenticationLevel = .RDPAuthenticationLevel.ToString
                 My.Settings.ConDefaultLoadBalanceInfo = .LoadBalanceInfo
                 My.Settings.ConDefaultUseConsoleSession = .UseConsoleSession
@@ -820,7 +819,6 @@ Namespace App
                 My.Settings.InhDefaultUseConsoleSession = .UseConsoleSession
                 My.Settings.InhDefaultUseCredSsp = .UseCredSsp
                 My.Settings.InhDefaultRenderingEngine = .RenderingEngine
-                My.Settings.InhDefaultICAEncryptionStrength = .ICAEncryption
                 My.Settings.InhDefaultRDPAuthenticationLevel = .RDPAuthenticationLevel
                 My.Settings.InhDefaultLoadBalanceInfo = .LoadBalanceInfo
                 My.Settings.InhDefaultResolution = .Resolution
@@ -1459,8 +1457,6 @@ Namespace App
                         newProtocol = New Protocol.HTTP(newConnectionInfo.RenderingEngine)
                     Case Protocol.Protocols.HTTPS
                         newProtocol = New Protocol.HTTPS(newConnectionInfo.RenderingEngine)
-                    Case Protocol.Protocols.ICA
-                        newProtocol = New Protocol.ICA
                     Case Protocol.Protocols.IntApp
                         newProtocol = New Protocol.IntegratedProgram
 
