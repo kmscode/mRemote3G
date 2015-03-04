@@ -3,9 +3,6 @@ Imports System.Security.Principal
 Imports System.Security.Permissions
 Imports mRemoteNG.App.Runtime
 
-<Assembly: SecurityPermissionAttribute(SecurityAction.RequestMinimum, UnmanagedCode:=True), _
-Assembly: PermissionSetAttribute(SecurityAction.RequestMinimum, Name:="FullTrust")> 
-
 Namespace Security
     Public Class Impersonator
 #Region "Logon API"
