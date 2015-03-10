@@ -204,9 +204,11 @@ Namespace Connection
 
 #Region "Private Methods"
             Private Function DoResize() As Boolean
-                Control.Location = InterfaceControl.Location
                 If Not Control.Size = InterfaceControl.Size And Not InterfaceControl.Size = Size.Empty Then
+                    Dim resolution As Rectangle = GetResolutionRectangle(_connectionInfo.Resolution)
+                    SetFixedAspectRect(resolution)
                     Control.Size = InterfaceControl.Size
+                    Control.Location = InterfaceControl.Location
                     Return True
                 Else
                     Return False
@@ -363,11 +365,33 @@ Namespace Connection
                             Dim resolution As Rectangle = GetResolutionRectangle(_connectionInfo.Resolution)
                             _rdpClient.DesktopWidth = resolution.Width
                             _rdpClient.DesktopHeight = resolution.Height
+                            Me.SmartSize = True
                     End Select
                 Catch ex As Exception
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetResolutionFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
+
+            Private Sub SetFixedAspectRect(ByRef resolution As Rectangle)
+                Dim ratioW As Double = InterfaceControl.Parent.Size.Width / resolution.Width
+                Dim ratioH As Double = InterfaceControl.Parent.Size.Height / resolution.Height
+
+                Dim scale As Double = Math.Min(ratioW, ratioH)
+
+                If scale > 1.0 Then
+                    Exit Sub
+                End If
+
+                If resolution.Width > resolution.Height Then
+                    Me.InterfaceControl.Size = New Size(InterfaceControl.Parent.Size.Width, InterfaceControl.Parent.Size.Width * (resolution.Height / resolution.Width))
+                    'Me.InterfaceControl.Location = New Point(0, (InterfaceControl.Parent.Height - InterfaceControl.Size.Height) / 2)
+                Else
+                    Me.InterfaceControl.Size = New Size(InterfaceControl.Parent.Size.Height * (resolution.Width / resolution.Height), InterfaceControl.Parent.Size.Height)
+                    'Me.InterfaceControl.Location = New Point((InterfaceControl.Parent.Width - InterfaceControl.Size.Width) / 2, 0)
+                End If
+
+            End Sub
+
 
             Private Sub SetPort()
                 Try
