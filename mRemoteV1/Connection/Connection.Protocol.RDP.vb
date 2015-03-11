@@ -382,14 +382,7 @@ Namespace Connection
                     Exit Sub
                 End If
 
-                If resolution.Width > resolution.Height Then
-                    Me.InterfaceControl.Size = New Size(InterfaceControl.Parent.Size.Width, InterfaceControl.Parent.Size.Width * (resolution.Height / resolution.Width))
-                    'Me.InterfaceControl.Location = New Point(0, (InterfaceControl.Parent.Height - InterfaceControl.Size.Height) / 2)
-                Else
-                    Me.InterfaceControl.Size = New Size(InterfaceControl.Parent.Size.Height * (resolution.Width / resolution.Height), InterfaceControl.Parent.Size.Height)
-                    'Me.InterfaceControl.Location = New Point((InterfaceControl.Parent.Width - InterfaceControl.Size.Width) / 2, 0)
-                End If
-
+                Me.InterfaceControl.Size = New Size(resolution.Width * scale, resolution.Height * scale)
             End Sub
 
 
