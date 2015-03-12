@@ -138,6 +138,7 @@ Namespace Connection
                 Try
                     _rdpClient.Connect()
                     MyBase.Connect()
+                    DoResize()
                     Return True
                 Catch ex As Exception
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpConnectionOpenFailed & vbNewLine & ex.Message)
@@ -211,6 +212,8 @@ Namespace Connection
                 Dim resolution As Rectangle = GetResolutionRectangle(_connectionInfo.Resolution)
                 SetFixedAspectRect(resolution)
                 Control.Size = InterfaceControl.Size
+                Control.Location = InterfaceControl.Location
+
                 Return True
                 'Else
                 'Return False
