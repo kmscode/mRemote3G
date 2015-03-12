@@ -204,16 +204,32 @@ Namespace Connection
 
 #Region "Private Methods"
             Private Function DoResize() As Boolean
-                If Not Control.Size = InterfaceControl.Size And Not InterfaceControl.Size = Size.Empty Then
-                    Dim resolution As Rectangle = GetResolutionRectangle(_connectionInfo.Resolution)
-                    SetFixedAspectRect(resolution)
-                    Control.Size = InterfaceControl.Size
-                    Control.Location = InterfaceControl.Location
-                    Return True
-                Else
-                    Return False
-                End If
+                Control.Location = New Point(0, 0)
+                InterfaceControl.Location = New Point(0, 0)
+
+                'If Not Control.Size = InterfaceControl.Size And Not InterfaceControl.Size = Size.Empty Then
+                Dim resolution As Rectangle = GetResolutionRectangle(_connectionInfo.Resolution)
+                SetFixedAspectRect(resolution)
+                Control.Size = InterfaceControl.Size
+                Return True
+                'Else
+                'Return False
+                'End If
             End Function
+
+            Private Sub SetFixedAspectRect(ByRef resolution As Rectangle)
+                Dim ratioW As Double = InterfaceControl.Parent.Size.Width / resolution.Width
+                Dim ratioH As Double = InterfaceControl.Parent.Size.Height / resolution.Height
+
+                Dim scale As Double = Math.Min(ratioW, ratioH)
+
+                If scale > 1.0 Then
+                    Exit Sub
+                End If
+
+                Me.InterfaceControl.Size = New Size(resolution.Width * scale, resolution.Height * scale)
+            End Sub
+
 
             Private Sub ReconnectForResize()
                 If _rdpVersion < Versions.RDC80 Then Return
@@ -370,19 +386,6 @@ Namespace Connection
                 Catch ex As Exception
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetResolutionFailed & vbNewLine & ex.Message, True)
                 End Try
-            End Sub
-
-            Private Sub SetFixedAspectRect(ByRef resolution As Rectangle)
-                Dim ratioW As Double = InterfaceControl.Parent.Size.Width / resolution.Width
-                Dim ratioH As Double = InterfaceControl.Parent.Size.Height / resolution.Height
-
-                Dim scale As Double = Math.Min(ratioW, ratioH)
-
-                If scale > 1.0 Then
-                    Exit Sub
-                End If
-
-                Me.InterfaceControl.Size = New Size(resolution.Width * scale, resolution.Height * scale)
             End Sub
 
 
