@@ -34,6 +34,7 @@ Namespace Connection
                 Me.Parent = Parent
                 Me.Location = New Point(0, 0)
                 Me.Size = Me.Parent.Size
+                Me.BackColor = Color.Black
                 Me.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right Or AnchorStyles.Top
                 InitializeComponent()
             Catch ex As Exception

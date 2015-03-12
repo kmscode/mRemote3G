@@ -19,6 +19,7 @@ Namespace Connection
                 End Get
                 Set(ByVal value As Boolean)
                     _rdpClient.AdvancedSettings2.SmartSizing = value
+                    DoResize()
                     ReconnectForResize()
                 End Set
             End Property
@@ -205,34 +206,30 @@ Namespace Connection
 
 #Region "Private Methods"
             Private Function DoResize() As Boolean
-                Control.Location = New Point(0, 0)
-                InterfaceControl.Location = New Point(0, 0)
+                If Not SmartSize Then
+                    Control.Size = InterfaceControl.Size
+                    Control.Location = InterfaceControl.Location
+                    Return True
+                End If
 
-                'If Not Control.Size = InterfaceControl.Size And Not InterfaceControl.Size = Size.Empty Then
                 Dim resolution As Rectangle = GetResolutionRectangle(_connectionInfo.Resolution)
-                SetFixedAspectRect(resolution)
-                Control.Size = InterfaceControl.Size
-                Control.Location = InterfaceControl.Location
-
-                Return True
-                'Else
-                'Return False
-                'End If
-            End Function
-
-            Private Sub SetFixedAspectRect(ByRef resolution As Rectangle)
                 Dim ratioW As Double = InterfaceControl.Parent.Size.Width / resolution.Width
                 Dim ratioH As Double = InterfaceControl.Parent.Size.Height / resolution.Height
 
                 Dim scale As Double = Math.Min(ratioW, ratioH)
 
                 If scale > 1.0 Then
-                    Exit Sub
+                    Return True
                 End If
 
-                Me.InterfaceControl.Size = New Size(resolution.Width * scale, resolution.Height * scale)
-            End Sub
+                Me.Control.Size = New Size(resolution.Width * scale, resolution.Height * scale)
 
+                Dim parentRect As Rectangle = Control.Parent.ClientRectangle
+                Control.Left = (parentRect.Width - Control.Width) / 2
+                Control.Top = (parentRect.Height - Control.Height) / 2
+
+                Return True
+            End Function
 
             Private Sub ReconnectForResize()
                 If _rdpVersion < Versions.RDC80 Then Return
