@@ -1,4 +1,13 @@
-1.73 Beta 2 ():
+1.80 (2015-11-05):
+  Compile with VS 2015
+  Target .NET Framework 4.6
+  Remove ICA support (unable to find proper required library, not a "key" feature from my perspective)
+  Fixed some form inconsistencies - OK btn left of Cancel btn, no more flat style controls (Pull Request #101 from Upstream)
+  Latest DockPanel Suite library 2.9.0 - https://github.com/dockpanelsuite/dockpanelsuite
+  Disable the update check (at least for now).
+  PuTTYNG updated to 0.65 from Upstream PuTTY release
+  
+1.73 Beta 2 (NOT RELEASED):
   Fixed issue MR-619 - Keyboard shortcuts stop working after locking the screen with Win+L
   Added support for importing files from PuTTY Connection Manager.
   Improved the import and export functionality.
