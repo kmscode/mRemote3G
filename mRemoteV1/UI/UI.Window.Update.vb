@@ -63,7 +63,8 @@ Namespace UI
                     Return
                 End If
 
-                lblStatus.Text = Language.strUpdateCheckingLabel
+                'lblStatus.Text = Language.strUpdateCheckingLabel
+                lblStatus.Text = "Update Check is currently disabled."
                 lblStatus.ForeColor = SystemColors.WindowText
                 lblLatestVersionLabel.Visible = False
                 lblInstalledVersion.Visible = False
@@ -71,6 +72,8 @@ Namespace UI
                 lblLatestVersion.Visible = False
                 btnCheckForUpdate.Visible = False
                 pnlUpdate.Visible = False
+
+                Return
 
                 AddHandler _appUpdate.GetUpdateInfoCompletedEvent, AddressOf GetUpdateInfoCompleted
 
