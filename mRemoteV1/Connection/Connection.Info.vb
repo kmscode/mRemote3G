@@ -169,20 +169,6 @@ Namespace Connection
             End Set
         End Property
 
-        Private _icaEncryption As Protocol.ICA.EncryptionStrength = Tools.Misc.StringToEnum(GetType(Protocol.ICA.EncryptionStrength), My.Settings.ConDefaultICAEncryptionStrength)
-        <LocalizedCategory("strCategoryProtocol", 3), _
-            LocalizedDisplayName("strPropertyNameEncryptionStrength"), _
-            LocalizedDescription("strPropertyDescriptionEncryptionStrength"), _
-            TypeConverter(GetType(Tools.Misc.EnumTypeConverter))> _
-        Public Property ICAEncryption() As Protocol.ICA.EncryptionStrength
-            Get
-                Return GetInheritedPropertyValue("ICAEncryption", _icaEncryption)
-            End Get
-            Set(ByVal value As Protocol.ICA.EncryptionStrength)
-                _icaEncryption = value
-            End Set
-        End Property
-
         Private _useConsoleSession As Boolean = My.Settings.ConDefaultUseConsoleSession
         <LocalizedCategory("strCategoryProtocol", 3), _
             LocalizedDisplayName("strPropertyNameUseConsoleSession"), _
@@ -872,8 +858,6 @@ Namespace Connection
                         Return Connection.Protocol.HTTP.Defaults.Port
                     Case Connection.Protocol.Protocols.HTTPS
                         Return Connection.Protocol.HTTPS.Defaults.Port
-                    Case Connection.Protocol.Protocols.ICA
-                        Return Connection.Protocol.ICA.Defaults.Port
                     Case Connection.Protocol.Protocols.IntApp
                         Return Connection.Protocol.IntegratedProgram.Defaults.Port
                 End Select

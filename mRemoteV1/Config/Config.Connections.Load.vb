@@ -446,9 +446,6 @@ Namespace Config
                         conI.Panel = .Item("Panel")
 
                         If Me.confVersion > 1.5 Then '1.6
-                            conI.ICAEncryption = Tools.Misc.StringToEnum(GetType(Connection.Protocol.ICA.EncryptionStrength), .Item("ICAEncryptionStrength"))
-                            conI.Inherit.ICAEncryption = .Item("InheritICAEncryptionStrength")
-
                             conI.PreExtApp = .Item("PreExtApp")
                             conI.PostExtApp = .Item("PostExtApp")
                             conI.Inherit.PreExtApp = .Item("InheritPreExtApp")
@@ -932,9 +929,6 @@ Namespace Config
                         End If
 
                         If Me.confVersion > 1.5 Then '1.6
-                            conI.ICAEncryption = Tools.Misc.StringToEnum(GetType(mRemoteNG.Connection.Protocol.ICA.EncryptionStrength), .Attributes("ICAEncryptionStrength").Value)
-                            conI.Inherit.ICAEncryption = .Attributes("InheritICAEncryptionStrength").Value
-
                             conI.PreExtApp = .Attributes("PreExtApp").Value
                             conI.PostExtApp = .Attributes("PostExtApp").Value
                             conI.Inherit.PreExtApp = .Attributes("InheritPreExtApp").Value

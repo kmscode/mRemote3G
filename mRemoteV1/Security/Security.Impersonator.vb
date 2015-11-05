@@ -3,8 +3,9 @@ Imports System.Security.Principal
 Imports System.Security.Permissions
 Imports mRemoteNG.App.Runtime
 
-<Assembly: SecurityPermissionAttribute(SecurityAction.RequestMinimum, UnmanagedCode:=True), _
-Assembly: PermissionSetAttribute(SecurityAction.RequestMinimum, Name:="FullTrust")> 
+'warning BC40000: 'RequestMinimum' is obsolete: 'Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'.
+'<Assembly: SecurityPermissionAttribute(SecurityAction.RequestMinimum, UnmanagedCode:=True), _
+'Assembly: PermissionSetAttribute(SecurityAction.RequestMinimum, Name:="FullTrust")> 
 
 Namespace Security
     Public Class Impersonator

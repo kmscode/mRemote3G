@@ -17,7 +17,7 @@ Namespace Connection
                     And Port And Protocol And PuttySession And RedirectDiskDrives And RedirectKeys _
                     And RedirectPorts And RedirectPrinters And RedirectSmartCards And RedirectSound And Resolution _
                     And AutomaticResize And UseConsoleSession And UseCredSsp And RenderingEngine And UserField _
-                    And ExtApp And Username And Panel And ICAEncryption And RDPAuthenticationLevel _
+                    And ExtApp And Username And Panel And RDPAuthenticationLevel _
                     And LoadBalanceInfo And PreExtApp And PostExtApp And MacAddress And VNCAuthMode _
                     And VNCColors And VNCCompression And VNCEncoding And VNCProxyIP And VNCProxyPassword _
                     And VNCProxyPort And VNCProxyType And VNCProxyUsername Then
@@ -94,16 +94,10 @@ Namespace Connection
                 TypeConverter(GetType(Tools.Misc.YesNoTypeConverter))> _
             Public Property PuttySession() As Boolean = My.Settings.InhDefaultPuttySession
 
-            <LocalizedCategory("strCategoryProtocol", 4), _
-                LocalizedDisplayNameInheritAttribute("strPropertyNameEncryptionStrength"), _
-                LocalizedDescriptionInheritAttribute("strPropertyDescriptionEncryptionStrength"), _
-                TypeConverter(GetType(Tools.Misc.YesNoTypeConverter))> _
-            Public Property ICAEncryption() As Boolean = My.Settings.InhDefaultICAEncryptionStrength
-
-            <LocalizedCategory("strCategoryProtocol", 4), _
-                LocalizedDisplayNameInheritAttribute("strPropertyNameAuthenticationLevel"), _
-                LocalizedDescriptionInheritAttribute("strPropertyDescriptionAuthenticationLevel"), _
-                TypeConverter(GetType(Tools.Misc.YesNoTypeConverter))> _
+            <LocalizedCategory("strCategoryProtocol", 4),
+                LocalizedDisplayNameInheritAttribute("strPropertyNameAuthenticationLevel"),
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionAuthenticationLevel"),
+                TypeConverter(GetType(Tools.Misc.YesNoTypeConverter))>
             Public Property RDPAuthenticationLevel() As Boolean = My.Settings.InhDefaultRDPAuthenticationLevel
 
             <LocalizedCategory("strCategoryProtocol", 4), _
@@ -391,7 +385,6 @@ Namespace Connection
                 ExtApp = value
                 Port = value
                 PuttySession = value
-                ICAEncryption = value
                 RDPAuthenticationLevel = value
                 LoadBalanceInfo = value
                 RenderingEngine = value
