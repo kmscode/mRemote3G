@@ -1,7 +1,7 @@
 Imports System.Runtime.InteropServices
 Imports System.ComponentModel
 Imports mRemoteNG.Messages
-Imports mRemoteNG.App.Native
+Imports mRemoteNG.App.NativeMethods
 Imports System.Threading
 Imports Microsoft.Win32
 Imports System.Drawing

@@ -891,10 +891,10 @@ Namespace UI
             Private _doubleClickRectangle As Rectangle
             Private Sub TabController_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles TabController.MouseUp
                 Try
-                    If Not Native.GetForegroundWindow() = frmMain.Handle And Not _ignoreChangeSelectedTabClick Then
+                    If Not NativeMethods.GetForegroundWindow() = frmMain.Handle And Not _ignoreChangeSelectedTabClick Then
                         Dim clickedTab As Magic.Controls.TabPage = TabController.TabPageFromPoint(e.Location)
                         If clickedTab IsNot Nothing And TabController.SelectedTab IsNot clickedTab Then
-                            Native.SetForegroundWindow(Handle)
+                            NativeMethods.SetForegroundWindow(Handle)
                             TabController.SelectedTab = clickedTab
                         End If
                     End If
@@ -915,7 +915,7 @@ Namespace UI
                             CloseConnectionTab()
                         Case MouseButtons.Right
                             ShowHideMenuButtons()
-                            Native.SetForegroundWindow(Handle)
+                            NativeMethods.SetForegroundWindow(Handle)
                             cmenTab.Show(TabController, e.Location)
                     End Select
                 Catch ex As Exception
@@ -956,7 +956,7 @@ Namespace UI
 #Region "Window Overrides"
             Protected Overloads Overrides Sub WndProc(ByRef m As Message)
                 Try
-                    If m.Msg = Native.WM_MOUSEACTIVATE Then
+                    If m.Msg = NativeMethods.WM_MOUSEACTIVATE Then
                         Dim selectedTab As Magic.Controls.TabPage = TabController.SelectedTab
                         If selectedTab IsNot Nothing Then
                             Dim tabClientRectangle As Rectangle = selectedTab.RectangleToScreen(selectedTab.ClientRectangle)

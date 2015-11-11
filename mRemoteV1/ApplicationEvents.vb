@@ -49,11 +49,11 @@
                 'Restore window if minimized. Do not restore if already in
                 'normal or maximised window state, since we don't want to
                 'change the current state of the window.
-                If App.Native.IsIconic(hWnd) <> 0 Then
-                    App.Native.ShowWindow(hWnd, App.Native.SW_RESTORE)
+                If App.NativeMethods.IsIconic(hWnd) <> 0 Then
+                    App.NativeMethods.ShowWindow(hWnd, App.NativeMethods.SW_RESTORE)
                 End If
 
-                App.Native.SetForegroundWindow(hWnd)
+                App.NativeMethods.SetForegroundWindow(hWnd)
             End If
         End Sub
 

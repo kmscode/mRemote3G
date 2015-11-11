@@ -8,7 +8,7 @@ Imports mRemoteNG.App.Runtime
 Imports System.Reflection
 Imports System.Runtime.InteropServices
 Imports Crownwood
-Imports mRemoteNG.App.Native
+Imports mRemoteNG.App.NativeMethods
 Imports PSTaskDialog
 Imports mRemoteNG.Config
 Imports mRemoteNG.Themes

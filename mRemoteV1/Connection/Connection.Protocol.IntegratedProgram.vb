@@ -1,4 +1,4 @@
-﻿Imports mRemoteNG.App.Native
+﻿Imports mRemoteNG.App.NativeMethods
 Imports System.Threading
 Imports mRemoteNG.App.Runtime
 Imports mRemoteNG.Tools
