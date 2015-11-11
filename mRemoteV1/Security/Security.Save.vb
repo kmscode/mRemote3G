@@ -10,7 +10,7 @@ Namespace Security
         End Sub
 
         Private _Username As Boolean
-        Public Property Username() As Boolean
+        Public Property UserName() As Boolean
             Get
                 Return _Username
             End Get

@@ -67,10 +67,10 @@ Namespace Connection
             End Property
 
             <[ReadOnly](True)> _
-            Public Overrides Property Hostname() As String
+            Public Overrides Property HostName() As String
 
             <[ReadOnly](True)> _
-            Public Overrides Property Username() As String
+            Public Overrides Property UserName() As String
 
             <[ReadOnly](True), _
             Browsable(False)> _

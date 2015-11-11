@@ -31,7 +31,7 @@ Namespace App
                                 exportTreeNode = rootTreeNode
                         End Select
 
-                        saveSecurity.Username = .IncludeUsername
+                        saveSecurity.UserName = .IncludeUserName
                         saveSecurity.Password = .IncludePassword
                         saveSecurity.Domain = .IncludeDomain
                         saveSecurity.Inheritance = .IncludeInheritance

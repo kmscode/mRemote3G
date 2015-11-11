@@ -86,7 +86,7 @@ Namespace Connection
 
                     _rdpVersion = New Version(_rdpClient.Version)
 
-                    _rdpClient.Server = Me._connectionInfo.Hostname
+                    _rdpClient.Server = Me._connectionInfo.HostName
 
                     Me.SetCredentials()
                     Me.SetResolution()
@@ -246,20 +246,20 @@ Namespace Connection
 
                     If Not _connectionInfo.RDGatewayUsageMethod = RDGatewayUsageMethod.Never Then
                         _rdpClient.TransportSettings.GatewayUsageMethod = _connectionInfo.RDGatewayUsageMethod
-                        _rdpClient.TransportSettings.GatewayHostname = _connectionInfo.RDGatewayHostname
+                        _rdpClient.TransportSettings.GatewayHostname = _connectionInfo.RDGatewayHostName
                         _rdpClient.TransportSettings.GatewayProfileUsageMethod = 1 ' TSC_PROXY_PROFILE_MODE_EXPLICIT
-                        If _connectionInfo.RDGatewayUseConnectionCredentials = RDGatewayUseConnectionCredentials.SmartCard Then
+                        If _connectionInfo.RDGatewayUseConnectionCredentials = RDGatewayUseConnectionCredentials.Smartcard Then
                             _rdpClient.TransportSettings.GatewayCredsSource = 1 ' TSC_PROXY_CREDS_MODE_SMARTCARD
                         End If
                         If _rdpVersion >= Versions.RDC61 And Not ((Force And Info.Force.NoCredentials) = Info.Force.NoCredentials) Then
                             If _connectionInfo.RDGatewayUseConnectionCredentials = RDGatewayUseConnectionCredentials.Yes Then
-                                _rdpClient.TransportSettings2.GatewayUsername = _connectionInfo.Username
+                                _rdpClient.TransportSettings2.GatewayUsername = _connectionInfo.UserName
                                 _rdpClient.TransportSettings2.GatewayPassword = _connectionInfo.Password
                                 _rdpClient.TransportSettings2.GatewayDomain = _connectionInfo.Domain
-                            ElseIf _connectionInfo.RDGatewayUseConnectionCredentials = RDGatewayUseConnectionCredentials.SmartCard Then
+                            ElseIf _connectionInfo.RDGatewayUseConnectionCredentials = RDGatewayUseConnectionCredentials.Smartcard Then
                                 _rdpClient.TransportSettings2.GatewayCredSharing = 0
                             Else
-                                _rdpClient.TransportSettings2.GatewayUsername = _connectionInfo.RDGatewayUsername
+                                _rdpClient.TransportSettings2.GatewayUsername = _connectionInfo.RDGatewayUserName
                                 _rdpClient.TransportSettings2.GatewayPassword = _connectionInfo.RDGatewayPassword
                                 _rdpClient.TransportSettings2.GatewayDomain = _connectionInfo.RDGatewayDomain
                                 _rdpClient.TransportSettings2.GatewayCredSharing = 0
@@ -299,7 +299,7 @@ Namespace Connection
                 Try
                     If (Force And Info.Force.NoCredentials) = Info.Force.NoCredentials Then Return
 
-                    Dim userName As String = _connectionInfo.Username
+                    Dim userName As String = _connectionInfo.UserName
                     Dim password As String = _connectionInfo.Password
                     Dim domain As String = _connectionInfo.Domain
 
@@ -383,7 +383,7 @@ Namespace Connection
                     _rdpClient.AdvancedSettings2.RedirectDrives = Me._connectionInfo.RedirectDiskDrives
                     _rdpClient.AdvancedSettings2.RedirectPorts = Me._connectionInfo.RedirectPorts
                     _rdpClient.AdvancedSettings2.RedirectPrinters = Me._connectionInfo.RedirectPrinters
-                    _rdpClient.AdvancedSettings2.RedirectSmartCards = Me._connectionInfo.RedirectSmartCards
+                    _rdpClient.AdvancedSettings2.RedirectSmartCards = Me._connectionInfo.RedirectSmartcards
                     _rdpClient.SecuredSettings2.AudioRedirectionMode = Int(Me._connectionInfo.RedirectSound)
                 Catch ex As Exception
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetRedirectionFailed & vbNewLine & ex.Message, True)
@@ -501,116 +501,116 @@ Namespace Connection
             End Enum
 
             Public Enum RDPColors
-                <LocalizedDescription("strRDP256Colors")> _
+                <LocalizedDescription("strRDP256Colors")>
                 Colors256 = 8
-                <LocalizedDescription("strRDP32768Colors")> _
+                <LocalizedDescription("strRDP32768Colors")>
                 Colors15Bit = 15
-                <LocalizedDescription("strRDP65536Colors")> _
+                <LocalizedDescription("strRDP65536Colors")>
                 Colors16Bit = 16
-                <LocalizedDescription("strRDP16777216Colors")> _
+                <LocalizedDescription("strRDP16777216Colors")>
                 Colors24Bit = 24
-                <LocalizedDescription("strRDP4294967296Colors")> _
+                <LocalizedDescription("strRDP4294967296Colors")>
                 Colors32Bit = 32
             End Enum
 
             Public Enum RDPSounds
-                <LocalizedDescription("strRDPSoundBringToThisComputer")> _
+                <LocalizedDescription("strRDPSoundBringToThisComputer")>
                 BringToThisComputer = 0
-                <LocalizedDescription("strRDPSoundLeaveAtRemoteComputer")> _
+                <LocalizedDescription("strRDPSoundLeaveAtRemoteComputer")>
                 LeaveAtRemoteComputer = 1
-                <LocalizedDescription("strRDPSoundDoNotPlay")> _
+                <LocalizedDescription("strRDPSoundDoNotPlay")>
                 DoNotPlay = 2
             End Enum
 
             Private Enum RDPPerformanceFlags
-                <Description("strRDPDisableWallpaper")> _
+                <Description("strRDPDisableWallpaper")>
                 DisableWallpaper = &H1
-                <Description("strRDPDisableFullWindowdrag")> _
+                <Description("strRDPDisableFullWindowdrag")>
                 DisableFullWindowDrag = &H2
-                <Description("strRDPDisableMenuAnimations")> _
+                <Description("strRDPDisableMenuAnimations")>
                 DisableMenuAnimations = &H4
-                <Description("strRDPDisableThemes")> _
+                <Description("strRDPDisableThemes")>
                 DisableThemes = &H8
-                <Description("strRDPDisableCursorShadow")> _
+                <Description("strRDPDisableCursorShadow")>
                 DisableCursorShadow = &H20
-                <Description("strRDPDisableCursorblinking")> _
+                <Description("strRDPDisableCursorblinking")>
                 DisableCursorBlinking = &H40
-                <Description("strRDPEnableFontSmoothing")> _
+                <Description("strRDPEnableFontSmoothing")>
                 EnableFontSmoothing = &H80
-                <Description("strRDPEnableDesktopComposition")> _
+                <Description("strRDPEnableDesktopComposition")>
                 EnableDesktopComposition = &H100
             End Enum
 
             Public Enum RDPResolutions
-                <LocalizedDescription("strRDPFitToPanel")> _
+                <LocalizedDescription("strRDPFitToPanel")>
                 FitToWindow
-                <LocalizedDescription("strFullscreen")> _
+                <LocalizedDescription("strFullscreen")>
                 Fullscreen
-                <LocalizedDescription("strRDPSmartSize")> _
+                <LocalizedDescription("strRDPSmartSize")>
                 SmartSize
-                <Description("640x480")> _
+                <Description("640x480")>
                 Res640x480
-                <Description("800x600")> _
+                <Description("800x600")>
                 Res800x600
-                <Description("1024x768")> _
+                <Description("1024x768")>
                 Res1024x768
-                <Description("1152x864")> _
+                <Description("1152x864")>
                 Res1152x864
-                <Description("1280x800")> _
+                <Description("1280x800")>
                 Res1280x800
-                <Description("1280x1024")> _
+                <Description("1280x1024")>
                 Res1280x1024
-                <Description("1400x1050")> _
+                <Description("1400x1050")>
                 Res1400x1050
-                <Description("1440x900")> _
+                <Description("1440x900")>
                 Res1440x900
-                <Description("1600x1024")> _
+                <Description("1600x1024")>
                 Res1600x1024
-                <Description("1600x1200")> _
+                <Description("1600x1200")>
                 Res1600x1200
-                <Description("1600x1280")> _
+                <Description("1600x1280")>
                 Res1600x1280
-                <Description("1680x1050")> _
+                <Description("1680x1050")>
                 Res1680x1050
-                <Description("1900x1200")> _
+                <Description("1900x1200")>
                 Res1900x1200
-                <Description("1920x1200")> _
+                <Description("1920x1200")>
                 Res1920x1200
-                <Description("2048x1536")> _
+                <Description("2048x1536")>
                 Res2048x1536
-                <Description("2560x2048")> _
+                <Description("2560x2048")>
                 Res2560x2048
-                <Description("3200x2400")> _
+                <Description("3200x2400")>
                 Res3200x2400
-                <Description("3840x2400")> _
+                <Description("3840x2400")>
                 Res3840x2400
             End Enum
 
             Public Enum AuthenticationLevel
-                <LocalizedDescription("strAlwaysConnectEvenIfAuthFails")> _
+                <LocalizedDescription("strAlwaysConnectEvenIfAuthFails")>
                 NoAuth = 0
-                <LocalizedDescription("strDontConnectWhenAuthFails")> _
+                <LocalizedDescription("strDontConnectWhenAuthFails")>
                 AuthRequired = 1
-                <LocalizedDescription("strWarnIfAuthFails")> _
+                <LocalizedDescription("strWarnIfAuthFails")>
                 WarnOnFailedAuth = 2
             End Enum
 
             Public Enum RDGatewayUsageMethod
-                <LocalizedDescription("strNever")> _
+                <LocalizedDescription("strNever")>
                 Never = 0 ' TSC_PROXY_MODE_NONE_DIRECT
-                <LocalizedDescription("strAlways")> _
+                <LocalizedDescription("strAlways")>
                 Always = 1 ' TSC_PROXY_MODE_DIRECT
-                <LocalizedDescription("strDetect")> _
+                <LocalizedDescription("strDetect")>
                 Detect = 2 ' TSC_PROXY_MODE_DETECT
             End Enum
 
             Public Enum RDGatewayUseConnectionCredentials
-                <LocalizedDescription("strUseDifferentUsernameAndPassword")> _
+                <LocalizedDescription("strUseDifferentUsernameAndPassword")>
                 No = 0
-                <LocalizedDescription("strUseSameUsernameAndPassword")> _
+                <LocalizedDescription("strUseSameUsernameAndPassword")>
                 Yes = 1
-                <LocalizedDescription("strUseSmartCard")> _
-                SmartCard = 2
+                <LocalizedDescription("strUseSmartCard")>
+                Smartcard = 2
             End Enum
 #End Region
 
@@ -804,7 +804,7 @@ Namespace Connection
 
 #Region "Reconnect Stuff"
             Private Sub tmrReconnect_Elapsed(ByVal sender As Object, ByVal e As System.Timers.ElapsedEventArgs) Handles tmrReconnect.Elapsed
-                Dim srvReady As Boolean = Tools.PortScan.Scanner.IsPortOpen(_connectionInfo.Hostname, _connectionInfo.Port)
+                Dim srvReady As Boolean = Tools.PortScan.Scanner.IsPortOpen(_connectionInfo.HostName, _connectionInfo.Port)
 
                 ReconnectGroup.ServerReady = srvReady
 

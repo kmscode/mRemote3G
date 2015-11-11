@@ -30,8 +30,8 @@
             Return App.Native.CreatePopupMenu()
         End Function
 
-        Public Function InsertMenuItem(ByVal SysMenu As IntPtr, ByVal Position As Integer, ByVal Flags As Flags, ByVal SubMenu As IntPtr, ByVal Text As String) As Boolean
-            Return App.Native.InsertMenu(SysMenu, Position, Flags, SubMenu, Text)
+        Public Function InsertMenuItem(ByVal SysMenu As IntPtr, ByVal Position As Integer, ByVal Flags As Flags, ByVal Submenu As IntPtr, ByVal Text As String) As Boolean
+            Return App.Native.InsertMenu(SysMenu, Position, Flags, Submenu, Text)
         End Function
 
         Public Function SetBitmap(ByVal Menu As IntPtr, ByVal Position As Integer, ByVal Flags As Flags, ByVal Bitmap As Bitmap) As IntPtr

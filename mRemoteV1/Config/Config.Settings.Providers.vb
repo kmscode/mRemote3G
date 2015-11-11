@@ -42,7 +42,7 @@ Namespace Config
                     Return fi.DirectoryName
                 End Function
 
-                Overridable Function GetAppSettingsFilename() As String
+                Overridable Function GetAppSettingsFileName() As String
                     'Used to determine the filename to store the settings
                     Return "portable.config" 'ApplicationName & ".settings"
                 End Function
@@ -55,7 +55,7 @@ Namespace Config
                     Next
 
                     Try
-                        SettingsXML.Save(IO.Path.Combine(GetAppSettingsPath, GetAppSettingsFilename))
+                        SettingsXML.Save(IO.Path.Combine(GetAppSettingsPath, GetAppSettingsFileName))
                     Catch ex As Exception
                         'Ignore if cant save, device been ejected
                     End Try
@@ -86,7 +86,7 @@ Namespace Config
                             m_SettingsXML = New Xml.XmlDocument
 
                             Try
-                                m_SettingsXML.Load(IO.Path.Combine(GetAppSettingsPath, GetAppSettingsFilename))
+                                m_SettingsXML.Load(IO.Path.Combine(GetAppSettingsPath, GetAppSettingsFileName))
                             Catch ex As Exception
                                 'Create new document
                                 Dim dec As XmlDeclaration = m_SettingsXML.CreateXmlDeclaration("1.0", "utf-8", String.Empty)

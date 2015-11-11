@@ -240,8 +240,8 @@ Namespace Config
                     _sqlQuery.CommandText &= "'" & PrepareValueForDB(.Icon) & "',"
                     _sqlQuery.CommandText &= "'" & PrepareValueForDB(.Panel) & "',"
 
-                    If Me._SaveSecurity.Username = True Then
-                        _sqlQuery.CommandText &= "'" & PrepareValueForDB(.Username) & "',"
+                    If Me._SaveSecurity.UserName = True Then
+                        _sqlQuery.CommandText &= "'" & PrepareValueForDB(.UserName) & "',"
                     Else
                         _sqlQuery.CommandText &= "'" & "" & "',"
                     End If
@@ -258,7 +258,7 @@ Namespace Config
                         _sqlQuery.CommandText &= "'" & "" & "',"
                     End If
 
-                    _sqlQuery.CommandText &= "'" & PrepareValueForDB(.Hostname) & "',"
+                    _sqlQuery.CommandText &= "'" & PrepareValueForDB(.HostName) & "',"
                     _sqlQuery.CommandText &= "'" & .Protocol.ToString & "',"
                     _sqlQuery.CommandText &= "'" & PrepareValueForDB(.PuttySession) & "',"
                     _sqlQuery.CommandText &= "'" & .Port & "',"
@@ -277,7 +277,7 @@ Namespace Config
                     _sqlQuery.CommandText &= "'" & .RedirectDiskDrives & "',"
                     _sqlQuery.CommandText &= "'" & .RedirectPorts & "',"
                     _sqlQuery.CommandText &= "'" & .RedirectPrinters & "',"
-                    _sqlQuery.CommandText &= "'" & .RedirectSmartCards & "',"
+                    _sqlQuery.CommandText &= "'" & .RedirectSmartcards & "',"
                     _sqlQuery.CommandText &= "'" & .RedirectSound.ToString & "',"
                     _sqlQuery.CommandText &= "'" & .RedirectKeys & "',"
 
@@ -299,18 +299,18 @@ Namespace Config
                     _sqlQuery.CommandText &= "'" & .VNCProxyType.ToString & "',"
                     _sqlQuery.CommandText &= "'" & .VNCProxyIP & "',"
                     _sqlQuery.CommandText &= "'" & .VNCProxyPort & "',"
-                    _sqlQuery.CommandText &= "'" & .VNCProxyUsername & "',"
+                    _sqlQuery.CommandText &= "'" & .VNCProxyUserName & "',"
                     _sqlQuery.CommandText &= "'" & Security.Crypt.Encrypt(.VNCProxyPassword, _password) & "',"
                     _sqlQuery.CommandText &= "'" & .VNCColors.ToString & "',"
                     _sqlQuery.CommandText &= "'" & .VNCSmartSizeMode.ToString & "',"
                     _sqlQuery.CommandText &= "'" & .VNCViewOnly & "',"
 
                     _sqlQuery.CommandText &= "'" & .RDGatewayUsageMethod.ToString & "',"
-                    _sqlQuery.CommandText &= "'" & .RDGatewayHostname & "',"
+                    _sqlQuery.CommandText &= "'" & .RDGatewayHostName & "',"
                     _sqlQuery.CommandText &= "'" & .RDGatewayUseConnectionCredentials.ToString & "',"
 
-                    If Me._SaveSecurity.Username = True Then
-                        _sqlQuery.CommandText &= "'" & .RDGatewayUsername & "',"
+                    If Me._SaveSecurity.UserName = True Then
+                        _sqlQuery.CommandText &= "'" & .RDGatewayUserName & "',"
                     Else
                         _sqlQuery.CommandText &= "'" & "" & "',"
                     End If
@@ -577,8 +577,8 @@ Namespace Config
 
                     _xmlTextWriter.WriteAttributeString("Panel", "", curConI.Panel)
 
-                    If Me._SaveSecurity.Username = True Then
-                        _xmlTextWriter.WriteAttributeString("Username", "", curConI.Username)
+                    If Me._SaveSecurity.UserName = True Then
+                        _xmlTextWriter.WriteAttributeString("Username", "", curConI.UserName)
                     Else
                         _xmlTextWriter.WriteAttributeString("Username", "", "")
                     End If
@@ -595,7 +595,7 @@ Namespace Config
                         _xmlTextWriter.WriteAttributeString("Password", "", "")
                     End If
 
-                    _xmlTextWriter.WriteAttributeString("Hostname", "", curConI.Hostname)
+                    _xmlTextWriter.WriteAttributeString("Hostname", "", curConI.HostName)
 
                     _xmlTextWriter.WriteAttributeString("Protocol", "", curConI.Protocol.ToString)
 
@@ -635,7 +635,7 @@ Namespace Config
 
                     _xmlTextWriter.WriteAttributeString("RedirectPrinters", "", curConI.RedirectPrinters)
 
-                    _xmlTextWriter.WriteAttributeString("RedirectSmartCards", "", curConI.RedirectSmartCards)
+                    _xmlTextWriter.WriteAttributeString("RedirectSmartCards", "", curConI.RedirectSmartcards)
 
                     _xmlTextWriter.WriteAttributeString("RedirectSound", "", curConI.RedirectSound.ToString)
 
@@ -659,19 +659,19 @@ Namespace Config
                     _xmlTextWriter.WriteAttributeString("VNCProxyType", "", curConI.VNCProxyType.ToString)
                     _xmlTextWriter.WriteAttributeString("VNCProxyIP", "", curConI.VNCProxyIP)
                     _xmlTextWriter.WriteAttributeString("VNCProxyPort", "", curConI.VNCProxyPort)
-                    _xmlTextWriter.WriteAttributeString("VNCProxyUsername", "", curConI.VNCProxyUsername)
+                    _xmlTextWriter.WriteAttributeString("VNCProxyUsername", "", curConI.VNCProxyUserName)
                     _xmlTextWriter.WriteAttributeString("VNCProxyPassword", "", Security.Crypt.Encrypt(curConI.VNCProxyPassword, _password))
                     _xmlTextWriter.WriteAttributeString("VNCColors", "", curConI.VNCColors.ToString)
                     _xmlTextWriter.WriteAttributeString("VNCSmartSizeMode", "", curConI.VNCSmartSizeMode.ToString)
                     _xmlTextWriter.WriteAttributeString("VNCViewOnly", "", curConI.VNCViewOnly)
 
                     _xmlTextWriter.WriteAttributeString("RDGatewayUsageMethod", "", curConI.RDGatewayUsageMethod.ToString)
-                    _xmlTextWriter.WriteAttributeString("RDGatewayHostname", "", curConI.RDGatewayHostname)
+                    _xmlTextWriter.WriteAttributeString("RDGatewayHostname", "", curConI.RDGatewayHostName)
 
                     _xmlTextWriter.WriteAttributeString("RDGatewayUseConnectionCredentials", "", curConI.RDGatewayUseConnectionCredentials.ToString)
 
-                    If Me._SaveSecurity.Username = True Then
-                        _xmlTextWriter.WriteAttributeString("RDGatewayUsername", "", curConI.RDGatewayUsername)
+                    If Me._SaveSecurity.UserName = True Then
+                        _xmlTextWriter.WriteAttributeString("RDGatewayUsername", "", curConI.RDGatewayUserName)
                     Else
                         _xmlTextWriter.WriteAttributeString("RDGatewayUsername", "", "")
                     End If
@@ -817,7 +817,7 @@ Namespace Config
 
                 csvLn += "Name;Folder;Description;Icon;Panel;"
 
-                If SaveSecurity.Username Then
+                If SaveSecurity.UserName Then
                     csvLn += "Username;"
                 End If
 
@@ -871,8 +871,8 @@ Namespace Config
 
                 csvLn += con.Name & ";" & nodePath & ";" & con.Description & ";" & con.Icon & ";" & con.Panel & ";"
 
-                If SaveSecurity.Username Then
-                    csvLn += con.Username & ";"
+                If SaveSecurity.UserName Then
+                    csvLn += con.UserName & ";"
                 End If
 
                 If SaveSecurity.Password Then
@@ -883,7 +883,7 @@ Namespace Config
                     csvLn += con.Domain & ";"
                 End If
 
-                csvLn += con.Hostname & ";" & con.Protocol.ToString & ";" & con.PuttySession & ";" & con.Port & ";" & con.UseConsoleSession & ";" & con.UseCredSsp & ";" & con.RenderingEngine.ToString & ";" & con.RDPAuthenticationLevel.ToString & ";" & con.LoadBalanceInfo & ";" & con.Colors.ToString & ";" & con.Resolution.ToString & ";" & con.AutomaticResize & ";" & con.DisplayWallpaper & ";" & con.DisplayThemes & ";" & con.EnableFontSmoothing & ";" & con.EnableDesktopComposition & ";" & con.CacheBitmaps & ";" & con.RedirectDiskDrives & ";" & con.RedirectPorts & ";" & con.RedirectPrinters & ";" & con.RedirectSmartCards & ";" & con.RedirectSound.ToString & ";" & con.RedirectKeys & ";" & con.PreExtApp & ";" & con.PostExtApp & ";" & con.MacAddress & ";" & con.UserField & ";" & con.ExtApp & ";" & con.VNCCompression.ToString & ";" & con.VNCEncoding.ToString & ";" & con.VNCAuthMode.ToString & ";" & con.VNCProxyType.ToString & ";" & con.VNCProxyIP & ";" & con.VNCProxyPort & ";" & con.VNCProxyUsername & ";" & con.VNCProxyPassword & ";" & con.VNCColors.ToString & ";" & con.VNCSmartSizeMode.ToString & ";" & con.VNCViewOnly & ";"
+                csvLn += con.HostName & ";" & con.Protocol.ToString & ";" & con.PuttySession & ";" & con.Port & ";" & con.UseConsoleSession & ";" & con.UseCredSsp & ";" & con.RenderingEngine.ToString & ";" & con.RDPAuthenticationLevel.ToString & ";" & con.LoadBalanceInfo & ";" & con.Colors.ToString & ";" & con.Resolution.ToString & ";" & con.AutomaticResize & ";" & con.DisplayWallpaper & ";" & con.DisplayThemes & ";" & con.EnableFontSmoothing & ";" & con.EnableDesktopComposition & ";" & con.CacheBitmaps & ";" & con.RedirectDiskDrives & ";" & con.RedirectPorts & ";" & con.RedirectPrinters & ";" & con.RedirectSmartcards & ";" & con.RedirectSound.ToString & ";" & con.RedirectKeys & ";" & con.PreExtApp & ";" & con.PostExtApp & ";" & con.MacAddress & ";" & con.UserField & ";" & con.ExtApp & ";" & con.VNCCompression.ToString & ";" & con.VNCEncoding.ToString & ";" & con.VNCAuthMode.ToString & ";" & con.VNCProxyType.ToString & ";" & con.VNCProxyIP & ";" & con.VNCProxyPort & ";" & con.VNCProxyUserName & ";" & con.VNCProxyPassword & ";" & con.VNCColors.ToString & ";" & con.VNCSmartSizeMode.ToString & ";" & con.VNCViewOnly & ";"
 
                 If SaveSecurity.Inheritance Then
                     csvLn += con.Inherit.CacheBitmaps & ";" & con.Inherit.Colors & ";" & con.Inherit.Description & ";" & con.Inherit.DisplayThemes & ";" & con.Inherit.DisplayWallpaper & ";" & con.Inherit.EnableFontSmoothing & ";" & con.Inherit.EnableDesktopComposition & ";" & con.Inherit.Domain & ";" & con.Inherit.Icon & ";" & con.Inherit.Panel & ";" & con.Inherit.Password & ";" & con.Inherit.Port & ";" & con.Inherit.Protocol & ";" & con.Inherit.PuttySession & ";" & con.Inherit.RedirectDiskDrives & ";" & con.Inherit.RedirectKeys & ";" & con.Inherit.RedirectPorts & ";" & con.Inherit.RedirectPrinters & ";" & con.Inherit.RedirectSmartCards & ";" & con.Inherit.RedirectSound & ";" & con.Inherit.Resolution & ";" & con.Inherit.AutomaticResize & ";" & con.Inherit.UseConsoleSession & ";" & con.Inherit.UseCredSsp & ";" & con.Inherit.RenderingEngine & ";" & con.Inherit.Username & ";" & con.Inherit.RDPAuthenticationLevel & ";" & con.Inherit.LoadBalanceInfo & ";" & con.Inherit.PreExtApp & ";" & con.Inherit.PostExtApp & ";" & con.Inherit.MacAddress & ";" & con.Inherit.UserField & ";" & con.Inherit.ExtApp & ";" & con.Inherit.VNCCompression & ";" & con.Inherit.VNCEncoding & ";" & con.Inherit.VNCAuthMode & ";" & con.Inherit.VNCProxyType & ";" & con.Inherit.VNCProxyIP & ";" & con.Inherit.VNCProxyPort & ";" & con.Inherit.VNCProxyUsername & ";" & con.Inherit.VNCProxyPassword & ";" & con.Inherit.VNCColors & ";" & con.Inherit.VNCSmartSizeMode & ";" & con.Inherit.VNCViewOnly
@@ -939,7 +939,7 @@ Namespace Config
                     nodePath = ""
                 End If
 
-                csvWr.WriteLine(con.Name & ";" & con.Hostname & ";" & con.MacAddress & ";;" & con.Port & ";" & con.UseConsoleSession & ";" & nodePath)
+                csvWr.WriteLine(con.Name & ";" & con.HostName & ";" & con.MacAddress & ";;" & con.Port & ";" & con.UseConsoleSession & ";" & nodePath)
             End Sub
 #End Region
 
@@ -1000,7 +1000,7 @@ Namespace Config
 
                 'Hostname
                 _xmlTextWriter.WriteStartElement("ServerName")
-                _xmlTextWriter.WriteValue(con.Hostname)
+                _xmlTextWriter.WriteValue(con.HostName)
                 _xmlTextWriter.WriteEndElement()
 
                 'Mac Adress
@@ -1050,7 +1050,7 @@ Namespace Config
 
                 'Redirect Smartcards
                 _xmlTextWriter.WriteStartElement("SmartCard")
-                _xmlTextWriter.WriteValue(con.RedirectSmartCards)
+                _xmlTextWriter.WriteValue(con.RedirectSmartcards)
                 _xmlTextWriter.WriteEndElement()
 
                 'Connection Place

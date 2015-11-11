@@ -71,11 +71,11 @@ Namespace Connection
 
             Public Overrides Function Connect() As Boolean
                 Try
-                    Dim strHost As String = Me.InterfaceControl.Info.Hostname
+                    Dim strHost As String = Me.InterfaceControl.Info.HostName
                     Dim strAuth As String = ""
 
-                    If Not ((Force And Info.Force.NoCredentials) = Info.Force.NoCredentials) And Not String.IsNullOrEmpty(InterfaceControl.Info.Username) And Not String.IsNullOrEmpty(InterfaceControl.Info.Password) Then
-                        strAuth = "Authorization: Basic " + Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes(Me.InterfaceControl.Info.Username & ":" & Me.InterfaceControl.Info.Password)) & vbNewLine
+                    If Not ((Force And Info.Force.NoCredentials) = Info.Force.NoCredentials) And Not String.IsNullOrEmpty(InterfaceControl.Info.UserName) And Not String.IsNullOrEmpty(InterfaceControl.Info.Password) Then
+                        strAuth = "Authorization: Basic " + Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes(Me.InterfaceControl.Info.UserName & ":" & Me.InterfaceControl.Info.Password)) & vbNewLine
                     End If
 
                     If Me.InterfaceControl.Info.Port <> defaultPort Then

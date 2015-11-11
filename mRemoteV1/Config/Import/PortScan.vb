@@ -13,7 +13,7 @@ Namespace Config.Import
                 connectionInfo.Inherit = New Connection.Info.Inheritance(connectionInfo)
 
                 connectionInfo.Name = host.HostNameWithoutDomain
-                connectionInfo.Hostname = host.HostName
+                connectionInfo.HostName = host.HostName
 
                 Select Case protocol
                     Case Connection.Protocol.Protocols.SSH2

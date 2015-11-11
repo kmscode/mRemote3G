@@ -73,7 +73,7 @@ Namespace Controls
             Public Property ConnectionInfo As Connection.Info
 
             Public Overloads Function Equals(other As HistoryItem) As Boolean Implements IEquatable(Of HistoryItem).Equals
-                If Not ConnectionInfo.Hostname = other.ConnectionInfo.Hostname Then Return False
+                If Not ConnectionInfo.HostName = other.ConnectionInfo.HostName Then Return False
                 If Not ConnectionInfo.Port = other.ConnectionInfo.Port Then Return False
                 If Not ConnectionInfo.Protocol = other.ConnectionInfo.Protocol Then Return False
                 Return True
@@ -89,9 +89,9 @@ Namespace Controls
                     port = String.Format(":{0}", ConnectionInfo.Port)
                 End If
                 If includeProtocol Then
-                    Return String.Format("{0}{1} ({2})", ConnectionInfo.Hostname, port, ConnectionInfo.Protocol)
+                    Return String.Format("{0}{1} ({2})", ConnectionInfo.HostName, port, ConnectionInfo.Protocol)
                 Else
-                    Return String.Format("{0}{1}", ConnectionInfo.Hostname, port)
+                    Return String.Format("{0}{1}", ConnectionInfo.HostName, port)
                 End If
             End Function
         End Structure

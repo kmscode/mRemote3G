@@ -27,7 +27,7 @@ Namespace Config.Putty
             Dim sessionInfo As Connection.Info
             For Each sessionName As String In GetSessionNames(True)
                 sessionInfo = GetSession(sessionName)
-                If sessionInfo Is Nothing OrElse String.IsNullOrEmpty(sessionInfo.Hostname) Then Continue For
+                If sessionInfo Is Nothing OrElse String.IsNullOrEmpty(sessionInfo.HostName) Then Continue For
                 sessionList.Add(sessionInfo)
             Next
             Return sessionList.ToArray()

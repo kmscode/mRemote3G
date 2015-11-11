@@ -121,7 +121,7 @@ Namespace Connection
                 Me.SetEventHandlers()
 
                 Try
-                    VNC.Connect(Me.Info.Hostname, Me.Info.VNCViewOnly, Info.VNCSmartSizeMode <> SmartSizeMode.SmartSNo)
+                    VNC.Connect(Me.Info.HostName, Me.Info.VNCViewOnly, Info.VNCSmartSizeMode <> SmartSizeMode.SmartSNo)
                 Catch ex As Exception
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncConnectionOpenFailed & vbNewLine & ex.Message)
                     Return False

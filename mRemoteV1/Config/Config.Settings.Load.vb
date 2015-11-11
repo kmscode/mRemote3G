@@ -113,9 +113,9 @@ Namespace Config
                         End If
 
                         If My.Settings.ResetToolbars = False Then
-                            LoadToolbarsFromSettings()
+                            LoadToolBarsFromSettings()
                         Else
-                            SetToolbarsDefault()
+                            SetToolBarsDefault()
                         End If
                     End With
                 Catch ex As Exception
@@ -123,7 +123,7 @@ Namespace Config
                 End Try
             End Sub
 
-            Public Sub SetToolbarsDefault()
+            Public Sub SetToolBarsDefault()
                 With MainForm
                     ToolStripPanelFromString("top").Join(.tsQuickConnect, New Point(300, 0))
                     .tsQuickConnect.Visible = True
@@ -132,7 +132,7 @@ Namespace Config
                 End With
             End Sub
 
-            Public Sub LoadToolbarsFromSettings()
+            Public Sub LoadToolBarsFromSettings()
                 With Me.MainForm
                     If My.Settings.QuickyTBLocation.X > My.Settings.ExtAppsTBLocation.X Then
                         AddDynamicPanels()

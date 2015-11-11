@@ -58,9 +58,9 @@ Namespace Connection
 #Region "Connection"
         Private _hostname As String = String.Empty
         <LocalizedCategory("strCategoryConnection", 2), _
-            LocalizedDisplayName("strPropertyNameAddress"), _
-            LocalizedDescription("strPropertyDescriptionAddress")> _
-        Public Overridable Property Hostname() As String
+            LocalizedDisplayName("strPropertyNameAddress"),
+            LocalizedDescription("strPropertyDescriptionAddress")>
+        Public Overridable Property HostName() As String
             Get
                 Return _hostname.Trim()
             End Get
@@ -75,9 +75,9 @@ Namespace Connection
 
         Private _username As String = My.Settings.ConDefaultUsername
         <LocalizedCategory("strCategoryConnection", 2), _
-            LocalizedDisplayName("strPropertyNameUsername"), _
-            LocalizedDescription("strPropertyDescriptionUsername")> _
-        Public Overridable Property Username() As String
+            LocalizedDisplayName("strPropertyNameUsername"),
+            LocalizedDescription("strPropertyDescriptionUsername")>
+        Public Overridable Property UserName() As String
             Get
                 Return GetInheritedPropertyValue("Username", _username)
             End Get
@@ -255,9 +255,9 @@ Namespace Connection
 
         Private _rdGatewayHostname As String = My.Settings.ConDefaultRDGatewayHostname
         <LocalizedCategory("strCategoryGateway", 4), _
-            LocalizedDisplayName("strPropertyNameRDGatewayHostname"), _
-            LocalizedDescription("strPropertyDescriptionRDGatewayHostname")> _
-        Public Property RDGatewayHostname() As String
+            LocalizedDisplayName("strPropertyNameRDGatewayHostname"),
+            LocalizedDescription("strPropertyDescriptionRDGatewayHostname")>
+        Public Property RDGatewayHostName() As String
             Get
                 Return GetInheritedPropertyValue("RDGatewayHostname", _rdGatewayHostname).Trim()
             End Get
@@ -282,9 +282,9 @@ Namespace Connection
 
         Private _rdGatewayUsername As String = My.Settings.ConDefaultRDGatewayUsername
         <LocalizedCategory("strCategoryGateway", 4), _
-            LocalizedDisplayName("strPropertyNameRDGatewayUsername"), _
-            LocalizedDescription("strPropertyDescriptionRDGatewayUsername")> _
-        Public Property RDGatewayUsername() As String
+            LocalizedDisplayName("strPropertyNameRDGatewayUsername"),
+            LocalizedDescription("strPropertyDescriptionRDGatewayUsername")>
+        Public Property RDGatewayUserName() As String
             Get
                 Return GetInheritedPropertyValue("RDGatewayUsername", _rdGatewayUsername).Trim()
             End Get
@@ -493,9 +493,9 @@ Namespace Connection
         Private _redirectSmartCards As Boolean = My.Settings.ConDefaultRedirectSmartCards
         <LocalizedCategory("strCategoryRedirect", 6), _
             LocalizedDisplayName("strPropertyNameRedirectSmartCards"), _
-            LocalizedDescription("strPropertyDescriptionRedirectSmartCards"), _
-            TypeConverter(GetType(Tools.Misc.YesNoTypeConverter))> _
-        Public Property RedirectSmartCards() As Boolean
+            LocalizedDescription("strPropertyDescriptionRedirectSmartCards"),
+            TypeConverter(GetType(Tools.Misc.YesNoTypeConverter))>
+        Public Property RedirectSmartcards() As Boolean
             Get
                 Return GetInheritedPropertyValue("RedirectSmartCards", _redirectSmartCards)
             End Get
@@ -666,9 +666,9 @@ Namespace Connection
         Private _vncProxyUsername As String = My.Settings.ConDefaultVNCProxyUsername
         <LocalizedCategory("strCategoryMiscellaneous", 7), _
             Browsable(False), _
-            LocalizedDisplayName("strPropertyNameVNCProxyUsername"), _
-            LocalizedDescription("strPropertyDescriptionVNCProxyUsername")> _
-        Public Property VNCProxyUsername() As String
+            LocalizedDisplayName("strPropertyNameVNCProxyUsername"),
+            LocalizedDescription("strPropertyDescriptionVNCProxyUsername")>
+        Public Property VNCProxyUserName() As String
             Get
                 Return GetInheritedPropertyValue("VNCProxyUsername", _vncProxyUsername)
             End Get

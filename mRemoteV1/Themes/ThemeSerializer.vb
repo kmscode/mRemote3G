@@ -4,13 +4,13 @@ Imports System.Reflection
 
 Namespace Themes
     Public Class ThemeSerializer
-        Public Shared Sub SaveToXmlFile(themeInfo As ThemeInfo, filename As String)
+        Public Shared Sub SaveToXmlFile(themeInfo As ThemeInfo, FileName As String)
             Dim themeList As New List(Of ThemeInfo)
-            themeList.Add(ThemeInfo)
-            SaveToXmlFile(themeList, filename)
+            themeList.Add(themeInfo)
+            SaveToXmlFile(themeList, FileName)
         End Sub
 
-        Public Shared Sub SaveToXmlFile(themes As List(Of ThemeInfo), filename As String)
+        Public Shared Sub SaveToXmlFile(themes As List(Of ThemeInfo), FileName As String)
             Dim tempFileName As String = Path.GetTempFileName()
             Dim xmlTextWriter As New XmlTextWriter(tempFileName, System.Text.Encoding.UTF8)
 
@@ -50,13 +50,13 @@ Namespace Themes
 
             xmlTextWriter.Close()
 
-            File.Delete(filename)
-            File.Move(tempFileName, filename)
+            File.Delete(FileName)
+            File.Move(tempFileName, FileName)
         End Sub
 
-        Public Shared Function LoadFromXmlFile(filename As String) As List(Of ThemeInfo)
+        Public Shared Function LoadFromXmlFile(FileName As String) As List(Of ThemeInfo)
             Dim xmlDocument As New XmlDocument()
-            xmlDocument.Load(filename)
+            xmlDocument.Load(FileName)
 
             Dim fileInfoNode As XmlNode = xmlDocument.SelectSingleNode("/mRemoteNG/FileInfo")
             Dim fileInfoVersion As New Version(fileInfoNode.Attributes("Version").Value)

@@ -80,7 +80,7 @@ Namespace App
             SetProxySettings(My.Settings.UpdateUseProxy, My.Settings.UpdateProxyAddress, My.Settings.UpdateProxyPort, My.Settings.UpdateProxyUseAuthentication, My.Settings.UpdateProxyAuthUser, Security.Crypt.Decrypt(My.Settings.UpdateProxyAuthPass, Info.General.EncryptionKey))
         End Sub
 
-        Public Sub SetProxySettings(ByVal useProxy As Boolean, ByVal address As String, ByVal port As Integer, ByVal useAuthentication As Boolean, ByVal username As String, ByVal password As String)
+        Public Sub SetProxySettings(ByVal useProxy As Boolean, ByVal address As String, ByVal port As Integer, ByVal useAuthentication As Boolean, ByVal UserName As String, ByVal password As String)
             If useProxy And Not String.IsNullOrEmpty(address) Then
                 If Not port = 0 Then
                     _webProxy = New WebProxy(address, port)
@@ -89,7 +89,7 @@ Namespace App
                 End If
 
                 If useAuthentication Then
-                    _webProxy.Credentials = New NetworkCredential(username, password)
+                    _webProxy.Credentials = New NetworkCredential(UserName, password)
                 Else
                     _webProxy.Credentials = Nothing
                 End If

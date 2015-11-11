@@ -9,7 +9,7 @@ Namespace Tree
             Root = 1
             Container = 2
             Connection = 3
-            PuttyRoot = 4
+            Puttyroot = 4
             PuttySession = 5
         End Enum
 
@@ -57,7 +57,7 @@ Namespace Tree
         End Function
 
         Public Shared Function GetNodeFromPositionID(ByVal id As Integer) As TreeNode
-            For Each conI As Connection.Info In connectionList
+            For Each conI As Connection.Info In ConnectionList
                 If conI.PositionID = id Then
                     If conI.IsContainer Then
                         Return TryCast(conI.Parent, Container.Info).TreeNode
@@ -71,7 +71,7 @@ Namespace Tree
         End Function
 
         Public Shared Function GetNodeFromConstantID(ByVal id As String) As TreeNode
-            For Each conI As Connection.Info In connectionList
+            For Each conI As Connection.Info In ConnectionList
                 If conI.ConstantID = id Then
                     If conI.IsContainer Then
                         Return TryCast(conI.Parent, Container.Info).TreeNode
@@ -87,15 +87,15 @@ Namespace Tree
         Public Shared Function GetNodeType(ByVal treeNode As TreeNode) As Tree.Node.Type
             Try
                 If treeNode Is Nothing Then
-                    Return Type.NONE
+                    Return Type.None
                 End If
 
                 If treeNode.Tag Is Nothing Then
-                    Return Type.NONE
+                    Return Type.None
                 End If
 
                 If TypeOf treeNode.Tag Is Root.PuttySessions.Info Then
-                    Return Type.PuttyRoot
+                    Return Type.Puttyroot
                 ElseIf TypeOf treeNode.Tag Is Root.Info Then
                     Return Type.Root
                 ElseIf TypeOf treeNode.Tag Is Container.Info Then
@@ -368,7 +368,7 @@ Namespace Tree
                 If My.Settings.SetHostnameLikeDisplayName Then
                     Dim connectionInfo As Connection.Info = TryCast(SelectedNode.Tag, Connection.Info)
                     If (connectionInfo IsNot Nothing) Then
-                        connectionInfo.Hostname = newName
+                        connectionInfo.HostName = newName
                     End If
                 End If
             End If
