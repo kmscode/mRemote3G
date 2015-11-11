@@ -166,13 +166,13 @@ Namespace Controls
         End Function
     End Class
 
-    Public Enum VerticalAlignment As Integer
+    Public Enum VerticalAlignment
         Top
         Middle
         Bottom
     End Enum
 
-    Public Enum HorizontalAlignment As Integer
+    Public Enum HorizontalAlignment
         Left
         Center
         Right

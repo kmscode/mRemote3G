@@ -319,7 +319,7 @@ Namespace Config
 #End Region
     End Class
 
-    Public Enum ShortcutCommand As Integer
+    Public Enum ShortcutCommand
         None = 0
         PreviousTab
         NextTab

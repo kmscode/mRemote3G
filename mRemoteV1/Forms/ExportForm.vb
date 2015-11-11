@@ -215,7 +215,7 @@ Namespace Forms
 #End Region
 
 #Region "Public Enumerations"
-        Public Enum ExportScope As Integer
+        Public Enum ExportScope
             Everything
             SelectedFolder
             SelectedConnection

@@ -20,23 +20,23 @@ Namespace Connection
         End Class
 
         Public Enum Protocols
-            <LocalizedDescription("strRDP")> _
+            <LocalizedDescription("strRDP")>
             RDP = 0
-            <LocalizedDescription("strVnc")> _
+            <LocalizedDescription("strVnc")>
             VNC = 1
-            <LocalizedDescription("strSsh1")> _
+            <LocalizedDescription("strSsh1")>
             SSH1 = 2
-            <LocalizedDescription("strSsh2")> _
+            <LocalizedDescription("strSsh2")>
             SSH2 = 3
-            <LocalizedDescription("strTelnet")> _
+            <LocalizedDescription("strTelnet")>
             Telnet = 4
-            <LocalizedDescription("strRlogin")> _
+            <LocalizedDescription("strRlogin")>
             Rlogin = 5
-            <LocalizedDescription("strRAW")> _
+            <LocalizedDescription("strRAW")>
             RAW = 6
-            <LocalizedDescription("strHttp")> _
+            <LocalizedDescription("strHttp")>
             HTTP = 7
-            <LocalizedDescription("strHttps")> _
+            <LocalizedDescription("strHttps")>
             HTTPS = 8
             <LocalizedDescription("strExtApp")>
             IntApp = 20

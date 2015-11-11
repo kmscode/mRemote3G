@@ -801,7 +801,7 @@ Namespace Connection
 #End Region
 
 #Region "Public Enumerations"
-        <Flags()> _
+        <Flags()>
         Public Enum Force
             None = 0
             UseConsoleSession = 1

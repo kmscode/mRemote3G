@@ -249,80 +249,80 @@ Namespace Connection
             End Enum
 
             Public Enum Compression
-                <LocalizedDescription("strNoCompression")> _
+                <LocalizedDescription("strNoCompression")>
                 CompNone = 99
-                <Description("0")> _
+                <Description("0")>
                 Comp0 = 0
-                <Description("1")> _
+                <Description("1")>
                 Comp1 = 1
-                <Description("2")> _
+                <Description("2")>
                 Comp2 = 2
-                <Description("3")> _
+                <Description("3")>
                 Comp3 = 3
-                <Description("4")> _
+                <Description("4")>
                 Comp4 = 4
-                <Description("5")> _
+                <Description("5")>
                 Comp5 = 5
-                <Description("6")> _
+                <Description("6")>
                 Comp6 = 6
-                <Description("7")> _
+                <Description("7")>
                 Comp7 = 7
-                <Description("8")> _
+                <Description("8")>
                 Comp8 = 8
-                <Description("9")> _
+                <Description("9")>
                 Comp9 = 9
             End Enum
 
             Public Enum Encoding
-                <Description("Raw")> _
+                <Description("Raw")>
                 EncRaw
-                <Description("RRE")> _
+                <Description("RRE")>
                 EncRRE
-                <Description("CoRRE")> _
+                <Description("CoRRE")>
                 EncCorre
-                <Description("Hextile")> _
+                <Description("Hextile")>
                 EncHextile
-                <Description("Zlib")> _
+                <Description("Zlib")>
                 EncZlib
-                <Description("Tight")> _
+                <Description("Tight")>
                 EncTight
-                <Description("ZlibHex")> _
+                <Description("ZlibHex")>
                 EncZLibHex
-                <Description("ZRLE")> _
+                <Description("ZRLE")>
                 EncZRLE
             End Enum
 
             Public Enum AuthMode
-                <LocalizedDescription("VNC")> _
+                <LocalizedDescription("VNC")>
                 AuthVNC
-                <LocalizedDescription("Windows")> _
+                <LocalizedDescription("Windows")>
                 AuthWin
             End Enum
 
             Public Enum ProxyType
-                <LocalizedDescription("strNone")> _
+                <LocalizedDescription("strNone")>
                 ProxyNone
-                <LocalizedDescription("strHttp")> _
+                <LocalizedDescription("strHttp")>
                 ProxyHTTP
-                <LocalizedDescription("strSocks5")> _
+                <LocalizedDescription("strSocks5")>
                 ProxySocks5
-                <LocalizedDescription("strUltraVncRepeater")> _
+                <LocalizedDescription("strUltraVncRepeater")>
                 ProxyUltra
             End Enum
 
             Public Enum Colors
-                <LocalizedDescription("strNormal")> _
+                <LocalizedDescription("strNormal")>
                 ColNormal
-                <Description("8-bit")> _
+                <Description("8-bit")>
                 Col8Bit
             End Enum
 
             Public Enum SmartSizeMode
-                <LocalizedDescription("strNoSmartSize")> _
+                <LocalizedDescription("strNoSmartSize")>
                 SmartSNo
-                <LocalizedDescription("strFree")> _
+                <LocalizedDescription("strFree")>
                 SmartSFree
-                <LocalizedDescription("strAspect")> _
+                <LocalizedDescription("strAspect")>
                 SmartSAspect
             End Enum
 #End Region

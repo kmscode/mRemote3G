@@ -161,7 +161,7 @@ Namespace Tools
 #End Region
 
 #Region "Public Enums"
-        Public Enum DisplayValue As UInt32
+        Public Enum DisplayValue
             Unknown = 0
             All = Win32.WTD_UI_ALL
             None = Win32.WTD_UI_NONE
@@ -169,12 +169,12 @@ Namespace Tools
             NoGood = Win32.WTD_UI_NOGOOD
         End Enum
 
-        Public Enum DisplayContextValue As UInt32
+        Public Enum DisplayContextValue
             Execute = Win32.WTD_UICONTEXT_EXECUTE
             Install = Win32.WTD_UICONTEXT_INSTALL
         End Enum
 
-        Public Enum StatusValue As Integer
+        Public Enum StatusValue
             Unknown = 0
             Verified
             FileNotExist
