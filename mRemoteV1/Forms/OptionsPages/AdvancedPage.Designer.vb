@@ -98,7 +98,7 @@
             Me.chkAutomaticReconnect.AutoSize = True
             Me.chkAutomaticReconnect.Location = New System.Drawing.Point(3, 69)
             Me.chkAutomaticReconnect.Name = "chkAutomaticReconnect"
-            Me.chkAutomaticReconnect.Size = New System.Drawing.Size(399, 17)
+            Me.chkAutomaticReconnect.Size = New System.Drawing.Size(370, 17)
             Me.chkAutomaticReconnect.TabIndex = 20
             Me.chkAutomaticReconnect.Text = "Automatically try to reconnect when disconnected from server (RDP only)"
             Me.chkAutomaticReconnect.UseVisualStyleBackColor = True

@@ -263,10 +263,6 @@ Namespace Config
                         Return Windows.errorsPanel
                     End If
 
-                    If persistString = GetType(UI.Window.Sessions).ToString Then
-                        Return Windows.sessionsPanel
-                    End If
-
                     If persistString = GetType(UI.Window.ScreenshotManager).ToString Then
                         Return Windows.screenshotPanel
                     End If

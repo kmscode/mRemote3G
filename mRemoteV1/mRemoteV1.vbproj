@@ -26,6 +26,7 @@
     <GenerateManifests>true</GenerateManifests>
     <SignManifests>false</SignManifests>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -41,7 +42,6 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -437,12 +437,6 @@
     <Compile Include="UI\UI.Window.ScreenshotManager.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\UI.Window.Sessions.Designer.vb">
-      <DependentUpon>UI.Window.Sessions.vb</DependentUpon>
-    </Compile>
-    <Compile Include="UI\UI.Window.Sessions.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="UI\UI.Window.SSHTransfer.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -611,10 +605,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UI.Window.ScreenshotManager.resx">
       <DependentUpon>UI.Window.ScreenshotManager.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\UI.Window.Sessions.resx">
-      <DependentUpon>UI.Window.Sessions.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UI.Window.SSHTransfer.resx">
@@ -1123,14 +1113,6 @@
       <VersionMinor>0</VersionMinor>
       <Lcid>0</Lcid>
       <WrapperTool>aximp</WrapperTool>
-      <Isolated>False</Isolated>
-    </COMReference>
-    <COMReference Include="EOLWTSCOM">
-      <Guid>{96C3FA7A-3211-4D93-BFEA-4589DA4ABDE2}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
       <Isolated>False</Isolated>
     </COMReference>
     <COMReference Include="MSTSCLib">

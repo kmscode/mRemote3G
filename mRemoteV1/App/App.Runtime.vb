@@ -217,7 +217,6 @@ Namespace App
             Public Shared configPanel As New DockContent
             Public Shared errorsForm As UI.Window.ErrorsAndInfos
             Public Shared errorsPanel As New DockContent
-            Public Shared sessionsForm As UI.Window.Sessions
             Public Shared sessionsPanel As New DockContent
             Public Shared screenshotForm As UI.Window.ScreenshotManager
             Public Shared screenshotPanel As New DockContent
@@ -408,9 +407,6 @@ Namespace App
 
                 Windows.errorsForm = New UI.Window.ErrorsAndInfos(Windows.errorsPanel)
                 Windows.errorsPanel = Windows.errorsForm
-
-                Windows.sessionsForm = New UI.Window.Sessions(Windows.sessionsPanel)
-                Windows.sessionsPanel = Windows.sessionsForm
 
                 Windows.screenshotForm = New UI.Window.ScreenshotManager(Windows.screenshotPanel)
                 Windows.screenshotPanel = Windows.screenshotForm

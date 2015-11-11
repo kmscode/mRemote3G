@@ -1,7 +1,6 @@
 Imports System.Windows.Forms
 Imports System.Threading
 Imports AxMSTSCLib
-Imports EOLWTSCOM
 Imports System.ComponentModel
 Imports mRemoteNG.Messages
 Imports mRemoteNG.App.Runtime
@@ -638,6 +637,9 @@ Namespace Connection
                 Public Shared RDC80 As New Version(6, 2, 9200)
             End Class
 
+            ' Disable Terminal Sessions code - This uses an old closed source library for which I can't find any
+            ' suitable replacement. This was a concern back in 2010: http://forum.mremoteng.org/viewtopic.php?f=5&t=70&start=10
+#If TERMINAL_SESSIONS Then
 #Region "Terminal Sessions"
             Public Class TerminalSessions
                 Private ReadOnly _wtsCom As WTSCOM
@@ -767,6 +769,7 @@ Namespace Connection
                 Public Property SessionName() As String
             End Class
 #End Region
+#End If
 
 #Region "Fatal Errors"
             Public Class FatalErrors

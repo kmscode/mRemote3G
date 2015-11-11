@@ -579,25 +579,6 @@ Namespace UI
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "XULrunner was not found in " & My.Settings.XULRunnerPath, True)
                 End If
 
-
-                Dim eol As EOLWTSCOM.WTSCOM = Nothing
-
-                Try
-                    eol = New EOLWTSCOM.WTSCOM()
-
-                    pbCheck6.Image = My.Resources.Good_Symbol
-                    lblCheck6.ForeColor = Color.DarkOliveGreen
-                    lblCheck6.Text = "(RDP) Sessions " & My.Language.strCcCheckSucceeded
-                    txtCheck6.Text = My.Language.strCcEOLOK
-                Catch ex As Exception
-                    pbCheck6.Image = My.Resources.Bad_Symbol
-                    lblCheck6.ForeColor = Color.Firebrick
-                    lblCheck6.Text = "(RDP) Sessions " & My.Language.strCcCheckFailed
-                    txtCheck6.Text = My.Language.strCcEOLFailed
-
-                    MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "EOLWTSCOM " & errorMsg, True)
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, ex.Message, True)
-                End Try
             End Sub
 #End Region
 

@@ -1,3 +1,13 @@
+1.81 (2015-11-11):
+  Updated CREDITS.TXT
+  Updated to latest log4net.dll
+  Enabled Log file by default
+  Removed EOLWTSCOM dll - closed source and unable to find suitable replacement at this time
+  Removed "Sessions" window (required EOLWTSCOM)
+  Updated SSH Transfer log message
+  Corrected "Debug Portable" and "Release Portable" build configuration
+  
+  
 1.80 (2015-11-05):
   Compile with VS 2015
   Target .NET Framework 4.6

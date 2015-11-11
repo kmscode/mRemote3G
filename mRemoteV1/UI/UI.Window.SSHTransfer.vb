@@ -491,7 +491,11 @@ Namespace UI
                     EnableButtons()
                     SetStatus()
 
-                    MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, My.Language.strSSHTransferFailed)
+                    ' TODO: Localize that message or change to My.Language.strSSHTranferSuccessful accordingly.
+                    ' Original message was "SSH transfer failed." But that didn't seem to be accurate (since my test was successsful).
+                    ' Need to review further to see if there is any other error handlding for failed transfers before this and
+                    ' if this should be changed to successful.
+                    MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, "SSH Transfer Ended.")
 
                     If Me.sshT IsNot Nothing Then
                         Me.sshT.Close()

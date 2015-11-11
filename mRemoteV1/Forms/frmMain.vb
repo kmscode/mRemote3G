@@ -175,7 +175,6 @@ Public Class frmMain
         mMenViewConnectionPanels.Text = My.Language.strMenuConnectionPanels
         mMenViewConnections.Text = My.Language.strMenuConnections
         mMenViewConfig.Text = My.Language.strMenuConfig
-        mMenViewSessions.Text = My.Language.strMenuSessions
         mMenViewErrorsAndInfos.Text = My.Language.strMenuNotifications
         mMenViewScreenshotManager.Text = My.Language.strScreenshots
         mMenViewJumpTo.Text = My.Language.strMenuJumpTo
@@ -526,7 +525,6 @@ Public Class frmMain
         Me.mMenViewConnections.Checked = Not Windows.treeForm.IsHidden
         Me.mMenViewConfig.Checked = Not Windows.configForm.IsHidden
         Me.mMenViewErrorsAndInfos.Checked = Not Windows.errorsForm.IsHidden
-        Me.mMenViewSessions.Checked = Not Windows.sessionsForm.IsHidden
         Me.mMenViewScreenshotManager.Checked = Not Windows.screenshotForm.IsHidden
 
         Me.mMenViewExtAppsToolbar.Checked = tsExternalTools.Visible
@@ -551,16 +549,6 @@ Public Class frmMain
     Private Sub ConnectionPanelMenuItem_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         TryCast(sender.Tag, UI.Window.Base).Show(Me.pnlDock)
         TryCast(sender.Tag, UI.Window.Base).Focus()
-    End Sub
-
-    Private Sub mMenViewSessions_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles mMenViewSessions.Click
-        If Me.mMenViewSessions.Checked = False Then
-            Windows.sessionsPanel.Show(Me.pnlDock)
-            Me.mMenViewSessions.Checked = True
-        Else
-            Windows.sessionsPanel.Hide()
-            Me.mMenViewSessions.Checked = False
-        End If
     End Sub
 
     Private Sub mMenViewConnections_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenViewConnections.Click
@@ -608,14 +596,6 @@ Public Class frmMain
             Windows.configForm.Activate()
         Else
             Windows.treeForm.Activate()
-        End If
-    End Sub
-
-    Private Sub mMenViewJumpToSessionsScreenshots_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles mMenViewJumpToSessionsScreenshots.Click
-        If pnlDock.ActiveContent Is Windows.sessionsPanel Then
-            Windows.screenshotForm.Activate()
-        Else
-            Windows.sessionsForm.Activate()
         End If
     End Sub
 
