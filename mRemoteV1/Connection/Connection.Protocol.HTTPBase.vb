@@ -176,9 +176,10 @@ Namespace Connection
 
 #Region "Enums"
             Public Enum RenderingEngine
-                <LocalizedDescription("strHttpInternetExplorer")> _
+                None = 0
+                <LocalizedDescription("strHttpInternetExplorer")>
                 IE = 1
-                <LocalizedDescription("strHttpGecko")> _
+                <LocalizedDescription("strHttpGecko")>
                 Gecko = 2
             End Enum
 

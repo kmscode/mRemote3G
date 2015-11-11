@@ -250,6 +250,7 @@ Namespace Connection
             End Enum
 
             Public Enum Putty_SSHVersion
+                None = 0
                 ssh1 = 1
                 ssh2 = 2
             End Enum

@@ -501,6 +501,7 @@ Namespace Connection
             End Enum
 
             Public Enum RDPColors
+                None = 0
                 <LocalizedDescription("strRDP256Colors")>
                 Colors256 = 8
                 <LocalizedDescription("strRDP32768Colors")>

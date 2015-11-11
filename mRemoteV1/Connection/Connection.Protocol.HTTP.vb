@@ -15,6 +15,7 @@ Namespace Connection
             End Sub
 
             Public Enum Defaults
+                None = 0
                 Port = 80
             End Enum
         End Class

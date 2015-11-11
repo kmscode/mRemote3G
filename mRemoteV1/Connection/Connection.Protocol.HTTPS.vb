@@ -15,6 +15,7 @@
             End Sub
 
             Public Enum Defaults
+                None = 0
                 Port = 443
             End Enum
         End Class

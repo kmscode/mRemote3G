@@ -239,6 +239,7 @@ Namespace Connection
 
 #Region "Enums"
             Public Enum Defaults
+                None = 0
                 Port = 5900
             End Enum
 
