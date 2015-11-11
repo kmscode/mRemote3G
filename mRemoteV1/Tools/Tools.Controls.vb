@@ -243,5 +243,8 @@ Namespace Tools
                 End Select
             End Function
         End Class
+
+        Private Sub New()
+        End Sub
     End Class
 End Namespace

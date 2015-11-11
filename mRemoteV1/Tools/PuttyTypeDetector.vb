@@ -66,5 +66,8 @@ Namespace Tools
             Kitty
             Xming
         End Enum
+
+        Private Sub New()
+        End Sub
     End Class
 End Namespace

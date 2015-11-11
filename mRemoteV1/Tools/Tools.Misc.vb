@@ -411,5 +411,8 @@ Namespace Tools
                 End Try
             End Sub
         End Class
+
+        Private Sub New()
+        End Sub
     End Class
 End Namespace

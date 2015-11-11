@@ -163,6 +163,9 @@ Namespace Config.Putty
                 Return True
             End Function
         End Class
+
+        Private Sub New()
+        End Sub
 #End Region
     End Class
 End Namespace

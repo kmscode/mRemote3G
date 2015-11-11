@@ -166,6 +166,9 @@ Namespace App
             RemoteDesktopConnectionManager
             PuttyConnectionManager
         End Enum
+
+        Private Sub New()
+        End Sub
 #End Region
     End Class
 End Namespace

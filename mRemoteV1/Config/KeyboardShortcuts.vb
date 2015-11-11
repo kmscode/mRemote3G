@@ -82,6 +82,9 @@ Namespace Config
                 KeyboardHook.CancelKeyNotification(_handle, shortcutMapping.Key.KeyCode, shortcutMapping.Key.ModifierKeys, False)
             Next
         End Sub
+
+        Private Sub New()
+        End Sub
 #End Region
     End Class
 

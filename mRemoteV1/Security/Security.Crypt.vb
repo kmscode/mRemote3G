@@ -84,6 +84,9 @@ Namespace Security
 
             Return ciphertextBase64
         End Function
+
+        Private Sub New()
+        End Sub
     End Class
 End Namespace
 

@@ -111,6 +111,9 @@ Namespace Container
             Public Class Container
                 Inherits Attribute
             End Class
+
+            Private Sub New()
+            End Sub
         End Class
     End Class
 End Namespace

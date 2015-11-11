@@ -115,5 +115,8 @@ Namespace Themes
                 Return Color.FromName(name)
             End If
         End Function
+
+        Private Sub New()
+        End Sub
     End Class
 End Namespace

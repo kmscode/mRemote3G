@@ -489,5 +489,8 @@ Namespace Tree
                 TreeView.EndUpdate()
             End If
         End Sub
+
+        Private Sub New()
+        End Sub
     End Class
 End Namespace

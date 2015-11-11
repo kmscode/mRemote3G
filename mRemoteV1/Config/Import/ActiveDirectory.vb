@@ -93,5 +93,8 @@ Namespace Config.Import
                 MessageCollector.AddExceptionMessage("Config.Import.ActiveDirectory.ImportComputers() failed.", ex, , True)
             End Try
         End Sub
+
+        Private Sub New()
+        End Sub
     End Class
 End Namespace

@@ -29,6 +29,9 @@ Namespace App
                     Return String.Format("Mozilla/4.0 ({0}) {1}/{2}", detailsString, Application.ProductName, Application.ProductVersion)
                 End Get
             End Property
+
+            Private Sub New()
+            End Sub
         End Class
 
         Public Class Settings
@@ -40,6 +43,10 @@ Namespace App
             Public Shared ReadOnly LayoutFileName As String = "pnlLayout.xml"
             Public Shared ReadOnly ExtAppsFilesName As String = "extApps.xml"
             Public Const ThemesFileName As String = "Themes.xml"
+
+            Private Sub New()
+            End Sub
+
         End Class
 
         Public Class Update
@@ -58,6 +65,9 @@ Namespace App
                     End Select
                 End Get
             End Property
+
+            Private Sub New()
+            End Sub
         End Class
 
         Public Class Connections
@@ -65,6 +75,9 @@ Namespace App
             Public Shared ReadOnly DefaultConnectionsFile As String = "confCons.xml"
             Public Shared ReadOnly DefaultConnectionsFileNew As String = "confConsNew.xml"
             Public Shared ReadOnly ConnectionFileVersion As Double = 2.5
+
+            Private Sub New()
+            End Sub
         End Class
 
         Public Class Credentials
@@ -72,6 +85,9 @@ Namespace App
             Public Shared ReadOnly CredentialsFile As String = "confCreds.xml"
             Public Shared ReadOnly CredentialsFileNew As String = "confCredsNew.xml"
             Public Shared ReadOnly CredentialsFileVersion As Double = 1.0
+
+            Private Sub New()
+            End Sub
         End Class
     End Namespace
 End Namespace

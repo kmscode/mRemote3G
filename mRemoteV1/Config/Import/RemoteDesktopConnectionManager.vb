@@ -278,11 +278,11 @@ Namespace Config.Import
             ' ReSharper disable InconsistentNaming
             ' ReSharper disable IdentifierTypo
             ' ReSharper disable StringLiteralTypo
-            <DllImport("crypt32.dll", CharSet:=CharSet.Unicode)> _
+            <DllImport("crypt32.dll", CharSet:=CharSet.Unicode)>
             Public Shared Function CryptUnprotectData(ByRef dataIn As DATA_BLOB, ByVal description As String, ByRef optionalEntropy As DATA_BLOB, ByVal reserved As IntPtr, ByRef promptStruct As IntPtr, ByVal flags As Integer, ByRef dataOut As DATA_BLOB) As Boolean
             End Function
 
-            <DllImport("kernel32.dll", CharSet:=CharSet.Unicode)> _
+            <DllImport("kernel32.dll", CharSet:=CharSet.Unicode)>
             Public Shared Sub LocalFree(ByVal ptr As IntPtr)
             End Sub
 
@@ -294,5 +294,8 @@ Namespace Config.Import
             ' ReSharper restore IdentifierTypo
             ' ReSharper restore InconsistentNaming
         End Class
+
+        Private Sub New()
+        End Sub
     End Class
 End Namespace

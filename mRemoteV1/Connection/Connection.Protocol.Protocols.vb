@@ -14,6 +14,9 @@ Namespace Connection
                     Return Protocols.RDP
                 End Try
             End Function
+
+            Private Sub New()
+            End Sub
         End Class
 
         Public Enum Protocols

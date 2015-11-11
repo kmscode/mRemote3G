@@ -100,6 +100,9 @@ Namespace Config
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SaveExternalAppsToXML failed" & vbNewLine & vbNewLine & ex.Message, False)
                 End Try
             End Sub
+
+            Private Sub New()
+            End Sub
 #End Region
         End Class
     End Namespace

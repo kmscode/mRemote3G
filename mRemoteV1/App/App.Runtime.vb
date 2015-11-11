@@ -327,6 +327,9 @@ Namespace App
                     optionsForm.ShowDialog(frmMain, GetType(UpdatesPage))
                 End Using
             End Sub
+
+            Private Sub New()
+            End Sub
         End Class
 
         Public Class Screens
@@ -349,6 +352,9 @@ Namespace App
                 Panel.DockState = DockState.Float
                 Panel.ParentForm.Left = Screen.Bounds.Location.X
                 Panel.ParentForm.Top = Screen.Bounds.Location.Y
+            End Sub
+
+            Private Sub New()
             End Sub
         End Class
 
@@ -684,6 +690,9 @@ Namespace App
                 Catch ex As Exception
                 End Try
             End Sub
+
+            Private Sub New()
+            End Sub
         End Class
 
         Public Class Shutdown
@@ -728,6 +737,9 @@ Namespace App
                     Return Not String.IsNullOrEmpty(_updateFilePath)
                 End Get
             End Property
+
+            Private Sub New()
+            End Sub
         End Class
 #End Region
 

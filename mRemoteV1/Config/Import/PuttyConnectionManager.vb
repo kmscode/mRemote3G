@@ -156,5 +156,8 @@ Namespace Config.Import
 
             Return connectionInfo
         End Function
+
+        Private Sub New()
+        End Sub
     End Class
 End Namespace

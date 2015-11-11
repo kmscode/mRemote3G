@@ -635,6 +635,9 @@ Namespace Connection
                 Public Shared RDC61 As New Version(6, 0, 6001)
                 Public Shared RDC70 As New Version(6, 1, 7600)
                 Public Shared RDC80 As New Version(6, 2, 9200)
+
+                Private Sub New()
+                End Sub
             End Class
 
             ' Disable Terminal Sessions code - This uses an old closed source library for which I can't find any
@@ -793,6 +796,9 @@ Namespace Connection
                         Return String.Format(My.Language.strRdpErrorUnknown, id)
                     End Try
                 End Function
+
+                Private Sub New()
+                End Sub
             End Class
 #End Region
 

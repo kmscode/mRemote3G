@@ -242,7 +242,13 @@ Namespace Tools
             Public Const WTD_UICONTEXT_EXECUTE As UInt32 = 0
             Public Const WTD_UICONTEXT_INSTALL As UInt32 = 1
             ' ReSharper restore InconsistentNaming
+
+            Private Sub New()
+            End Sub
         End Class
 #End Region
+
+        Private Sub New()
+        End Sub
     End Class
 End Namespace

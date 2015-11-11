@@ -45,5 +45,8 @@ Namespace Config.Import
 
             ContainerList.Add(containerInfo)
         End Sub
+
+        Private Sub New()
+        End Sub
     End Class
 End Namespace

@@ -91,6 +91,9 @@ Namespace Themes
                 If needNotify Then NotifyThemeChanged(_activeTheme, New PropertyChangedEventArgs(""))
             End Set
         End Property
+
+        Private Sub New()
+        End Sub
 #End Region
     End Class
 End Namespace

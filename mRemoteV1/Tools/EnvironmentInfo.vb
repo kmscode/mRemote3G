@@ -27,17 +27,23 @@ Namespace Tools
 
         Protected Class Win32
             ' ReSharper disable InconsistentNaming
-            <DllImport("kernel32", CharSet:=CharSet.Auto, SetLastError:=True)> _
+            <DllImport("kernel32", CharSet:=CharSet.Auto, SetLastError:=True)>
             Public Shared Function LoadLibrary(<[In](), MarshalAs(UnmanagedType.LPTStr)> ByVal lpFileName As String) As IntPtr
             End Function
 
-            <DllImport("kernel32", ExactSpelling:=True, CharSet:=CharSet.Ansi, SetLastError:=True)> _
+            <DllImport("kernel32", ExactSpelling:=True, CharSet:=CharSet.Ansi, SetLastError:=True)>
             Public Shared Function GetProcAddress(<[In]()> ByVal hModule As IntPtr, <[In](), MarshalAs(UnmanagedType.LPStr)> ByVal lpProcName As String) As IntPtr
             End Function
 
             Public Delegate Function IsWow64ProcessDelegate(<[In]()> hProcess As IntPtr, <[Out]()> ByRef Wow64Process As Boolean) As Boolean
             ' ReSharper restore InconsistentNaming
+
+            Private Sub New()
+            End Sub
         End Class
+
+        Private Sub New()
+        End Sub
     End Class
 End Namespace
 

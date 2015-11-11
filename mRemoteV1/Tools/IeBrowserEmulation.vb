@@ -38,6 +38,9 @@ Namespace Tools
             End Try
 #End If
         End Sub
+
+        Private Sub New()
+        End Sub
     End Class
 End Namespace
 

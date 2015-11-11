@@ -142,6 +142,8 @@ Namespace Tools
         End Class
 #End Region
 
+        Private Sub New()
+        End Sub
     End Class
 
 End Namespace

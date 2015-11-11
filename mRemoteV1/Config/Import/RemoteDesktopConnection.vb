@@ -137,5 +137,8 @@ Namespace Config.Import
                     End Select
             End Select
         End Sub
+
+        Private Sub New()
+        End Sub
     End Class
 End Namespace

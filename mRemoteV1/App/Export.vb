@@ -75,5 +75,7 @@ Namespace App
                 End If
             End Try
         End Sub
+        Private Sub New()
+        End Sub
     End Class
 End Namespace

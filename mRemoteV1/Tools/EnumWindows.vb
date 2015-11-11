@@ -36,5 +36,8 @@
             Declare Function EnumWindows Lib "user32" (ByVal lpEnumFunc As EnumWindowsProc, ByVal lParam As Integer) As Boolean
             Declare Function EnumChildWindows Lib "user32" (ByVal hWndParent As IntPtr, ByVal lpEnumFunc As EnumWindowsProc, ByVal lParam As Integer) As Boolean
         End Class
+
+        Private Sub New()
+        End Sub
     End Class
 End Namespace

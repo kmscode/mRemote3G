@@ -68,5 +68,8 @@ Namespace Config.Import
                 End If
             Next
         End Sub
+
+        Private Sub New()
+        End Sub
     End Class
 End Namespace
