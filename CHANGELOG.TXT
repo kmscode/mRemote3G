@@ -1,3 +1,8 @@
+1.82 (2015-11-12):
+  Fixed a number of Complier Warnings
+  Print exception stack in the log
+  PuTTYNG updated to 0.66 from Upstream PuTTY release
+  
 1.81 (2015-11-11):
   Updated CREDITS.TXT
   Updated to latest log4net.dll
