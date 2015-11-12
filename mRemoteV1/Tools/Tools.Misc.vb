@@ -55,7 +55,7 @@ Namespace Tools
 
                 Return myIcon
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "GetIconFromFile failed (Tools.Misc)" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "GetIconFromFile failed (Tools.Misc)" & vbNewLine & ex.ToString(), True)
                 Return Nothing
             End Try
         End Function
@@ -99,7 +99,7 @@ Namespace Tools
 
                 RaiseEvent SQLUpdateCheckFinished(False)
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "IsSQLUpdateAvailable failed (Tools.Misc)" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "IsSQLUpdateAvailable failed (Tools.Misc)" & vbNewLine & ex.ToString(), True)
             End Try
 
             Return False
@@ -153,7 +153,7 @@ Namespace Tools
         End Function
 
         Public Shared Function GetExceptionMessageRecursive(ByVal ex As Exception, Optional ByVal separator As String = vbNewLine) As String
-            Dim message As String = ex.Message
+            Dim message As String = ex.ToString()
             If ex.InnerException IsNot Nothing Then
                 Dim innerMessage As String = GetExceptionMessageRecursive(ex.InnerException, separator)
                 message = String.Join(separator, New String() {message, innerMessage})
@@ -176,7 +176,7 @@ Namespace Tools
 
                 Return ScreenToBitmap
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Taking Screenshot failed" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Taking Screenshot failed" & vbNewLine & ex.ToString(), True)
             End Try
 
             Return Nothing
@@ -407,7 +407,7 @@ Namespace Tools
                         End If
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Creating new Args failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Creating new Args failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
         End Class

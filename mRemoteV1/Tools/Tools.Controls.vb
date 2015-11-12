@@ -87,7 +87,7 @@ Namespace Tools
                     AddHandler Me._nI.MouseClick, AddressOf nI_MouseClick
                     AddHandler Me._nI.MouseDoubleClick, AddressOf nI_MouseDoubleClick
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Creating new SysTrayIcon failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Creating new SysTrayIcon failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -98,7 +98,7 @@ Namespace Tools
                     Me._cMen.Dispose()
                     Me._Disposed = True
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Disposing SysTrayIcon failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Disposing SysTrayIcon failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -136,7 +136,7 @@ Namespace Tools
                         AddHandler tMenItem.MouseUp, AddressOf ConMenItem_MouseUp
                     Next
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "AddNodeToMenu failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "AddNodeToMenu failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 

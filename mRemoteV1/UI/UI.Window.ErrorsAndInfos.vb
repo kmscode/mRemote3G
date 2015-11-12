@@ -215,7 +215,7 @@ Namespace UI
 
                     Me._Layout = ControlLayout.Vertical
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "LayoutVertical (UI.Window.ErrorsAndInfos) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "LayoutVertical (UI.Window.ErrorsAndInfos) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -231,7 +231,7 @@ Namespace UI
 
                     Me._Layout = ControlLayout.Horizontal
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "LayoutHorizontal (UI.Window.ErrorsAndInfos) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "LayoutHorizontal (UI.Window.ErrorsAndInfos) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -249,7 +249,7 @@ Namespace UI
 
                     Me.lvErrorCollector.Columns(0).Width = Me.lvErrorCollector.Width - 20
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ErrorsAndInfos_Resize (UI.Window.ErrorsAndInfos) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ErrorsAndInfos_Resize (UI.Window.ErrorsAndInfos) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -261,7 +261,7 @@ Namespace UI
                     Me.txtMsgText.BackColor = Color.FromKnownColor(KnownColor.Control)
                     Me.lblMsgDate.Text = ""
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "pnlErrorMsg_ResetDefaultStyle (UI.Window.ErrorsAndInfos) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "pnlErrorMsg_ResetDefaultStyle (UI.Window.ErrorsAndInfos) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -278,7 +278,7 @@ Namespace UI
                         End Try
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "MC_KeyDown (UI.Window.ErrorsAndInfos) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "MC_KeyDown (UI.Window.ErrorsAndInfos) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -309,7 +309,7 @@ Namespace UI
                     Me.lblMsgDate.Text = eMsg.MsgDate
                     Me.txtMsgText.Text = eMsg.MsgText
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "lvErrorCollector_SelectedIndexChanged (UI.Window.ErrorsAndInfos) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "lvErrorCollector_SelectedIndexChanged (UI.Window.ErrorsAndInfos) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -362,7 +362,7 @@ Namespace UI
 
                     Clipboard.SetText(stringBuilder.ToString)
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "UI.Window.ErrorsAndInfos.CopyMessagesToClipboard() failed." & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "UI.Window.ErrorsAndInfos.CopyMessagesToClipboard() failed." & vbNewLine & ex.ToString(), True)
                 Finally
                     lvErrorCollector.EndUpdate()
                 End Try
@@ -384,7 +384,7 @@ Namespace UI
                         lvErrorCollector.Items.Clear()
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "UI.Window.ErrorsAndInfos.DeleteMessages() failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "UI.Window.ErrorsAndInfos.DeleteMessages() failed" & vbNewLine & ex.ToString(), True)
                 Finally
                     lvErrorCollector.EndUpdate()
                 End Try

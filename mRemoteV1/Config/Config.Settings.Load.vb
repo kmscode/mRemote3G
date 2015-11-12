@@ -32,7 +32,7 @@ Namespace Config
                             Try
                                 My.Settings.Upgrade()
                             Catch ex As Exception
-                                Log.Error("My.Settings.Upgrade() failed" & vbNewLine & ex.Message)
+                                Log.Error("My.Settings.Upgrade() failed" & vbNewLine & ex.ToString())
                             End Try
                             My.Settings.DoUpgrade = False
 
@@ -119,7 +119,7 @@ Namespace Config
                         End If
                     End With
                 Catch ex As Exception
-                    Log.Error("Loading settings failed" & vbNewLine & ex.Message)
+                    Log.Error("Loading settings failed" & vbNewLine & ex.ToString())
                 End Try
             End Sub
 
@@ -200,7 +200,7 @@ Namespace Config
                         End If
                     End With
                 Catch ex As Exception
-                    Log.Error("LoadPanelsFromXML failed" & vbNewLine & ex.Message)
+                    Log.Error("LoadPanelsFromXML failed" & vbNewLine & ex.ToString())
                 End Try
             End Sub
 
@@ -267,7 +267,7 @@ Namespace Config
                         Return Windows.screenshotPanel
                     End If
                 Catch ex As Exception
-                    Log.Error("GetContentFromPersistString failed" & vbNewLine & ex.Message)
+                    Log.Error("GetContentFromPersistString failed" & vbNewLine & ex.ToString())
                 End Try
 
                 Return Nothing

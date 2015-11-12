@@ -26,7 +26,7 @@ Namespace Connection
 
                     NewExtended()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strHttpConnectionFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strHttpConnectionFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -64,7 +64,7 @@ Namespace Connection
 
                     Return True
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strHttpSetPropsFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strHttpSetPropsFailed & vbNewLine & ex.ToString(), True)
                     Return False
                 End Try
             End Function
@@ -107,7 +107,7 @@ Namespace Connection
                     MyBase.Connect()
                     Return True
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strHttpConnectFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strHttpConnectFailed & vbNewLine & ex.ToString(), True)
                     Return False
                 End Try
             End Function
@@ -169,7 +169,7 @@ Namespace Connection
                         End If
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Language.strHttpDocumentTileChangeFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Language.strHttpDocumentTileChangeFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 #End Region

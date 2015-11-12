@@ -393,7 +393,7 @@ Namespace Tools
 
                     RaiseEvent ScanComplete(_scannedHosts)
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "StartScanBG failed (Tools.PortScan)" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "StartScanBG failed (Tools.PortScan)" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 

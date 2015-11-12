@@ -112,7 +112,7 @@ Namespace Config
                         MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, String.Format(My.Language.strErrorBadDatabaseVersion, databaseVersion.ToString, My.Application.Info.ProductName))
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Language.strErrorVerifyDatabaseVersionFailed, ex.Message))
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Language.strErrorVerifyDatabaseVersionFailed, ex.ToString()))
                 Finally
                     If sqlDataReader IsNot Nothing Then
                         If Not sqlDataReader.IsClosed Then sqlDataReader.Close()
@@ -535,7 +535,7 @@ Namespace Config
                     End If
                     File.Move(tempFileName, ConnectionFileName)
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SaveToXml failed" & vbNewLine & ex.Message, False)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SaveToXml failed" & vbNewLine & ex.ToString(), False)
                 End Try
             End Sub
 
@@ -565,7 +565,7 @@ Namespace Config
                         End If
                     Next
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SaveNode failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SaveNode failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -791,7 +791,7 @@ Namespace Config
                         _xmlTextWriter.WriteAttributeString("InheritRDGatewayDomain", "", False)
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SaveConnectionFields failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SaveConnectionFields failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 #End Region

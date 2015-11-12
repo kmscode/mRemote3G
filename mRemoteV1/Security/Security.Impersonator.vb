@@ -72,7 +72,7 @@ Namespace Security
                 Dim newId As New WindowsIdentity(tokenHandle)
                 impersonatedUser = newId.Impersonate()
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "Starting Impersonation failed (Sessions feature will not work)" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "Starting Impersonation failed (Sessions feature will not work)" & vbNewLine & ex.ToString(), True)
             End Try
         End Sub
 
@@ -83,7 +83,7 @@ Namespace Security
             Try
                 impersonatedUser.Undo() ' Stop impersonating the user.
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "Stopping Impersonation failed" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "Stopping Impersonation failed" & vbNewLine & ex.ToString(), True)
                 Throw
             Finally
 

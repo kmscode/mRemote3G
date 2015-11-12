@@ -142,7 +142,7 @@ Namespace UI
 
                     _portScanner.StartScan()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "StartScan failed (UI.Window.PortScan)" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "StartScan failed (UI.Window.PortScan)" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 

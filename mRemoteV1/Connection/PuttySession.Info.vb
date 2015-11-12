@@ -25,7 +25,7 @@ Namespace Connection
                     puttyProcess.SetControlVisible("Button", "&Open", False)
                     puttyProcess.WaitForExit()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strErrorCouldNotLaunchPutty & vbNewLine & ex.Message, False)
+                    MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strErrorCouldNotLaunchPutty & vbNewLine & ex.ToString(), False)
                 End Try
             End Sub
 #End Region

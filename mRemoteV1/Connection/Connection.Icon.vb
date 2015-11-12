@@ -29,7 +29,7 @@ Namespace Connection
                     Return nI
                 End If
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't get Icon from String" & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't get Icon from String" & vbNewLine & ex.ToString())
             End Try
 
             Return Nothing

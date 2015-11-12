@@ -68,7 +68,7 @@ Namespace Connection
                 Try
                     Me._Control.Focus()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't focus Control (Connection.Protocol.Base)" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't focus Control (Connection.Protocol.Base)" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -99,7 +99,7 @@ Namespace Connection
 
                     Return True
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't SetProps (Connection.Protocol.Base)" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't SetProps (Connection.Protocol.Base)" & vbNewLine & ex.ToString(), True)
                     Return False
                 End Try
             End Function
@@ -131,7 +131,7 @@ Namespace Connection
                         Try
                             Me.DisposeControl()
                         Catch ex As Exception
-                            MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "Could not dispose control, probably form is already closed (Connection.Protocol.Base)" & vbNewLine & ex.Message, True)
+                            MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "Could not dispose control, probably form is already closed (Connection.Protocol.Base)" & vbNewLine & ex.ToString(), True)
                         End Try
                     End If
 
@@ -145,11 +145,11 @@ Namespace Connection
                                 Me.DisposeInterface()
                             End If
                         Catch ex As Exception
-                            MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "Could not set InterfaceControl.Parent.Tag or Dispose Interface, probably form is already closed (Connection.Protocol.Base)" & vbNewLine & ex.Message, True)
+                            MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "Could not set InterfaceControl.Parent.Tag or Dispose Interface, probably form is already closed (Connection.Protocol.Base)" & vbNewLine & ex.ToString(), True)
                         End Try
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't Close InterfaceControl BG (Connection.Protocol.Base)" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't Close InterfaceControl BG (Connection.Protocol.Base)" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 

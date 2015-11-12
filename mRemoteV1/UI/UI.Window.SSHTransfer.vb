@@ -399,7 +399,7 @@ Namespace UI
                     t.IsBackground = True
                     t.Start()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strSSHTransferFailed & vbNewLine & ex.Message)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strSSHTransferFailed & vbNewLine & ex.ToString())
                     Me.sshT.Close()
                 End Try
             End Sub
@@ -412,7 +412,7 @@ Namespace UI
                     DisableButtons()
                     Me.sshT.Put(LocalFile, RemoteFile)
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strSSHStartTransferBG & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strSSHStartTransferBG & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -503,7 +503,7 @@ Namespace UI
                         Me.sshT.Close()
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strSSHTransferEndFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strSSHTransferEndFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 #End Region

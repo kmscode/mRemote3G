@@ -46,7 +46,7 @@ Namespace Connection
                         Dim msRdpClientSecuredSettings As MSTSCLib.IMsRdpClientSecuredSettings = _rdpClient.SecuredSettings2
                         msRdpClientSecuredSettings.KeyboardHookMode = 1 ' Apply key combinations at the remote server.
                     Catch ex As Exception
-                        MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetRedirectKeysFailed & vbNewLine & ex.Message, True)
+                        MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetRedirectKeysFailed & vbNewLine & ex.ToString(), True)
                     End Try
                 End Set
             End Property
@@ -125,7 +125,7 @@ Namespace Connection
 
                     Return True
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetPropsFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetPropsFailed & vbNewLine & ex.ToString(), True)
                     Return False
                 End Try
             End Function
@@ -139,7 +139,7 @@ Namespace Connection
                     MyBase.Connect()
                     Return True
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpConnectionOpenFailed & vbNewLine & ex.Message)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpConnectionOpenFailed & vbNewLine & ex.ToString())
                 End Try
 
                 Return False
@@ -149,7 +149,7 @@ Namespace Connection
                 Try
                     _rdpClient.Disconnect()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpDisconnectFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpDisconnectFailed & vbNewLine & ex.ToString(), True)
                     MyBase.Close()
                 End Try
             End Sub
@@ -158,7 +158,7 @@ Namespace Connection
                 Try
                     Me.Fullscreen = Not Me.Fullscreen
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpToggleFullscreenFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpToggleFullscreenFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -166,7 +166,7 @@ Namespace Connection
                 Try
                     Me.SmartSize = Not Me.SmartSize
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpToggleSmartSizeFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpToggleSmartSizeFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -176,7 +176,7 @@ Namespace Connection
                         Control.Focus()
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpFocusFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpFocusFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -267,7 +267,7 @@ Namespace Connection
                         End If
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strRdpSetGatewayFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strRdpSetGatewayFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -336,7 +336,7 @@ Namespace Connection
                         _rdpClient.Domain = domain
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetCredentialsFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetCredentialsFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -364,7 +364,7 @@ Namespace Connection
                             _rdpClient.DesktopHeight = resolution.Height
                     End Select
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetResolutionFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetResolutionFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -374,7 +374,7 @@ Namespace Connection
                         _rdpClient.AdvancedSettings2.RDPPort = _connectionInfo.Port
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetPortFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetPortFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -386,7 +386,7 @@ Namespace Connection
                     _rdpClient.AdvancedSettings2.RedirectSmartCards = Me._connectionInfo.RedirectSmartcards
                     _rdpClient.SecuredSettings2.AudioRedirectionMode = Int(Me._connectionInfo.RedirectSound)
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetRedirectionFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetRedirectionFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -411,7 +411,7 @@ Namespace Connection
 
                     _rdpClient.AdvancedSettings2.PerformanceFlags = pFlags
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetPerformanceFlagsFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetPerformanceFlagsFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -419,7 +419,7 @@ Namespace Connection
                 Try
                     _rdpClient.AdvancedSettings5.AuthenticationLevel = Me._connectionInfo.RDPAuthenticationLevel
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetAuthenticationLevelFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetAuthenticationLevelFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -441,7 +441,7 @@ Namespace Connection
                     AddHandler _rdpClient.OnDisconnected, AddressOf RDPEvent_OnDisconnected
                     AddHandler _rdpClient.OnLeaveFullScreenMode, AddressOf RDPEvent_OnLeaveFullscreenMode
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetEventHandlersFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetEventHandlersFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 #End Region
@@ -793,7 +793,7 @@ Namespace Connection
                     Try
                         Return (_description(id))
                     Catch ex As Exception
-                        MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpErrorGetFailure & vbNewLine & ex.Message, True)
+                        MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpErrorGetFailure & vbNewLine & ex.ToString(), True)
                         Return String.Format(My.Language.strRdpErrorUnknown, id)
                     End Try
                 End Function

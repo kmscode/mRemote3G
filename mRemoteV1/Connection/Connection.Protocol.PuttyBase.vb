@@ -189,7 +189,7 @@ Namespace Connection
                     MyBase.Connect()
                     Return True
                 Catch ex As Exception
-                    MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strPuttyConnectionFailed & vbNewLine & ex.Message)
+                    MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strPuttyConnectionFailed & vbNewLine & ex.ToString())
                     Return False
                 End Try
             End Function
@@ -199,7 +199,7 @@ Namespace Connection
                     If ConnectionWindow.InTabDrag Then Return
                     SetForegroundWindow(PuttyHandle)
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPuttyFocusFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPuttyFocusFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -208,7 +208,7 @@ Namespace Connection
                     If InterfaceControl.Size = Size.Empty Then Return
                     MoveWindow(PuttyHandle, -SystemInformation.FrameBorderSize.Width, -(SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height), InterfaceControl.Width + (SystemInformation.FrameBorderSize.Width * 2), InterfaceControl.Height + SystemInformation.CaptionHeight + (SystemInformation.FrameBorderSize.Height * 2), True)
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPuttyResizeFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPuttyResizeFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -218,13 +218,13 @@ Namespace Connection
                         PuttyProcess.Kill()
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPuttyKillFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPuttyKillFailed & vbNewLine & ex.ToString(), True)
                 End Try
 
                 Try
                     PuttyProcess.Dispose()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPuttyDisposeFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPuttyDisposeFailed & vbNewLine & ex.ToString(), True)
                 End Try
 
                 MyBase.Close()
@@ -235,7 +235,7 @@ Namespace Connection
                     PostMessage(Me.PuttyHandle, WM_SYSCOMMAND, IDM_RECONF, 0)
                     SetForegroundWindow(Me.PuttyHandle)
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPuttyShowSettingsDialogFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPuttyShowSettingsDialogFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 #End Region

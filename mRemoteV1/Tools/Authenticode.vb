@@ -134,7 +134,7 @@ Namespace Tools
                         Return String.Format("The thumbprint does not match. {0} {1} {2}.", _thumbprint, ChrW(&H2260), ThumbprintToMatch)
                     Case StatusValue.TrustProviderError
                         Dim ex As New Win32Exception(_trustProviderErrorCode)
-                        Return String.Format("The trust provider returned an error. {0}", ex.Message)
+                        Return String.Format("The trust provider returned an error. {0}", ex.ToString())
                     Case StatusValue.UnhandledException
                         Return String.Format("An unhandled exception occurred. {0}", Exception.Message)
                     Case Else

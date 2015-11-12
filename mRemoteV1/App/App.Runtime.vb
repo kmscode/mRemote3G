@@ -318,7 +318,7 @@ Namespace App
                             AnnouncementForm.Show(frmMain.pnlDock)
                     End Select
                 Catch ex As Exception
-                    MessageCollector.AddMessage(MessageClass.ErrorMsg, "App.Runtime.Windows.Show() failed." & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(MessageClass.ErrorMsg, "App.Runtime.Windows.Show() failed." & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -498,7 +498,7 @@ Namespace App
                             If Not servicePackNumber = 0 Then servicePack = String.Format("Service Pack {0}", servicePackNumber)
                         Next
                     Catch ex As Exception
-                        Log.WarnFormat("Error retrieving operating system information from WMI. {0}", ex.Message)
+                        Log.WarnFormat("Error retrieving operating system information from WMI. {0}", ex.ToString())
                     End Try
 
                     Dim architecture As String = String.Empty
@@ -508,7 +508,7 @@ Namespace App
                             architecture = String.Format("{0}-bit", addressWidth)
                         Next
                     Catch ex As Exception
-                        Log.WarnFormat("Error retrieving operating system address width from WMI. {0}", ex.Message)
+                        Log.WarnFormat("Error retrieving operating system address width from WMI. {0}", ex.ToString())
                     End Try
 
                     Log.InfoFormat(String.Join(" ", Array.FindAll(New String() {osVersion, servicePack, architecture}, Function(s) Not String.IsNullOrEmpty(s))))
@@ -667,7 +667,7 @@ Namespace App
                         My.Settings.ResetToolbars = True
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strCommandLineArgsCouldNotBeParsed & vbNewLine & ex.Message)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strCommandLineArgsCouldNotBeParsed & vbNewLine & ex.ToString())
                 End Try
             End Sub
 
@@ -717,7 +717,7 @@ Namespace App
 
                     IeBrowserEmulation.Unregister()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strSettingsCouldNotBeSavedOrTrayDispose & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strSettingsCouldNotBeSavedOrTrayDispose & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -726,7 +726,7 @@ Namespace App
                 Try
                     Process.Start(_updateFilePath)
                 Catch ex As Exception
-                    MessageCollector.AddMessage(MessageClass.ErrorMsg, "The update could not be started." & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(MessageClass.ErrorMsg, "The update could not be started." & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -916,7 +916,7 @@ Namespace App
 
                 Return cForm
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't add panel" & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't add panel" & vbNewLine & ex.ToString())
                 Return Nothing
             End Try
         End Function
@@ -932,7 +932,7 @@ Namespace App
                     conW.SetFormText(nTitle.Replace("&", "&&"))
                 End If
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't rename panel" & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't rename panel" & vbNewLine & ex.ToString())
             End Try
         End Sub
 
@@ -952,7 +952,7 @@ Namespace App
                     cMenScreens.DropDownItems.Add(cMenScreen)
                 Next
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't enumerate screens" & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't enumerate screens" & vbNewLine & ex.ToString())
             End Try
         End Sub
 
@@ -1266,7 +1266,7 @@ Namespace App
                     LastSqlUpdate = Now
                 End If
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionsFileCouldNotBeSaved & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionsFileCouldNotBeSaved & vbNewLine & ex.ToString())
             Finally
                 If TimerSqlWatcher IsNot Nothing Then
                     TimerSqlWatcher.Enabled = previousTimerState
@@ -1332,7 +1332,7 @@ Namespace App
 #Region "Opening Connection"
         Public Shared Function CreateQuickConnect(ByVal connectionString As String, ByVal protocol As Protocol.Protocols) As Connection.Info
             Try
-                Dim uri As New Uri("dummyscheme" & uri.SchemeDelimiter & connectionString)
+                Dim uri As New Uri("dummyscheme" & Uri.SchemeDelimiter & connectionString)
 
                 If String.IsNullOrEmpty(uri.Host) Then Return Nothing
 
@@ -1364,7 +1364,7 @@ Namespace App
             Try
                 OpenConnection(Connection.Info.Force.None)
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed & vbNewLine & ex.ToString())
             End Try
         End Sub
 
@@ -1388,7 +1388,7 @@ Namespace App
                     Next
                 End If
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed & vbNewLine & ex.ToString())
             End Try
         End Sub
 
@@ -1396,7 +1396,7 @@ Namespace App
             Try
                 OpenConnection(ConnectionInfo, Connection.Info.Force.None)
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed & vbNewLine & ex.ToString())
             End Try
         End Sub
 
@@ -1404,7 +1404,7 @@ Namespace App
             Try
                 OpenConnectionFinal(ConnectionInfo, Connection.Info.Force.None, ConnectionForm)
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed & vbNewLine & ex.ToString())
             End Try
         End Sub
 
@@ -1412,7 +1412,7 @@ Namespace App
             Try
                 OpenConnectionFinal(ConnectionInfo, Force, ConnectionForm)
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed & vbNewLine & ex.ToString())
             End Try
         End Sub
 
@@ -1420,7 +1420,7 @@ Namespace App
             Try
                 OpenConnectionFinal(ConnectionInfo, Force, Nothing)
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed & vbNewLine & ex.ToString())
             End Try
         End Sub
 
@@ -1552,7 +1552,7 @@ Namespace App
 
                 frmMain.SelectedConnection = newConnectionInfo
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed & vbNewLine & ex.ToString())
             End Try
         End Sub
 
@@ -1590,7 +1590,7 @@ Namespace App
                     End If
                 End If
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Language.strProtocolEventDisconnectFailed, ex.Message), True)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Language.strProtocolEventDisconnectFailed, ex.ToString()), True)
             End Try
         End Sub
 
@@ -1615,7 +1615,7 @@ Namespace App
                     End If
                 End If
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnenctionCloseEventFailed & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnenctionCloseEventFailed & vbNewLine & ex.ToString(), True)
             End Try
         End Sub
 
@@ -1638,7 +1638,7 @@ Namespace App
                     End If
                 End If
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionEventConnectionFailed & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionEventConnectionFailed & vbNewLine & ex.ToString(), True)
             End Try
         End Sub
 #End Region
@@ -1711,7 +1711,7 @@ Namespace App
 
                 Return True
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strLogWriteToFileFinalLocationFailed & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strLogWriteToFileFinalLocationFailed & vbNewLine & ex.ToString(), True)
                 Return False
             Finally
                 If streamReader IsNot Nothing Then

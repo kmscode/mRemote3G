@@ -37,7 +37,7 @@ Namespace Security
 
                 Return Convert.ToBase64String(encdata)
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Language.strErrorEncryptionFailed, ex.Message))
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Language.strErrorEncryptionFailed, ex.ToString()))
             End Try
 
             Return StrToEncrypt
@@ -78,7 +78,7 @@ Namespace Security
             Catch ex As Exception
                 ' Ignore CryptographicException "Padding is invalid and cannot be removed." when password is incorrect.
                 If Not TypeOf ex Is CryptographicException Then
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Language.strErrorDecryptionFailed, ex.Message))
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Language.strErrorDecryptionFailed, ex.ToString()))
                 End If
             End Try
 

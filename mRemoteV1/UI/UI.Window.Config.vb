@@ -519,7 +519,7 @@ Namespace UI
                     Me.ShowHideGridItems()
                     Me.SetHostStatus(Obj)
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConfigPropertyGridObjectFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConfigPropertyGridObjectFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -600,7 +600,7 @@ Namespace UI
                         ToolStripManager.Merge(customToolStrip, propertyGridToolStrip)
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strConfigUiLoadFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strConfigUiLoadFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -681,7 +681,7 @@ Namespace UI
                     Me.ShowHideGridItems()
                     App.Runtime.SaveConnectionsBG()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConfigPropertyGridValueFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConfigPropertyGridValueFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -1307,7 +1307,7 @@ Namespace UI
 
                     Me.pGrid.Refresh()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConfigPropertyGridHideItemsFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConfigPropertyGridHideItemsFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -1390,7 +1390,7 @@ Namespace UI
                         Me.cMenIcons.Show(mPos)
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConfigPropertyGridButtonIconClickFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConfigPropertyGridButtonIconClickFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -1415,7 +1415,7 @@ Namespace UI
 
                     SaveConnectionsBG()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strConfigPropertyGridMenuClickFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strConfigPropertyGridMenuClickFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 #End Region
@@ -1476,7 +1476,7 @@ Namespace UI
                     pThread.IsBackground = True
                     pThread.Start()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConfigPropertyGridSetHostStatusFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConfigPropertyGridSetHostStatusFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 #End Region

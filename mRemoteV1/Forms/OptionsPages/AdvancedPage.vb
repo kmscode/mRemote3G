@@ -128,7 +128,7 @@ Namespace Forms.OptionsPages
                 puttyProcess.SetControlVisible("Button", "&Open", False)
                 puttyProcess.WaitForExit()
             Catch ex As Exception
-                cTaskDialog.MessageBox(Application.Info.ProductName, Language.strErrorCouldNotLaunchPutty, "", ex.Message, "", "", eTaskDialogButtons.OK, eSysIcons.Error, Nothing)
+                cTaskDialog.MessageBox(Application.Info.ProductName, Language.strErrorCouldNotLaunchPutty, "", ex.ToString(), "", "", eTaskDialogButtons.OK, eSysIcons.Error, Nothing)
             End Try
         End Sub
 

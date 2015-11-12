@@ -362,7 +362,7 @@ Public Class frmMain
                 button.Tag = tool
             Next
         Catch ex As Exception
-            MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Language.strErrorAddExternalToolsToToolBarFailed, ex.Message), True)
+            MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Language.strErrorAddExternalToolsToToolBarFailed, ex.ToString()), True)
         End Try
     End Sub
 

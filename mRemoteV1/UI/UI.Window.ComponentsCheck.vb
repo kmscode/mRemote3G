@@ -494,7 +494,7 @@ Namespace UI
                     txtCheck1.Text = My.Language.strCcRDPFailed
 
                     MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "RDP " & errorMsg, True)
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, ex.ToString(), True)
                 End Try
 
                 If rdpClient IsNot Nothing Then rdpClient.Dispose()
