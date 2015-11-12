@@ -6,7 +6,6 @@ Currently these protocols are supported:
 
  * RDP (Remote Desktop)
  * VNC (Virtual Network Computing)
- * ICA (Independent Computing Architecture)
  * SSH (Secure Shell)
  * Telnet (TELecommunication NETwork)
  * HTTP/S (Hypertext Transfer Protocol)
