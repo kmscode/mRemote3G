@@ -1,3 +1,6 @@
+1.83 ()
+  Correct random crash after unlocking session (Thanks to Fabrice Didierjean - coredmp95@gmail.com )
+
 1.82 (2015-11-12):
   Fixed a number of Complier Warnings
   Print exception stack in the log

@@ -147,23 +147,36 @@ namespace SharedLibraryNG
             var result = 0;
 
             foreach (var notificationEntry in NotificationEntries)
-                if (GetFocusWindow() == notificationEntry.WindowHandle && notificationEntry.KeyCode == key.vkCode)
+            // If error code is null, have to ignore the exception
+            // For some unknown reason, sometimes GetFocusWindows throws an exception
+            // Mainly when the station is unlocked, or after an admin password is asked
+                try
                 {
-                    var modifierKeys = GetModifierKeyState();
-					if (!ModifierKeysMatch(notificationEntry.ModifierKeys, modifierKeys)) continue;
-
-                    var wParam = new IntPtr(msg);
-                    var lParam = new HookKeyMsgData
+                    if (GetFocusWindow() == notificationEntry.WindowHandle && notificationEntry.KeyCode == key.vkCode)
                     {
-                        KeyCode = key.vkCode,
-                        ModifierKeys = modifierKeys,
-                        WasBlocked = notificationEntry.Block,
-                    };
+                        var modifierKeys = GetModifierKeyState();
+                        if (!ModifierKeysMatch(notificationEntry.ModifierKeys, modifierKeys)) continue;
 
-                    if (!PostMessage(notificationEntry.WindowHandle, HookKeyMsg, wParam, lParam))
-                        throw new Win32Exception(Marshal.GetLastWin32Error());
+                        var wParam = new IntPtr(msg);
+                        var lParam = new HookKeyMsgData
+                        {
+                            KeyCode = key.vkCode,
+                            ModifierKeys = modifierKeys,
+                            WasBlocked = notificationEntry.Block,
+                        };
 
-                    if (notificationEntry.Block) result = 1;
+                        if (!PostMessage(notificationEntry.WindowHandle, HookKeyMsg, wParam, lParam))
+                            throw new Win32Exception(Marshal.GetLastWin32Error());
+
+                        if (notificationEntry.Block) result = 1;
+                    }
+                }
+                catch (Win32Exception e)
+                {
+                    if (e.NativeErrorCode != 0)
+                    {
+                        throw;
+                    }
                 }
 
             return result;
@@ -173,7 +186,10 @@ namespace SharedLibraryNG
         {
             var guiThreadInfo = new Win32.GUITHREADINFO();
             if (!Win32.GetGUIThreadInfo(0, guiThreadInfo))
-                throw new Win32Exception(Marshal.GetLastWin32Error());
+            {
+                var except = Marshal.GetLastWin32Error();
+                throw new Win32Exception(except);
+            }
 			return Win32.GetAncestor(guiThreadInfo.hwndFocus, Win32.GA_ROOT);
         }
 
