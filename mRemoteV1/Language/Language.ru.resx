@@ -340,7 +340,7 @@
  VncSharpNG Control Version {0}</value>
   </data>
   <data name="strCheckboxAutomaticReconnect" xml:space="preserve">
-    <value>Автоматически пытаться восстановить связь при отключении от сервера (только RDP и ICA)</value>
+    <value>Автоматически пытаться восстановить связь при отключении от сервера (только RDP)</value>
   </data>
   <data name="strCheckboxDomain" xml:space="preserve">
     <value>Домен</value>

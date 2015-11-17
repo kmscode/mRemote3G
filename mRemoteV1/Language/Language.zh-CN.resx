@@ -335,7 +335,7 @@ Citrix ICA 客户端空间版本：{0}</value>
 VncSharpNG 版本 {0}</value>
   </data>
   <data name="strCheckboxAutomaticReconnect" xml:space="preserve">
-    <value>服务器连接断开时，自动重试连接(仅限RDP和ICA)</value>
+    <value>服务器连接断开时，自动重试连接(仅限RDP和)</value>
   </data>
   <data name="strCheckboxDomain" xml:space="preserve">
     <value>域名</value>

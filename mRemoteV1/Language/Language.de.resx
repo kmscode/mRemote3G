@@ -340,7 +340,7 @@ Wenn Sie noch immer Probleme mit VNC haben, konsultieren Sie bitte das mRemoteNG
 VncSharpNG Control Version {0}</value>
   </data>
   <data name="strCheckboxAutomaticReconnect" xml:space="preserve">
-    <value>Automatisch versuchen zu verbinden wenn Verbindung getrennt wird (nur RDP &amp;&amp; ICA)</value>
+    <value>Automatisch versuchen zu verbinden wenn Verbindung getrennt wird (nur RDP)</value>
   </data>
   <data name="strCheckboxDomain" xml:space="preserve">
     <value>Domäne</value>

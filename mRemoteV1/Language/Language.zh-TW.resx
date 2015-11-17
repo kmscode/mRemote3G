@@ -308,7 +308,7 @@ Remote Desktop Connection Control 版本 {0}</value>
 VncSharpNG Control 版本 {0}</value>
   </data>
   <data name="strCheckboxAutomaticReconnect" xml:space="preserve">
-    <value>從伺服器中斷連線時自動嘗試重新連線 (僅限 RDP &amp;&amp; ICA)</value>
+    <value>從伺服器中斷連線時自動嘗試重新連線 (僅限 RDP)</value>
   </data>
   <data name="strCheckboxDomain" xml:space="preserve">
     <value>網域</value>

@@ -322,7 +322,7 @@
     <value>Todos os componentes do VNC foram encontrados e parecem estar registrados corretamente. VncSharpNG versão {0}</value>
   </data>
   <data name="strCheckboxAutomaticReconnect" xml:space="preserve">
-    <value>Tentar reconectar automaticamente quando desconectado do servidor (RDP &amp;&amp; ICA somente)</value>
+    <value>Tentar reconectar automaticamente quando desconectado do servidor (RDP somente)</value>
   </data>
   <data name="strCheckboxDomain" xml:space="preserve">
     <value>Domínio</value>

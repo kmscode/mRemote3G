@@ -340,7 +340,7 @@ Hvis du ikke passerer kontrollen eller ikke får brukt VNC i mRemoteNG, vennligs
 VncSharpNG Control Version {0}</value>
   </data>
   <data name="strCheckboxAutomaticReconnect" xml:space="preserve">
-    <value>Forsøk å automatisk koble til på nytt ved frakobling fra server (kun RDP &amp;&amp; ICA)</value>
+    <value>Forsøk å automatisk koble til på nytt ved frakobling fra server (kun RDP)</value>
   </data>
   <data name="strCheckboxDomain" xml:space="preserve">
     <value>Domene</value>

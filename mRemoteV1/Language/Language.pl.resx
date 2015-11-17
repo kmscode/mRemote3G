@@ -327,7 +327,7 @@ Proszę upewnić się, że albo masz Putty.exe w katalogu mRemoteNG (domyślnie:
     <value>Wszystkie składniki VNC zostały znalezione i wydają się być poprawnie zarejestrowane. Wersja VncSharpNG {0}</value>
   </data>
   <data name="strCheckboxAutomaticReconnect" xml:space="preserve">
-    <value>Automatycznie połącz ponownie jeśli nastąpi odłączenie od serwera (tylko RDP &amp;&amp; ICA)</value>
+    <value>Automatycznie połącz ponownie jeśli nastąpi odłączenie od serwera (tylko RDP)</value>
   </data>
   <data name="strCheckboxDomain" xml:space="preserve">
     <value>Domena</value>

@@ -711,7 +711,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Automatically try to reconnect when disconnected from server (RDP &amp;&amp; ICA only).
+        '''  Looks up a localized string similar to Automatically try to reconnect when disconnected from server (RDP only).
         '''</summary>
         Friend Shared ReadOnly Property strCheckboxAutomaticReconnect() As String
             Get

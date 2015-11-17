@@ -345,7 +345,7 @@ If you are still not able to pass this check or use VNC in mRemoteNG please cons
 VncSharpNG Control Version {0}</value>
   </data>
   <data name="strCheckboxAutomaticReconnect" xml:space="preserve">
-    <value>Automatically try to reconnect when disconnected from server (RDP &amp;&amp; ICA only)</value>
+    <value>Automatically try to reconnect when disconnected from server (RDP only)</value>
   </data>
   <data name="strCheckboxDomain" xml:space="preserve">
     <value>Domain</value>

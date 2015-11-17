@@ -326,7 +326,7 @@ Si la vérification des composants ou l'utilisation d'ICA échoue malgré tout, 
     <value>Tous les composants VNC ont été trouvés et semblent être enregistrés correctement. Version Control VncSharpNG {0}</value>
   </data>
   <data name="strCheckboxAutomaticReconnect" xml:space="preserve">
-    <value>Reconnexion automatique en cas de déconnexion du serveur RDP (ICA &amp;&amp; seulement)</value>
+    <value>Reconnexion automatique en cas de déconnexion du serveur (RDP seulement)</value>
   </data>
   <data name="strCheckboxDomain" xml:space="preserve">
     <value>Domaine</value>

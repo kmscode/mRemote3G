@@ -337,7 +337,7 @@ Remote Desktop Connection, Control Version {0}</value>
 VncSharpNG Control Version {0}</value>
   </data>
   <data name="strCheckboxAutomaticReconnect" xml:space="preserve">
-    <value>Автоматично намагатися відновити зв'язок при відключенні від сервера (тільки RDP і ICA)</value>
+    <value>Автоматично намагатися відновити зв'язок при відключенні від сервера (тільки RDP)</value>
   </data>
   <data name="strCheckboxDomain" xml:space="preserve">
     <value>Домен</value>

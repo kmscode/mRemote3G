@@ -339,7 +339,7 @@ Si continúa sin funcionar la comprobación ó no puede utilizar VNC en mRemoteN
 Versión de Control {0} de VNCSharpNG</value>
   </data>
   <data name="strCheckboxAutomaticReconnect" xml:space="preserve">
-    <value>Tratar de reconectar automáticamente al ser desconectado del servidor (solo RDP &amp;&amp; ICA)</value>
+    <value>Tratar de reconectar automáticamente al ser desconectado del servidor (solo RDP)</value>
   </data>
   <data name="strCheckboxDomain" xml:space="preserve">
     <value>Dominio</value>

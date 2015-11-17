@@ -173,7 +173,7 @@
 VncSharpNG Control {0}</value>
   </data>
   <data name="strCheckboxAutomaticReconnect" xml:space="preserve">
-    <value>Intentar reconectar automáticamente cuando se desconecte (solo para RDP &amp;&amp; ICA)</value>
+    <value>Intentar reconectar automáticamente cuando se desconecte (solo para RDP)</value>
   </data>
   <data name="strCheckboxDomain" xml:space="preserve">
     <value>Dominio</value>

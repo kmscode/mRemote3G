@@ -337,7 +337,7 @@ Se risulta ancora impossibile utilizzare VNC con mRemoteNG, contattare il forum 
 VncSharpNG Control versione {0}</value>
   </data>
   <data name="strCheckboxAutomaticReconnect" xml:space="preserve">
-    <value>Prova a riconnettersi automaticamente quando disconnesso (solo RDP ed ICA)</value>
+    <value>Prova a riconnettersi automaticamente quando disconnesso (solo RDP)</value>
   </data>
   <data name="strCheckboxDomain" xml:space="preserve">
     <value>Dominio</value>

@@ -340,7 +340,7 @@ Als u nog steeds niet in staat bent om de langs check te komen gebruik dan VNC i
 VncSharpNG Versie {0}</value>
   </data>
   <data name="strCheckboxAutomaticReconnect" xml:space="preserve">
-    <value>Automatisch proberen opnieuw te verbinden wanneer de verbinding is verbroken van de server (RDP &amp;&amp; ICA Alleen)</value>
+    <value>Automatisch proberen opnieuw te verbinden wanneer de verbinding is verbroken van de server (RDP Alleen)</value>
   </data>
   <data name="strCheckboxDomain" xml:space="preserve">
     <value>Domein</value>
