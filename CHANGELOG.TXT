@@ -1,5 +1,7 @@
-1.83 ()
-  Correct random crash after unlocking session (Thanks to Fabrice Didierjean - coredmp95@gmail.com )
+1.83 (2015-11-16)
+  Correct random crash after unlocking session (Thanks to Fabrice Didierjean - coredmp95@gmail.com)
+  Update to be "DPI Aware" to prevent the UI from looking "Fuzzy" - https://msdn.microsoft.com/en-us/library/dn469266%28v=vs.85%29.aspx
+  Added new build-relport.cmd file for quick "Release Portable" builds
 
 1.82 (2015-11-12):
   Fixed a number of Complier Warnings

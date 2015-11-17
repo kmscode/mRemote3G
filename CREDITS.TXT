@@ -13,6 +13,7 @@ Apisitt Rattana
 Andreas Rehm
 David Vidmar
 Fabrice Didierjean
+Sean Kaim
 
 
 Translators
