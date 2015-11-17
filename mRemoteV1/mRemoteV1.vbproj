@@ -97,6 +97,7 @@
     <DefineConstants>PORTABLE</DefineConstants>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ADTree, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
