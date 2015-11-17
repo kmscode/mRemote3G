@@ -320,8 +320,6 @@ Namespace UI
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.pnlChecks.AutoScroll = True
-                Me.pnlChecks.AutoSize = True
-                Me.pnlChecks.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
                 Me.pnlChecks.Controls.Add(Me.pnlCheck1)
                 Me.pnlChecks.Controls.Add(Me.pnlCheck2)
                 Me.pnlChecks.Controls.Add(Me.pnlCheck3)
