@@ -78,7 +78,7 @@ Namespace Tools
 
         Public ReadOnly Property Component As System.ComponentModel.IComponent Implements System.ComponentModel.ISite.Component
             Get
-                Throw New NotImplementedException()
+                Throw New NotSupportedException()
             End Get
         End Property
 
@@ -96,7 +96,7 @@ Namespace Tools
 
         Public Property Name As String Implements System.ComponentModel.ISite.Name
             Get
-                Throw New NotImplementedException()
+                Throw New NotSupportedException()
             End Get
             Set(value As String)
                 Throw New NotImplementedException()
