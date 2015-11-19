@@ -2,6 +2,7 @@
 Imports System.IO
 Imports mRemoteNG.App.Runtime
 Imports mRemoteNG.Connection.Protocol
+Imports System.Globalization
 
 Namespace Config.Import
     Public Class PuttyConnectionManager
@@ -24,11 +25,11 @@ Namespace Config.Import
             Dim xmlNodeType As String = xmlNode.Attributes("type").Value
             Select Case xmlNode.Name
                 Case "root"
-                    If Not String.Compare(xmlNodeType, "database", ignoreCase:=True) = 0 Then
+                    If Not String.Compare(xmlNodeType, "database", True, CultureInfo.InvariantCulture) = 0 Then
                         Throw New FileFormatException(String.Format("Unrecognized root node type ({0}).", xmlNodeType))
                     End If
                 Case "container"
-                    If Not String.Compare(xmlNodeType, "folder", ignoreCase:=True) = 0 Then
+                    If Not String.Compare(xmlNodeType, "folder", True, CultureInfo.InvariantCulture) = 0 Then
                         Throw New FileFormatException(String.Format("Unrecognized root node type ({0}).", xmlNodeType))
                     End If
                 Case Else
@@ -85,7 +86,7 @@ Namespace Config.Import
 
         Private Shared Sub ImportConnection(ByVal connectionNode As XmlNode, ByVal parentTreeNode As TreeNode)
             Dim connectionNodeType As String = connectionNode.Attributes("type").Value
-            If Not String.Compare(connectionNodeType, "PuTTY", ignoreCase:=True) = 0 Then
+            If Not String.Compare(connectionNodeType, "PuTTY", True, CultureInfo.InvariantCulture) = 0 Then
                 Throw New FileFormatException(String.Format("Unrecognized connection node type ({0}).", connectionNodeType))
             End If
 
