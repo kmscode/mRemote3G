@@ -1,3 +1,7 @@
+1.84 (2015-12-11)
+  Open links within the default browser (not within the mRemote application)
+  Removed HTTP/S connection functionality (which is better served by browsers)
+  
 1.83 (2015-11-16)
   Correct random crash after unlocking session (Thanks to Fabrice Didierjean - coredmp95@gmail.com)
   Update to be "DPI Aware" to prevent the UI from looking "Fuzzy" - https://msdn.microsoft.com/en-us/library/dn469266%28v=vs.85%29.aspx
