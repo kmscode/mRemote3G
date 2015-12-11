@@ -16,7 +16,7 @@ Namespace Connection
                     And EnableFontSmoothing And EnableDesktopComposition And Domain And Icon And Password _
                     And Port And Protocol And PuttySession And RedirectDiskDrives And RedirectKeys _
                     And RedirectPorts And RedirectPrinters And RedirectSmartCards And RedirectSound And Resolution _
-                    And AutomaticResize And UseConsoleSession And UseCredSsp And RenderingEngine And UserField _
+                    And AutomaticResize And UseConsoleSession And UseCredSsp And UserField _
                     And ExtApp And Username And Panel And RDPAuthenticationLevel _
                     And LoadBalanceInfo And PreExtApp And PostExtApp And MacAddress And VNCAuthMode _
                     And VNCColors And VNCCompression And VNCEncoding And VNCProxyIP And VNCProxyPassword _
@@ -106,16 +106,10 @@ Namespace Connection
                 TypeConverter(GetType(Tools.Misc.YesNoTypeConverter))> _
             Public Property LoadBalanceInfo() As Boolean = My.Settings.InhDefaultLoadBalanceInfo
 
-            <LocalizedCategory("strCategoryProtocol", 4), _
-                LocalizedDisplayNameInheritAttribute("strPropertyNameRenderingEngine"), _
-                LocalizedDescriptionInheritAttribute("strPropertyDescriptionRenderingEngine"), _
-                TypeConverter(GetType(Tools.Misc.YesNoTypeConverter))> _
-            Public Property RenderingEngine() As Boolean = My.Settings.InhDefaultRenderingEngine
-
-            <LocalizedCategory("strCategoryProtocol", 4), _
-                LocalizedDisplayNameInheritAttribute("strPropertyNameUseConsoleSession"), _
-                LocalizedDescriptionInheritAttribute("strPropertyDescriptionUseConsoleSession"), _
-                TypeConverter(GetType(Tools.Misc.YesNoTypeConverter))> _
+            <LocalizedCategory("strCategoryProtocol", 4),
+                LocalizedDisplayNameInheritAttribute("strPropertyNameUseConsoleSession"),
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionUseConsoleSession"),
+                TypeConverter(GetType(Tools.Misc.YesNoTypeConverter))>
             Public Property UseConsoleSession() As Boolean = My.Settings.InhDefaultUseConsoleSession
 
             <LocalizedCategory("strCategoryProtocol", 4), _
@@ -387,7 +381,6 @@ Namespace Connection
                 PuttySession = value
                 RDPAuthenticationLevel = value
                 LoadBalanceInfo = value
-                RenderingEngine = value
                 UseConsoleSession = value
                 UseCredSsp = value
 

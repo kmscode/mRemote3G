@@ -26,16 +26,6 @@ Namespace Config.Import
                             finalProtocol = Connection.Protocol.Protocols.Telnet
                             protocolValid = True
                         End If
-                    Case Connection.Protocol.Protocols.HTTP
-                        If host.HTTP Then
-                            finalProtocol = Connection.Protocol.Protocols.HTTP
-                            protocolValid = True
-                        End If
-                    Case Connection.Protocol.Protocols.HTTPS
-                        If host.HTTPS Then
-                            finalProtocol = Connection.Protocol.Protocols.HTTPS
-                            protocolValid = True
-                        End If
                     Case Connection.Protocol.Protocols.Rlogin
                         If host.Rlogin Then
                             finalProtocol = Connection.Protocol.Protocols.Rlogin

@@ -20,15 +20,11 @@ Namespace UI
             Friend WithEvents pnlCheck4 As System.Windows.Forms.Panel
             Friend WithEvents lblCheck4 As System.Windows.Forms.Label
             Friend WithEvents pbCheck4 As System.Windows.Forms.PictureBox
-            Friend WithEvents pnlCheck5 As System.Windows.Forms.Panel
-            Friend WithEvents lblCheck5 As System.Windows.Forms.Label
-            Friend WithEvents pbCheck5 As System.Windows.Forms.PictureBox
             Friend WithEvents btnCheckAgain As System.Windows.Forms.Button
             Friend WithEvents txtCheck1 As System.Windows.Forms.TextBox
             Friend WithEvents txtCheck2 As System.Windows.Forms.TextBox
             Friend WithEvents txtCheck3 As System.Windows.Forms.TextBox
             Friend WithEvents txtCheck4 As System.Windows.Forms.TextBox
-            Friend WithEvents txtCheck5 As System.Windows.Forms.TextBox
             Friend WithEvents chkAlwaysShow As System.Windows.Forms.CheckBox
             Friend WithEvents pnlChecks As System.Windows.Forms.Panel
             Friend WithEvents pnlCheck1 As System.Windows.Forms.Panel
@@ -50,10 +46,6 @@ Namespace UI
                 Me.txtCheck4 = New System.Windows.Forms.TextBox()
                 Me.lblCheck4 = New System.Windows.Forms.Label()
                 Me.pbCheck4 = New System.Windows.Forms.PictureBox()
-                Me.pnlCheck5 = New System.Windows.Forms.Panel()
-                Me.txtCheck5 = New System.Windows.Forms.TextBox()
-                Me.lblCheck5 = New System.Windows.Forms.Label()
-                Me.pbCheck5 = New System.Windows.Forms.PictureBox()
                 Me.btnCheckAgain = New System.Windows.Forms.Button()
                 Me.chkAlwaysShow = New System.Windows.Forms.CheckBox()
                 Me.pnlChecks = New System.Windows.Forms.Panel()
@@ -64,8 +56,6 @@ Namespace UI
                 Me.pnlCheck3.SuspendLayout()
                 CType(Me.pbCheck3, System.ComponentModel.ISupportInitialize).BeginInit()
                 CType(Me.pbCheck4, System.ComponentModel.ISupportInitialize).BeginInit()
-                Me.pnlCheck5.SuspendLayout()
-                CType(Me.pbCheck5, System.ComponentModel.ISupportInitialize).BeginInit()
                 Me.pnlChecks.SuspendLayout()
                 Me.SuspendLayout()
                 '
@@ -225,7 +215,7 @@ Namespace UI
                 '
                 Me.txtCheck4.Location = New System.Drawing.Point(0, 0)
                 Me.txtCheck4.Name = "txtCheck4"
-                Me.txtCheck4.Size = New System.Drawing.Size(100, 22)
+                Me.txtCheck4.Size = New System.Drawing.Size(100, 20)
                 Me.txtCheck4.TabIndex = 0
                 '
                 'lblCheck4
@@ -243,59 +233,11 @@ Namespace UI
                 Me.pbCheck4.TabIndex = 0
                 Me.pbCheck4.TabStop = False
                 '
-                'pnlCheck5
-                '
-                Me.pnlCheck5.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-                Me.pnlCheck5.Controls.Add(Me.txtCheck5)
-                Me.pnlCheck5.Controls.Add(Me.lblCheck5)
-                Me.pnlCheck5.Controls.Add(Me.pbCheck5)
-                Me.pnlCheck5.Location = New System.Drawing.Point(3, 407)
-                Me.pnlCheck5.Name = "pnlCheck5"
-                Me.pnlCheck5.Size = New System.Drawing.Size(562, 130)
-                Me.pnlCheck5.TabIndex = 50
-                Me.pnlCheck5.Visible = False
-                '
-                'txtCheck5
-                '
-                Me.txtCheck5.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-                Me.txtCheck5.BackColor = System.Drawing.SystemColors.Control
-                Me.txtCheck5.BorderStyle = System.Windows.Forms.BorderStyle.None
-                Me.txtCheck5.Location = New System.Drawing.Point(129, 29)
-                Me.txtCheck5.Multiline = True
-                Me.txtCheck5.Name = "txtCheck5"
-                Me.txtCheck5.ReadOnly = True
-                Me.txtCheck5.Size = New System.Drawing.Size(430, 97)
-                Me.txtCheck5.TabIndex = 2
-                '
-                'lblCheck5
-                '
-                Me.lblCheck5.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-                Me.lblCheck5.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-                Me.lblCheck5.Location = New System.Drawing.Point(112, 3)
-                Me.lblCheck5.Name = "lblCheck5"
-                Me.lblCheck5.Size = New System.Drawing.Size(447, 23)
-                Me.lblCheck5.TabIndex = 1
-                Me.lblCheck5.Text = "RDP check succeeded!"
-                '
-                'pbCheck5
-                '
-                Me.pbCheck5.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-                Me.pbCheck5.Location = New System.Drawing.Point(3, 3)
-                Me.pbCheck5.Name = "pbCheck5"
-                Me.pbCheck5.Size = New System.Drawing.Size(72, 123)
-                Me.pbCheck5.TabIndex = 0
-                Me.pbCheck5.TabStop = False
-                '
                 'btnCheckAgain
                 '
                 Me.btnCheckAgain.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.btnCheckAgain.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-                Me.btnCheckAgain.Location = New System.Drawing.Point(476, 590)
+                Me.btnCheckAgain.Location = New System.Drawing.Point(476, 585)
                 Me.btnCheckAgain.Name = "btnCheckAgain"
                 Me.btnCheckAgain.Size = New System.Drawing.Size(104, 23)
                 Me.btnCheckAgain.TabIndex = 0
@@ -307,7 +249,7 @@ Namespace UI
                 Me.chkAlwaysShow.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
                 Me.chkAlwaysShow.AutoSize = True
                 Me.chkAlwaysShow.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-                Me.chkAlwaysShow.Location = New System.Drawing.Point(12, 591)
+                Me.chkAlwaysShow.Location = New System.Drawing.Point(12, 586)
                 Me.chkAlwaysShow.Name = "chkAlwaysShow"
                 Me.chkAlwaysShow.Size = New System.Drawing.Size(225, 20)
                 Me.chkAlwaysShow.TabIndex = 51
@@ -323,16 +265,15 @@ Namespace UI
                 Me.pnlChecks.Controls.Add(Me.pnlCheck1)
                 Me.pnlChecks.Controls.Add(Me.pnlCheck2)
                 Me.pnlChecks.Controls.Add(Me.pnlCheck3)
-                Me.pnlChecks.Controls.Add(Me.pnlCheck5)
                 Me.pnlChecks.Controls.Add(Me.pnlCheck4)
                 Me.pnlChecks.Location = New System.Drawing.Point(12, 12)
                 Me.pnlChecks.Name = "pnlChecks"
-                Me.pnlChecks.Size = New System.Drawing.Size(568, 540)
+                Me.pnlChecks.Size = New System.Drawing.Size(568, 411)
                 Me.pnlChecks.TabIndex = 52
                 '
                 'ComponentsCheck
                 '
-                Me.ClientSize = New System.Drawing.Size(592, 625)
+                Me.ClientSize = New System.Drawing.Size(592, 620)
                 Me.Controls.Add(Me.pnlChecks)
                 Me.Controls.Add(Me.chkAlwaysShow)
                 Me.Controls.Add(Me.btnCheckAgain)
@@ -351,9 +292,6 @@ Namespace UI
                 Me.pnlCheck3.PerformLayout()
                 CType(Me.pbCheck3, System.ComponentModel.ISupportInitialize).EndInit()
                 CType(Me.pbCheck4, System.ComponentModel.ISupportInitialize).EndInit()
-                Me.pnlCheck5.ResumeLayout(False)
-                Me.pnlCheck5.PerformLayout()
-                CType(Me.pbCheck5, System.ComponentModel.ISupportInitialize).EndInit()
                 Me.pnlChecks.ResumeLayout(False)
                 Me.ResumeLayout(False)
                 Me.PerformLayout()
@@ -402,7 +340,6 @@ Namespace UI
                 pnlCheck2.Visible = True
                 pnlCheck3.Visible = True
                 pnlCheck4.Visible = True
-                pnlCheck5.Visible = True
 
                 Dim rdpClient As AxMSTSCLib.AxMsRdpClient5NotSafeForScripting = Nothing
 
@@ -483,36 +420,6 @@ Namespace UI
 
                     MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "PuTTY " & errorMsg, True)
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "File " & pPath & " does not exist.", True)
-                End If
-
-
-                Dim GeckoBad As Boolean = False
-
-                If My.Settings.XULRunnerPath = "" Then
-                    GeckoBad = True
-                End If
-
-                If Directory.Exists(My.Settings.XULRunnerPath) Then
-                    If File.Exists(Path.Combine(My.Settings.XULRunnerPath, "xpcom.dll")) = False Then
-                        GeckoBad = True
-                    End If
-                Else
-                    GeckoBad = True
-                End If
-
-                If GeckoBad = False Then
-                    pbCheck5.Image = My.Resources.Good_Symbol
-                    lblCheck5.ForeColor = Color.DarkOliveGreen
-                    lblCheck5.Text = "Gecko (Firefox) Rendering Engine (HTTP/S) " & My.Language.strCcCheckSucceeded
-                    txtCheck5.Text = My.Language.strCcGeckoOK
-                Else
-                    pbCheck5.Image = My.Resources.Bad_Symbol
-                    lblCheck5.ForeColor = Color.Firebrick
-                    lblCheck5.Text = "Gecko (Firefox) Rendering Engine (HTTP/S) " & My.Language.strCcCheckFailed
-                    txtCheck5.Text = My.Language.strCcGeckoFailed
-
-                    MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "Gecko " & errorMsg, True)
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "XULrunner was not found in " & My.Settings.XULRunnerPath, True)
                 End If
 
             End Sub

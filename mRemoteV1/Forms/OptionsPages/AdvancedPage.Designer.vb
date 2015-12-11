@@ -26,15 +26,12 @@
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(AdvancedPage))
             Me.chkWriteLogFile = New System.Windows.Forms.CheckBox()
             Me.chkAutomaticallyGetSessionInfo = New System.Windows.Forms.CheckBox()
-            Me.lblXulRunnerPath = New System.Windows.Forms.Label()
             Me.lblMaximumPuttyWaitTime = New System.Windows.Forms.Label()
             Me.chkEncryptCompleteFile = New System.Windows.Forms.CheckBox()
             Me.chkAutomaticReconnect = New System.Windows.Forms.CheckBox()
-            Me.btnBrowseXulRunnerPath = New System.Windows.Forms.Button()
             Me.numPuttyWaitTime = New System.Windows.Forms.NumericUpDown()
             Me.chkUseCustomPuttyPath = New System.Windows.Forms.CheckBox()
             Me.lblConfigurePuttySessions = New System.Windows.Forms.Label()
-            Me.txtXULrunnerPath = New System.Windows.Forms.TextBox()
             Me.numUVNCSCPort = New System.Windows.Forms.NumericUpDown()
             Me.txtCustomPuttyPath = New System.Windows.Forms.TextBox()
             Me.btnLaunchPutty = New System.Windows.Forms.Button()
@@ -65,15 +62,6 @@
             Me.chkAutomaticallyGetSessionInfo.Text = "Automatically get session information"
             Me.chkAutomaticallyGetSessionInfo.UseVisualStyleBackColor = True
             '
-            'lblXulRunnerPath
-            '
-            Me.lblXulRunnerPath.AutoSize = True
-            Me.lblXulRunnerPath.Location = New System.Drawing.Point(3, 217)
-            Me.lblXulRunnerPath.Name = "lblXulRunnerPath"
-            Me.lblXulRunnerPath.Size = New System.Drawing.Size(85, 13)
-            Me.lblXulRunnerPath.TabIndex = 29
-            Me.lblXulRunnerPath.Text = "XULrunner path:"
-            '
             'lblMaximumPuttyWaitTime
             '
             Me.lblMaximumPuttyWaitTime.Location = New System.Drawing.Point(3, 185)
@@ -102,15 +90,6 @@
             Me.chkAutomaticReconnect.TabIndex = 20
             Me.chkAutomaticReconnect.Text = "Automatically try to reconnect when disconnected from server (RDP only)"
             Me.chkAutomaticReconnect.UseVisualStyleBackColor = True
-            '
-            'btnBrowseXulRunnerPath
-            '
-            Me.btnBrowseXulRunnerPath.Location = New System.Drawing.Point(373, 233)
-            Me.btnBrowseXulRunnerPath.Name = "btnBrowseXulRunnerPath"
-            Me.btnBrowseXulRunnerPath.Size = New System.Drawing.Size(75, 23)
-            Me.btnBrowseXulRunnerPath.TabIndex = 31
-            Me.btnBrowseXulRunnerPath.Text = "Browse..."
-            Me.btnBrowseXulRunnerPath.UseVisualStyleBackColor = True
             '
             'numPuttyWaitTime
             '
@@ -141,18 +120,10 @@
             Me.lblConfigurePuttySessions.Text = "To configure PuTTY sessions click this button:"
             Me.lblConfigurePuttySessions.TextAlign = System.Drawing.ContentAlignment.TopRight
             '
-            'txtXULrunnerPath
-            '
-            Me.txtXULrunnerPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtXULrunnerPath.Location = New System.Drawing.Point(21, 235)
-            Me.txtXULrunnerPath.Name = "txtXULrunnerPath"
-            Me.txtXULrunnerPath.Size = New System.Drawing.Size(346, 20)
-            Me.txtXULrunnerPath.TabIndex = 30
-            '
             'numUVNCSCPort
             '
             Me.numUVNCSCPort.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.numUVNCSCPort.Location = New System.Drawing.Point(373, 276)
+            Me.numUVNCSCPort.Location = New System.Drawing.Point(373, 209)
             Me.numUVNCSCPort.Maximum = New Decimal(New Integer() {65535, 0, 0, 0})
             Me.numUVNCSCPort.Name = "numUVNCSCPort"
             Me.numUVNCSCPort.Size = New System.Drawing.Size(72, 20)
@@ -183,7 +154,7 @@
             '
             'lblUVNCSCPort
             '
-            Me.lblUVNCSCPort.Location = New System.Drawing.Point(3, 278)
+            Me.lblUVNCSCPort.Location = New System.Drawing.Point(3, 216)
             Me.lblUVNCSCPort.Name = "lblUVNCSCPort"
             Me.lblUVNCSCPort.Size = New System.Drawing.Size(364, 13)
             Me.lblUVNCSCPort.TabIndex = 32
@@ -216,15 +187,12 @@
             Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
             Me.Controls.Add(Me.chkWriteLogFile)
             Me.Controls.Add(Me.chkAutomaticallyGetSessionInfo)
-            Me.Controls.Add(Me.lblXulRunnerPath)
             Me.Controls.Add(Me.lblMaximumPuttyWaitTime)
             Me.Controls.Add(Me.chkEncryptCompleteFile)
             Me.Controls.Add(Me.chkAutomaticReconnect)
-            Me.Controls.Add(Me.btnBrowseXulRunnerPath)
             Me.Controls.Add(Me.numPuttyWaitTime)
             Me.Controls.Add(Me.chkUseCustomPuttyPath)
             Me.Controls.Add(Me.lblConfigurePuttySessions)
-            Me.Controls.Add(Me.txtXULrunnerPath)
             Me.Controls.Add(Me.numUVNCSCPort)
             Me.Controls.Add(Me.txtCustomPuttyPath)
             Me.Controls.Add(Me.btnLaunchPutty)
@@ -242,15 +210,12 @@
         End Sub
         Friend WithEvents chkWriteLogFile As System.Windows.Forms.CheckBox
         Friend WithEvents chkAutomaticallyGetSessionInfo As System.Windows.Forms.CheckBox
-        Friend WithEvents lblXulRunnerPath As System.Windows.Forms.Label
         Friend WithEvents lblMaximumPuttyWaitTime As System.Windows.Forms.Label
         Friend WithEvents chkEncryptCompleteFile As System.Windows.Forms.CheckBox
         Friend WithEvents chkAutomaticReconnect As System.Windows.Forms.CheckBox
-        Friend WithEvents btnBrowseXulRunnerPath As System.Windows.Forms.Button
         Friend WithEvents numPuttyWaitTime As System.Windows.Forms.NumericUpDown
         Friend WithEvents chkUseCustomPuttyPath As System.Windows.Forms.CheckBox
         Friend WithEvents lblConfigurePuttySessions As System.Windows.Forms.Label
-        Friend WithEvents txtXULrunnerPath As System.Windows.Forms.TextBox
         Friend WithEvents numUVNCSCPort As System.Windows.Forms.NumericUpDown
         Friend WithEvents txtCustomPuttyPath As System.Windows.Forms.TextBox
         Friend WithEvents btnLaunchPutty As System.Windows.Forms.Button

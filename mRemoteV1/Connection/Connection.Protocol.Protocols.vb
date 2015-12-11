@@ -34,10 +34,6 @@ Namespace Connection
             Rlogin = 5
             <LocalizedDescription("strRAW")>
             RAW = 6
-            <LocalizedDescription("strHttp")>
-            HTTP = 7
-            <LocalizedDescription("strHttps")>
-            HTTPS = 8
             <LocalizedDescription("strExtApp")>
             IntApp = 20
         End Enum

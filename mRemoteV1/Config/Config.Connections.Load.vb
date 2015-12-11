@@ -485,10 +485,8 @@ Namespace Config
                         End If
 
                         If Me.confVersion > 1.8 Then '1.9
-                            conI.RenderingEngine = Tools.Misc.StringToEnum(GetType(Connection.Protocol.HTTPBase.RenderingEngine), .Item("RenderingEngine"))
                             conI.MacAddress = .Item("MacAddress")
 
-                            conI.Inherit.RenderingEngine = .Item("InheritRenderingEngine")
                             conI.Inherit.MacAddress = .Item("InheritMacAddress")
                         End If
 
@@ -968,10 +966,8 @@ Namespace Config
                         End If
 
                         If Me.confVersion > 1.8 Then '1.9
-                            conI.RenderingEngine = Tools.Misc.StringToEnum(GetType(mRemoteNG.Connection.Protocol.HTTPBase.RenderingEngine), .Attributes("RenderingEngine").Value)
                             conI.MacAddress = .Attributes("MacAddress").Value
 
-                            conI.Inherit.RenderingEngine = .Attributes("InheritRenderingEngine").Value
                             conI.Inherit.MacAddress = .Attributes("InheritMacAddress").Value
                         End If
 

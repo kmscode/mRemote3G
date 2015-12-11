@@ -210,20 +210,6 @@ Namespace Connection
             End Set
         End Property
 
-        Private _renderingEngine As Protocol.HTTPBase.RenderingEngine = Tools.Misc.StringToEnum(GetType(Protocol.HTTPBase.RenderingEngine), My.Settings.ConDefaultRenderingEngine)
-        <LocalizedCategory("strCategoryProtocol", 3), _
-            LocalizedDisplayName("strPropertyNameRenderingEngine"), _
-            LocalizedDescription("strPropertyDescriptionRenderingEngine"), _
-            TypeConverter(GetType(Tools.Misc.EnumTypeConverter))> _
-        Public Property RenderingEngine() As Protocol.HTTPBase.RenderingEngine
-            Get
-                Return GetInheritedPropertyValue("RenderingEngine", _renderingEngine)
-            End Get
-            Set(ByVal value As Protocol.HTTPBase.RenderingEngine)
-                _renderingEngine = value
-            End Set
-        End Property
-
         Private _useCredSsp As Boolean = My.Settings.ConDefaultUseCredSsp
         <LocalizedCategory("strCategoryProtocol", 3), _
             LocalizedDisplayName("strPropertyNameUseCredSsp"), _
@@ -854,10 +840,6 @@ Namespace Connection
                         Return Connection.Protocol.Rlogin.Defaults.Port
                     Case Connection.Protocol.Protocols.RAW
                         Return Connection.Protocol.RAW.Defaults.Port
-                    Case Connection.Protocol.Protocols.HTTP
-                        Return Connection.Protocol.HTTP.Defaults.Port
-                    Case Connection.Protocol.Protocols.HTTPS
-                        Return Connection.Protocol.HTTPS.Defaults.Port
                     Case Connection.Protocol.Protocols.IntApp
                         Return Connection.Protocol.IntegratedProgram.Defaults.Port
                 End Select
