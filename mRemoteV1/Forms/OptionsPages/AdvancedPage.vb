@@ -29,6 +29,8 @@ Namespace Forms.OptionsPages
             chkAutomaticallyGetSessionInfo.Text = Language.strAutomaticallyGetSessionInfo
             chkWriteLogFile.Text = Language.strWriteLogFile
             lblUVNCSCPort.Text = Language.strUltraVNCSCListeningPort
+            lblXulRunnerPath.Text = Language.strXULrunnerPath
+            btnBrowseXulRunnerPath.Text = Language.strButtonBrowse
             chkEncryptCompleteFile.Text = Language.strEncryptCompleteConnectionFile
         End Sub
 
@@ -47,6 +49,7 @@ Namespace Forms.OptionsPages
 
             numUVNCSCPort.Value = My.Settings.UVNCSCPort
 
+            txtXULrunnerPath.Text = My.Settings.XULRunnerPath
         End Sub
 
         Public Overrides Sub SaveSettings()
@@ -79,6 +82,7 @@ Namespace Forms.OptionsPages
 
             My.Settings.UVNCSCPort = numUVNCSCPort.Value
 
+            My.Settings.XULRunnerPath = txtXULrunnerPath.Text
         End Sub
 #End Region
 
@@ -128,6 +132,16 @@ Namespace Forms.OptionsPages
             End Try
         End Sub
 
+        Private Sub btnBrowseXulRunnerPath_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnBrowseXulRunnerPath.Click
+            Dim oDlg As New FolderBrowserDialog
+            oDlg.ShowNewFolderButton = False
+
+            If oDlg.ShowDialog = DialogResult.OK Then
+                txtXULrunnerPath.Text = oDlg.SelectedPath
+            End If
+
+            oDlg.Dispose()
+        End Sub
 #End Region
 
         Private Sub SetPuttyLaunchButtonEnabled()

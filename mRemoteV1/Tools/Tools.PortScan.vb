@@ -27,6 +27,26 @@ Namespace Tools
                 End Set
             End Property
 
+            Private Shared _HTTPPort As Integer = Connection.Protocol.HTTP.Defaults.Port
+            Public Shared Property HTTPPort() As Integer
+                Get
+                    Return _HTTPPort
+                End Get
+                Set(ByVal value As Integer)
+                    _HTTPPort = value
+                End Set
+            End Property
+
+            Private Shared _HTTPSPort As Integer = Connection.Protocol.HTTPS.Defaults.Port
+            Public Shared Property HTTPSPort() As Integer
+                Get
+                    Return _HTTPSPort
+                End Get
+                Set(ByVal value As Integer)
+                    _HTTPSPort = value
+                End Set
+            End Property
+
             Private Shared _RloginPort As Integer = Connection.Protocol.Rlogin.Defaults.Port
             Public Shared Property RloginPort() As Integer
                 Get
@@ -267,8 +287,8 @@ Namespace Tools
                 Dim ipAddressEnd As IPAddress = IpAddressMax(ipAddress1, ipAddress2)
 
                 _ports.Clear()
-                _ports.AddRange(New Integer() {ScanHost.SSHPort, ScanHost.TelnetPort,
-                                              ScanHost.RloginPort, ScanHost.RDPPort,
+                _ports.AddRange(New Integer() {ScanHost.SSHPort, ScanHost.TelnetPort, ScanHost.HTTPPort, _
+                                              ScanHost.HTTPSPort, ScanHost.RloginPort, ScanHost.RDPPort, _
                                               ScanHost.VNCPort})
 
                 _ipAddresses.Clear()
@@ -347,6 +367,10 @@ Namespace Tools
                                         scanHost.SSH = isPortOpen
                                     Case ScanHost.TelnetPort
                                         scanHost.Telnet = isPortOpen
+                                    Case ScanHost.HTTPPort
+                                        scanHost.HTTP = isPortOpen
+                                    Case ScanHost.HTTPSPort
+                                        scanHost.HTTPS = isPortOpen
                                     Case ScanHost.RloginPort
                                         scanHost.Rlogin = isPortOpen
                                     Case ScanHost.RDPPort

@@ -764,6 +764,7 @@ Namespace App
                 My.Settings.ConDefaultLoadBalanceInfo = .LoadBalanceInfo
                 My.Settings.ConDefaultUseConsoleSession = .UseConsoleSession
                 My.Settings.ConDefaultUseCredSsp = .UseCredSsp
+                My.Settings.ConDefaultRenderingEngine = .RenderingEngine.ToString
                 My.Settings.ConDefaultResolution = .Resolution.ToString
                 My.Settings.ConDefaultAutomaticResize = .AutomaticResize
                 My.Settings.ConDefaultColors = .Colors.ToString
@@ -825,6 +826,7 @@ Namespace App
                 My.Settings.InhDefaultPuttySession = .PuttySession
                 My.Settings.InhDefaultUseConsoleSession = .UseConsoleSession
                 My.Settings.InhDefaultUseCredSsp = .UseCredSsp
+                My.Settings.InhDefaultRenderingEngine = .RenderingEngine
                 My.Settings.InhDefaultRDPAuthenticationLevel = .RDPAuthenticationLevel
                 My.Settings.InhDefaultLoadBalanceInfo = .LoadBalanceInfo
                 My.Settings.InhDefaultResolution = .Resolution
@@ -1459,6 +1461,10 @@ Namespace App
                         newProtocol = New Protocol.Rlogin
                     Case Protocol.Protocols.RAW
                         newProtocol = New Protocol.RAW
+                    Case Protocol.Protocols.HTTP
+                        newProtocol = New Protocol.HTTP(newConnectionInfo.RenderingEngine)
+                    Case Protocol.Protocols.HTTPS
+                        newProtocol = New Protocol.HTTPS(newConnectionInfo.RenderingEngine)
                     Case Protocol.Protocols.IntApp
                         newProtocol = New Protocol.IntegratedProgram
 
@@ -1651,12 +1657,19 @@ Namespace App
 
 #Region "Misc"
         Public Shared Sub GoToURL(ByVal URL As String)
-            Try
-                Process.Start(URL)
-            Catch ex As Exception
-                Log.WarnFormat("Error launching URL ({0}) : {1}", URL, ex.ToString())
-            End Try
+            Dim cI As New mRemoteNG.Connection.Info
 
+            cI.Name = ""
+            cI.HostName = URL
+            If URL.StartsWith("https:") Then
+                cI.Protocol = Connection.Protocol.Protocols.HTTPS
+            Else
+                cI.Protocol = Connection.Protocol.Protocols.HTTP
+            End If
+            cI.SetDefaultPort()
+            cI.IsQuickConnect = True
+
+            App.Runtime.OpenConnection(cI, mRemoteNG.Connection.Info.Force.DoNotJump)
         End Sub
 
         Public Shared Sub GoToWebsite()
