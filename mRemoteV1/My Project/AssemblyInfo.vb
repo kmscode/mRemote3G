@@ -9,11 +9,11 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("mRemoteNG")> 
+<Assembly: AssemblyTitle("mRemote3G")>
 <Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("")> 
-<Assembly: AssemblyProduct("mRemoteNG")>
-<Assembly: AssemblyCopyright("Copyright © 2007-2009 Felix Deimel, 2010-2013 Riley McArdle, 2015 Sean Kaim")>
+<Assembly: AssemblyCompany("")>
+<Assembly: AssemblyProduct("mRemote3G")>
+<Assembly: AssemblyCopyright("Copyright © 2015 Sean Kaim - Based off of mRemote 2007-2009 Felix Deimel, & mRemoteNG 2010-2013 Riley McArdle")>
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)> 
@@ -32,6 +32,6 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.84.*")>
+<Assembly: AssemblyVersion("1.90.*")>
 
 <Assembly: NeutralResourcesLanguageAttribute("en")> 

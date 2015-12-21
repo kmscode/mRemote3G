@@ -15,4 +15,4 @@ xcopy /S /Y "D:\Source\mRemoteNG\mRemoteV1\bin\Release Portable" D:\Source\mRemo
 
 for /f "delims=" %%i in ('findstr /R /C:"^<Assembly: AssemblyVersion" "mRemoteV1\My Project\AssemblyInfo.vb"') do set output="%%i"
 
-"C:\Program Files\7-Zip\7z.exe" a -r -tzip -y D:\Source\mRemoteNG\mRemoteV1\bin\mRmoteNG-%output:~-10,-6%.zip D:\Source\mRemoteNG\mRemoteV1\bin\package\*.*
+"C:\Program Files\7-Zip\7z.exe" a -r -tzip -y D:\Source\mRemoteNG\mRemoteV1\bin\mRmote3G-%output:~-10,-6%.zip D:\Source\mRemoteNG\mRemoteV1\bin\package\*.*
