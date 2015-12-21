@@ -17,12 +17,7 @@ Namespace Connection
 #Region "Public Methods"
             Public Sub New(ByVal RenderingEngine As RenderingEngine)
                 Try
-                    If RenderingEngine = RenderingEngine.Gecko Then
-                        Me.Control = New MiniGeckoBrowser.MiniGeckoBrowser
-                        TryCast(Me.Control, MiniGeckoBrowser.MiniGeckoBrowser).XULrunnerPath = My.Settings.XULRunnerPath
-                    Else
-                        Me.Control = New WebBrowser
-                    End If
+                    Me.Control = New WebBrowser
 
                     NewExtended()
                 Catch ex As Exception
@@ -46,21 +41,14 @@ Namespace Connection
                 Try
                     Me.wBrowser = Me.Control
 
-                    If InterfaceControl.Info.RenderingEngine = RenderingEngine.Gecko Then
-                        Dim objMiniGeckoBrowser As MiniGeckoBrowser.MiniGeckoBrowser = TryCast(wBrowser, MiniGeckoBrowser.MiniGeckoBrowser)
+                    Dim objWebBrowser As WebBrowser = TryCast(wBrowser, WebBrowser)
+                    Dim objAxWebBrowser As SHDocVw.WebBrowser = DirectCast(objWebBrowser.ActiveXInstance, SHDocVw.WebBrowser)
 
-                        AddHandler objMiniGeckoBrowser.TitleChanged, AddressOf wBrowser_DocumentTitleChanged
-                        AddHandler objMiniGeckoBrowser.LastTabRemoved, AddressOf wBrowser_LastTabRemoved
-                    Else
-                        Dim objWebBrowser As WebBrowser = TryCast(wBrowser, WebBrowser)
-                        Dim objAxWebBrowser As SHDocVw.WebBrowser = DirectCast(objWebBrowser.ActiveXInstance, SHDocVw.WebBrowser)
+                    objWebBrowser.ScrollBarsEnabled = True
 
-                        objWebBrowser.ScrollBarsEnabled = True
-
-                        AddHandler objWebBrowser.Navigated, AddressOf wBrowser_Navigated
-                        AddHandler objWebBrowser.DocumentTitleChanged, AddressOf wBrowser_DocumentTitleChanged
-                        AddHandler objAxWebBrowser.NewWindow3, AddressOf wBrowser_NewWindow3
-                    End If
+                    AddHandler objWebBrowser.Navigated, AddressOf wBrowser_Navigated
+                    AddHandler objWebBrowser.DocumentTitleChanged, AddressOf wBrowser_DocumentTitleChanged
+                    AddHandler objAxWebBrowser.NewWindow3, AddressOf wBrowser_NewWindow3
 
                     Return True
                 Catch ex As Exception
@@ -87,21 +75,15 @@ Namespace Connection
                             strHost = httpOrS & "://" & strHost
                         End If
 
-                        If InterfaceControl.Info.RenderingEngine = RenderingEngine.Gecko Then
-                            TryCast(wBrowser, MiniGeckoBrowser.MiniGeckoBrowser).Navigate(strHost & ":" & Me.InterfaceControl.Info.Port)
-                        Else
-                            TryCast(wBrowser, WebBrowser).Navigate(strHost & ":" & Me.InterfaceControl.Info.Port, Nothing, Nothing, strAuth)
-                        End If
+
+                        TryCast(wBrowser, WebBrowser).Navigate(strHost & ":" & Me.InterfaceControl.Info.Port, Nothing, Nothing, strAuth)
                     Else
                         If strHost.Contains(httpOrS & "://") = False Then
                             strHost = httpOrS & "://" & strHost
                         End If
 
-                        If InterfaceControl.Info.RenderingEngine = RenderingEngine.Gecko Then
-                            TryCast(wBrowser, MiniGeckoBrowser.MiniGeckoBrowser).Navigate(strHost)
-                        Else
-                            TryCast(wBrowser, WebBrowser).Navigate(strHost, Nothing, Nothing, strAuth)
-                        End If
+
+                        TryCast(wBrowser, WebBrowser).Navigate(strHost, Nothing, Nothing, strAuth)
                     End If
 
                     MyBase.Connect()
@@ -148,18 +130,11 @@ Namespace Connection
                     If tabP IsNot Nothing Then
                         Dim shortTitle As String = ""
 
-                        If Me.InterfaceControl.Info.RenderingEngine = RenderingEngine.Gecko Then
-                            If TryCast(wBrowser, MiniGeckoBrowser.MiniGeckoBrowser).Title.Length >= 30 Then
-                                shortTitle = TryCast(wBrowser, MiniGeckoBrowser.MiniGeckoBrowser).Title.Substring(0, 29) & " ..."
-                            Else
-                                shortTitle = TryCast(wBrowser, MiniGeckoBrowser.MiniGeckoBrowser).Title
-                            End If
+
+                        If TryCast(wBrowser, WebBrowser).DocumentTitle.Length >= 30 Then
+                            shortTitle = TryCast(wBrowser, WebBrowser).DocumentTitle.Substring(0, 29) & " ..."
                         Else
-                            If TryCast(wBrowser, WebBrowser).DocumentTitle.Length >= 30 Then
-                                shortTitle = TryCast(wBrowser, WebBrowser).DocumentTitle.Substring(0, 29) & " ..."
-                            Else
-                                shortTitle = TryCast(wBrowser, WebBrowser).DocumentTitle
-                            End If
+                            shortTitle = TryCast(wBrowser, WebBrowser).DocumentTitle
                         End If
 
                         If Me.tabTitle <> "" Then
@@ -179,8 +154,6 @@ Namespace Connection
                 None = 0
                 <LocalizedDescription("strHttpInternetExplorer")>
                 IE = 1
-                <LocalizedDescription("strHttpGecko")>
-                Gecko = 2
             End Enum
 
             Private Enum NWMF

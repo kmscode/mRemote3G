@@ -1657,19 +1657,11 @@ Namespace App
 
 #Region "Misc"
         Public Shared Sub GoToURL(ByVal URL As String)
-            Dim cI As New mRemoteNG.Connection.Info
-
-            cI.Name = ""
-            cI.HostName = URL
-            If URL.StartsWith("https:") Then
-                cI.Protocol = Connection.Protocol.Protocols.HTTPS
-            Else
-                cI.Protocol = Connection.Protocol.Protocols.HTTP
-            End If
-            cI.SetDefaultPort()
-            cI.IsQuickConnect = True
-
-            App.Runtime.OpenConnection(cI, mRemoteNG.Connection.Info.Force.DoNotJump)
+            Try
+                Process.Start(URL)
+            Catch ex As Exception
+                Log.WarnFormat("Error launching URL ({0}) : {1}", URL, ex.ToString())
+            End Try
         End Sub
 
         Public Shared Sub GoToWebsite()
@@ -1677,15 +1669,15 @@ Namespace App
         End Sub
 
         Public Shared Sub GoToDonate()
-            GoToURL(App.Info.General.URLDonate)
+            GoToURL(App.Info.General.URLHome)
         End Sub
 
         Public Shared Sub GoToForum()
-            GoToURL(App.Info.General.URLForum)
+            GoToURL(App.Info.General.URLHome)
         End Sub
 
         Public Shared Sub GoToBugs()
-            GoToURL(App.Info.General.URLBugs)
+            GoToURL(App.Info.General.URLHome)
         End Sub
 
         Public Shared Sub Report(ByVal Text As String)

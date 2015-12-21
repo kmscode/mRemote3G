@@ -485,36 +485,6 @@ Namespace UI
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "File " & pPath & " does not exist.", True)
                 End If
 
-
-                Dim GeckoBad As Boolean = False
-
-                If My.Settings.XULRunnerPath = "" Then
-                    GeckoBad = True
-                End If
-
-                If Directory.Exists(My.Settings.XULRunnerPath) Then
-                    If File.Exists(Path.Combine(My.Settings.XULRunnerPath, "xpcom.dll")) = False Then
-                        GeckoBad = True
-                    End If
-                Else
-                    GeckoBad = True
-                End If
-
-                If GeckoBad = False Then
-                    pbCheck5.Image = My.Resources.Good_Symbol
-                    lblCheck5.ForeColor = Color.DarkOliveGreen
-                    lblCheck5.Text = "Gecko (Firefox) Rendering Engine (HTTP/S) " & My.Language.strCcCheckSucceeded
-                    txtCheck5.Text = My.Language.strCcGeckoOK
-                Else
-                    pbCheck5.Image = My.Resources.Bad_Symbol
-                    lblCheck5.ForeColor = Color.Firebrick
-                    lblCheck5.Text = "Gecko (Firefox) Rendering Engine (HTTP/S) " & My.Language.strCcCheckFailed
-                    txtCheck5.Text = My.Language.strCcGeckoFailed
-
-                    MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "Gecko " & errorMsg, True)
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "XULrunner was not found in " & My.Settings.XULRunnerPath, True)
-                End If
-
             End Sub
 #End Region
 

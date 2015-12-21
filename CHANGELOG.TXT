@@ -1,6 +1,17 @@
+1.85 (2015-12-20)
+  Reverted most changes from 1.84 - Re-enabled HTTP/S connections
+  Removed XULRunner HTTP/S rendering engine only (current versions aren't a drop in replacement for the 1.8.x release, circa 2007)
+  Disabled some links that are not proper for this build (Donate, Support, Bugs)
+  Pointed "website" links to GitHub project page
+  Fixed changelog (forgot to list some really minor things)
+  
+  
 1.84 (2015-12-11)
   Open links within the default browser (not within the mRemote application)
   Removed HTTP/S connection functionality (which is better served by browsers)
+  Removed "RDP Sessions" component check (functionality removed in 1.81)
+  Removed "ICA" references from Language files
+  Fixed some compiler warnings and build environment issues
   
 1.83 (2015-11-16)
   Correct random crash after unlocking session (Thanks to Fabrice Didierjean - coredmp95@gmail.com)

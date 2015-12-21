@@ -4,8 +4,8 @@ Imports System.Threading
 Namespace App
     Namespace Info
         Public Class General
-            Public Shared ReadOnly URLHome As String = "http://www.mremoteng.org/"
-            Public Shared ReadOnly URLDonate As String = "http://donate.mremoteng.org/"
+            Public Shared ReadOnly URLHome As String = "https://github.com/kaymer327/mRemoteNG"
+            'Public Shared ReadOnly URLDonate As String = "http://donate.mremoteng.org/"
             Public Shared ReadOnly URLForum As String = "http://forum.mremoteng.org/"
             Public Shared ReadOnly URLBugs As String = "http://bugs.mremoteng.org/"
             Public Shared ReadOnly HomePath As String = My.Application.Info.DirectoryPath
