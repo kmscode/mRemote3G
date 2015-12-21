@@ -1673,11 +1673,11 @@ Namespace App
         End Sub
 
         Public Shared Sub GoToForum()
-            GoToURL(App.Info.General.URLHome)
+            GoToURL(App.Info.General.URLForum)
         End Sub
 
         Public Shared Sub GoToBugs()
-            GoToURL(App.Info.General.URLHome)
+            GoToURL(App.Info.General.URLBugs)
         End Sub
 
         Public Shared Sub Report(ByVal Text As String)

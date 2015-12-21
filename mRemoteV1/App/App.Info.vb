@@ -4,10 +4,10 @@ Imports System.Threading
 Namespace App
     Namespace Info
         Public Class General
-            Public Shared ReadOnly URLHome As String = "https://github.com/kaymer327/mRemoteNG"
+            Public Shared ReadOnly URLHome As String = "https://github.com/kaymer327/mRemote3G"
             'Public Shared ReadOnly URLDonate As String = "http://donate.mremoteng.org/"
-            Public Shared ReadOnly URLForum As String = "http://forum.mremoteng.org/"
-            Public Shared ReadOnly URLBugs As String = "http://bugs.mremoteng.org/"
+            Public Shared ReadOnly URLForum As String = "https://github.com/kaymer327/mRemote3G/issues"
+            Public Shared ReadOnly URLBugs As String = "https://github.com/kaymer327/mRemote3G/issues"
             Public Shared ReadOnly HomePath As String = My.Application.Info.DirectoryPath
             Public Shared EncryptionKey As String = "mR3m"
             Public Shared ReportingFilePath As String = ""
