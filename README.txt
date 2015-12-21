@@ -8,5 +8,6 @@ Currently these protocols are supported:
  * VNC (Virtual Network Computing)
  * SSH (Secure Shell)
  * Telnet (TELecommunication NETwork)
+ * HTTP/S (Hypertext Transfer Protocol)
  * Rlogin (Rlogin)
  * RAW
