@@ -7,7 +7,7 @@ Namespace App
         End Sub
 
 #Region "Functions"
-        <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)>
+        <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Unicode)>
         Public Shared Function AppendMenu(ByVal hMenu As IntPtr, ByVal uFlags As Int32, ByVal uIDNewItem As IntPtr, ByVal lpNewItem As String) As Boolean
         End Function
 
@@ -15,7 +15,7 @@ Namespace App
         Public Shared Function CreatePopupMenu() As IntPtr
         End Function
 
-        <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)>
+        <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Unicode)>
         Public Shared Function FindWindowEx(ByVal parentHandle As IntPtr, ByVal childAfter As IntPtr, ByVal lclassName As String, ByVal windowTitle As String) As IntPtr
         End Function
 
@@ -27,7 +27,7 @@ Namespace App
         Public Shared Function GetSystemMenu(ByVal hWnd As IntPtr, ByVal bRevert As Boolean) As IntPtr
         End Function
 
-        <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)>
+        <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Unicode)>
         Public Shared Function InsertMenu(ByVal hMenu As IntPtr, ByVal uPosition As Integer, ByVal uFlags As Integer, ByVal uIDNewItem As IntPtr, ByVal lpNewItem As String) As Boolean
         End Function
 
@@ -79,8 +79,8 @@ Namespace App
 #Region "Structures"
         <StructLayout(LayoutKind.Sequential)>
         Public Structure WINDOWPOS
-            Public hwnd As IntPtr
-            Public hwndInsertAfter As IntPtr
+            Private hwnd As IntPtr
+            Private hwndInsertAfter As IntPtr
             Public x As Integer
             Public y As Integer
             Public cx As Integer

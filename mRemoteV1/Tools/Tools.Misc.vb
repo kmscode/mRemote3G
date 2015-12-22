@@ -20,7 +20,7 @@ Namespace Tools
             Public szTypeName As String
         End Structure
 
-        <DllImport("shell32.dll")> _
+        <DllImport("shell32.dll", CharSet:=CharSet.Unicode)>
         Private Shared Function SHGetFileInfo(ByVal pszPath As String, ByVal dwFileAttributes As Integer, ByRef psfi As SHFILEINFO, ByVal cbFileInfo As Integer, ByVal uFlags As Integer) As IntPtr
         End Function
 

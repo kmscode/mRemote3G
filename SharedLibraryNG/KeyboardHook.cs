@@ -4,20 +4,25 @@
 //
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using System.Collections.Generic;
 
 namespace SharedLibraryNG
 {
+
     public class KeyboardHook
     {
-        // ReSharper disable InconsistentNaming
-        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool PostMessage(IntPtr hWnd, Int32 Msg, IntPtr wParam, HookKeyMsgData lParam);
-        // ReSharper restore InconsistentNaming
+
+        internal static class NativeMethods
+        {
+            // ReSharper disable InconsistentNaming
+            [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+            [return: MarshalAs(UnmanagedType.Bool)]
+            public static extern bool PostMessage(IntPtr hWnd, Int32 Msg, IntPtr wParam, HookKeyMsgData lParam);
+            // ReSharper restore InconsistentNaming
+        }
 
         [Flags]
         public enum ModifierKeys
@@ -40,17 +45,34 @@ namespace SharedLibraryNG
         protected class KeyNotificationEntry
 			: IEquatable<KeyNotificationEntry>
         {
-            public IntPtr WindowHandle;
+            private IntPtr WindowHandle;
             public Int32 KeyCode;
             public ModifierKeys ModifierKeys;
             public Boolean Block;
 
+            public KeyNotificationEntry(IntPtr h, Int32 k, ModifierKeys m, Boolean b)
+            {
+                WindowHandle = h;
+                KeyCode = k;
+                ModifierKeys = m;
+                Block = b;
+            }
             public bool Equals(KeyNotificationEntry obj)
             {
                 return (WindowHandle == obj.WindowHandle &&
                         KeyCode == obj.KeyCode &&
                         ModifierKeys == obj.ModifierKeys &&
                         Block == obj.Block);
+            }
+
+            public IntPtr getWinHdl()
+            {
+                return WindowHandle;
+            }
+
+            public void setWinHdl(IntPtr hdl)
+            {
+                WindowHandle = hdl;
             }
         }
 
@@ -62,9 +84,12 @@ namespace SharedLibraryNG
             {
 	            if (_hookKeyMsg == 0)
 	            {
-					_hookKeyMsg = Win32.RegisterWindowMessage(HookKeyMsgName).ToInt32();
-					if (_hookKeyMsg == 0)
-						throw new Win32Exception(Marshal.GetLastWin32Error());
+					_hookKeyMsg = Win32.NativeMethods.RegisterWindowMessage(HookKeyMsgName).ToInt32();
+                    if (_hookKeyMsg == 0)
+                    {
+                        logger.Log.WarnFormat("_hookKeyMsg == 0");
+                        throw new System.InvalidOperationException("_hookKeyMsg == 0");
+                    }
 				}
 	            return _hookKeyMsg;
             }
@@ -104,7 +129,7 @@ namespace SharedLibraryNG
             var curProcess = Process.GetCurrentProcess();
             var curModule = curProcess.MainModule;
 
-            var hook = Win32.SetWindowsHookEx(Win32.WH_KEYBOARD_LL, LowLevelKeyboardProcStaticDelegate, Win32.GetModuleHandle(curModule.ModuleName), 0);
+            var hook = Win32.NativeMethods.SetWindowsHookEx(Win32.WH_KEYBOARD_LL, LowLevelKeyboardProcStaticDelegate, Win32.NativeMethods.GetModuleHandle(curModule.ModuleName), 0);
             if (hook == IntPtr.Zero)
                 throw new Win32Exception(Marshal.GetLastWin32Error());
 
@@ -115,7 +140,7 @@ namespace SharedLibraryNG
         {
             if (_hook == IntPtr.Zero) return;
 
-            Win32.UnhookWindowsHookEx(_hook);
+            Win32.NativeMethods.UnhookWindowsHookEx(_hook);
             _hook = IntPtr.Zero;
         }
 
@@ -139,7 +164,7 @@ namespace SharedLibraryNG
 
             if (result != 0) return new IntPtr(result);
 
-            return Win32.CallNextHookEx(_hook, nCode, wParam, lParam);
+            return Win32.NativeMethods.CallNextHookEx(_hook, nCode, wParam, lParam);
         }
 
         private static int OnKey(Int32 msg, Win32.KBDLLHOOKSTRUCT key)
@@ -152,7 +177,7 @@ namespace SharedLibraryNG
             // Mainly when the station is unlocked, or after an admin password is asked
                 try
                 {
-                    if (GetFocusWindow() == notificationEntry.WindowHandle && notificationEntry.KeyCode == key.vkCode)
+                    if (GetFocusWindow() == notificationEntry.getWinHdl() && notificationEntry.KeyCode == key.vkCode)
                     {
                         var modifierKeys = GetModifierKeyState();
                         if (!ModifierKeysMatch(notificationEntry.ModifierKeys, modifierKeys)) continue;
@@ -165,7 +190,7 @@ namespace SharedLibraryNG
                             WasBlocked = notificationEntry.Block,
                         };
 
-                        if (!PostMessage(notificationEntry.WindowHandle, HookKeyMsg, wParam, lParam))
+                        if (!NativeMethods.PostMessage(notificationEntry.getWinHdl(), HookKeyMsg, wParam, lParam))
                             throw new Win32Exception(Marshal.GetLastWin32Error());
 
                         if (notificationEntry.Block) result = 1;
@@ -185,12 +210,12 @@ namespace SharedLibraryNG
         private static IntPtr GetFocusWindow()
         {
             var guiThreadInfo = new Win32.GUITHREADINFO();
-            if (!Win32.GetGUIThreadInfo(0, guiThreadInfo))
+            if (!Win32.NativeMethods.GetGUIThreadInfo(0, guiThreadInfo))
             {
                 var except = Marshal.GetLastWin32Error();
                 throw new Win32Exception(except);
             }
-			return Win32.GetAncestor(guiThreadInfo.hwndFocus, Win32.GA_ROOT);
+			return Win32.NativeMethods.GetAncestor(guiThreadInfo.getFocus(), Win32.GA_ROOT);
         }
 
         protected static Dictionary<Int32, ModifierKeys> ModifierKeyTable = new Dictionary<Int32, ModifierKeys>
@@ -214,7 +239,7 @@ namespace SharedLibraryNG
 
             foreach (KeyValuePair<Int32, ModifierKeys> pair in ModifierKeyTable)
             {
-                if ((Win32.GetAsyncKeyState(pair.Key) & Win32.KEYSTATE_PRESSED) != 0) modifierKeyState |= pair.Value;
+                if ((Win32.NativeMethods.GetAsyncKeyState(pair.Key) & Win32.KEYSTATE_PRESSED) != 0) modifierKeyState |= pair.Value;
             }
 
 	        if ((modifierKeyState & ModifierKeys.LeftWin) != 0) modifierKeyState |= ModifierKeys.Win;
@@ -239,13 +264,7 @@ namespace SharedLibraryNG
 
         public static void RequestKeyNotification(IntPtr windowHandle, Int32 keyCode, ModifierKeys modifierKeys = ModifierKeys.None, Boolean block = false)
         {
-            var newNotificationEntry = new KeyNotificationEntry
-            {
-                WindowHandle = windowHandle,
-                KeyCode = keyCode,
-                ModifierKeys = modifierKeys,
-                Block = block,
-            };
+            var newNotificationEntry = new KeyNotificationEntry(windowHandle, keyCode, modifierKeys, block);
 
             foreach (var notificationEntry in NotificationEntries)
                 if (notificationEntry == newNotificationEntry) return;
@@ -260,15 +279,9 @@ namespace SharedLibraryNG
 
 		public static void CancelKeyNotification(IntPtr windowHandle, Int32 keyCode, ModifierKeys modifierKeys = ModifierKeys.None, Boolean block = false)
 		{
-			var notificationEntry = new KeyNotificationEntry
-			{
-				WindowHandle = windowHandle,
-				KeyCode = keyCode,
-				ModifierKeys = modifierKeys,
-				Block = block,
-			};
+			var notificationEntry = new KeyNotificationEntry(windowHandle, keyCode, modifierKeys, block);
 
-			NotificationEntries.Remove(notificationEntry);
+            NotificationEntries.Remove(notificationEntry);
 		}
     }
 }

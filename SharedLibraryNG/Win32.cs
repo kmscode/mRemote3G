@@ -7,33 +7,34 @@ namespace SharedLibraryNG
     public static class Win32
     {
         #region Functions
+        internal static class NativeMethods
+        {
+            [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+            public static extern IntPtr SetWindowsHookEx(int idHook, LowLevelKeyboardProcDelegate lpfn, IntPtr hMod, Int32 dwThreadId);
 
-        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        public static extern IntPtr SetWindowsHookEx(int idHook, LowLevelKeyboardProcDelegate lpfn, IntPtr hMod, Int32 dwThreadId);
+            [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+            [return: MarshalAs(UnmanagedType.Bool)]
+            public static extern bool UnhookWindowsHookEx(IntPtr hhk);
 
-        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool UnhookWindowsHookEx(IntPtr hhk);
+            [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+            public static extern IntPtr CallNextHookEx(IntPtr hhk, int nCode, IntPtr wParam, KBDLLHOOKSTRUCT lParam);
 
-        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        public static extern IntPtr CallNextHookEx(IntPtr hhk, int nCode, IntPtr wParam, KBDLLHOOKSTRUCT lParam);
+            [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+            public static extern IntPtr GetModuleHandle(string lpModuleName);
 
-        [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        public static extern IntPtr GetModuleHandle(string lpModuleName);
+            [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+            public static extern IntPtr RegisterWindowMessage(string lpString);
 
-        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        public static extern IntPtr RegisterWindowMessage(string lpString);
+            [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+            [return: MarshalAs(UnmanagedType.Bool)]
+            public static extern bool GetGUIThreadInfo(Int32 idThread, GUITHREADINFO lpgui);
 
-        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool GetGUIThreadInfo(Int32 idThread, GUITHREADINFO lpgui);
+            [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+            public static extern IntPtr GetAncestor(IntPtr hwnd, UInt32 gaFlags);
 
-        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        public static extern IntPtr GetAncestor(IntPtr hwnd, UInt32 gaFlags);
-
-        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        public static extern Int16 GetAsyncKeyState(Int32 vKey);
-
+            [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+            public static extern Int16 GetAsyncKeyState(Int32 vKey);
+        }
         #endregion
 
         #region Delegates
@@ -51,7 +52,7 @@ namespace SharedLibraryNG
             public Int32 scanCode;
             public Int32 flags;
             public Int32 time;
-            public IntPtr dwExtraInfo;
+            private IntPtr dwExtraInfo;
         };
 
         [StructLayout(LayoutKind.Sequential)]
@@ -73,13 +74,18 @@ namespace SharedLibraryNG
 
             public Int32 cbSize;
             public Int32 flags;
-            public IntPtr hwndActive;
-            public IntPtr hwndFocus;
-            public IntPtr hwndCapture;
-            public IntPtr hwndMenuOwner;
-            public IntPtr hwndMoveSize;
-            public IntPtr hwndCaret;
+            private IntPtr hwndActive;
+            private IntPtr hwndFocus;
+            private IntPtr hwndCapture;
+            private IntPtr hwndMenuOwner;
+            private IntPtr hwndMoveSize;
+            private IntPtr hwndCaret;
             public RECT rcCaret;
+
+            public IntPtr getFocus()
+            {
+                return hwndFocus;
+            }
         }
 
         #endregion
