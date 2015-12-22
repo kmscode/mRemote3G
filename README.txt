@@ -1,4 +1,4 @@
-mRemoteNG is the next generation of mRemote, a full-featured, multi-tab remote connections manager.
+mRemote3G is the Third Generation of mRemote, a full-featured, multi-tab remote connections manager.
 
 It allows you to store all your remote connections in a simple yet powerful interface.
 
