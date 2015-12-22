@@ -340,7 +340,6 @@ Namespace UI
                 pnlCheck2.Visible = True
                 pnlCheck3.Visible = True
                 pnlCheck4.Visible = True
-                pnlCheck5.Visible = True
 
                 Dim rdpClient As AxMSTSCLib.AxMsRdpClient5NotSafeForScripting = Nothing
 
