@@ -1,9 +1,16 @@
-1.85 (2015-12-20)
+1.90 (2015-12-21)
+  ** Updated name to "mRemote3G" **
+  
+  Changed some logos/icons accordingly with the name change
   Reverted most changes from 1.84 - Re-enabled HTTP/S connections
-  Removed XULRunner HTTP/S rendering engine only (current versions aren't a drop in replacement for the 1.8.x release, circa 2007)
-  Disabled some links that are not proper for this build (Donate, Support, Bugs)
+  Enabled enhanced functionality for the IE rendering engine
+  Removed XULRunner HTTP/S (Gecko) rendering engine only (current versions aren't a drop in replacement for the 1.8.x release, circa 2007)
+  Disabled donate link (not proper for this build)
   Pointed "website" links to GitHub project page
-  Fixed changelog (forgot to list some really minor things)
+  Changed Bugs and Forum link to port to GitHub repo issues
+  Fixed some complier errors
+  Minor changes to build envornment
+  Fixed changelog (forgot to list some really minor things for the 1.84 changelog)
   
   
 1.84 (2015-12-11)
@@ -14,7 +21,7 @@
   Fixed some compiler warnings and build environment issues
   
 1.83 (2015-11-16)
-  Correct random crash after unlocking session (Thanks to Fabrice Didierjean - coredmp95@gmail.com)
+  Correct random crash after unlocking session (Thanks to Fabrice Didierjean - coredmp95 - AT - gmail.com)
   Update to be "DPI Aware" to prevent the UI from looking "Fuzzy" - https://msdn.microsoft.com/en-us/library/dn469266%28v=vs.85%29.aspx
   Added new build-relport.cmd file for quick "Release Portable" builds
 
