@@ -4,6 +4,7 @@ call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\Tools\VsDevCmd
 rmdir /S /Q D:\Source\mRemoteNG\mRemoteV1\bin\package
 mkdir D:\Source\mRemoteNG\mRemoteV1\bin\package
 copy D:\Source\mRemoteNG\*.txt D:\Source\mRemoteNG\mRemoteV1\bin\package
+copy D:\Source\PuTTYNG\WINDOWS\PuTTYNG.exe D:\Source\mRemoteNG\mRemoteV1\bin\package
 
 rem These del's can error out, that's OK. We don't want these files in the release.
 del "D:\Source\mRemoteNG\mRemoteV1\bin\Release Portable\confCons*"
