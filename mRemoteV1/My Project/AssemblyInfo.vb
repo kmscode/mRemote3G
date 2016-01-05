@@ -13,7 +13,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("")> 
 <Assembly: AssemblyCompany("")>
 <Assembly: AssemblyProduct("mRemote3G")>
-<Assembly: AssemblyCopyright("Copyright © 2015 Sean Kaim - Based off of mRemote 2007-2009 Felix Deimel, & mRemoteNG 2010-2013 Riley McArdle")>
+<Assembly: AssemblyCopyright("Copyright © 2015-2016 Sean Kaim - Based off of mRemote 2007-2009 Felix Deimel, & mRemoteNG 2010-2013 Riley McArdle")>
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)> 
