@@ -1,3 +1,9 @@
+1.91 (2016-01-05)
+  Additional code changes for the rename to "mRemote3G"
+  Revert commit 5f2112a (Fix Warning CA1702) - This resolves issue #3
+  Additional logging for Windows System Lock Crash - Pull Request #2 helped significantly, but didn't fully resolve this
+  
+
 1.90 (2015-12-21)
   ** Updated name to "mRemote3G" **
   
