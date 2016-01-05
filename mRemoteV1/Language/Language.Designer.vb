@@ -137,7 +137,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Allow only a single instance of the application (mRemoteNG restart required).
+        '''  Looks up a localized string similar to Allow only a single instance of the application (mRemote3G restart required).
         '''</summary>
         Friend Shared ReadOnly Property strAllowOnlySingleInstance() As String
             Get
@@ -580,8 +580,8 @@ Namespace My
         
         '''<summary>
         '''  Looks up a localized string similar to The (RDP) Sessions feature requires that you have a copy of eolwtscom.dll registered on your system.
-        '''mRemoteNG ships with this component but it is not registered automatically if you do not use the mRemoteNG Installer.
-        '''To register it manually, run the following command from an elevated command prompt: regsvr32 &quot;C:\Program Files\mRemoteNG\eolwtscom.dll&quot; (where C:\Program Files\mRemoteNG\ is the path to your mRemoteNG installation).
+        '''mRemote3G ships with this component but it is not registered automatically if you do not use the mRemote3G Installer.
+        '''To register it manually, run the following command from an elevated command prompt: regsvr32 &quot;C:\Program Files\mRemote3G\eolwtscom.dll&quot; (where C:\Program Files\mRemote3G\ is the path to your mRemote3G installation).
         '''If this check still fails or you are unable to use the (RDP) Sessions feat [rest of string was truncated]&quot;;.
         '''</summary>
         Friend Shared ReadOnly Property strCcEOLFailed() As String
@@ -602,8 +602,8 @@ Namespace My
         '''<summary>
         '''  Looks up a localized string similar to To use the Gecko Rendering Engine you need to have XULrunner 1.8.1.x and the path to the installation set in your Options.
         '''You can download XULrunner 1.8.1.3 here: ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/
-        '''When you are finished downloading extract the package to a path of your choice. Then in mRemoteNG go to Tools - Options - Advanced and enter the correct path in the XULrunner path field.
-        '''If you are still not able to pass this check or use the Gecko Engine in mRemoteNG please c [rest of string was truncated]&quot;;.
+        '''When you are finished downloading extract the package to a path of your choice. Then in mRemote3G go to Tools - Options - Advanced and enter the correct path in the XULrunner path field.
+        '''If you are still not able to pass this check or use the Gecko Engine in mRemote3G please c [rest of string was truncated]&quot;;.
         '''</summary>
         Friend Shared ReadOnly Property strCcGeckoFailed() As String
             Get
@@ -651,8 +651,8 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to The SSH, Telnet, Rlogin and RAW protocols need PuTTY to work. PuTTY comes with every mRemoteNG package and is located in the installation path.
-        '''Please make sure that either you have the Putty.exe in your mRemoteNG directory (default: c:\Program Files\mRemoteNG\) or that you specified a valid path to your PuTTY executable in the Options (Tools - Options - Advanced - Custom PuTTY path).
+        '''  Looks up a localized string similar to The SSH, Telnet, Rlogin and RAW protocols need PuTTY to work. PuTTY comes with every mRemote3G package and is located in the installation path.
+        '''Please make sure that either you have the Putty.exe in your mRemote3G directory (default: c:\Program Files\mRemote3G\) or that you specified a valid path to your PuTTY executable in the Options (Tools - Options - Advanced - Custom PuTTY path).
         '''</summary>
         Friend Shared ReadOnly Property strCcPuttyFailed() As String
             Get
@@ -671,7 +671,7 @@ Namespace My
         
         '''<summary>
         '''  Looks up a localized string similar to For RDP to work properly you need to have at least Remote Desktop Connection (Terminal Services) Client 6.0 installed. You can download it here: http://support.microsoft.com/kb/925876
-        '''If this check still fails or you are unable to use RDP, please consult the mRemoteNG Forum at http://forum.mremoteng.org/..
+        '''If this check still fails or you are unable to use RDP, please consult the mRemote3G Forum at http://forum.mremoteng.org/..
         '''</summary>
         Friend Shared ReadOnly Property strCcRDPFailed() As String
             Get
@@ -690,9 +690,9 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to VNC requires VncSharpNG.dll to be located in your mRemoteNG application folder.
-        '''Please make sure that you have the VncSharpNG.dll file in your mRemoteNG application folder (usually C:\Program Files\mRemoteNG\).
-        '''If you are still not able to pass this check or use VNC in mRemoteNG please consult the mRemoteNG Forum at http://forum.mremoteng.org/.
+        '''  Looks up a localized string similar to VNC requires VncSharpNG.dll to be located in your mRemote3G application folder.
+        '''Please make sure that you have the VncSharpNG.dll file in your mRemote3G application folder (usually C:\Program Files\mRemote3G\).
+        '''If you are still not able to pass this check or use VNC in mRemote3G please consult the mRemote3G Forum at http://forum.mremoteng.org/.
         '''</summary>
         Friend Shared ReadOnly Property strCcVNCFailed() As String
             Get
@@ -1726,7 +1726,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Export mRemote/mRemoteNG XML.
+        '''  Looks up a localized string similar to Export mRemote/mRemote3G XML.
         '''</summary>
         Friend Shared ReadOnly Property strExportmRemoteXML() As String
             Get
@@ -2230,7 +2230,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Import mRemote/mRemoteNG XML.
+        '''  Looks up a localized string similar to Import mRemote/mRemote3G XML.
         '''</summary>
         Friend Shared ReadOnly Property strImportmRemoteXML() As String
             Get
@@ -2275,7 +2275,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to mRemoteNG is up to date.
+        '''  Looks up a localized string similar to mRemote3G is up to date.
         '''</summary>
         Friend Shared ReadOnly Property strInheritNewConnection() As String
             Get
@@ -2977,7 +2977,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to mRemoteNG Help.
+        '''  Looks up a localized string similar to mRemote3G Help.
         '''</summary>
         Friend Shared ReadOnly Property strMenuHelpContents() As String
             Get
@@ -3373,7 +3373,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to mRemoteNG CSV.
+        '''  Looks up a localized string similar to mRemote3G CSV.
         '''</summary>
         Friend Shared ReadOnly Property strMremoteNgCsv() As String
             Get
@@ -3382,7 +3382,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to mRemoteNG XML.
+        '''  Looks up a localized string similar to mRemote3G XML.
         '''</summary>
         Friend Shared ReadOnly Property strMremoteNgXml() As String
             Get
@@ -3743,7 +3743,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to (These properties will only be saved if you select mRemote/mRemoteNG XML as output file format!).
+        '''  Looks up a localized string similar to (These properties will only be saved if you select mRemote/mRemote3G XML as output file format!).
         '''</summary>
         Friend Shared ReadOnly Property strPropertiesWillOnlyBeSavedMRemoteXML() As String
             Get
@@ -3986,7 +3986,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Choose the protocol mRemoteNG should use to connect to the host..
+        '''  Looks up a localized string similar to Choose the protocol mRemote3G should use to connect to the host..
         '''</summary>
         Friend Shared ReadOnly Property strPropertyDescriptionProtocol() As String
             Get
@@ -4925,7 +4925,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Warn me only when e&amp;xiting mRemoteNG.
+        '''  Looks up a localized string similar to Warn me only when e&amp;xiting mRemote3G.
         '''</summary>
         Friend Shared ReadOnly Property strRadioCloseWarnExit() As String
             Get
@@ -5060,7 +5060,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Couldn&apos;t create RDP control, please check mRemoteNG requirements..
+        '''  Looks up a localized string similar to Couldn&apos;t create RDP control, please check mRemote3G requirements..
         '''</summary>
         Friend Shared ReadOnly Property strRdpControlCreationFailed() As String
             Get
@@ -6428,7 +6428,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to mRemoteNG requires an update.
+        '''  Looks up a localized string similar to mRemote3G requires an update.
         '''</summary>
         Friend Shared ReadOnly Property strUpdateAvailable() As String
             Get
@@ -6437,7 +6437,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to mRemoteNG can periodically connect to the mRemoteNG website to check for updates and product announcements..
+        '''  Looks up a localized string similar to mRemote3G can periodically connect to the mRemote3G website to check for updates and product announcements..
         '''</summary>
         Friend Shared ReadOnly Property strUpdateCheck() As String
             Get
@@ -6473,7 +6473,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to mRemoteNG Portable Edition does not currently support automatic updates..
+        '''  Looks up a localized string similar to mRemote3G Portable Edition does not currently support automatic updates..
         '''</summary>
         Friend Shared ReadOnly Property strUpdateCheckPortableEdition() As String
             Get
@@ -6483,7 +6483,7 @@ Namespace My
         
         '''<summary>
         '''  Looks up a localized string similar to Download complete!
-        '''mRemoteNG will now quit and begin with the installation..
+        '''mRemote3G will now quit and begin with the installation..
         '''</summary>
         Friend Shared ReadOnly Property strUpdateDownloadComplete() As String
             Get

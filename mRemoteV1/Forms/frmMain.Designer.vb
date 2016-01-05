@@ -138,7 +138,7 @@ Partial Class frmMain
         Me.pnlDock.DocumentStyle = WeifenLuo.WinFormsUI.Docking.DocumentStyle.DockingSdi
         Me.pnlDock.Location = New System.Drawing.Point(0, 0)
         Me.pnlDock.Name = "pnlDock"
-        Me.pnlDock.Size = New System.Drawing.Size(842, 449)
+        Me.pnlDock.Size = New System.Drawing.Size(842, 474)
         DockPanelGradient1.EndColor = System.Drawing.SystemColors.ControlLight
         DockPanelGradient1.StartColor = System.Drawing.SystemColors.ControlLight
         AutoHideStripSkin1.DockStripGradient = DockPanelGradient1
@@ -196,7 +196,7 @@ Partial Class frmMain
         Me.msMain.Location = New System.Drawing.Point(3, 0)
         Me.msMain.Name = "msMain"
         Me.msMain.Padding = New System.Windows.Forms.Padding(2, 2, 0, 2)
-        Me.msMain.Size = New System.Drawing.Size(273, 24)
+        Me.msMain.Size = New System.Drawing.Size(181, 24)
         Me.msMain.Stretch = False
         Me.msMain.TabIndex = 16
         Me.msMain.Text = "Main Toolbar"
@@ -641,7 +641,7 @@ Partial Class frmMain
         '
         Me.tsContainer.ContentPanel.Controls.Add(Me.pnlDock)
         Me.tsContainer.ContentPanel.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-        Me.tsContainer.ContentPanel.Size = New System.Drawing.Size(842, 449)
+        Me.tsContainer.ContentPanel.Size = New System.Drawing.Size(842, 474)
         Me.tsContainer.Dock = System.Windows.Forms.DockStyle.Fill
         '
         'tsContainer.LeftToolStripPanel
@@ -714,7 +714,7 @@ Partial Class frmMain
         '
         Me.tsExternalTools.ContextMenuStrip = Me.cMenExtAppsToolbar
         Me.tsExternalTools.Dock = System.Windows.Forms.DockStyle.None
-        Me.tsExternalTools.Location = New System.Drawing.Point(39, 49)
+        Me.tsExternalTools.Location = New System.Drawing.Point(391, 24)
         Me.tsExternalTools.MaximumSize = New System.Drawing.Size(0, 25)
         Me.tsExternalTools.Name = "tsExternalTools"
         Me.tsExternalTools.Size = New System.Drawing.Size(111, 25)
@@ -805,7 +805,7 @@ Partial Class frmMain
         Me.MainMenuStrip = Me.msMain
         Me.Name = "frmMain"
         Me.Opacity = 0R
-        Me.Text = "mRemoteNG"
+        Me.Text = "mRemote3G"
         Me.msMain.ResumeLayout(False)
         Me.msMain.PerformLayout()
         Me.tsContainer.ContentPanel.ResumeLayout(False)
