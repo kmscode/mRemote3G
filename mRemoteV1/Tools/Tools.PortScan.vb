@@ -320,10 +320,10 @@ Namespace Tools
                 _scanThread.Abort()
             End Sub
 
-            Public Shared Function IsPortOpen(ByVal HostName As String, ByVal port As String) As Boolean
+            Public Shared Function IsPortOpen(ByVal hostname As String, ByVal port As String) As Boolean
                 Try
                     ' ReSharper disable UnusedVariable
-                    Dim tcpClient As New Sockets.TcpClient(HostName, port)
+                    Dim tcpClient As New Sockets.TcpClient(hostname, port)
                     ' ReSharper restore UnusedVariable
                     Return True
                 Catch ex As Exception

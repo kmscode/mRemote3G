@@ -396,8 +396,8 @@ Namespace Config
                         conI.ConstantID = .Item("ConstantID")
                         conI.Name = .Item("Name")
                         conI.Description = .Item("Description")
-                        conI.HostName = .Item("Hostname")
-                        conI.UserName = .Item("Username")
+                        conI.Hostname = .Item("Hostname")
+                        conI.Username = .Item("Username")
                         conI.Password = Security.Crypt.Decrypt(.Item("Password"), pW)
                         conI.Domain = .Item("DomainName")
                         conI.DisplayWallpaper = .Item("DisplayWallpaper")
@@ -408,7 +408,7 @@ Namespace Config
                         conI.RedirectDiskDrives = .Item("RedirectDiskDrives")
                         conI.RedirectPrinters = .Item("RedirectPrinters")
                         conI.RedirectPorts = .Item("RedirectPorts")
-                        conI.RedirectSmartcards = .Item("RedirectSmartCards")
+                        conI.RedirectSmartCards = .Item("RedirectSmartCards")
                         conI.RedirectKeys = .Item("RedirectKeys")
                         conI.RedirectSound = Tools.Misc.StringToEnum(GetType(Connection.Protocol.RDP.RDPSounds), .Item("RedirectSound"))
 
@@ -459,7 +459,7 @@ Namespace Config
                             conI.VNCProxyType = Tools.Misc.StringToEnum(GetType(Connection.Protocol.VNC.ProxyType), .Item("VNCProxyType"))
                             conI.VNCProxyIP = .Item("VNCProxyIP")
                             conI.VNCProxyPort = .Item("VNCProxyPort")
-                            conI.VNCProxyUserName = .Item("VNCProxyUsername")
+                            conI.VNCProxyUsername = .Item("VNCProxyUsername")
                             conI.VNCProxyPassword = Security.Crypt.Decrypt(.Item("VNCProxyPassword"), pW)
                             conI.VNCColors = Tools.Misc.StringToEnum(GetType(Connection.Protocol.VNC.Colors), .Item("VNCColors"))
                             conI.VNCSmartSizeMode = Tools.Misc.StringToEnum(GetType(Connection.Protocol.VNC.SmartSizeMode), .Item("VNCSmartSizeMode"))
@@ -506,9 +506,9 @@ Namespace Config
 
                         If Me.confVersion >= 2.2 Then
                             conI.RDGatewayUsageMethod = Tools.Misc.StringToEnum(GetType(mRemoteNG.Connection.Protocol.RDP.RDGatewayUsageMethod), .Item("RDGatewayUsageMethod"))
-                            conI.RDGatewayHostName = .Item("RDGatewayHostname")
+                            conI.RDGatewayHostname = .Item("RDGatewayHostname")
                             conI.RDGatewayUseConnectionCredentials = Tools.Misc.StringToEnum(GetType(mRemoteNG.Connection.Protocol.RDP.RDGatewayUseConnectionCredentials), .Item("RDGatewayUseConnectionCredentials"))
-                            conI.RDGatewayUserName = .Item("RDGatewayUsername")
+                            conI.RDGatewayUsername = .Item("RDGatewayUsername")
                             conI.RDGatewayPassword = Security.Crypt.Decrypt(.Item("RDGatewayPassword"), pW)
                             conI.RDGatewayDomain = .Item("RDGatewayDomain")
                             conI.Inherit.RDGatewayUsageMethod = .Item("InheritRDGatewayUsageMethod")
@@ -793,8 +793,8 @@ Namespace Config
                         If Me.confVersion > 0.1 Then '0.2
                             conI.Name = .Attributes("Name").Value
                             conI.Description = .Attributes("Descr").Value
-                            conI.HostName = .Attributes("Hostname").Value
-                            conI.UserName = .Attributes("Username").Value
+                            conI.Hostname = .Attributes("Hostname").Value
+                            conI.Username = .Attributes("Username").Value
                             conI.Password = Security.Crypt.Decrypt(.Attributes("Password").Value, pW)
                             conI.Domain = .Attributes("Domain").Value
                             conI.DisplayWallpaper = .Attributes("DisplayWallpaper").Value
@@ -849,12 +849,12 @@ Namespace Config
                             conI.RedirectDiskDrives = .Attributes("RedirectDiskDrives").Value
                             conI.RedirectPrinters = .Attributes("RedirectPrinters").Value
                             conI.RedirectPorts = .Attributes("RedirectPorts").Value
-                            conI.RedirectSmartcards = .Attributes("RedirectSmartCards").Value
+                            conI.RedirectSmartCards = .Attributes("RedirectSmartCards").Value
                         Else
                             conI.RedirectDiskDrives = False
                             conI.RedirectPrinters = False
                             conI.RedirectPorts = False
-                            conI.RedirectSmartcards = False
+                            conI.RedirectSmartCards = False
                         End If
 
                         If Me.confVersion > 0.6 Then '0.7
@@ -942,7 +942,7 @@ Namespace Config
                             conI.VNCProxyType = Tools.Misc.StringToEnum(GetType(mRemoteNG.Connection.Protocol.VNC.ProxyType), .Attributes("VNCProxyType").Value)
                             conI.VNCProxyIP = .Attributes("VNCProxyIP").Value
                             conI.VNCProxyPort = .Attributes("VNCProxyPort").Value
-                            conI.VNCProxyUserName = .Attributes("VNCProxyUsername").Value
+                            conI.VNCProxyUsername = .Attributes("VNCProxyUsername").Value
                             conI.VNCProxyPassword = Security.Crypt.Decrypt(.Attributes("VNCProxyPassword").Value, pW)
                             conI.VNCColors = Tools.Misc.StringToEnum(GetType(mRemoteNG.Connection.Protocol.VNC.Colors), .Attributes("VNCColors").Value)
                             conI.VNCSmartSizeMode = Tools.Misc.StringToEnum(GetType(mRemoteNG.Connection.Protocol.VNC.SmartSizeMode), .Attributes("VNCSmartSizeMode").Value)
@@ -988,9 +988,9 @@ Namespace Config
                         If Me.confVersion > 2.1 Then '2.2
                             ' Get settings
                             conI.RDGatewayUsageMethod = Tools.Misc.StringToEnum(GetType(mRemoteNG.Connection.Protocol.RDP.RDGatewayUsageMethod), .Attributes("RDGatewayUsageMethod").Value)
-                            conI.RDGatewayHostName = .Attributes("RDGatewayHostname").Value
+                            conI.RDGatewayHostname = .Attributes("RDGatewayHostname").Value
                             conI.RDGatewayUseConnectionCredentials = Tools.Misc.StringToEnum(GetType(mRemoteNG.Connection.Protocol.RDP.RDGatewayUseConnectionCredentials), .Attributes("RDGatewayUseConnectionCredentials").Value)
-                            conI.RDGatewayUserName = .Attributes("RDGatewayUsername").Value
+                            conI.RDGatewayUsername = .Attributes("RDGatewayUsername").Value
                             conI.RDGatewayPassword = Security.Crypt.Decrypt(.Attributes("RDGatewayPassword").Value, pW)
                             conI.RDGatewayDomain = .Attributes("RDGatewayDomain").Value
 

@@ -36,9 +36,9 @@ Namespace Credential
         Private _Username As String
         <LocalizedCategory("strCategoryCredentials", 2), _
             Browsable(True), _
-            LocalizedDisplayName("strPropertyNameUsername"),
-            LocalizedDescription("strPropertyDescriptionUsername")>
-        Public Property UserName() As String
+            LocalizedDisplayName("strPropertyNameUsername"), _
+            LocalizedDescription("strPropertyDescriptionUsername")> _
+        Public Property Username() As String
             Get
                 Return _Username
             End Get

@@ -6,13 +6,13 @@ Namespace Tools
             Return GetPuttyType(PuttyBase.PuttyPath)
         End Function
 
-        Public Shared Function GetPuttyType(ByVal FileName As String) As PuttyType
-            If IsPuttyNg(FileName) Then Return PuttyType.PuttyNg
-            If IsKitty(FileName) Then Return PuttyType.Kitty
-            If IsXming(FileName) Then Return PuttyType.Xming
+        Public Shared Function GetPuttyType(ByVal filename As String) As PuttyType
+            If IsPuttyNg(filename) Then Return PuttyType.PuttyNg
+            If IsKitty(filename) Then Return PuttyType.Kitty
+            If IsXming(filename) Then Return PuttyType.Xming
 
             ' Check this last
-            If IsPutty(FileName) Then Return PuttyType.Putty
+            If IsPutty(filename) Then Return PuttyType.Putty
 
             Return PuttyType.Unknown
         End Function

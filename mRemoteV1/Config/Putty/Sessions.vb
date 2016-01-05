@@ -53,7 +53,7 @@ Namespace Config.Putty
 
                     sessionInfo.RootPuttySessionsInfo = provider.RootInfo
                     sessionInfo.TreeNode = treeNode
-                    sessionInfo.Inherit.TurnoffInheritanceCompletely()
+                    sessionInfo.Inherit.TurnOffInheritanceCompletely()
 
                     treeNode.Tag = sessionInfo
 

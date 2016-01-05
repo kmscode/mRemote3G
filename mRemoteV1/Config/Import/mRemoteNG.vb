@@ -25,7 +25,7 @@ Namespace Config.Import
             If Tree.Node.GetNodeType(parentTreeNode) = Tree.Node.Type.Container Then
                 containerInfo.Parent = parentTreeNode.Tag
             Else
-                connectionInfo.Inherit.TurnoffInheritanceCompletely()
+                connectionInfo.Inherit.TurnOffInheritanceCompletely()
             End If
 
             treeNode.Name = name

@@ -116,8 +116,8 @@ Namespace Connection
                                 Dim username As String = ""
                                 Dim password As String = ""
 
-                                If Not String.IsNullOrEmpty(InterfaceControl.Info.UserName) Then
-                                    username = InterfaceControl.Info.UserName
+                                If Not String.IsNullOrEmpty(InterfaceControl.Info.Username) Then
+                                    username = InterfaceControl.Info.Username
                                 Else
                                     If My.Settings.EmptyCredentials = "windows" Then
                                         username = Environment.UserName
@@ -147,7 +147,7 @@ Namespace Connection
                             End If
 
                             arguments.Add("-P", InterfaceControl.Info.Port.ToString)
-                            arguments.Add(InterfaceControl.Info.HostName)
+                            arguments.Add(InterfaceControl.Info.Hostname)
                         End If
 
                         If _isPuttyNg Then

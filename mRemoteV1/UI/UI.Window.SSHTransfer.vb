@@ -307,7 +307,7 @@ Namespace UI
 #End Region
 
 #Region "Public Properties"
-            Public Property HostName() As String
+            Public Property Hostname() As String
                 Get
                     Return Me.txtHost.Text
                 End Get
@@ -325,7 +325,7 @@ Namespace UI
                 End Set
             End Property
 
-            Public Property UserName() As String
+            Public Property Username() As String
                 Get
                     Return Me.txtUser.Text
                 End Get

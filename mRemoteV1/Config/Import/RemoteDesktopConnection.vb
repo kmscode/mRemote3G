@@ -41,12 +41,12 @@ Namespace Config.Import
             Select Case LCase(key)
                 Case "full address"
                     Dim uri As New Uri("dummyscheme" + uri.SchemeDelimiter + value)
-                    If Not String.IsNullOrEmpty(uri.Host) Then connectionInfo.HostName = uri.Host
+                    If Not String.IsNullOrEmpty(uri.Host) Then connectionInfo.Hostname = uri.Host
                     If Not uri.Port = -1 Then connectionInfo.Port = uri.Port
                 Case "server port"
                     connectionInfo.Port = value
                 Case "username"
-                    connectionInfo.UserName = value
+                    connectionInfo.Username = value
                 Case "domain"
                     connectionInfo.Domain = value
                 Case "session bpp"
@@ -104,9 +104,9 @@ Namespace Config.Import
                     End If
                 Case "redirectsmartcards"
                     If value = 1 Then
-                        connectionInfo.RedirectSmartcards = True
+                        connectionInfo.RedirectSmartCards = True
                     Else
-                        connectionInfo.RedirectSmartcards = False
+                        connectionInfo.RedirectSmartCards = False
                     End If
                 Case "redirectdrives"
                     If value = 1 Then

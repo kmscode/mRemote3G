@@ -755,7 +755,7 @@ Namespace App
             With DefaultConnection
                 My.Settings.ConDefaultDescription = .Description
                 My.Settings.ConDefaultIcon = .Icon
-                My.Settings.ConDefaultUsername = .UserName
+                My.Settings.ConDefaultUsername = .Username
                 My.Settings.ConDefaultPassword = .Password
                 My.Settings.ConDefaultDomain = .Domain
                 My.Settings.ConDefaultProtocol = .Protocol.ToString
@@ -777,7 +777,7 @@ Namespace App
                 My.Settings.ConDefaultRedirectDiskDrives = .RedirectDiskDrives
                 My.Settings.ConDefaultRedirectPrinters = .RedirectPrinters
                 My.Settings.ConDefaultRedirectPorts = .RedirectPorts
-                My.Settings.ConDefaultRedirectSmartCards = .RedirectSmartcards
+                My.Settings.ConDefaultRedirectSmartCards = .RedirectSmartCards
                 My.Settings.ConDefaultRedirectSound = .RedirectSound.ToString
                 My.Settings.ConDefaultPreExtApp = .PreExtApp
                 My.Settings.ConDefaultPostExtApp = .PostExtApp
@@ -791,13 +791,13 @@ Namespace App
                 My.Settings.ConDefaultVNCProxyPassword = .VNCProxyPassword
                 My.Settings.ConDefaultVNCProxyPort = .VNCProxyPort
                 My.Settings.ConDefaultVNCProxyType = .VNCProxyType.ToString
-                My.Settings.ConDefaultVNCProxyUsername = .VNCProxyUserName
+                My.Settings.ConDefaultVNCProxyUsername = .VNCProxyUsername
                 My.Settings.ConDefaultVNCSmartSizeMode = .VNCSmartSizeMode.ToString
                 My.Settings.ConDefaultVNCViewOnly = .VNCViewOnly
                 My.Settings.ConDefaultExtApp = .ExtApp
                 My.Settings.ConDefaultRDGatewayUsageMethod = .RDGatewayUsageMethod.ToString
-                My.Settings.ConDefaultRDGatewayHostname = .RDGatewayHostName
-                My.Settings.ConDefaultRDGatewayUsername = .RDGatewayUserName
+                My.Settings.ConDefaultRDGatewayHostname = .RDGatewayHostname
+                My.Settings.ConDefaultRDGatewayUsername = .RDGatewayUsername
                 My.Settings.ConDefaultRDGatewayPassword = .RDGatewayPassword
                 My.Settings.ConDefaultRDGatewayDomain = .RDGatewayDomain
                 My.Settings.ConDefaultRDGatewayUseConnectionCredentials = .RDGatewayUseConnectionCredentials.ToString
@@ -973,24 +973,24 @@ Namespace App
 #End Region
 
 #Region "Connections Loading/Saving"
-        Public Shared Sub NewConnections(ByVal FileName As String)
+        Public Shared Sub NewConnections(ByVal filename As String)
             Try
                 ConnectionList = New Connection.List
                 ContainerList = New Container.List
 
                 Dim connectionsLoad As New Connections.Load
 
-                If FileName = GetDefaultStartupConnectionFileName() Then
+                If filename = GetDefaultStartupConnectionFileName() Then
                     My.Settings.LoadConsFromCustomLocation = False
                 Else
                     My.Settings.LoadConsFromCustomLocation = True
-                    My.Settings.CustomConsPath = FileName
+                    My.Settings.CustomConsPath = filename
                 End If
 
-                Directory.CreateDirectory(Path.GetDirectoryName(FileName))
+                Directory.CreateDirectory(Path.GetDirectoryName(filename))
 
                 ' Use File.Open with FileMode.CreateNew so that we don't overwrite an existing file
-                Using fileStream As FileStream = File.Open(FileName, FileMode.CreateNew, FileAccess.Write, FileShare.None)
+                Using fileStream As FileStream = File.Open(filename, FileMode.CreateNew, FileAccess.Write, FileShare.None)
                     Using xmlTextWriter As New XmlTextWriter(fileStream, System.Text.Encoding.UTF8)
                         With xmlTextWriter
                             .Formatting = Formatting.Indented
@@ -1020,7 +1020,7 @@ Namespace App
                 connectionsLoad.RootTreeNode = Windows.treeForm.tvConnections.Nodes(0)
 
                 ' Load config
-                connectionsLoad.ConnectionFileName = FileName
+                connectionsLoad.ConnectionFileName = filename
                 connectionsLoad.Load(False)
 
                 Windows.treeForm.tvConnections.SelectedNode = connectionsLoad.RootTreeNode
@@ -1345,7 +1345,7 @@ Namespace App
                 End If
 
                 newConnectionInfo.Protocol = protocol
-                newConnectionInfo.HostName = uri.Host
+                newConnectionInfo.Hostname = uri.Host
                 If uri.Port = -1 Then
                     newConnectionInfo.SetDefaultPort()
                 Else
@@ -1374,12 +1374,12 @@ Namespace App
                     Exit Sub
                 End If
 
-                If Tree.Node.GetNodeType(Tree.Node.SelectedNode) = Tree.Node.Type.Connection Or
+                If Tree.Node.GetNodeType(Tree.Node.SelectedNode) = Tree.Node.Type.Connection Or _
                    Tree.Node.GetNodeType(Tree.Node.SelectedNode) = Tree.Node.Type.PuttySession Then
                     OpenConnection(Windows.treeForm.tvConnections.SelectedNode.Tag, Force)
                 ElseIf Tree.Node.GetNodeType(Tree.Node.SelectedNode) = Tree.Node.Type.Container Then
                     For Each tNode As TreeNode In Tree.Node.SelectedNode.Nodes
-                        If Tree.Node.GetNodeType(tNode) = Tree.Node.Type.Connection Or
+                        If Tree.Node.GetNodeType(tNode) = Tree.Node.Type.Connection Or _
                            Tree.Node.GetNodeType(Tree.Node.SelectedNode) = Tree.Node.Type.PuttySession Then
                             If tNode.Tag IsNot Nothing Then
                                 OpenConnection(tNode.Tag, Force)
@@ -1426,7 +1426,7 @@ Namespace App
 
         Private Shared Sub OpenConnectionFinal(ByVal newConnectionInfo As mRemoteNG.Connection.Info, ByVal Force As mRemoteNG.Connection.Info.Force, ByVal ConForm As System.Windows.Forms.Form)
             Try
-                If newConnectionInfo.HostName = "" And newConnectionInfo.Protocol <> Connection.Protocol.Protocols.IntApp Then
+                If newConnectionInfo.Hostname = "" And newConnectionInfo.Protocol <> Connection.Protocol.Protocols.IntApp Then
                     MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Language.strConnectionOpenFailedNoHostname)
                     Exit Sub
                 End If
@@ -1600,7 +1600,7 @@ Namespace App
 
                 MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, My.Language.strConnenctionCloseEvent, True)
 
-                MessageCollector.AddMessage(Messages.MessageClass.ReportMsg, String.Format(My.Language.strConnenctionClosedByUser, Prot.InterfaceControl.Info.HostName, Prot.InterfaceControl.Info.Protocol.ToString, My.User.Name))
+                MessageCollector.AddMessage(Messages.MessageClass.ReportMsg, String.Format(My.Language.strConnenctionClosedByUser, Prot.InterfaceControl.Info.Hostname, Prot.InterfaceControl.Info.Protocol.ToString, My.User.Name))
 
                 Prot.InterfaceControl.Info.OpenConnections.Remove(Prot)
 
@@ -1623,7 +1623,7 @@ Namespace App
             Dim prot As mRemoteNG.Connection.Protocol.Base = sender
 
             MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, My.Language.strConnectionEventConnected, True)
-            MessageCollector.AddMessage(Messages.MessageClass.ReportMsg, String.Format(My.Language.strConnectionEventConnectedDetail, prot.InterfaceControl.Info.HostName, prot.InterfaceControl.Info.Protocol.ToString, My.User.Name, prot.InterfaceControl.Info.Description, prot.InterfaceControl.Info.UserField))
+            MessageCollector.AddMessage(Messages.MessageClass.ReportMsg, String.Format(My.Language.strConnectionEventConnectedDetail, prot.InterfaceControl.Info.Hostname, prot.InterfaceControl.Info.Protocol.ToString, My.User.Name, prot.InterfaceControl.Info.Description, prot.InterfaceControl.Info.UserField))
         End Sub
 
         Public Shared Sub Prot_Event_ErrorOccured(ByVal sender As Object, ByVal ErrorMessage As String)

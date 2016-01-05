@@ -57,10 +57,10 @@ Namespace Connection
 #End Region
 #Region "Connection"
         Private _hostname As String = String.Empty
-        <LocalizedCategory("strCategoryConnection", 2), _
+        <LocalizedCategory("strCategoryConnection", 2),
             LocalizedDisplayName("strPropertyNameAddress"),
             LocalizedDescription("strPropertyDescriptionAddress")>
-        Public Overridable Property HostName() As String
+        Public Overridable Property Hostname() As String
             Get
                 Return _hostname.Trim()
             End Get
@@ -74,10 +74,10 @@ Namespace Connection
         End Property
 
         Private _username As String = My.Settings.ConDefaultUsername
-        <LocalizedCategory("strCategoryConnection", 2), _
+        <LocalizedCategory("strCategoryConnection", 2),
             LocalizedDisplayName("strPropertyNameUsername"),
             LocalizedDescription("strPropertyDescriptionUsername")>
-        Public Overridable Property UserName() As String
+        Public Overridable Property Username() As String
             Get
                 Return GetInheritedPropertyValue("Username", _username)
             End Get
@@ -87,10 +87,10 @@ Namespace Connection
         End Property
 
         Private _password As String = My.Settings.ConDefaultPassword
-        <LocalizedCategory("strCategoryConnection", 2), _
-            LocalizedDisplayName("strPropertyNamePassword"), _
-            LocalizedDescription("strPropertyDescriptionPassword"), _
-            PasswordPropertyText(True)> _
+        <LocalizedCategory("strCategoryConnection", 2),
+            LocalizedDisplayName("strPropertyNamePassword"),
+            LocalizedDescription("strPropertyDescriptionPassword"),
+            PasswordPropertyText(True)>
         Public Overridable Property Password() As String
             Get
                 Return GetInheritedPropertyValue("Password", _password)
@@ -101,9 +101,9 @@ Namespace Connection
         End Property
 
         Private _domain As String = My.Settings.ConDefaultDomain
-        <LocalizedCategory("strCategoryConnection", 2), _
-            LocalizedDisplayName("strPropertyNameDomain"), _
-            LocalizedDescription("strPropertyDescriptionDomain")> _
+        <LocalizedCategory("strCategoryConnection", 2),
+            LocalizedDisplayName("strPropertyNameDomain"),
+            LocalizedDescription("strPropertyDescriptionDomain")>
         Public Property Domain() As String
             Get
                 Return GetInheritedPropertyValue("Domain", _domain).Trim()
@@ -115,10 +115,10 @@ Namespace Connection
 #End Region
 #Region "Protocol"
         Private _protocol As Protocol.Protocols = Tools.Misc.StringToEnum(GetType(Protocol.Protocols), My.Settings.ConDefaultProtocol)
-        <LocalizedCategory("strCategoryProtocol", 3), _
-            LocalizedDisplayName("strPropertyNameProtocol"), _
-            LocalizedDescription("strPropertyDescriptionProtocol"), _
-            TypeConverter(GetType(Tools.Misc.EnumTypeConverter))> _
+        <LocalizedCategory("strCategoryProtocol", 3),
+            LocalizedDisplayName("strPropertyNameProtocol"),
+            LocalizedDescription("strPropertyDescriptionProtocol"),
+            TypeConverter(GetType(Tools.Misc.EnumTypeConverter))>
         Public Overridable Property Protocol() As Protocol.Protocols
             Get
                 Return GetInheritedPropertyValue("Protocol", _protocol)
@@ -129,10 +129,10 @@ Namespace Connection
         End Property
 
         Private _extApp As String = My.Settings.ConDefaultExtApp
-        <LocalizedCategory("strCategoryProtocol", 3), _
-            LocalizedDisplayName("strPropertyNameExternalTool"), _
-            LocalizedDescription("strPropertyDescriptionExternalTool"), _
-            TypeConverter(GetType(Tools.ExternalToolsTypeConverter))> _
+        <LocalizedCategory("strCategoryProtocol", 3),
+            LocalizedDisplayName("strPropertyNameExternalTool"),
+            LocalizedDescription("strPropertyDescriptionExternalTool"),
+            TypeConverter(GetType(Tools.ExternalToolsTypeConverter))>
         Public Property ExtApp() As String
             Get
                 Return GetInheritedPropertyValue("ExtApp", _extApp)
@@ -143,9 +143,9 @@ Namespace Connection
         End Property
 
         Private _port As Integer
-        <LocalizedCategory("strCategoryProtocol", 3), _
-            LocalizedDisplayName("strPropertyNamePort"), _
-            LocalizedDescription("strPropertyDescriptionPort")> _
+        <LocalizedCategory("strCategoryProtocol", 3),
+            LocalizedDisplayName("strPropertyNamePort"),
+            LocalizedDescription("strPropertyDescriptionPort")>
         Public Overridable Property Port() As Integer
             Get
                 Return GetInheritedPropertyValue("Port", _port)
@@ -156,10 +156,10 @@ Namespace Connection
         End Property
 
         Private _puttySession As String = My.Settings.ConDefaultPuttySession
-        <LocalizedCategory("strCategoryProtocol", 3), _
-            LocalizedDisplayName("strPropertyNamePuttySession"), _
-            LocalizedDescription("strPropertyDescriptionPuttySession"), _
-            TypeConverter(GetType(Putty.Sessions.SessionList))> _
+        <LocalizedCategory("strCategoryProtocol", 3),
+            LocalizedDisplayName("strPropertyNamePuttySession"),
+            LocalizedDescription("strPropertyDescriptionPuttySession"),
+            TypeConverter(GetType(Putty.Sessions.SessionList))>
         Public Overridable Property PuttySession() As String
             Get
                 Return GetInheritedPropertyValue("PuttySession", _puttySession)
@@ -170,10 +170,10 @@ Namespace Connection
         End Property
 
         Private _useConsoleSession As Boolean = My.Settings.ConDefaultUseConsoleSession
-        <LocalizedCategory("strCategoryProtocol", 3), _
-            LocalizedDisplayName("strPropertyNameUseConsoleSession"), _
-            LocalizedDescription("strPropertyDescriptionUseConsoleSession"), _
-            TypeConverter(GetType(Tools.Misc.YesNoTypeConverter))> _
+        <LocalizedCategory("strCategoryProtocol", 3),
+            LocalizedDisplayName("strPropertyNameUseConsoleSession"),
+            LocalizedDescription("strPropertyDescriptionUseConsoleSession"),
+            TypeConverter(GetType(Tools.Misc.YesNoTypeConverter))>
         Public Property UseConsoleSession() As Boolean
             Get
                 Return GetInheritedPropertyValue("UseConsoleSession", _useConsoleSession)
@@ -184,10 +184,10 @@ Namespace Connection
         End Property
 
         Private _rdpAuthenticationLevel As Protocol.RDP.AuthenticationLevel = Tools.Misc.StringToEnum(GetType(Protocol.RDP.AuthenticationLevel), My.Settings.ConDefaultRDPAuthenticationLevel)
-        <LocalizedCategory("strCategoryProtocol", 3), _
-            LocalizedDisplayName("strPropertyNameAuthenticationLevel"), _
-            LocalizedDescription("strPropertyDescriptionAuthenticationLevel"), _
-            TypeConverter(GetType(Tools.Misc.EnumTypeConverter))> _
+        <LocalizedCategory("strCategoryProtocol", 3),
+            LocalizedDisplayName("strPropertyNameAuthenticationLevel"),
+            LocalizedDescription("strPropertyDescriptionAuthenticationLevel"),
+            TypeConverter(GetType(Tools.Misc.EnumTypeConverter))>
         Public Property RDPAuthenticationLevel() As Protocol.RDP.AuthenticationLevel
             Get
                 Return GetInheritedPropertyValue("RDPAuthenticationLevel", _rdpAuthenticationLevel)
@@ -198,9 +198,9 @@ Namespace Connection
         End Property
 
         Private _loadBalanceInfo As String = My.Settings.ConDefaultLoadBalanceInfo
-        <LocalizedCategory("strCategoryProtocol", 3), _
-            LocalizedDisplayName("strPropertyNameLoadBalanceInfo"), _
-            LocalizedDescription("strPropertyDescriptionLoadBalanceInfo")> _
+        <LocalizedCategory("strCategoryProtocol", 3),
+            LocalizedDisplayName("strPropertyNameLoadBalanceInfo"),
+            LocalizedDescription("strPropertyDescriptionLoadBalanceInfo")>
         Public Property LoadBalanceInfo() As String
             Get
                 Return GetInheritedPropertyValue("LoadBalanceInfo", _loadBalanceInfo).Trim()
@@ -211,10 +211,10 @@ Namespace Connection
         End Property
 
         Private _renderingEngine As Protocol.HTTPBase.RenderingEngine = Tools.Misc.StringToEnum(GetType(Protocol.HTTPBase.RenderingEngine), My.Settings.ConDefaultRenderingEngine)
-        <LocalizedCategory("strCategoryProtocol", 3), _
-            LocalizedDisplayName("strPropertyNameRenderingEngine"), _
-            LocalizedDescription("strPropertyDescriptionRenderingEngine"), _
-            TypeConverter(GetType(Tools.Misc.EnumTypeConverter))> _
+        <LocalizedCategory("strCategoryProtocol", 3),
+            LocalizedDisplayName("strPropertyNameRenderingEngine"),
+            LocalizedDescription("strPropertyDescriptionRenderingEngine"),
+            TypeConverter(GetType(Tools.Misc.EnumTypeConverter))>
         Public Property RenderingEngine() As Protocol.HTTPBase.RenderingEngine
             Get
                 Return GetInheritedPropertyValue("RenderingEngine", _renderingEngine)
@@ -225,10 +225,10 @@ Namespace Connection
         End Property
 
         Private _useCredSsp As Boolean = My.Settings.ConDefaultUseCredSsp
-        <LocalizedCategory("strCategoryProtocol", 3), _
-            LocalizedDisplayName("strPropertyNameUseCredSsp"), _
-            LocalizedDescription("strPropertyDescriptionUseCredSsp"), _
-            TypeConverter(GetType(Tools.Misc.YesNoTypeConverter))> _
+        <LocalizedCategory("strCategoryProtocol", 3),
+            LocalizedDisplayName("strPropertyNameUseCredSsp"),
+            LocalizedDescription("strPropertyDescriptionUseCredSsp"),
+            TypeConverter(GetType(Tools.Misc.YesNoTypeConverter))>
         Public Property UseCredSsp() As Boolean
             Get
                 Return GetInheritedPropertyValue("UseCredSsp", _useCredSsp)
@@ -240,10 +240,10 @@ Namespace Connection
 #End Region
 #Region "RD Gateway"
         Private _rdGatewayUsageMethod As Protocol.RDP.RDGatewayUsageMethod = Tools.Misc.StringToEnum(GetType(Protocol.RDP.RDGatewayUsageMethod), My.Settings.ConDefaultRDGatewayUsageMethod)
-        <LocalizedCategory("strCategoryGateway", 4), _
-            LocalizedDisplayName("strPropertyNameRDGatewayUsageMethod"), _
-            LocalizedDescription("strPropertyDescriptionRDGatewayUsageMethod"), _
-            TypeConverter(GetType(Tools.Misc.EnumTypeConverter))> _
+        <LocalizedCategory("strCategoryGateway", 4),
+            LocalizedDisplayName("strPropertyNameRDGatewayUsageMethod"),
+            LocalizedDescription("strPropertyDescriptionRDGatewayUsageMethod"),
+            TypeConverter(GetType(Tools.Misc.EnumTypeConverter))>
         Public Property RDGatewayUsageMethod() As Protocol.RDP.RDGatewayUsageMethod
             Get
                 Return GetInheritedPropertyValue("RDGatewayUsageMethod", _rdGatewayUsageMethod)
@@ -254,10 +254,10 @@ Namespace Connection
         End Property
 
         Private _rdGatewayHostname As String = My.Settings.ConDefaultRDGatewayHostname
-        <LocalizedCategory("strCategoryGateway", 4), _
+        <LocalizedCategory("strCategoryGateway", 4),
             LocalizedDisplayName("strPropertyNameRDGatewayHostname"),
             LocalizedDescription("strPropertyDescriptionRDGatewayHostname")>
-        Public Property RDGatewayHostName() As String
+        Public Property RDGatewayHostname() As String
             Get
                 Return GetInheritedPropertyValue("RDGatewayHostname", _rdGatewayHostname).Trim()
             End Get
@@ -267,10 +267,10 @@ Namespace Connection
         End Property
 
         Private _rdGatewayUseConnectionCredentials As Protocol.RDP.RDGatewayUseConnectionCredentials = Tools.Misc.StringToEnum(GetType(Protocol.RDP.RDGatewayUseConnectionCredentials), My.Settings.ConDefaultRDGatewayUseConnectionCredentials)
-        <LocalizedCategory("strCategoryGateway", 4), _
-            LocalizedDisplayName("strPropertyNameRDGatewayUseConnectionCredentials"), _
-            LocalizedDescription("strPropertyDescriptionRDGatewayUseConnectionCredentials"), _
-            TypeConverter(GetType(Tools.Misc.EnumTypeConverter))> _
+        <LocalizedCategory("strCategoryGateway", 4),
+            LocalizedDisplayName("strPropertyNameRDGatewayUseConnectionCredentials"),
+            LocalizedDescription("strPropertyDescriptionRDGatewayUseConnectionCredentials"),
+            TypeConverter(GetType(Tools.Misc.EnumTypeConverter))>
         Public Property RDGatewayUseConnectionCredentials() As Protocol.RDP.RDGatewayUseConnectionCredentials
             Get
                 Return GetInheritedPropertyValue("RDGatewayUseConnectionCredentials", _rdGatewayUseConnectionCredentials)
@@ -281,10 +281,10 @@ Namespace Connection
         End Property
 
         Private _rdGatewayUsername As String = My.Settings.ConDefaultRDGatewayUsername
-        <LocalizedCategory("strCategoryGateway", 4), _
+        <LocalizedCategory("strCategoryGateway", 4),
             LocalizedDisplayName("strPropertyNameRDGatewayUsername"),
             LocalizedDescription("strPropertyDescriptionRDGatewayUsername")>
-        Public Property RDGatewayUserName() As String
+        Public Property RDGatewayUsername() As String
             Get
                 Return GetInheritedPropertyValue("RDGatewayUsername", _rdGatewayUsername).Trim()
             End Get
@@ -294,10 +294,10 @@ Namespace Connection
         End Property
 
         Private _rdGatewayPassword As String = My.Settings.ConDefaultRDGatewayPassword
-        <LocalizedCategory("strCategoryGateway", 4), _
-            LocalizedDisplayName("strPropertyNameRDGatewayPassword"), _
-            LocalizedDescription("strPropertyNameRDGatewayPassword"), _
-            PasswordPropertyText(True)> _
+        <LocalizedCategory("strCategoryGateway", 4),
+            LocalizedDisplayName("strPropertyNameRDGatewayPassword"),
+            LocalizedDescription("strPropertyNameRDGatewayPassword"),
+            PasswordPropertyText(True)>
         Public Property RDGatewayPassword() As String
             Get
                 Return GetInheritedPropertyValue("RDGatewayPassword", _rdGatewayPassword)
@@ -308,9 +308,9 @@ Namespace Connection
         End Property
 
         Private _rdGatewayDomain As String = My.Settings.ConDefaultRDGatewayDomain
-        <LocalizedCategory("strCategoryGateway", 4), _
-            LocalizedDisplayName("strPropertyNameRDGatewayDomain"), _
-            LocalizedDescription("strPropertyDescriptionRDGatewayDomain")> _
+        <LocalizedCategory("strCategoryGateway", 4),
+            LocalizedDisplayName("strPropertyNameRDGatewayDomain"),
+            LocalizedDescription("strPropertyDescriptionRDGatewayDomain")>
         Public Property RDGatewayDomain() As String
             Get
                 Return GetInheritedPropertyValue("RDGatewayDomain", _rdGatewayDomain).Trim()
@@ -322,10 +322,10 @@ Namespace Connection
 #End Region
 #Region "Appearance"
         Private _resolution As Protocol.RDP.RDPResolutions = Tools.Misc.StringToEnum(GetType(Protocol.RDP.RDPResolutions), My.Settings.ConDefaultResolution)
-        <LocalizedCategory("strCategoryAppearance", 5), _
-            LocalizedDisplayName("strPropertyNameResolution"), _
-            LocalizedDescription("strPropertyDescriptionResolution"), _
-            TypeConverter(GetType(Tools.Misc.EnumTypeConverter))> _
+        <LocalizedCategory("strCategoryAppearance", 5),
+            LocalizedDisplayName("strPropertyNameResolution"),
+            LocalizedDescription("strPropertyDescriptionResolution"),
+            TypeConverter(GetType(Tools.Misc.EnumTypeConverter))>
         Public Property Resolution() As Protocol.RDP.RDPResolutions
             Get
                 Return GetInheritedPropertyValue("Resolution", _resolution)
@@ -336,10 +336,10 @@ Namespace Connection
         End Property
 
         Private _automaticResize As Boolean = My.Settings.ConDefaultAutomaticResize
-        <LocalizedCategory("strCategoryAppearance", 5), _
-            LocalizedDisplayName("strPropertyNameAutomaticResize"), _
-            LocalizedDescription("strPropertyDescriptionAutomaticResize"), _
-            TypeConverter(GetType(Tools.Misc.YesNoTypeConverter))> _
+        <LocalizedCategory("strCategoryAppearance", 5),
+            LocalizedDisplayName("strPropertyNameAutomaticResize"),
+            LocalizedDescription("strPropertyDescriptionAutomaticResize"),
+            TypeConverter(GetType(Tools.Misc.YesNoTypeConverter))>
         Public Property AutomaticResize() As Boolean
             Get
                 Return GetInheritedPropertyValue("AutomaticResize", _automaticResize)
@@ -350,10 +350,10 @@ Namespace Connection
         End Property
 
         Private _colors As Protocol.RDP.RDPColors = Tools.Misc.StringToEnum(GetType(Protocol.RDP.RDPColors), My.Settings.ConDefaultColors)
-        <LocalizedCategory("strCategoryAppearance", 5), _
-            LocalizedDisplayName("strPropertyNameColors"), _
-            LocalizedDescription("strPropertyDescriptionColors"), _
-            TypeConverter(GetType(Tools.Misc.EnumTypeConverter))> _
+        <LocalizedCategory("strCategoryAppearance", 5),
+            LocalizedDisplayName("strPropertyNameColors"),
+            LocalizedDescription("strPropertyDescriptionColors"),
+            TypeConverter(GetType(Tools.Misc.EnumTypeConverter))>
         Public Property Colors() As Protocol.RDP.RDPColors
             Get
                 Return GetInheritedPropertyValue("Colors", _colors)
@@ -364,10 +364,10 @@ Namespace Connection
         End Property
 
         Private _cacheBitmaps As Boolean = My.Settings.ConDefaultCacheBitmaps
-        <LocalizedCategory("strCategoryAppearance", 5), _
-            LocalizedDisplayName("strPropertyNameCacheBitmaps"), _
-            LocalizedDescription("strPropertyDescriptionCacheBitmaps"), _
-            TypeConverter(GetType(Tools.Misc.YesNoTypeConverter))> _
+        <LocalizedCategory("strCategoryAppearance", 5),
+            LocalizedDisplayName("strPropertyNameCacheBitmaps"),
+            LocalizedDescription("strPropertyDescriptionCacheBitmaps"),
+            TypeConverter(GetType(Tools.Misc.YesNoTypeConverter))>
         Public Property CacheBitmaps() As Boolean
             Get
                 Return GetInheritedPropertyValue("CacheBitmaps", _cacheBitmaps)
@@ -378,10 +378,10 @@ Namespace Connection
         End Property
 
         Private _displayWallpaper As Boolean = My.Settings.ConDefaultDisplayWallpaper
-        <LocalizedCategory("strCategoryAppearance", 5), _
-            LocalizedDisplayName("strPropertyNameDisplayWallpaper"), _
-            LocalizedDescription("strPropertyDescriptionDisplayWallpaper"), _
-            TypeConverter(GetType(Tools.Misc.YesNoTypeConverter))> _
+        <LocalizedCategory("strCategoryAppearance", 5),
+            LocalizedDisplayName("strPropertyNameDisplayWallpaper"),
+            LocalizedDescription("strPropertyDescriptionDisplayWallpaper"),
+            TypeConverter(GetType(Tools.Misc.YesNoTypeConverter))>
         Public Property DisplayWallpaper() As Boolean
             Get
                 Return GetInheritedPropertyValue("DisplayWallpaper", _displayWallpaper)
@@ -392,10 +392,10 @@ Namespace Connection
         End Property
 
         Private _displayThemes As Boolean = My.Settings.ConDefaultDisplayThemes
-        <LocalizedCategory("strCategoryAppearance", 5), _
-            LocalizedDisplayName("strPropertyNameDisplayThemes"), _
-            LocalizedDescription("strPropertyDescriptionDisplayThemes"), _
-            TypeConverter(GetType(Tools.Misc.YesNoTypeConverter))> _
+        <LocalizedCategory("strCategoryAppearance", 5),
+            LocalizedDisplayName("strPropertyNameDisplayThemes"),
+            LocalizedDescription("strPropertyDescriptionDisplayThemes"),
+            TypeConverter(GetType(Tools.Misc.YesNoTypeConverter))>
         Public Property DisplayThemes() As Boolean
             Get
                 Return GetInheritedPropertyValue("DisplayThemes", _displayThemes)
@@ -406,10 +406,10 @@ Namespace Connection
         End Property
 
         Private _enableFontSmoothing As Boolean = My.Settings.ConDefaultEnableFontSmoothing
-        <LocalizedCategory("strCategoryAppearance", 5), _
-            LocalizedDisplayName("strPropertyNameEnableFontSmoothing"), _
-            LocalizedDescription("strPropertyDescriptionEnableFontSmoothing"), _
-            TypeConverter(GetType(Tools.Misc.YesNoTypeConverter))> _
+        <LocalizedCategory("strCategoryAppearance", 5),
+            LocalizedDisplayName("strPropertyNameEnableFontSmoothing"),
+            LocalizedDescription("strPropertyDescriptionEnableFontSmoothing"),
+            TypeConverter(GetType(Tools.Misc.YesNoTypeConverter))>
         Public Property EnableFontSmoothing() As Boolean
             Get
                 Return GetInheritedPropertyValue("EnableFontSmoothing", _enableFontSmoothing)
@@ -420,10 +420,10 @@ Namespace Connection
         End Property
 
         Private _enableDesktopComposition As Boolean = My.Settings.ConDefaultEnableDesktopComposition
-        <LocalizedCategory("strCategoryAppearance", 5), _
-            LocalizedDisplayName("strPropertyNameEnableDesktopComposition"), _
-            LocalizedDescription("strPropertyDescriptionEnableDesktopComposition"), _
-            TypeConverter(GetType(Tools.Misc.YesNoTypeConverter))> _
+        <LocalizedCategory("strCategoryAppearance", 5),
+            LocalizedDisplayName("strPropertyNameEnableDesktopComposition"),
+            LocalizedDescription("strPropertyDescriptionEnableDesktopComposition"),
+            TypeConverter(GetType(Tools.Misc.YesNoTypeConverter))>
         Public Property EnableDesktopComposition() As Boolean
             Get
                 Return GetInheritedPropertyValue("EnableDesktopComposition", _enableDesktopComposition)
@@ -435,10 +435,10 @@ Namespace Connection
 #End Region
 #Region "Redirect"
         Private _redirectKeys As Boolean = My.Settings.ConDefaultRedirectKeys
-        <LocalizedCategory("strCategoryRedirect", 6), _
-            LocalizedDisplayName("strPropertyNameRedirectKeys"), _
-            LocalizedDescription("strPropertyDescriptionRedirectKeys"), _
-            TypeConverter(GetType(Tools.Misc.YesNoTypeConverter))> _
+        <LocalizedCategory("strCategoryRedirect", 6),
+            LocalizedDisplayName("strPropertyNameRedirectKeys"),
+            LocalizedDescription("strPropertyDescriptionRedirectKeys"),
+            TypeConverter(GetType(Tools.Misc.YesNoTypeConverter))>
         Public Property RedirectKeys() As Boolean
             Get
                 Return GetInheritedPropertyValue("RedirectKeys", _redirectKeys)
@@ -449,10 +449,10 @@ Namespace Connection
         End Property
 
         Private _redirectDiskDrives As Boolean = My.Settings.ConDefaultRedirectDiskDrives
-        <LocalizedCategory("strCategoryRedirect", 6), _
-            LocalizedDisplayName("strPropertyNameRedirectDrives"), _
-            LocalizedDescription("strPropertyDescriptionRedirectDrives"), _
-            TypeConverter(GetType(Tools.Misc.YesNoTypeConverter))> _
+        <LocalizedCategory("strCategoryRedirect", 6),
+            LocalizedDisplayName("strPropertyNameRedirectDrives"),
+            LocalizedDescription("strPropertyDescriptionRedirectDrives"),
+            TypeConverter(GetType(Tools.Misc.YesNoTypeConverter))>
         Public Property RedirectDiskDrives() As Boolean
             Get
                 Return GetInheritedPropertyValue("RedirectDiskDrives", _redirectDiskDrives)
@@ -463,10 +463,10 @@ Namespace Connection
         End Property
 
         Private _redirectPrinters As Boolean = My.Settings.ConDefaultRedirectPrinters
-        <LocalizedCategory("strCategoryRedirect", 6), _
-            LocalizedDisplayName("strPropertyNameRedirectPrinters"), _
-            LocalizedDescription("strPropertyDescriptionRedirectPrinters"), _
-            TypeConverter(GetType(Tools.Misc.YesNoTypeConverter))> _
+        <LocalizedCategory("strCategoryRedirect", 6),
+            LocalizedDisplayName("strPropertyNameRedirectPrinters"),
+            LocalizedDescription("strPropertyDescriptionRedirectPrinters"),
+            TypeConverter(GetType(Tools.Misc.YesNoTypeConverter))>
         Public Property RedirectPrinters() As Boolean
             Get
                 Return GetInheritedPropertyValue("RedirectPrinters", _redirectPrinters)
@@ -477,10 +477,10 @@ Namespace Connection
         End Property
 
         Private _redirectPorts As Boolean = My.Settings.ConDefaultRedirectPorts
-        <LocalizedCategory("strCategoryRedirect", 6), _
-            LocalizedDisplayName("strPropertyNameRedirectPorts"), _
-            LocalizedDescription("strPropertyDescriptionRedirectPorts"), _
-            TypeConverter(GetType(Tools.Misc.YesNoTypeConverter))> _
+        <LocalizedCategory("strCategoryRedirect", 6),
+            LocalizedDisplayName("strPropertyNameRedirectPorts"),
+            LocalizedDescription("strPropertyDescriptionRedirectPorts"),
+            TypeConverter(GetType(Tools.Misc.YesNoTypeConverter))>
         Public Property RedirectPorts() As Boolean
             Get
                 Return GetInheritedPropertyValue("RedirectPorts", _redirectPorts)
@@ -491,11 +491,11 @@ Namespace Connection
         End Property
 
         Private _redirectSmartCards As Boolean = My.Settings.ConDefaultRedirectSmartCards
-        <LocalizedCategory("strCategoryRedirect", 6), _
-            LocalizedDisplayName("strPropertyNameRedirectSmartCards"), _
+        <LocalizedCategory("strCategoryRedirect", 6),
+            LocalizedDisplayName("strPropertyNameRedirectSmartCards"),
             LocalizedDescription("strPropertyDescriptionRedirectSmartCards"),
             TypeConverter(GetType(Tools.Misc.YesNoTypeConverter))>
-        Public Property RedirectSmartcards() As Boolean
+        Public Property RedirectSmartCards() As Boolean
             Get
                 Return GetInheritedPropertyValue("RedirectSmartCards", _redirectSmartCards)
             End Get
@@ -505,10 +505,10 @@ Namespace Connection
         End Property
 
         Private _redirectSound As Protocol.RDP.RDPSounds = Tools.Misc.StringToEnum(GetType(Protocol.RDP.RDPSounds), My.Settings.ConDefaultRedirectSound)
-        <LocalizedCategory("strCategoryRedirect", 6), _
-            LocalizedDisplayName("strPropertyNameRedirectSounds"), _
-            LocalizedDescription("strPropertyDescriptionRedirectSounds"), _
-            TypeConverter(GetType(Tools.Misc.EnumTypeConverter))> _
+        <LocalizedCategory("strCategoryRedirect", 6),
+            LocalizedDisplayName("strPropertyNameRedirectSounds"),
+            LocalizedDescription("strPropertyDescriptionRedirectSounds"),
+            TypeConverter(GetType(Tools.Misc.EnumTypeConverter))>
         Public Property RedirectSound() As Protocol.RDP.RDPSounds
             Get
                 Return GetInheritedPropertyValue("RedirectSound", _redirectSound)
@@ -520,10 +520,10 @@ Namespace Connection
 #End Region
 #Region "Misc"
         Private _preExtApp As String = My.Settings.ConDefaultPreExtApp
-        <LocalizedCategory("strCategoryMiscellaneous", 7), _
-            LocalizedDisplayName("strPropertyNameExternalToolBefore"), _
-            LocalizedDescription("strPropertyDescriptionExternalToolBefore"), _
-            TypeConverter(GetType(Tools.ExternalToolsTypeConverter))> _
+        <LocalizedCategory("strCategoryMiscellaneous", 7),
+            LocalizedDisplayName("strPropertyNameExternalToolBefore"),
+            LocalizedDescription("strPropertyDescriptionExternalToolBefore"),
+            TypeConverter(GetType(Tools.ExternalToolsTypeConverter))>
         Public Overridable Property PreExtApp() As String
             Get
                 Return GetInheritedPropertyValue("PreExtApp", _preExtApp)
@@ -534,10 +534,10 @@ Namespace Connection
         End Property
 
         Private _postExtApp As String = My.Settings.ConDefaultPostExtApp
-        <LocalizedCategory("strCategoryMiscellaneous", 7), _
-            LocalizedDisplayName("strPropertyNameExternalToolAfter"), _
-            LocalizedDescription("strPropertyDescriptionExternalToolAfter"), _
-            TypeConverter(GetType(Tools.ExternalToolsTypeConverter))> _
+        <LocalizedCategory("strCategoryMiscellaneous", 7),
+            LocalizedDisplayName("strPropertyNameExternalToolAfter"),
+            LocalizedDescription("strPropertyDescriptionExternalToolAfter"),
+            TypeConverter(GetType(Tools.ExternalToolsTypeConverter))>
         Public Overridable Property PostExtApp() As String
             Get
                 Return GetInheritedPropertyValue("PostExtApp", _postExtApp)
@@ -548,9 +548,9 @@ Namespace Connection
         End Property
 
         Private _macAddress As String = My.Settings.ConDefaultMacAddress
-        <LocalizedCategory("strCategoryMiscellaneous", 7), _
-            LocalizedDisplayName("strPropertyNameMACAddress"), _
-            LocalizedDescription("strPropertyDescriptionMACAddress")> _
+        <LocalizedCategory("strCategoryMiscellaneous", 7),
+            LocalizedDisplayName("strPropertyNameMACAddress"),
+            LocalizedDescription("strPropertyDescriptionMACAddress")>
         Public Overridable Property MacAddress() As String
             Get
                 Return GetInheritedPropertyValue("MacAddress", _macAddress)
@@ -561,9 +561,9 @@ Namespace Connection
         End Property
 
         Private _userField As String = My.Settings.ConDefaultUserField
-        <LocalizedCategory("strCategoryMiscellaneous", 7), _
-            LocalizedDisplayName("strPropertyNameUser1"), _
-            LocalizedDescription("strPropertyDescriptionUser1")> _
+        <LocalizedCategory("strCategoryMiscellaneous", 7),
+            LocalizedDisplayName("strPropertyNameUser1"),
+            LocalizedDescription("strPropertyDescriptionUser1")>
         Public Overridable Property UserField() As String
             Get
                 Return GetInheritedPropertyValue("UserField", _userField)
@@ -575,11 +575,11 @@ Namespace Connection
 #End Region
 #Region "VNC"
         Private _vncCompression As Protocol.VNC.Compression = Tools.Misc.StringToEnum(GetType(Protocol.VNC.Compression), My.Settings.ConDefaultVNCCompression)
-        <LocalizedCategory("strCategoryAppearance", 5), _
-           Browsable(False), _
-            LocalizedDisplayName("strPropertyNameCompression"), _
-            LocalizedDescription("strPropertyDescriptionCompression"), _
-           TypeConverter(GetType(Tools.Misc.EnumTypeConverter))> _
+        <LocalizedCategory("strCategoryAppearance", 5),
+           Browsable(False),
+            LocalizedDisplayName("strPropertyNameCompression"),
+            LocalizedDescription("strPropertyDescriptionCompression"),
+           TypeConverter(GetType(Tools.Misc.EnumTypeConverter))>
         Public Property VNCCompression() As Protocol.VNC.Compression
             Get
                 Return GetInheritedPropertyValue("VNCCompression", _vncCompression)
@@ -590,11 +590,11 @@ Namespace Connection
         End Property
 
         Private _vncEncoding As Protocol.VNC.Encoding = Tools.Misc.StringToEnum(GetType(Protocol.VNC.Encoding), My.Settings.ConDefaultVNCEncoding)
-        <LocalizedCategory("strCategoryAppearance", 5), _
-            Browsable(False), _
-            LocalizedDisplayName("strPropertyNameEncoding"), _
-            LocalizedDescription("strPropertyDescriptionEncoding"), _
-            TypeConverter(GetType(Tools.Misc.EnumTypeConverter))> _
+        <LocalizedCategory("strCategoryAppearance", 5),
+            Browsable(False),
+            LocalizedDisplayName("strPropertyNameEncoding"),
+            LocalizedDescription("strPropertyDescriptionEncoding"),
+            TypeConverter(GetType(Tools.Misc.EnumTypeConverter))>
         Public Property VNCEncoding() As Protocol.VNC.Encoding
             Get
                 Return GetInheritedPropertyValue("VNCEncoding", _vncEncoding)
@@ -606,11 +606,11 @@ Namespace Connection
 
 
         Private _vncAuthMode As Protocol.VNC.AuthMode = Tools.Misc.StringToEnum(GetType(Protocol.VNC.AuthMode), My.Settings.ConDefaultVNCAuthMode)
-        <LocalizedCategory("strCategoryConnection", 2), _
-            Browsable(False), _
-            LocalizedDisplayName("strPropertyNameAuthenticationMode"), _
-            LocalizedDescription("strPropertyDescriptionAuthenticationMode"), _
-            TypeConverter(GetType(Tools.Misc.EnumTypeConverter))> _
+        <LocalizedCategory("strCategoryConnection", 2),
+            Browsable(False),
+            LocalizedDisplayName("strPropertyNameAuthenticationMode"),
+            LocalizedDescription("strPropertyDescriptionAuthenticationMode"),
+            TypeConverter(GetType(Tools.Misc.EnumTypeConverter))>
         Public Property VNCAuthMode() As Protocol.VNC.AuthMode
             Get
                 Return GetInheritedPropertyValue("VNCAuthMode", _vncAuthMode)
@@ -621,11 +621,11 @@ Namespace Connection
         End Property
 
         Private _vncProxyType As Protocol.VNC.ProxyType = Tools.Misc.StringToEnum(GetType(Protocol.VNC.ProxyType), My.Settings.ConDefaultVNCProxyType)
-        <LocalizedCategory("strCategoryMiscellaneous", 7), _
-           Browsable(False), _
-            LocalizedDisplayName("strPropertyNameVNCProxyType"), _
-            LocalizedDescription("strPropertyDescriptionVNCProxyType"), _
-           TypeConverter(GetType(Tools.Misc.EnumTypeConverter))> _
+        <LocalizedCategory("strCategoryMiscellaneous", 7),
+           Browsable(False),
+            LocalizedDisplayName("strPropertyNameVNCProxyType"),
+            LocalizedDescription("strPropertyDescriptionVNCProxyType"),
+           TypeConverter(GetType(Tools.Misc.EnumTypeConverter))>
         Public Property VNCProxyType() As Protocol.VNC.ProxyType
             Get
                 Return GetInheritedPropertyValue("VNCProxyType", _vncProxyType)
@@ -636,10 +636,10 @@ Namespace Connection
         End Property
 
         Private _vncProxyIP As String = My.Settings.ConDefaultVNCProxyIP
-        <LocalizedCategory("strCategoryMiscellaneous", 7), _
-            Browsable(False), _
-            LocalizedDisplayName("strPropertyNameVNCProxyAddress"), _
-            LocalizedDescription("strPropertyDescriptionVNCProxyAddress")> _
+        <LocalizedCategory("strCategoryMiscellaneous", 7),
+            Browsable(False),
+            LocalizedDisplayName("strPropertyNameVNCProxyAddress"),
+            LocalizedDescription("strPropertyDescriptionVNCProxyAddress")>
         Public Property VNCProxyIP() As String
             Get
                 Return GetInheritedPropertyValue("VNCProxyIP", _vncProxyIP)
@@ -650,10 +650,10 @@ Namespace Connection
         End Property
 
         Private _vncProxyPort As Integer = My.Settings.ConDefaultVNCProxyPort
-        <LocalizedCategory("strCategoryMiscellaneous", 7), _
-            Browsable(False), _
-            LocalizedDisplayName("strPropertyNameVNCProxyPort"), _
-            LocalizedDescription("strPropertyDescriptionVNCProxyPort")> _
+        <LocalizedCategory("strCategoryMiscellaneous", 7),
+            Browsable(False),
+            LocalizedDisplayName("strPropertyNameVNCProxyPort"),
+            LocalizedDescription("strPropertyDescriptionVNCProxyPort")>
         Public Property VNCProxyPort() As Integer
             Get
                 Return GetInheritedPropertyValue("VNCProxyPort", _vncProxyPort)
@@ -664,11 +664,11 @@ Namespace Connection
         End Property
 
         Private _vncProxyUsername As String = My.Settings.ConDefaultVNCProxyUsername
-        <LocalizedCategory("strCategoryMiscellaneous", 7), _
-            Browsable(False), _
+        <LocalizedCategory("strCategoryMiscellaneous", 7),
+            Browsable(False),
             LocalizedDisplayName("strPropertyNameVNCProxyUsername"),
             LocalizedDescription("strPropertyDescriptionVNCProxyUsername")>
-        Public Property VNCProxyUserName() As String
+        Public Property VNCProxyUsername() As String
             Get
                 Return GetInheritedPropertyValue("VNCProxyUsername", _vncProxyUsername)
             End Get

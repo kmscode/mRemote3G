@@ -63,8 +63,8 @@ Namespace Config.Putty
             With sessionInfo
                 .PuttySession = sessionName
                 .Name = sessionName
-                .HostName = sessionFileReader.GetValue("HostName")
-                .UserName = sessionFileReader.GetValue("UserName")
+                .Hostname = sessionFileReader.GetValue("HostName")
+                .Username = sessionFileReader.GetValue("UserName")
                 Dim protocol As String = sessionFileReader.GetValue("Protocol")
                 If protocol Is Nothing Then protocol = "ssh"
                 Select Case protocol.ToLowerInvariant()

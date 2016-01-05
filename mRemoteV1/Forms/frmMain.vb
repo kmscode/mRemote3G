@@ -221,25 +221,25 @@ Public Class frmMain
     Public Sub ApplyThemes()
         With ThemeManager.ActiveTheme
             pnlDock.DockBackColor = .WindowBackgroundColor
-            tsContainer.BackColor = .ToolBarBackgroundColor
-            tsContainer.ForeColor = .ToolBarTextColor
-            tsContainer.TopToolStripPanel.BackColor = .ToolBarBackgroundColor
-            tsContainer.TopToolStripPanel.ForeColor = .ToolBarTextColor
-            tsContainer.BottomToolStripPanel.BackColor = .ToolBarBackgroundColor
-            tsContainer.BottomToolStripPanel.ForeColor = .ToolBarTextColor
-            tsContainer.LeftToolStripPanel.BackColor = .ToolBarBackgroundColor
-            tsContainer.LeftToolStripPanel.ForeColor = .ToolBarTextColor
-            tsContainer.RightToolStripPanel.BackColor = .ToolBarBackgroundColor
-            tsContainer.RightToolStripPanel.ForeColor = .ToolBarTextColor
-            tsContainer.ContentPanel.BackColor = .ToolBarBackgroundColor
-            tsContainer.ContentPanel.ForeColor = .ToolBarTextColor
-            msMain.BackColor = .ToolBarBackgroundColor
-            msMain.ForeColor = .ToolBarTextColor
+            tsContainer.BackColor = .ToolbarBackgroundColor
+            tsContainer.ForeColor = .ToolbarTextColor
+            tsContainer.TopToolStripPanel.BackColor = .ToolbarBackgroundColor
+            tsContainer.TopToolStripPanel.ForeColor = .ToolbarTextColor
+            tsContainer.BottomToolStripPanel.BackColor = .ToolbarBackgroundColor
+            tsContainer.BottomToolStripPanel.ForeColor = .ToolbarTextColor
+            tsContainer.LeftToolStripPanel.BackColor = .ToolbarBackgroundColor
+            tsContainer.LeftToolStripPanel.ForeColor = .ToolbarTextColor
+            tsContainer.RightToolStripPanel.BackColor = .ToolbarBackgroundColor
+            tsContainer.RightToolStripPanel.ForeColor = .ToolbarTextColor
+            tsContainer.ContentPanel.BackColor = .ToolbarBackgroundColor
+            tsContainer.ContentPanel.ForeColor = .ToolbarTextColor
+            msMain.BackColor = .ToolbarBackgroundColor
+            msMain.ForeColor = .ToolbarTextColor
             ApplyMenuColors(msMain.Items)
-            tsExternalTools.BackColor = .ToolBarBackgroundColor
-            tsExternalTools.ForeColor = .ToolBarTextColor
-            tsQuickConnect.BackColor = .ToolBarBackgroundColor
-            tsQuickConnect.ForeColor = .ToolBarTextColor
+            tsExternalTools.BackColor = .ToolbarBackgroundColor
+            tsExternalTools.ForeColor = .ToolbarTextColor
+            tsQuickConnect.BackColor = .ToolbarBackgroundColor
+            tsQuickConnect.ForeColor = .ToolbarTextColor
         End With
     End Sub
 
@@ -425,7 +425,7 @@ Public Class frmMain
                 mMenFileDelete.Text = My.Language.strMenuDeleteConnection
                 mMenFileRename.Text = My.Language.strMenuRenameConnection
                 mMenFileDuplicate.Text = My.Language.strMenuDuplicateConnection
-            Case Tree.Node.Type.Puttyroot, Tree.Node.Type.PuttySession
+            Case Tree.Node.Type.PuttyRoot, Tree.Node.Type.PuttySession
                 mMenFileNewConnection.Enabled = False
                 mMenFileNewFolder.Enabled = False
                 mMenFileDelete.Enabled = False

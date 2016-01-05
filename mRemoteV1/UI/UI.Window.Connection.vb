@@ -253,12 +253,12 @@ Namespace UI
                             nTab.Title &= conI.Domain
                         End If
 
-                        If conI.UserName <> "" Then
+                        If conI.Username <> "" Then
                             If conI.Domain <> "" Then
                                 nTab.Title &= "\"
                             End If
 
-                            nTab.Title &= conI.UserName
+                            nTab.Title &= conI.Username
                         End If
 
                         nTab.Title &= ")"
@@ -623,8 +623,8 @@ Namespace UI
 
                     Dim conI As mRemoteNG.Connection.Info = IC.Info
 
-                    Windows.sshtransferForm.HostName = conI.HostName
-                    Windows.sshtransferForm.UserName = conI.UserName
+                    Windows.sshtransferForm.Hostname = conI.Hostname
+                    Windows.sshtransferForm.Username = conI.Username
                     Windows.sshtransferForm.Password = conI.Password
                     Windows.sshtransferForm.Port = conI.Port
                 Catch ex As Exception

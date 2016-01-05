@@ -59,7 +59,7 @@ Namespace Config.Import
             If Tree.Node.GetNodeType(parentTreeNode) = Tree.Node.Type.Container Then
                 containerInfo.Parent = parentTreeNode.Tag
             Else
-                connectionInfo.Inherit.TurnoffInheritanceCompletely()
+                connectionInfo.Inherit.TurnOffInheritanceCompletely()
             End If
 
             treeNode.Name = name
@@ -129,14 +129,14 @@ Namespace Config.Import
                     Throw New FileFormatException(String.Format("Unrecognized protocol ({0}).", protocol))
             End Select
 
-            connectionInfo.HostName = connectionInfoNode.SelectSingleNode("./host").InnerText
+            connectionInfo.Hostname = connectionInfoNode.SelectSingleNode("./host").InnerText
             connectionInfo.Port = connectionInfoNode.SelectSingleNode("./port").InnerText
             connectionInfo.PuttySession = connectionInfoNode.SelectSingleNode("./session").InnerText
             ' ./commandline
             connectionInfo.Description = connectionInfoNode.SelectSingleNode("./description").InnerText
 
             Dim loginNode As XmlNode = xmlNode.SelectSingleNode("./login")
-            connectionInfo.UserName = loginNode.SelectSingleNode("login").InnerText
+            connectionInfo.Username = loginNode.SelectSingleNode("login").InnerText
             connectionInfo.Password = loginNode.SelectSingleNode("password").InnerText
             ' ./prompt
 

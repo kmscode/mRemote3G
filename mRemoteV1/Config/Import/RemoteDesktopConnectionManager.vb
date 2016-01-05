@@ -46,7 +46,7 @@ Namespace Config.Import
             If Tree.Node.GetNodeType(parentTreeNode) = Tree.Node.Type.Container Then
                 containerInfo.Parent = parentTreeNode.Tag
             Else
-                connectionInfo.Inherit.TurnoffInheritanceCompletely()
+                connectionInfo.Inherit.TurnOffInheritanceCompletely()
             End If
 
             treeNode.Name = name
@@ -102,11 +102,11 @@ Namespace Config.Import
 
             connectionInfo.Name = displayName
             connectionInfo.Description = xmlNode.SelectSingleNode("./comment").InnerText
-            connectionInfo.HostName = name
+            connectionInfo.Hostname = name
 
             Dim logonCredentialsNode As XmlNode = xmlNode.SelectSingleNode("./logonCredentials")
             If logonCredentialsNode.Attributes("inherit").Value = "None" Then
-                connectionInfo.UserName = logonCredentialsNode.SelectSingleNode("userName").InnerText
+                connectionInfo.Username = logonCredentialsNode.SelectSingleNode("userName").InnerText
 
                 Dim passwordNode As XmlNode = logonCredentialsNode.SelectSingleNode("./password")
                 If passwordNode.Attributes("storeAsClearText").Value = "True" Then
@@ -141,8 +141,8 @@ Namespace Config.Import
                     connectionInfo.RDGatewayUsageMethod = RDP.RDGatewayUsageMethod.Never
                 End If
 
-                connectionInfo.RDGatewayHostName = gatewaySettingsNode.SelectSingleNode("./hostName").InnerText
-                connectionInfo.RDGatewayUserName = gatewaySettingsNode.SelectSingleNode("./userName").InnerText
+                connectionInfo.RDGatewayHostname = gatewaySettingsNode.SelectSingleNode("./hostName").InnerText
+                connectionInfo.RDGatewayUsername = gatewaySettingsNode.SelectSingleNode("./userName").InnerText
 
                 Dim passwordNode As XmlNode = logonCredentialsNode.SelectSingleNode("./password")
                 If passwordNode.Attributes("storeAsClearText").Value = "True" Then
@@ -213,7 +213,7 @@ Namespace Config.Import
                 connectionInfo.RedirectDiskDrives = localResourcesNode.SelectSingleNode("./redirectDrives").InnerText
                 connectionInfo.RedirectPorts = localResourcesNode.SelectSingleNode("./redirectPorts").InnerText
                 connectionInfo.RedirectPrinters = localResourcesNode.SelectSingleNode("./redirectPrinters").InnerText
-                connectionInfo.RedirectSmartcards = localResourcesNode.SelectSingleNode("./redirectSmartCards").InnerText
+                connectionInfo.RedirectSmartCards = localResourcesNode.SelectSingleNode("./redirectSmartCards").InnerText
             Else
                 connectionInfo.Inherit.RedirectSound = True
                 connectionInfo.Inherit.RedirectKeys = True

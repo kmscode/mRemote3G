@@ -92,7 +92,7 @@ Namespace Forms
             End Set
         End Property
 
-        Public Property IncludeUserName As Boolean
+        Public Property IncludeUsername As Boolean
             Get
                 Return chkUsername.Checked
             End Get

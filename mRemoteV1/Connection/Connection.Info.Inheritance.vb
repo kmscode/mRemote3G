@@ -363,7 +363,7 @@ Namespace Connection
                 SetAllValues(True)
             End Sub
 
-            Public Sub TurnoffInheritanceCompletely()
+            Public Sub TurnOffInheritanceCompletely()
                 SetAllValues(False)
             End Sub
 #End Region

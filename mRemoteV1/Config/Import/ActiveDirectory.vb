@@ -27,7 +27,7 @@ Namespace Config.Import
                 If Tree.Node.GetNodeType(parentTreeNode) = Tree.Node.Type.Container Then
                     containerInfo.Parent = parentTreeNode.Tag
                 Else
-                    containerInfo.ConnectionInfo.Inherit.TurnoffInheritanceCompletely()
+                    containerInfo.ConnectionInfo.Inherit.TurnOffInheritanceCompletely()
                 End If
 
                 treeNode.Text = name
@@ -79,7 +79,7 @@ Namespace Config.Import
                     End If
                     connectionInfo.Inherit = inheritanceInfo
                     connectionInfo.Name = strDisplayName
-                    connectionInfo.HostName = strHostName
+                    connectionInfo.Hostname = strHostName
                     connectionInfo.Description = strDescription
                     connectionInfo.TreeNode = treeNode
                     treeNode.Name = strDisplayName

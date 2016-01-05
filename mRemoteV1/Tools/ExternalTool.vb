@@ -246,11 +246,11 @@ Namespace Tools
                 Case "name"
                     If ConnectionInfo Is Nothing Then replacement = "" Else replacement = ConnectionInfo.Name
                 Case "hostname"
-                    If ConnectionInfo Is Nothing Then replacement = "" Else replacement = ConnectionInfo.HostName
+                    If ConnectionInfo Is Nothing Then replacement = "" Else replacement = ConnectionInfo.Hostname
                 Case "port"
                     If ConnectionInfo Is Nothing Then replacement = "" Else replacement = ConnectionInfo.Port
                 Case "username"
-                    If ConnectionInfo Is Nothing Then replacement = "" Else replacement = ConnectionInfo.UserName
+                    If ConnectionInfo Is Nothing Then replacement = "" Else replacement = ConnectionInfo.Username
                 Case "password"
                     If ConnectionInfo Is Nothing Then replacement = "" Else replacement = ConnectionInfo.Password
                 Case "domain"

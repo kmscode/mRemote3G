@@ -543,8 +543,8 @@ Namespace UI
 
             Private Sub ApplyTheme()
                 With Themes.ThemeManager.ActiveTheme
-                    pGrid.BackColor = .ToolBarBackgroundColor
-                    pGrid.ForeColor = .ToolBarTextColor
+                    pGrid.BackColor = .ToolbarBackgroundColor
+                    pGrid.ForeColor = .ToolbarTextColor
                     pGrid.ViewBackColor = .ConfigPanelBackgroundColor
                     pGrid.ViewForeColor = .ConfigPanelTextColor
                     pGrid.LineColor = .ConfigPanelGridLineColor
@@ -630,7 +630,7 @@ Namespace UI
                                 If My.Settings.SetHostnameLikeDisplayName And TypeOf Me.pGrid.SelectedObject Is mRemoteNG.Connection.Info Then
                                     Dim connectionInfo As mRemoteNG.Connection.Info = DirectCast(Me.pGrid.SelectedObject, mRemoteNG.Connection.Info)
                                     If Not String.IsNullOrEmpty(connectionInfo.Name) Then
-                                        connectionInfo.HostName = connectionInfo.Name
+                                        connectionInfo.Hostname = connectionInfo.Name
                                     End If
                                 End If
                             Case My.Language.strPropertyNameIcon
@@ -1470,7 +1470,7 @@ Namespace UI
                     End If
 
                     Me.btnHostStatus.Tag = "checking"
-                    HostName = TryCast(ConnectionInfo, mRemoteNG.Connection.Info).HostName
+                    HostName = TryCast(ConnectionInfo, mRemoteNG.Connection.Info).Hostname
                     pThread = New Threading.Thread(AddressOf CheckHostAlive)
                     pThread.SetApartmentState(Threading.ApartmentState.STA)
                     pThread.IsBackground = True

@@ -67,12 +67,12 @@ Namespace UI
 
             Public Sub ApplyTheme()
                 With Themes.ThemeManager.ActiveTheme
-                    msMain.BackColor = .ToolBarBackgroundColor
-                    msMain.ForeColor = .ToolBarTextColor
+                    msMain.BackColor = .ToolbarBackgroundColor
+                    msMain.ForeColor = .ToolbarTextColor
                     tvConnections.BackColor = .ConnectionsPanelBackgroundColor
                     tvConnections.ForeColor = .ConnectionsPanelTextColor
                     tvConnections.LineColor = .ConnectionsPanelTreeLineColor
-                    BackColor = .ToolBarBackgroundColor
+                    BackColor = .ToolbarBackgroundColor
                     txtSearch.BackColor = .SearchBoxBackgroundColor
                     txtSearch.ForeColor = .SearchBoxTextPromptColor
                 End With
@@ -137,7 +137,7 @@ Namespace UI
                             Windows.configForm.SetPropertyGridObject(e.Node.Tag)
                         Case mRemoteNG.Tree.Node.Type.Container
                             Windows.configForm.SetPropertyGridObject(TryCast(e.Node.Tag, Container.Info).ConnectionInfo)
-                        Case mRemoteNG.Tree.Node.Type.Root, mRemoteNG.Tree.Node.Type.Puttyroot
+                        Case mRemoteNG.Tree.Node.Type.Root, mRemoteNG.Tree.Node.Type.PuttyRoot
                             Windows.configForm.SetPropertyGridObject(e.Node.Tag)
                         Case Else
                             Exit Sub
@@ -283,7 +283,7 @@ Namespace UI
                             cMenTreeDelete.Enabled = False
                             cMenTreeMoveUp.Enabled = False
                             cMenTreeMoveDown.Enabled = False
-                        Case mRemoteNG.Tree.Node.Type.Puttyroot
+                        Case mRemoteNG.Tree.Node.Type.PuttyRoot
                             cMenTreeAddConnection.Enabled = False
                             cMenTreeAddFolder.Enabled = False
                             cMenTreeConnect.Enabled = False
@@ -577,7 +577,7 @@ Namespace UI
 
                     Dim newConnectionInfo As New mRemoteNG.Connection.Info()
                     If mRemoteNG.Tree.Node.GetNodeType(containerNode) = mRemoteNG.Tree.Node.Type.Root Then
-                        newConnectionInfo.Inherit.TurnoffInheritanceCompletely()
+                        newConnectionInfo.Inherit.TurnOffInheritanceCompletely()
                     Else
                         newConnectionInfo.Parent = containerNode.Tag
                     End If
@@ -621,7 +621,7 @@ Namespace UI
                     If mRemoteNG.Tree.Node.GetNodeType(parentNode) = mRemoteNG.Tree.Node.Type.Container Then
                         newContainerInfo.Parent = parentNode.Tag
                     Else
-                        newContainerInfo.ConnectionInfo.Inherit.TurnoffInheritanceCompletely()
+                        newContainerInfo.ConnectionInfo.Inherit.TurnOffInheritanceCompletely()
                     End If
 
                     ContainerList.Add(newContainerInfo)
@@ -666,8 +666,8 @@ Namespace UI
 
                     Dim conI As mRemoteNG.Connection.Info = mRemoteNG.Tree.Node.SelectedNode.Tag
 
-                    Windows.sshtransferForm.HostName = conI.HostName
-                    Windows.sshtransferForm.UserName = conI.UserName
+                    Windows.sshtransferForm.Hostname = conI.Hostname
+                    Windows.sshtransferForm.Username = conI.Username
                     Windows.sshtransferForm.Password = conI.Password
                     Windows.sshtransferForm.Port = conI.Port
                 Catch ex As Exception

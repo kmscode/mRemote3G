@@ -107,9 +107,9 @@ Namespace Themes
         Private _toolbarBackgroundColor As Color = SystemColors.Control
         <LocalizedCategory("strThemeCategoryGeneral", 1), _
             Browsable(False), _
-            LocalizedDisplayName("strThemeNameToolbarBackgroundColor"),
-            LocalizedDescription("strThemeDescriptionToolbarBackgroundColor")>
-        Public Property ToolBarBackgroundColor() As Color
+            LocalizedDisplayName("strThemeNameToolbarBackgroundColor"), _
+            LocalizedDescription("strThemeDescriptionToolbarBackgroundColor")> _
+        Public Property ToolbarBackgroundColor() As Color
             Get
                 Return _toolbarBackgroundColor
             End Get
@@ -123,9 +123,9 @@ Namespace Themes
         Private _toolbarTextColor As Color = SystemColors.ControlText
         <LocalizedCategory("strThemeCategoryGeneral", 1), _
             Browsable(False), _
-            LocalizedDisplayName("strThemeNameToolbarTextColor"),
-            LocalizedDescription("strThemeDescriptionToolbarTextColor")>
-        Public Property ToolBarTextColor() As Color
+            LocalizedDisplayName("strThemeNameToolbarTextColor"), _
+            LocalizedDescription("strThemeDescriptionToolbarTextColor")> _
+        Public Property ToolbarTextColor() As Color
             Get
                 Return _toolbarTextColor
             End Get
