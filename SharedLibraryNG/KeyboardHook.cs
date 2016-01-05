@@ -131,7 +131,11 @@ namespace SharedLibraryNG
 
             var hook = Win32.NativeMethods.SetWindowsHookEx(Win32.WH_KEYBOARD_LL, LowLevelKeyboardProcStaticDelegate, Win32.NativeMethods.GetModuleHandle(curModule.ModuleName), 0);
             if (hook == IntPtr.Zero)
-                throw new Win32Exception(Marshal.GetLastWin32Error());
+            {
+                var e = Marshal.GetLastWin32Error();
+                logger.Log.WarnFormat("hook == IntPtr.Zero: {0}", e.ToString());
+                throw new Win32Exception(e);
+            }
 
             _hook = hook;
         }
@@ -191,7 +195,10 @@ namespace SharedLibraryNG
                         };
 
                         if (!NativeMethods.PostMessage(notificationEntry.getWinHdl(), HookKeyMsg, wParam, lParam))
+                        {
+                            logger.Log.WarnFormat("Post Message Failed....");
                             throw new Win32Exception(Marshal.GetLastWin32Error());
+                        }
 
                         if (notificationEntry.Block) result = 1;
                     }
@@ -200,6 +207,7 @@ namespace SharedLibraryNG
                 {
                     if (e.NativeErrorCode != 0)
                     {
+                        logger.Log.WarnFormat("Post Message Failed: {0}", e.ToString());
                         throw;
                     }
                 }
@@ -213,6 +221,7 @@ namespace SharedLibraryNG
             if (!Win32.NativeMethods.GetGUIThreadInfo(0, guiThreadInfo))
             {
                 var except = Marshal.GetLastWin32Error();
+                logger.Log.WarnFormat("GetFocus failed: {0}", except.ToString());
                 throw new Win32Exception(except);
             }
 			return Win32.NativeMethods.GetAncestor(guiThreadInfo.getFocus(), Win32.GA_ROOT);
