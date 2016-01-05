@@ -2150,7 +2150,7 @@ mRemoteNG 將立即結束並開始安裝。</value>
     <value>使用 DockPanel Suite by [Weifen Luo]</value>
   </data>
   <data name="strWriteLogFile" xml:space="preserve">
-    <value>寫入日誌檔 (mRemoteNG.log)</value>
+    <value>寫入日誌檔 (mRemote3G.log)</value>
   </data>
   <data name="strXULrunnerPath" xml:space="preserve">
     <value>XULrunner 路徑:</value>

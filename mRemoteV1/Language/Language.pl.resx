@@ -1894,7 +1894,7 @@ mRemoteNG zostanie teraz zamknięty i rozpocznie instalację.</value>
     <value>Ostrzeżenia</value>
   </data>
   <data name="strWriteLogFile" xml:space="preserve">
-    <value>Zapisz plik logu (mRemoteNG.log)</value>
+    <value>Zapisz plik logu (mRemote3G.log)</value>
   </data>
   <data name="strXULrunnerPath" xml:space="preserve">
     <value>Ścieżka XULrunner:</value>

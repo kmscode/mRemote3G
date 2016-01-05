@@ -2117,7 +2117,7 @@ mRemoteNG 将退出并安装更新。</value>
     <value>使用DockPanel Suite[Weifen Luo]</value>
   </data>
   <data name="strWriteLogFile" xml:space="preserve">
-    <value>记录日志(mRemoteNG.log)</value>
+    <value>记录日志(mRemote3G.log)</value>
   </data>
   <data name="strXULrunnerPath" xml:space="preserve">
     <value>XULrunner路径：</value>

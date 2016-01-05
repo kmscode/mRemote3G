@@ -6762,7 +6762,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Write log file (mRemoteNG.log).
+        '''  Looks up a localized string similar to Write log file (mRemote3G.log).
         '''</summary>
         Friend Shared ReadOnly Property strWriteLogFile() As String
             Get

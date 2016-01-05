@@ -2182,7 +2182,7 @@ mRemoteNG zal nu worden gesloten en beginnen met de installatie.</value>
     <value>Maakt gebruik van de DockPanel Suite van [Weifen Luo]</value>
   </data>
   <data name="strWriteLogFile" xml:space="preserve">
-    <value>Schrijf log bestand (mRemoteNG.log)</value>
+    <value>Schrijf log bestand (mRemote3G.log)</value>
   </data>
   <data name="strXULrunnerPath" xml:space="preserve">
     <value>XULrunner pad:</value>

@@ -2181,7 +2181,7 @@ mRemoteNG vil nå avslutte og starte installasjonen.</value>
     <value>Bruker DockPanel Suite av [Weifen Luo]</value>
   </data>
   <data name="strWriteLogFile" xml:space="preserve">
-    <value>Skriv loggfil (mRemoteNG.log)</value>
+    <value>Skriv loggfil (mRemote3G.log)</value>
   </data>
   <data name="strXULrunnerPath" xml:space="preserve">
     <value>XULrunner filsti:</value>

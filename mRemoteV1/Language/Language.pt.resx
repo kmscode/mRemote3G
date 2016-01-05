@@ -2115,7 +2115,7 @@ Descrição do erro: {1}</value>
     <value>Usa o DockPanel Suite por [Weifen Luo]</value>
   </data>
   <data name="strWriteLogFile" xml:space="preserve">
-    <value>Gravar o arquivo de log (mRemoteNG.log)</value>
+    <value>Gravar o arquivo de log (mRemote3G.log)</value>
   </data>
   <data name="strXULrunnerPath" xml:space="preserve">
     <value>Caminho XULrunner:</value>

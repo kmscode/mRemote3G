@@ -1993,7 +1993,7 @@ mRemoteNG зараз припинить роботу і почне процес 
     <value>http://sourceforge.net/projects/dockpanelsuite/</value>
   </data>
   <data name="strWriteLogFile" xml:space="preserve">
-    <value>Запис в лог-файл (mRemoteNG.log)</value>
+    <value>Запис в лог-файл (mRemote3G.log)</value>
   </data>
   <data name="strXULrunnerPath" xml:space="preserve">
     <value>Шлях XULRunner:</value>

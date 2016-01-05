@@ -50,7 +50,7 @@
             Me.chkWriteLogFile.Name = "chkWriteLogFile"
             Me.chkWriteLogFile.Size = New System.Drawing.Size(226, 21)
             Me.chkWriteLogFile.TabIndex = 17
-            Me.chkWriteLogFile.Text = "Write log file (mRemoteNG.log)"
+            Me.chkWriteLogFile.Text = "Write log file (mRemote3G.log)"
             Me.chkWriteLogFile.UseVisualStyleBackColor = True
             '
             'chkAutomaticallyGetSessionInfo

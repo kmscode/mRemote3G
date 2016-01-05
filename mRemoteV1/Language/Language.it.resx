@@ -2163,7 +2163,7 @@ mRemoteNG verrà chiuso e l'installazione avrà inizio.</value>
     <value>http://sourceforge.net/projects/dockpanelsuite/</value>
   </data>
   <data name="strWriteLogFile" xml:space="preserve">
-    <value>Scrivi nel file di log (mRemoteNG.log)</value>
+    <value>Scrivi nel file di log (mRemote3G.log)</value>
   </data>
   <data name="strXULrunnerPath" xml:space="preserve">
     <value>Percorso XULrunner:</value>

@@ -2162,7 +2162,7 @@ Message:
     <value>Utilise DockPanel Suite par [Weifen Luo]</value>
   </data>
   <data name="strWriteLogFile" xml:space="preserve">
-    <value>Ecrire dans un fichier journal (mRemoteNG.log)</value>
+    <value>Ecrire dans un fichier journal (mRemote3G.log)</value>
   </data>
   <data name="strXULrunnerPath" xml:space="preserve">
     <value>Chemin de XULRunner:</value>
