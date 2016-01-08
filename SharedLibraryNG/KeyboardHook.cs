@@ -67,6 +67,7 @@ namespace SharedLibraryNG
 
             public IntPtr getWinHdl()
             {
+                //logger.Log.InfoFormat("WindowHandle: {0}", WindowHandle.ToString());
                 return WindowHandle;
             }
 
@@ -181,7 +182,20 @@ namespace SharedLibraryNG
             // Mainly when the station is unlocked, or after an admin password is asked
                 try
                 {
-                    if (GetFocusWindow() == notificationEntry.getWinHdl() && notificationEntry.KeyCode == key.vkCode)
+                    IntPtr hdl = notificationEntry.getWinHdl();
+                    IntPtr focusWin = GetFocusWindow();
+
+                    /* Sometimes these values return 0 for unknown reasons...
+                     * Seems to occur more frequently with Win+l to lock the system.
+                     * Let's try to avoid throwing exceptions in this scenario.
+                     */
+                    if(focusWin.Equals(IntPtr.Zero) || hdl.Equals(IntPtr.Zero))
+                    {
+                        logger.Log.WarnFormat("Handles returned 0. Can't process keys: code: {0}  mod: {1}", notificationEntry.KeyCode, notificationEntry.ModifierKeys);
+                        continue;
+                    }
+
+                    if (focusWin == hdl && notificationEntry.KeyCode == key.vkCode)
                     {
                         var modifierKeys = GetModifierKeyState();
                         if (!ModifierKeysMatch(notificationEntry.ModifierKeys, modifierKeys)) continue;
@@ -194,10 +208,16 @@ namespace SharedLibraryNG
                             WasBlocked = notificationEntry.Block,
                         };
 
-                        if (!NativeMethods.PostMessage(notificationEntry.getWinHdl(), HookKeyMsg, wParam, lParam))
+                        /*
+                        logger.Log.DebugFormat("About to post message - hdl: {0}  HookKeyMsg: {1}  wParam: {2}  lParam: {3}", 
+                                                hdl.ToString(), HookKeyMsg.ToString(), wParam.ToString(), lParam.ToString()
+                                              );
+                         */
+                        if (!NativeMethods.PostMessage(hdl, HookKeyMsg, wParam, lParam))
                         {
-                            logger.Log.WarnFormat("Post Message Failed....");
-                            throw new Win32Exception(Marshal.GetLastWin32Error());
+                            var e = Marshal.GetLastWin32Error();
+                            logger.Log.WarnFormat("Post Message Failed (1): {0}", e.ToString());
+                            throw new Win32Exception(e);
                         }
 
                         if (notificationEntry.Block) result = 1;
@@ -207,7 +227,7 @@ namespace SharedLibraryNG
                 {
                     if (e.NativeErrorCode != 0)
                     {
-                        logger.Log.WarnFormat("Post Message Failed: {0}", e.ToString());
+                        logger.Log.WarnFormat("Post Message Failed (2): {0}", e.ToString());
                         throw;
                     }
                 }
@@ -222,7 +242,12 @@ namespace SharedLibraryNG
             {
                 var except = Marshal.GetLastWin32Error();
                 logger.Log.WarnFormat("GetFocus failed: {0}", except.ToString());
-                throw new Win32Exception(except);
+
+
+                if (except != 0)
+                    throw new Win32Exception(except);
+                else
+                    return IntPtr.Zero;
             }
 			return Win32.NativeMethods.GetAncestor(guiThreadInfo.getFocus(), Win32.GA_ROOT);
         }
