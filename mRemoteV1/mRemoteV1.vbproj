@@ -125,10 +125,6 @@
       <HintPath>References\MagicLibrary.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MiniTabControl, Version=1.0.3142.32770, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>References\MiniTabControl.dll</HintPath>
-    </Reference>
     <Reference Include="Org.Mentalis.Security, Version=1.0.13.715, Culture=neutral">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\Org.Mentalis.Security.dll</HintPath>

@@ -86,10 +86,6 @@ Copyright © 2002-2005 The Mentalis.org Team
 Modified New BSD License
 http://www.mentalis.org/
 
-MiniTabControl 1.0
-Copyright © 2008 Felix Deimel
-http://www.appjuice.org/
-
 PuTTY 0.66
 Copyright © 1997-2015 Simon Tatham
 MIT License
