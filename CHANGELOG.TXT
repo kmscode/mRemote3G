@@ -1,3 +1,7 @@
+1.92 (2016-01-08)
+  Additional fixes/logging for Windows lock/unlock crash 
+  Removed old references and files for external code/binaries that are no longer used
+  
 1.91 (2016-01-05)
   Additional code changes for the rename to "mRemote3G"
   Revert commit 5f2112a (Fix Warning CA1702) - This resolves issue #3
