@@ -1,19 +1,19 @@
 Contributors
 ============
 
+Sean Kaim
+Riley McArdle
+Felix Deimel
 Jason Barbier
 Wiktor Beryt
 Lionel Caignec
 Ruben d'Arco
-Felix Deimel
 Holger Henke
 Tom Hiller
-Riley McArdle
 Apisitt Rattana
 Andreas Rehm
 David Vidmar
 Fabrice Didierjean
-Sean Kaim
 
 
 Translators
@@ -66,11 +66,6 @@ FilteredPropertyGrid 1.0.0.0
 Copyright © 2006 Azuria
 http://www.codeproject.com/KB/cs/FilteredPropertyGrid.aspx
 
-GeckoFX 1.8.1.4
-Copyright © 2008 Skybound Software
-Mozilla Public License 1.1
-http://www.geckofx.org/
-
 IPTextBox 1.1
 Copyright © 2006 Matthew Kleinwaks
 Copyright © 2008 Felix Deimel
@@ -90,10 +85,6 @@ Mentalis.org Security Library 1.0.13.715
 Copyright © 2002-2005 The Mentalis.org Team
 Modified New BSD License
 http://www.mentalis.org/
-
-MiniGeckoBrowser 1.0
-Copyright © 2008 Felix Deimel
-http://www.appjuice.org/
 
 MiniTabControl 1.0
 Copyright © 2008 Felix Deimel
