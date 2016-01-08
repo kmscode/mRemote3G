@@ -11,9 +11,11 @@ del "D:\Source\mRemoteNG\mRemoteV1\bin\Release Portable\confCons*"
 del "D:\Source\mRemoteNG\mRemoteV1\bin\Release Portable\mRemoteNG.log"
 del "D:\Source\mRemoteNG\mRemoteV1\bin\Release Portable\pnlLayout.xml"
 del "D:\Source\mRemoteNG\mRemoteV1\bin\Release Portable\extApps.xml"
+del "D:\Source\mRemoteNG\mRemoteV1\bin\Release Portable\*.pdb"
+del "D:\Source\mRemoteNG\mRemoteV1\bin\Release Portable\*vshost*"
 
 xcopy /S /Y "D:\Source\mRemoteNG\mRemoteV1\bin\Release Portable" D:\Source\mRemoteNG\mRemoteV1\bin\package
 
 for /f "delims=" %%i in ('findstr /R /C:"^<Assembly: AssemblyVersion" "mRemoteV1\My Project\AssemblyInfo.vb"') do set output="%%i"
 
-"C:\Program Files\7-Zip\7z.exe" a -r -tzip -y D:\Source\mRemoteNG\mRemoteV1\bin\mRmote3G-%output:~-10,-6%.zip D:\Source\mRemoteNG\mRemoteV1\bin\package\*.*
+"C:\Program Files\7-Zip\7z.exe" a -r -tzip -y D:\Source\mRemoteNG\mRemoteV1\bin\mRemote3G-%output:~-10,-6%.zip D:\Source\mRemoteNG\mRemoteV1\bin\package\*.*
