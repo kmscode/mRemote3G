@@ -204,7 +204,6 @@
     <Compile Include="Controls\ToolStripSplitButton.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Config\KeyboardShortcuts.vb" />
     <Compile Include="Forms\OptionsPages\AdvancedPage.Designer.vb">
       <DependentUpon>AdvancedPage.vb</DependentUpon>
     </Compile>
@@ -228,12 +227,6 @@
     </Compile>
     <Compile Include="Forms\OptionsForm.vb">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\OptionsPages\KeyboardPage.Designer.vb">
-      <DependentUpon>KeyboardPage.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\OptionsPages\KeyboardPage.vb">
-      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Forms\OptionsPages\OptionsPage.vb">
       <SubType>UserControl</SubType>
@@ -470,9 +463,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\OptionsForm.resx">
       <DependentUpon>OptionsForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\OptionsPages\KeyboardPage.resx">
-      <DependentUpon>KeyboardPage.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\OptionsPages\SqlServerPage.resx">
       <DependentUpon>SqlServerPage.vb</DependentUpon>
@@ -1131,12 +1121,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="My Project\DataSources\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\SharedLibraryNG\SharedLibraryNG.csproj">
-      <Project>{0F615504-5F30-4CF2-8341-1DE7FEC95A23}</Project>
-      <Name>SharedLibraryNG</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

@@ -19,7 +19,6 @@ Namespace Forms
             _pages.Add(New SqlServerPage, New PageInfo)
             _pages.Add(New UpdatesPage, New PageInfo)
             _pages.Add(New ThemePage, New PageInfo)
-            _pages.Add(New KeyboardPage, New PageInfo)
             _pages.Add(New AdvancedPage, New PageInfo)
 
             _startPage = GetPageFromType(GetType(StartupExitPage))

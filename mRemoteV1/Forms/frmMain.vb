@@ -1,7 +1,6 @@
 Imports System.IO
 Imports mRemoteNG.App
 Imports mRemoteNG.My
-Imports SharedLibraryNG
 Imports System.Text
 Imports WeifenLuo.WinFormsUI.Docking
 Imports mRemoteNG.App.Runtime
@@ -120,8 +119,8 @@ Public Class frmMain
 
         Tree.Node.TreeView = Windows.treeForm.tvConnections
 
-        If My.Settings.FirstStart And _
-                Not My.Settings.LoadConsFromCustomLocation And _
+        If My.Settings.FirstStart And
+                Not My.Settings.LoadConsFromCustomLocation And
                 Not IO.File.Exists(GetStartupConnectionFileName()) Then
             NewConnections(GetStartupConnectionFileName())
         End If
@@ -152,7 +151,6 @@ Public Class frmMain
 
         Me.Opacity = 1
 
-        KeyboardShortcuts.RequestKeyNotifications(Handle)
     End Sub
 
     Private Sub ApplyLanguage()
@@ -887,15 +885,6 @@ Public Class frmMain
                     'Send to the next window
                     SendMessage(fpChainedWindowHandle, m.Msg, m.LParam, m.WParam)
                     fpChainedWindowHandle = m.LParam
-                Case KeyboardHook.HookKeyMsg
-                    If Not m.WParam.ToInt32() = Win32.WM_KEYDOWN Then Exit Select
-
-                    Select Case KeyboardShortcuts.CommandFromHookKeyMessage(m)
-                        Case ShortcutCommand.PreviousTab
-                            SelectTabRelative(-1)
-                        Case ShortcutCommand.NextTab
-                            SelectTabRelative(1)
-                    End Select
             End Select
         Catch ex As Exception
         End Try
