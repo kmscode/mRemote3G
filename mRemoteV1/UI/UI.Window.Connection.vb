@@ -38,41 +38,40 @@ Namespace UI
 
             Public WithEvents TabController As Crownwood.Magic.Controls.TabControl
             Private Sub InitializeComponent()
-                Me.components = New System.ComponentModel.Container
+                Me.components = New System.ComponentModel.Container()
                 Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Connection))
-                Me.TabController = New Crownwood.Magic.Controls.TabControl
+                Me.TabController = New Crownwood.Magic.Controls.TabControl()
                 Me.cmenTab = New System.Windows.Forms.ContextMenuStrip(Me.components)
-                Me.cmenTabFullscreen = New System.Windows.Forms.ToolStripMenuItem
-                Me.cmenTabSmartSize = New System.Windows.Forms.ToolStripMenuItem
-                Me.cmenTabViewOnly = New System.Windows.Forms.ToolStripMenuItem
-                Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator
-                Me.cmenTabScreenshot = New System.Windows.Forms.ToolStripMenuItem
-                Me.cmenTabStartChat = New System.Windows.Forms.ToolStripMenuItem
-                Me.cmenTabTransferFile = New System.Windows.Forms.ToolStripMenuItem
-                Me.cmenTabRefreshScreen = New System.Windows.Forms.ToolStripMenuItem
-                Me.cmenTabSendSpecialKeys = New System.Windows.Forms.ToolStripMenuItem
-                Me.cmenTabSendSpecialKeysCtrlAltDel = New System.Windows.Forms.ToolStripMenuItem
-                Me.cmenTabSendSpecialKeysCtrlEsc = New System.Windows.Forms.ToolStripMenuItem
-                Me.cmenTabExternalApps = New System.Windows.Forms.ToolStripMenuItem
-                Me.cmenTabSep1 = New System.Windows.Forms.ToolStripSeparator
-                Me.cmenTabRenameTab = New System.Windows.Forms.ToolStripMenuItem
-                Me.cmenTabDuplicateTab = New System.Windows.Forms.ToolStripMenuItem
-                Me.cmenTabReconnect = New System.Windows.Forms.ToolStripMenuItem
-                Me.cmenTabDisconnect = New System.Windows.Forms.ToolStripMenuItem
-                Me.cmenTabPuttySettings = New System.Windows.Forms.ToolStripMenuItem
+                Me.cmenTabFullscreen = New System.Windows.Forms.ToolStripMenuItem()
+                Me.cmenTabSmartSize = New System.Windows.Forms.ToolStripMenuItem()
+                Me.cmenTabViewOnly = New System.Windows.Forms.ToolStripMenuItem()
+                Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+                Me.cmenTabScreenshot = New System.Windows.Forms.ToolStripMenuItem()
+                Me.cmenTabStartChat = New System.Windows.Forms.ToolStripMenuItem()
+                Me.cmenTabTransferFile = New System.Windows.Forms.ToolStripMenuItem()
+                Me.cmenTabRefreshScreen = New System.Windows.Forms.ToolStripMenuItem()
+                Me.cmenTabSendSpecialKeys = New System.Windows.Forms.ToolStripMenuItem()
+                Me.cmenTabSendSpecialKeysCtrlAltDel = New System.Windows.Forms.ToolStripMenuItem()
+                Me.cmenTabSendSpecialKeysCtrlEsc = New System.Windows.Forms.ToolStripMenuItem()
+                Me.cmenTabPuttySettings = New System.Windows.Forms.ToolStripMenuItem()
+                Me.cmenTabExternalApps = New System.Windows.Forms.ToolStripMenuItem()
+                Me.cmenTabSep1 = New System.Windows.Forms.ToolStripSeparator()
+                Me.cmenTabRenameTab = New System.Windows.Forms.ToolStripMenuItem()
+                Me.cmenTabDuplicateTab = New System.Windows.Forms.ToolStripMenuItem()
+                Me.cmenTabReconnect = New System.Windows.Forms.ToolStripMenuItem()
+                Me.cmenTabDisconnect = New System.Windows.Forms.ToolStripMenuItem()
                 Me.cmenTab.SuspendLayout()
                 Me.SuspendLayout()
                 '
                 'TabController
                 '
                 Me.TabController.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                            Or System.Windows.Forms.AnchorStyles.Left) _
-                            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.TabController.Appearance = Crownwood.Magic.Controls.TabControl.VisualAppearance.MultiDocument
                 Me.TabController.Cursor = System.Windows.Forms.Cursors.Hand
                 Me.TabController.DragFromControl = False
-                Me.TabController.IDEPixelArea = True
-                Me.TabController.IDEPixelBorder = False
+                Me.TabController.IDEPixelArea = False
                 Me.TabController.Location = New System.Drawing.Point(0, -1)
                 Me.TabController.Name = "TabController"
                 Me.TabController.Size = New System.Drawing.Size(632, 454)
@@ -80,48 +79,49 @@ Namespace UI
                 '
                 'cmenTab
                 '
+                Me.cmenTab.ImageScalingSize = New System.Drawing.Size(20, 20)
                 Me.cmenTab.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cmenTabFullscreen, Me.cmenTabSmartSize, Me.cmenTabViewOnly, Me.ToolStripSeparator1, Me.cmenTabScreenshot, Me.cmenTabStartChat, Me.cmenTabTransferFile, Me.cmenTabRefreshScreen, Me.cmenTabSendSpecialKeys, Me.cmenTabPuttySettings, Me.cmenTabExternalApps, Me.cmenTabSep1, Me.cmenTabRenameTab, Me.cmenTabDuplicateTab, Me.cmenTabReconnect, Me.cmenTabDisconnect})
                 Me.cmenTab.Name = "cmenTab"
                 Me.cmenTab.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-                Me.cmenTab.Size = New System.Drawing.Size(202, 346)
+                Me.cmenTab.Size = New System.Drawing.Size(245, 380)
                 '
                 'cmenTabFullscreen
                 '
                 Me.cmenTabFullscreen.Image = Global.mRemoteNG.My.Resources.Resources.arrow_out
                 Me.cmenTabFullscreen.Name = "cmenTabFullscreen"
-                Me.cmenTabFullscreen.Size = New System.Drawing.Size(201, 22)
+                Me.cmenTabFullscreen.Size = New System.Drawing.Size(244, 26)
                 Me.cmenTabFullscreen.Text = "Fullscreen (RDP)"
                 '
                 'cmenTabSmartSize
                 '
                 Me.cmenTabSmartSize.Image = Global.mRemoteNG.My.Resources.Resources.SmartSize
                 Me.cmenTabSmartSize.Name = "cmenTabSmartSize"
-                Me.cmenTabSmartSize.Size = New System.Drawing.Size(201, 22)
+                Me.cmenTabSmartSize.Size = New System.Drawing.Size(244, 26)
                 Me.cmenTabSmartSize.Text = "SmartSize (RDP/VNC)"
                 '
                 'cmenTabViewOnly
                 '
                 Me.cmenTabViewOnly.Name = "cmenTabViewOnly"
-                Me.cmenTabViewOnly.Size = New System.Drawing.Size(201, 22)
+                Me.cmenTabViewOnly.Size = New System.Drawing.Size(244, 26)
                 Me.cmenTabViewOnly.Text = "View Only (VNC)"
                 '
                 'ToolStripSeparator1
                 '
                 Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-                Me.ToolStripSeparator1.Size = New System.Drawing.Size(198, 6)
+                Me.ToolStripSeparator1.Size = New System.Drawing.Size(241, 6)
                 '
                 'cmenTabScreenshot
                 '
                 Me.cmenTabScreenshot.Image = Global.mRemoteNG.My.Resources.Resources.Screenshot_Add
                 Me.cmenTabScreenshot.Name = "cmenTabScreenshot"
-                Me.cmenTabScreenshot.Size = New System.Drawing.Size(201, 22)
+                Me.cmenTabScreenshot.Size = New System.Drawing.Size(244, 26)
                 Me.cmenTabScreenshot.Text = "Screenshot"
                 '
                 'cmenTabStartChat
                 '
                 Me.cmenTabStartChat.Image = Global.mRemoteNG.My.Resources.Resources.Chat
                 Me.cmenTabStartChat.Name = "cmenTabStartChat"
-                Me.cmenTabStartChat.Size = New System.Drawing.Size(201, 22)
+                Me.cmenTabStartChat.Size = New System.Drawing.Size(244, 26)
                 Me.cmenTabStartChat.Text = "Start Chat (VNC)"
                 Me.cmenTabStartChat.Visible = False
                 '
@@ -129,14 +129,14 @@ Namespace UI
                 '
                 Me.cmenTabTransferFile.Image = Global.mRemoteNG.My.Resources.Resources.SSHTransfer
                 Me.cmenTabTransferFile.Name = "cmenTabTransferFile"
-                Me.cmenTabTransferFile.Size = New System.Drawing.Size(201, 22)
+                Me.cmenTabTransferFile.Size = New System.Drawing.Size(244, 26)
                 Me.cmenTabTransferFile.Text = "Transfer File (SSH)"
                 '
                 'cmenTabRefreshScreen
                 '
                 Me.cmenTabRefreshScreen.Image = Global.mRemoteNG.My.Resources.Resources.Refresh
                 Me.cmenTabRefreshScreen.Name = "cmenTabRefreshScreen"
-                Me.cmenTabRefreshScreen.Size = New System.Drawing.Size(201, 22)
+                Me.cmenTabRefreshScreen.Size = New System.Drawing.Size(244, 26)
                 Me.cmenTabRefreshScreen.Text = "Refresh Screen (VNC)"
                 '
                 'cmenTabSendSpecialKeys
@@ -144,65 +144,65 @@ Namespace UI
                 Me.cmenTabSendSpecialKeys.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cmenTabSendSpecialKeysCtrlAltDel, Me.cmenTabSendSpecialKeysCtrlEsc})
                 Me.cmenTabSendSpecialKeys.Image = Global.mRemoteNG.My.Resources.Resources.Keyboard
                 Me.cmenTabSendSpecialKeys.Name = "cmenTabSendSpecialKeys"
-                Me.cmenTabSendSpecialKeys.Size = New System.Drawing.Size(201, 22)
+                Me.cmenTabSendSpecialKeys.Size = New System.Drawing.Size(244, 26)
                 Me.cmenTabSendSpecialKeys.Text = "Send special Keys (VNC)"
                 '
                 'cmenTabSendSpecialKeysCtrlAltDel
                 '
                 Me.cmenTabSendSpecialKeysCtrlAltDel.Name = "cmenTabSendSpecialKeysCtrlAltDel"
-                Me.cmenTabSendSpecialKeysCtrlAltDel.Size = New System.Drawing.Size(141, 22)
+                Me.cmenTabSendSpecialKeysCtrlAltDel.Size = New System.Drawing.Size(169, 26)
                 Me.cmenTabSendSpecialKeysCtrlAltDel.Text = "Ctrl+Alt+Del"
                 '
                 'cmenTabSendSpecialKeysCtrlEsc
                 '
                 Me.cmenTabSendSpecialKeysCtrlEsc.Name = "cmenTabSendSpecialKeysCtrlEsc"
-                Me.cmenTabSendSpecialKeysCtrlEsc.Size = New System.Drawing.Size(141, 22)
+                Me.cmenTabSendSpecialKeysCtrlEsc.Size = New System.Drawing.Size(169, 26)
                 Me.cmenTabSendSpecialKeysCtrlEsc.Text = "Ctrl+Esc"
+                '
+                'cmenTabPuttySettings
+                '
+                Me.cmenTabPuttySettings.Name = "cmenTabPuttySettings"
+                Me.cmenTabPuttySettings.Size = New System.Drawing.Size(244, 26)
+                Me.cmenTabPuttySettings.Text = "PuTTY Settings"
                 '
                 'cmenTabExternalApps
                 '
                 Me.cmenTabExternalApps.Image = CType(resources.GetObject("cmenTabExternalApps.Image"), System.Drawing.Image)
                 Me.cmenTabExternalApps.Name = "cmenTabExternalApps"
-                Me.cmenTabExternalApps.Size = New System.Drawing.Size(201, 22)
+                Me.cmenTabExternalApps.Size = New System.Drawing.Size(244, 26)
                 Me.cmenTabExternalApps.Text = "External Applications"
                 '
                 'cmenTabSep1
                 '
                 Me.cmenTabSep1.Name = "cmenTabSep1"
-                Me.cmenTabSep1.Size = New System.Drawing.Size(198, 6)
+                Me.cmenTabSep1.Size = New System.Drawing.Size(241, 6)
                 '
                 'cmenTabRenameTab
                 '
                 Me.cmenTabRenameTab.Image = Global.mRemoteNG.My.Resources.Resources.Rename
                 Me.cmenTabRenameTab.Name = "cmenTabRenameTab"
-                Me.cmenTabRenameTab.Size = New System.Drawing.Size(201, 22)
+                Me.cmenTabRenameTab.Size = New System.Drawing.Size(244, 26)
                 Me.cmenTabRenameTab.Text = "Rename Tab"
                 '
                 'cmenTabDuplicateTab
                 '
                 Me.cmenTabDuplicateTab.Name = "cmenTabDuplicateTab"
-                Me.cmenTabDuplicateTab.Size = New System.Drawing.Size(201, 22)
+                Me.cmenTabDuplicateTab.Size = New System.Drawing.Size(244, 26)
                 Me.cmenTabDuplicateTab.Text = "Duplicate Tab"
                 '
                 'cmenTabReconnect
                 '
                 Me.cmenTabReconnect.Image = CType(resources.GetObject("cmenTabReconnect.Image"), System.Drawing.Image)
                 Me.cmenTabReconnect.Name = "cmenTabReconnect"
-                Me.cmenTabReconnect.Size = New System.Drawing.Size(201, 22)
+                Me.cmenTabReconnect.Size = New System.Drawing.Size(244, 26)
                 Me.cmenTabReconnect.Text = "Reconnect"
                 '
                 'cmenTabDisconnect
                 '
                 Me.cmenTabDisconnect.Image = Global.mRemoteNG.My.Resources.Resources.Pause
                 Me.cmenTabDisconnect.Name = "cmenTabDisconnect"
-                Me.cmenTabDisconnect.Size = New System.Drawing.Size(201, 22)
+                Me.cmenTabDisconnect.Size = New System.Drawing.Size(244, 26)
                 Me.cmenTabDisconnect.Text = "Disconnect"
-                '
-                'cmenTabPuttySettings
-                '
-                Me.cmenTabPuttySettings.Name = "cmenTabPuttySettings"
-                Me.cmenTabPuttySettings.Size = New System.Drawing.Size(201, 22)
-                Me.cmenTabPuttySettings.Text = "PuTTY Settings"
                 '
                 'Connection
                 '
