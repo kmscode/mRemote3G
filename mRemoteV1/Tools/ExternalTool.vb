@@ -45,7 +45,11 @@ Namespace Tools
         ' Start external app
         Public Sub Start(Optional ByVal startConnectionInfo As Connection.Info = Nothing)
             Try
-                If String.IsNullOrEmpty(_FileName) Then Throw New InvalidOperationException("FileName cannot be blank.")
+                If String.IsNullOrEmpty(_FileName) Then
+                    ' No need to thow an exception, just log/show an error and return.
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ExternalApp.Start() failed: FileName cannot be blank.", False)
+                    Return
+                End If
 
                 ConnectionInfo = startConnectionInfo
 
