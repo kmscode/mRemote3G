@@ -1,3 +1,11 @@
+1.93 (2016-01-21)
+  Fix Bug #10 - Avoid throwing exceptions/crashing when adding new External Tool
+  Remove Keyboard Shortcut functilnaity to prevent Windows Lock/Unlock crash
+    - This was a beta option from 1.73 that was never released
+    - If the functionality were to be implmemted (in a "fixed" fashion), it may still end up causing "expected behavior"
+  New build of MagicLibrary.dll
+  Other minor build changes
+  
 1.92 (2016-01-08)
   Additional fixes/logging for Windows lock/unlock crash 
   Removed old references and files for external code/binaries that are no longer used
