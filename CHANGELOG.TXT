@@ -1,3 +1,11 @@
+1.94.1 (2016-01-25)
+  Version numbering change (I'm getting too close to 2.0, but don't want to flip to 2.0 yet - I'd be OK with 2.0 after 1.99.99 I guess)
+  Fix Bug #10 - (for reals this time?) crash seems to have been related to complier optimizations
+    - This may very well address #8 as well. Suspect that there was memory corruption that caused issues with Garbage Collection
+  Updated PuTTYNG (https://github.com/kmscode/PuTTYNG) with some minor changes that allow it to integrate properly into mRemote3G
+    - PuTTYNG window should no longer flash outside of mRemote3G
+  Fix for Menu bar items which were not displaying in the correct order
+
 1.93 (2016-01-21)
   Fix Bug #10 - Avoid throwing exceptions/crashing when adding new External Tool
   Remove Keyboard Shortcut functionality to prevent Windows Lock/Unlock crash
