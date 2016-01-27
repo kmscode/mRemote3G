@@ -53,7 +53,7 @@ Namespace Connection
 #End Region
 
 #Region "Private Declarations"
-            Private _rdpClient As MsRdpClient5NotSafeForScripting
+            Private _rdpClient As MsRdpClient8NotSafeForScripting
             Private _rdpVersion As Version
             Private _connectionInfo As Info
             Private _loginComplete As Boolean
@@ -61,7 +61,7 @@ Namespace Connection
 
 #Region "Public Methods"
             Public Sub New()
-                Control = New AxMsRdpClient5NotSafeForScripting
+                Control = New AxMsRdpClient8NotSafeForScripting
             End Sub
 
             Public Overrides Function SetProps() As Boolean
@@ -77,7 +77,7 @@ Namespace Connection
                             System.Windows.Forms.Application.DoEvents()
                         Loop
 
-                        _rdpClient = CType(Control, AxMsRdpClient5NotSafeForScripting).GetOcx()
+                        _rdpClient = CType(Control, AxMsRdpClient8NotSafeForScripting).GetOcx()
                     Catch ex As Runtime.InteropServices.COMException
                         MessageCollector.AddExceptionMessage(My.Language.strRdpControlCreationFailed, ex)
                         Control.Dispose()
@@ -636,6 +636,7 @@ Namespace Connection
                 Public Shared RDC61 As New Version(6, 0, 6001)
                 Public Shared RDC70 As New Version(6, 1, 7600)
                 Public Shared RDC80 As New Version(6, 2, 9200)
+                Public Shared RDC81 As New Version(6, 3, 9600)
 
                 Private Sub New()
                 End Sub

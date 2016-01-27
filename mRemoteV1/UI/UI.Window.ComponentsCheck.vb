@@ -341,10 +341,10 @@ Namespace UI
                 pnlCheck3.Visible = True
                 pnlCheck4.Visible = True
 
-                Dim rdpClient As AxMSTSCLib.AxMsRdpClient5NotSafeForScripting = Nothing
+                Dim rdpClient As AxMSTSCLib.AxMsRdpClient8NotSafeForScripting = Nothing
 
                 Try
-                    rdpClient = New AxMSTSCLib.AxMsRdpClient5NotSafeForScripting
+                    rdpClient = New AxMSTSCLib.AxMsRdpClient8NotSafeForScripting
                     rdpClient.CreateControl()
 
                     Do Until rdpClient.Created
