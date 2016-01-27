@@ -284,10 +284,10 @@ Namespace Connection
                     End If
 
                     If _rdpVersion >= Versions.RDC61 Then
-                        MessageCollector.AddMessage(MessageClass.InformationMsg, String.Format(My.Language.strRdpSetConsoleSwitch, "6.1"), True)
+                        MessageCollector.AddMessage(MessageClass.InformationMsg, String.Format(My.Language.strRdpSetConsoleSwitch, _rdpVersion.ToString()), True)
                         _rdpClient.AdvancedSettings7.ConnectToAdministerServer = value
                     Else
-                        MessageCollector.AddMessage(MessageClass.InformationMsg, String.Format(My.Language.strRdpSetConsoleSwitch, "6.0"), True)
+                        MessageCollector.AddMessage(MessageClass.InformationMsg, String.Format(My.Language.strRdpSetConsoleSwitch, _rdpVersion.ToString()), True)
                         _rdpClient.AdvancedSettings2.ConnectToServerConsole = value
                     End If
                 Catch ex As Exception
