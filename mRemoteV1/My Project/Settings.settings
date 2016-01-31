@@ -132,7 +132,7 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="ConDefaultResolution" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
-      <Value Profile="(Default)">FitToWindow</Value>
+      <Value Profile="(Default)">SmartSize</Value>
     </Setting>
     <Setting Name="ConDefaultColors" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
       <Value Profile="(Default)">Colors16Bit</Value>

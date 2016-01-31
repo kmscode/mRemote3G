@@ -613,7 +613,7 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Configuration.SettingsProviderAttribute(GetType(mRemoteNG.Config.Settings.Providers.ChooseProvider)),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("FitToWindow")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("SmartSize")>  _
         Public Property ConDefaultResolution() As String
             Get
                 Return CType(Me("ConDefaultResolution"),String)
