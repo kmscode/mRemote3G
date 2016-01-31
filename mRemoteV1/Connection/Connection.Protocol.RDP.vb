@@ -18,6 +18,7 @@ Namespace Connection
                 End Get
                 Set(ByVal value As Boolean)
                     _rdpClient.AdvancedSettings2.SmartSizing = value
+                    DoResize()
                     ReconnectForResize()
                 End Set
             End Property
@@ -137,6 +138,7 @@ Namespace Connection
                 Try
                     _rdpClient.Connect()
                     MyBase.Connect()
+                    DoResize()
                     Return True
                 Catch ex As Exception
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpConnectionOpenFailed & vbNewLine & ex.ToString())
@@ -203,13 +205,29 @@ Namespace Connection
 
 #Region "Private Methods"
             Private Function DoResize() As Boolean
-                Control.Location = InterfaceControl.Location
-                If Not Control.Size = InterfaceControl.Size And Not InterfaceControl.Size = Size.Empty Then
+                If Not SmartSize Then
                     Control.Size = InterfaceControl.Size
+                    Control.Location = InterfaceControl.Location
                     Return True
-                Else
-                    Return False
                 End If
+
+                Dim resolution As Rectangle = GetResolutionRectangle(_connectionInfo.Resolution)
+                Dim ratioW As Double = InterfaceControl.Parent.Size.Width / resolution.Width
+                Dim ratioH As Double = InterfaceControl.Parent.Size.Height / resolution.Height
+
+                Dim scale As Double = Math.Min(ratioW, ratioH)
+
+                If scale > 1.0 Then
+                    Return True
+                End If
+
+                Me.Control.Size = New Size(resolution.Width * scale, resolution.Height * scale)
+
+                Dim parentRect As Rectangle = Control.Parent.ClientRectangle
+                Control.Left = (parentRect.Width - Control.Width) / 2
+                Control.Top = (parentRect.Height - Control.Height) / 2
+
+                Return True
             End Function
 
             Private Sub ReconnectForResize()
@@ -362,11 +380,13 @@ Namespace Connection
                             Dim resolution As Rectangle = GetResolutionRectangle(_connectionInfo.Resolution)
                             _rdpClient.DesktopWidth = resolution.Width
                             _rdpClient.DesktopHeight = resolution.Height
+                            Me.SmartSize = True
                     End Select
                 Catch ex As Exception
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetResolutionFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
+
 
             Private Sub SetPort()
                 Try
@@ -549,14 +569,19 @@ Namespace Connection
                 Fullscreen
                 <LocalizedDescription("strRDPSmartSize")>
                 SmartSize
+<<<<<<< HEAD
                 <Description("640x480")>
                 Res640x480
                 <Description("800x600")>
                 Res800x600
                 <Description("1024x768")>
+=======
+                <Description("1024x768")> _
+>>>>>>> 4ec17aef8e30220e78901d7b637723e7abf2437c
                 Res1024x768
                 <Description("1152x864")>
                 Res1152x864
+<<<<<<< HEAD
                 <Description("1280x800")>
                 Res1280x800
                 <Description("1280x1024")>
@@ -578,15 +603,31 @@ Namespace Connection
                 <Description("1920x1080")>
                 Res1920x1080
                 <Description("1920x1200")>
+=======
+                <Description("1280x1024")> _
+                Res1280x1024
+                <Description("1600x1200")> _
+                Res1600x1200
+                <Description("1680x1050")> _
+                Res1680x1050
+                <Description("1920x1080")> _
+                Res1920x1080
+                <Description("1920x1200")> _
+>>>>>>> 4ec17aef8e30220e78901d7b637723e7abf2437c
                 Res1920x1200
                 <Description("2048x1536")>
                 Res2048x1536
                 <Description("2560x2048")>
                 Res2560x2048
+<<<<<<< HEAD
                 <Description("3200x2400")>
                 Res3200x2400
                 <Description("3840x2400")>
                 Res3840x2400
+=======
+                <Description("3840x2160")> _
+                Res3840x2160
+>>>>>>> 4ec17aef8e30220e78901d7b637723e7abf2437c
             End Enum
 
             Public Enum AuthenticationLevel
