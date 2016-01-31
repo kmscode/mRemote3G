@@ -351,9 +351,11 @@ Namespace Connection
                     End If
 
                     Select Case Me.InterfaceControl.Info.Resolution
-                        Case RDPResolutions.FitToWindow, RDPResolutions.SmartSize
+                        Case RDPResolutions.FitToWindow
                             _rdpClient.DesktopWidth = InterfaceControl.Size.Width
                             _rdpClient.DesktopHeight = InterfaceControl.Size.Height
+                        Case RDPResolutions.SmartSize
+                            Me.SmartSize = True
                         Case RDPResolutions.Fullscreen
                             _rdpClient.FullScreen = True
                             _rdpClient.DesktopWidth = Screen.FromControl(frmMain).Bounds.Width
@@ -496,7 +498,7 @@ Namespace Connection
             Public Enum Defaults
                 Colors = RDPColors.Colors16Bit
                 Sounds = RDPSounds.DoNotPlay
-                Resolution = RDPResolutions.FitToWindow
+                Resolution = RDPResolutions.SmartSize
                 Port = 3389
             End Enum
 
