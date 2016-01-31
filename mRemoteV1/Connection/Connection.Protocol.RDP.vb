@@ -18,7 +18,6 @@ Namespace Connection
                 End Get
                 Set(ByVal value As Boolean)
                     _rdpClient.AdvancedSettings2.SmartSizing = value
-                    DoResize()
                     ReconnectForResize()
                 End Set
             End Property
@@ -138,7 +137,6 @@ Namespace Connection
                 Try
                     _rdpClient.Connect()
                     MyBase.Connect()
-                    DoResize()
                     Return True
                 Catch ex As Exception
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpConnectionOpenFailed & vbNewLine & ex.ToString())
@@ -205,29 +203,13 @@ Namespace Connection
 
 #Region "Private Methods"
             Private Function DoResize() As Boolean
-                If Not SmartSize Then
+                Control.Location = InterfaceControl.Location
+                If Not Control.Size = InterfaceControl.Size And Not InterfaceControl.Size = Size.Empty Then
                     Control.Size = InterfaceControl.Size
-                    Control.Location = InterfaceControl.Location
                     Return True
+                Else
+                    Return False
                 End If
-
-                Dim resolution As Rectangle = GetResolutionRectangle(_connectionInfo.Resolution)
-                Dim ratioW As Double = InterfaceControl.Parent.Size.Width / resolution.Width
-                Dim ratioH As Double = InterfaceControl.Parent.Size.Height / resolution.Height
-
-                Dim scale As Double = Math.Min(ratioW, ratioH)
-
-                If scale > 1.0 Then
-                    Return True
-                End If
-
-                Me.Control.Size = New Size(resolution.Width * scale, resolution.Height * scale)
-
-                Dim parentRect As Rectangle = Control.Parent.ClientRectangle
-                Control.Left = (parentRect.Width - Control.Width) / 2
-                Control.Top = (parentRect.Height - Control.Height) / 2
-
-                Return True
             End Function
 
             Private Sub ReconnectForResize()
@@ -237,7 +219,7 @@ Namespace Connection
 
                 If Not InterfaceControl.Info.AutomaticResize Then Return
 
-                If Not (InterfaceControl.Info.Resolution = RDPResolutions.FitToWindow Or _
+                If Not (InterfaceControl.Info.Resolution = RDPResolutions.FitToWindow Or
                         InterfaceControl.Info.Resolution = RDPResolutions.Fullscreen) Then Return
 
                 If SmartSize Then Return
@@ -380,13 +362,11 @@ Namespace Connection
                             Dim resolution As Rectangle = GetResolutionRectangle(_connectionInfo.Resolution)
                             _rdpClient.DesktopWidth = resolution.Width
                             _rdpClient.DesktopHeight = resolution.Height
-                            Me.SmartSize = True
                     End Select
                 Catch ex As Exception
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetResolutionFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
-
 
             Private Sub SetPort()
                 Try
@@ -607,8 +587,6 @@ Namespace Connection
                 Res3200x2400
                 <Description("3840x2400")>
                 Res3840x2400
-                <Description("3840x2160")>
-                Res3840x2160
             End Enum
 
             Public Enum AuthenticationLevel
