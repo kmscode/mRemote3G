@@ -1,3 +1,10 @@
+1.94.2 (2016-01-31)
+  Use Remote Desktop Client v8 connections
+    - Requires Windows 7 SP1+
+    - https://support.microsoft.com/en-us/kb/2923545 may also be required for Win 7 SP1 (though is highly recommended at a minimum).
+  Default icons for External tools (attempt to fix #16)
+  Build environment changes
+  
 1.94.1 (2016-01-25)
   Version numbering change (I'm getting too close to 2.0, but don't want to flip to 2.0 yet - I'd be OK with 2.0 after 1.99.99 I guess)
   Fix Bug #10 - (for reals this time?) crash seems to have been related to complier optimizations
