@@ -610,7 +610,7 @@ Partial Class frmMain
         Me.mMenInfoAbout.Image = Global.mRemoteNG.My.Resources.Resources.mRemote
         Me.mMenInfoAbout.Name = "mMenInfoAbout"
         Me.mMenInfoAbout.Size = New System.Drawing.Size(230, 26)
-        Me.mMenInfoAbout.Text = "About mRemoteNG"
+        Me.mMenInfoAbout.Text = "About mRemote3G"
         '
         'mMenSep3
         '
