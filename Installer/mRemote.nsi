@@ -2,7 +2,6 @@
 !include "WordFunc.nsh"
 !insertmacro VersionCompare
 
-!include "DotNetVer.nsh"
 !include "..\Release\Version.nsh"
 
 ; This will be passed in using the /D switch by BUILD.CMD
@@ -129,12 +128,6 @@ Function SelectLanguage
 	Pop $LANGUAGE
 	StrCmp $LANGUAGE "cancel" 0 +2
 		Abort
-
-	; Check .NET version
-	${IfNot} ${HasDotNet4.6}
-		MessageBox MB_OK|MB_ICONEXCLAMATION "$(RequiresNetFramework)"
-		Quit
-	${EndIf}
 FunctionEnd
 
 Section "" ; Install
