@@ -8,7 +8,7 @@ copy D:\Source\PuTTYNG\WINDOWS\PuTTYNG.exe D:\Source\mRemoteNG\mRemoteV1\bin\pac
 
 rem These del's can error out, that's OK. We don't want these files in the release.
 del "D:\Source\mRemoteNG\mRemoteV1\bin\Release Portable\confCons*"
-del "D:\Source\mRemoteNG\mRemoteV1\bin\Release Portable\mRemoteNG.log"
+del "D:\Source\mRemoteNG\mRemoteV1\bin\Release Portable\mRemote3G.log"
 del "D:\Source\mRemoteNG\mRemoteV1\bin\Release Portable\pnlLayout.xml"
 del "D:\Source\mRemoteNG\mRemoteV1\bin\Release Portable\extApps.xml"
 del "D:\Source\mRemoteNG\mRemoteV1\bin\Release Portable\*.pdb"
