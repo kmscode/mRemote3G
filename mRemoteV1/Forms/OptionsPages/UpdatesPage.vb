@@ -19,6 +19,8 @@ Namespace Forms.OptionsPages
         End Property
 
         Public Overrides Sub ApplyLanguage()
+            ' Temporary
+            Return
             MyBase.ApplyLanguage()
 
 #If Not PORTABLE Then
@@ -42,6 +44,8 @@ Namespace Forms.OptionsPages
         End Sub
 
         Public Overrides Sub LoadSettings()
+            ' Temporary
+            Return
             MyBase.SaveSettings()
 
             chkCheckForUpdatesOnStartup.Checked = My.Settings.CheckForUpdatesOnStartup
@@ -87,6 +91,8 @@ Namespace Forms.OptionsPages
         End Sub
 
         Public Overrides Sub SaveSettings()
+            ' Temporary
+            Return
             MyBase.SaveSettings()
 
             My.Settings.CheckForUpdatesOnStartup = chkCheckForUpdatesOnStartup.Checked
@@ -116,14 +122,20 @@ Namespace Forms.OptionsPages
 #Region "Private Methods"
 #Region "Event Handlers"
         Private Sub chkCheckForUpdatesOnStartup_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chkCheckForUpdatesOnStartup.CheckedChanged
+            ' Temporary
+            Return
             cboUpdateCheckFrequency.Enabled = chkCheckForUpdatesOnStartup.Checked
         End Sub
 
         Private Sub btnUpdateCheckNow_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnUpdateCheckNow.Click
+            ' Temporary
+            Return
             Runtime.Windows.Show(Type.Update)
         End Sub
 
         Private Sub chkUseProxyForAutomaticUpdates_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chkUseProxyForAutomaticUpdates.CheckedChanged
+            ' Temporary
+            Return
             pnlProxyBasic.Enabled = chkUseProxyForAutomaticUpdates.Checked
             btnTestProxy.Enabled = chkUseProxyForAutomaticUpdates.Checked
 
@@ -140,6 +152,8 @@ Namespace Forms.OptionsPages
         End Sub
 
         Private Sub btnTestProxy_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnTestProxy.Click
+            ' Temporary
+            Return
             If _appUpdate IsNot Nothing Then
                 If _appUpdate.IsGetUpdateInfoRunning Then Return
             End If
@@ -156,6 +170,8 @@ Namespace Forms.OptionsPages
         End Sub
 
         Private Sub chkUseProxyAuthentication_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chkUseProxyAuthentication.CheckedChanged
+            ' Temporary
+            Return
             If chkUseProxyForAutomaticUpdates.Checked Then
                 If chkUseProxyAuthentication.Checked Then
                     pnlProxyAuthentication.Enabled = True
@@ -167,6 +183,8 @@ Namespace Forms.OptionsPages
 #End Region
 
         Private Sub GetUpdateInfoCompleted(ByVal sender As Object, ByVal e As AsyncCompletedEventArgs)
+            ' Temporary
+            Return
             If InvokeRequired Then
                 Dim myDelegate As New AsyncCompletedEventHandler(AddressOf GetUpdateInfoCompleted)
                 Invoke(myDelegate, New Object() {sender, e})
