@@ -5,7 +5,6 @@ Namespace App
     Namespace Info
         Public Class General
             Public Shared ReadOnly URLHome As String = "https://github.com/kmscode/mRemote3G"
-            'Public Shared ReadOnly URLDonate As String = "http://donate.mremoteng.org/"
             Public Shared ReadOnly URLForum As String = "https://github.com/kmscode/mRemote3G/issues"
             Public Shared ReadOnly URLBugs As String = "https://github.com/kmscode/mRemote3G/issues"
             Public Shared ReadOnly HomePath As String = My.Application.Info.DirectoryPath

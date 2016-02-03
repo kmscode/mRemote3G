@@ -194,9 +194,7 @@ Public Class frmMain
 
         mMenInfo.Text = My.Language.strMenuHelp
         mMenInfoHelp.Text = My.Language.strMenuHelpContents
-        mMenInfoForum.Text = My.Language.strMenuSupportForum
         mMenInfoBugReport.Text = My.Language.strMenuReportBug
-        mMenInfoDonate.Text = My.Language.strMenuDonate
         mMenInfoWebsite.Text = My.Language.strMenuWebsite
         mMenInfoAbout.Text = My.Language.strMenuAbout
         mMenInfoAnnouncements.Text = My.Language.strMenuAnnouncements
@@ -739,20 +737,12 @@ Public Class frmMain
         App.Runtime.Windows.Show(UI.Window.Type.Help)
     End Sub
 
-    Private Sub mMenInfoForum_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenInfoForum.Click
-        App.Runtime.GoToForum()
-    End Sub
-
     Private Sub mMenInfoBugReport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenInfoBugReport.Click
         App.Runtime.GoToBugs()
     End Sub
 
     Private Sub mMenInfoWebsite_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenInfoWebsite.Click
         App.Runtime.GoToWebsite()
-    End Sub
-
-    Private Sub mMenInfoDonate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenInfoDonate.Click
-        App.Runtime.GoToDonate()
     End Sub
 
     Private Sub mMenInfoAnnouncements_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenInfoAnnouncements.Click
