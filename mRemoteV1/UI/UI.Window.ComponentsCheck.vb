@@ -352,7 +352,7 @@ Namespace UI
                         System.Windows.Forms.Application.DoEvents()
                     Loop
 
-                    If Not New Version(rdpClient.Version) >= mRemoteNG.Connection.Protocol.RDP.Versions.RDC60 Then
+                    If Not New Version(rdpClient.Version) >= mRemoteNG.Connection.Protocol.RDP.Versions.RDC80 Then
                         Throw New Exception(String.Format("Found RDC Client version {0} but version {1} or higher is required.", rdpClient.Version, mRemoteNG.Connection.Protocol.RDP.Versions.RDC60))
                     End If
 
