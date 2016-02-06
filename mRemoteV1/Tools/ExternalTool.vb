@@ -24,11 +24,18 @@ Namespace Tools
 
         Public ReadOnly Property Image() As Image
             Get
-                If Icon IsNot Nothing Then
-                    Return Icon.ToBitmap
-                Else
-                    Return Nothing
-                End If
+                Try
+                    Dim i As Image
+                    If Icon IsNot Nothing Then
+                        i = Icon.ToBitmap
+                        Return i
+                    Else
+                        Return Global.mRemoteNG.My.Resources.Resources.mRemote_Icon.ToBitmap
+                    End If
+                Catch ex As Exception
+                    MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "Could not convert image to Bitmap (Tools.ExternalTool) - using default icon. Exception:" & vbNewLine & ex.ToString(), True)
+                    Return Global.mRemoteNG.My.Resources.Resources.mRemote_Icon.ToBitmap
+                End Try
             End Get
         End Property
 #End Region
