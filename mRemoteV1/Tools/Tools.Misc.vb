@@ -55,7 +55,7 @@ Namespace Tools
 
                 Return myIcon
             Catch SAEx As ArgumentException
-                MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "GetIconFromFile failed (Tools.Misc) - using default icon" & vbNewLine & SAEx.ToString(), True)
+                MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "GetIconFromFile failed (Tools.Misc) - using default icon. Exception:" & vbNewLine & SAEx.ToString(), True)
                 Return Global.mRemoteNG.My.Resources.Resources.mRemote_Icon
             Catch ex As Exception
                 MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "GetIconFromFile failed (Tools.Misc)" & vbNewLine & ex.ToString(), True)
