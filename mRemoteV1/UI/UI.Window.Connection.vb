@@ -466,44 +466,47 @@ Namespace UI
                     If IC.Info.Protocol = mRemoteNG.Connection.Protocol.Protocols.RDP Then
                         Dim rdp As mRemoteNG.Connection.Protocol.RDP = IC.Protocol
 
-                        cmenTabFullscreen.Enabled = True
+                        cmenTabFullscreen.Visible = True
                         cmenTabFullscreen.Checked = rdp.Fullscreen
 
-                        cmenTabSmartSize.Enabled = True
+                        cmenTabSmartSize.Visible = True
                         cmenTabSmartSize.Checked = rdp.SmartSize
+
+                        ToolStripSeparator1.Visible = True
                     Else
-                        cmenTabFullscreen.Enabled = False
-                        cmenTabSmartSize.Enabled = False
+                        cmenTabFullscreen.Visible = False
+                        cmenTabSmartSize.Visible = False
+                        ToolStripSeparator1.Visible = False
                     End If
 
                     If IC.Info.Protocol = mRemoteNG.Connection.Protocol.Protocols.VNC Then
-                        Me.cmenTabSendSpecialKeys.Enabled = True
-                        Me.cmenTabViewOnly.Enabled = True
+                        Me.cmenTabSendSpecialKeys.Visible = True
+                        Me.cmenTabViewOnly.Visible = True
 
-                        Me.cmenTabSmartSize.Enabled = True
-                        Me.cmenTabStartChat.Enabled = True
-                        Me.cmenTabRefreshScreen.Enabled = True
-                        Me.cmenTabTransferFile.Enabled = False
+                        Me.cmenTabSmartSize.Visible = True
+                        Me.cmenTabStartChat.Visible = True
+                        Me.cmenTabRefreshScreen.Visible = True
+                        Me.cmenTabTransferFile.Visible = False
 
                         Dim vnc As mRemoteNG.Connection.Protocol.VNC = IC.Protocol
                         Me.cmenTabSmartSize.Checked = vnc.SmartSize
                         Me.cmenTabViewOnly.Checked = vnc.ViewOnly
                     Else
-                        Me.cmenTabSendSpecialKeys.Enabled = False
-                        Me.cmenTabViewOnly.Enabled = False
-                        Me.cmenTabStartChat.Enabled = False
-                        Me.cmenTabRefreshScreen.Enabled = False
-                        Me.cmenTabTransferFile.Enabled = False
+                        Me.cmenTabSendSpecialKeys.Visible = False
+                        Me.cmenTabViewOnly.Visible = False
+                        Me.cmenTabStartChat.Visible = False
+                        Me.cmenTabRefreshScreen.Visible = False
+                        Me.cmenTabTransferFile.Visible = False
                     End If
 
                     If IC.Info.Protocol = mRemoteNG.Connection.Protocol.Protocols.SSH1 Or IC.Info.Protocol = mRemoteNG.Connection.Protocol.Protocols.SSH2 Then
-                        Me.cmenTabTransferFile.Enabled = True
+                        Me.cmenTabTransferFile.Visible = True
                     End If
 
                     If TypeOf IC.Protocol Is mRemoteNG.Connection.Protocol.PuttyBase Then
-                        Me.cmenTabPuttySettings.Enabled = True
+                        Me.cmenTabPuttySettings.Visible = True
                     Else
-                        Me.cmenTabPuttySettings.Enabled = False
+                        Me.cmenTabPuttySettings.Visible = False
                     End If
 
                     AddExternalApps()
