@@ -753,7 +753,14 @@ Namespace UI
             Private Sub AddExternalApps()
                 Try
                     'clean up
-                    cmenTabExternalApps.DropDownItems.Clear()
+                    'since new items are added below, we have to dispose of any previous items first
+                    If cmenTabExternalApps.DropDownItems.Count > 0 Then
+                        For Each mitem As ToolStripMenuItem In cmenTabExternalApps.DropDownItems
+                            mitem.Dispose()
+                        Next mitem
+                        cmenTabExternalApps.DropDownItems.Clear()
+                    End If
+
 
                     'add ext apps
                     For Each extA As Tools.ExternalTool In Runtime.ExternalTools
