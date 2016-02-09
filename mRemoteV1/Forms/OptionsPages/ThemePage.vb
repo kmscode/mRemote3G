@@ -1,12 +1,12 @@
 ﻿Imports System.ComponentModel
-Imports mRemoteNG.My
-Imports mRemoteNG.Themes
+Imports mRemote3G.App.Info
+Imports mRemote3G.Themes
 
 Namespace Forms.OptionsPages
     Public Class ThemePage
         Public Overrides Property PageName() As String
             Get
-                Return Language.strOptionsTabTheme
+                Return Language.Language.strOptionsTabTheme
             End Get
             Set(value As String)
             End Set
@@ -15,8 +15,8 @@ Namespace Forms.OptionsPages
         Public Overrides Sub ApplyLanguage()
             MyBase.ApplyLanguage()
 
-            btnThemeDelete.Text = Language.strOptionsThemeButtonDelete
-            btnThemeNew.Text = Language.strOptionsThemeButtonNew
+            btnThemeDelete.Text = Language.Language.strOptionsThemeButtonDelete
+            btnThemeNew.Text = Language.Language.strOptionsThemeButtonNew
         End Sub
 
         Public Overrides Sub LoadSettings()
@@ -36,7 +36,7 @@ Namespace Forms.OptionsPages
             MyBase.SaveSettings()
 
             ThemeManager.SaveThemes(_themeList)
-            Settings.ThemeName = ThemeManager.ActiveTheme.Name
+            My.Settings.ThemeName = ThemeManager.ActiveTheme.Name
         End Sub
 
         Public Overrides Sub RevertSettings()
@@ -75,7 +75,7 @@ Namespace Forms.OptionsPages
 
         Private Sub btnThemeNew_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnThemeNew.Click
             Dim newTheme As ThemeInfo = ThemeManager.ActiveTheme.Clone()
-            newTheme.Name = Language.strUnnamedTheme
+            newTheme.Name = Language.Language.strUnnamedTheme
 
             _themeList.Add(newTheme)
 

@@ -1,5 +1,5 @@
 ﻿Imports System.ComponentModel
-Imports mRemoteNG.Tools
+Imports mRemote3G.Tools
 
 Namespace Config.Putty
     Public Class Sessions
@@ -36,7 +36,7 @@ Namespace Config.Putty
                 End If
 
                 Dim newTreeNodes As New List(Of TreeNode)
-                For Each sessionInfo As Connection.PuttySession.Info In savedSessions
+                For Each sessionInfo As Connection.PuttySession.PuttyInfo In savedSessions
                     Dim treeNode As TreeNode
                     Dim isNewNode As Boolean
                     If rootTreeNode.Nodes.ContainsKey(sessionInfo.Name) Then

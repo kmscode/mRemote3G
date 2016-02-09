@@ -1,8 +1,6 @@
 Imports System.ComponentModel
-Imports mRemoteNG.My
-Imports WeifenLuo.WinFormsUI.Docking
 Imports System.IO
-Imports mRemoteNG.App.Runtime
+Imports WeifenLuo.WinFormsUI.Docking
 
 Namespace UI
     Namespace Window
@@ -13,7 +11,7 @@ Namespace UI
                 WindowType = Type.Update
                 DockPnl = panel
                 InitializeComponent()
-                FontOverride(Me)
+                App.Runtime.FontOverride(Me)
             End Sub
 #End Region
 
@@ -24,15 +22,15 @@ Namespace UI
             End Sub
 
             Private Sub ApplyLanguage()
-                Text = Language.strMenuCheckForUpdates
-                TabText = Language.strMenuCheckForUpdates
-                btnCheckForUpdate.Text = Language.strCheckForUpdate
-                btnDownload.Text = Language.strDownloadAndInstall
-                lblChangeLogLabel.Text = Language.strLabelChangeLog
-                lblInstalledVersion.Text = Language.strVersion
-                lblInstalledVersionLabel.Text = String.Format("{0}:", Language.strCurrentVersion)
-                lblLatestVersion.Text = Language.strVersion
-                lblLatestVersionLabel.Text = String.Format("{0}:", Language.strAvailableVersion)
+                Text = Language.Language.strMenuCheckForUpdates
+                TabText = Language.Language.strMenuCheckForUpdates
+                btnCheckForUpdate.Text = Language.Language.strCheckForUpdate
+                btnDownload.Text = Language.Language.strDownloadAndInstall
+                lblChangeLogLabel.Text = Language.Language.strLabelChangeLog
+                lblInstalledVersion.Text = Language.Language.strVersion
+                lblInstalledVersionLabel.Text = String.Format("{0}:", Language.Language.strCurrentVersion)
+                lblLatestVersion.Text = Language.Language.strVersion
+                lblLatestVersionLabel.Text = String.Format("{0}:", Language.Language.strAvailableVersion)
             End Sub
 
             Private Sub btnCheckForUpdate_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btnCheckForUpdate.Click
@@ -90,7 +88,7 @@ Namespace UI
                 Try
                     RemoveHandler _appUpdate.GetUpdateInfoCompletedEvent, AddressOf GetUpdateInfoCompleted
 
-                    lblInstalledVersion.Text = Application.Info.Version.ToString
+                    lblInstalledVersion.Text = My.Application.Info.Version.ToString
                     lblInstalledVersion.Visible = True
                     lblInstalledVersionLabel.Visible = True
                     btnCheckForUpdate.Visible = True
@@ -99,7 +97,7 @@ Namespace UI
                     If e.Error IsNot Nothing Then Throw e.Error
 
                     If _appUpdate.IsUpdateAvailable() Then
-                        lblStatus.Text = Language.strUpdateAvailable
+                        lblStatus.Text = Language.Language.strUpdateAvailable
                         lblStatus.ForeColor = Color.OrangeRed
                         pnlUpdate.Visible = True
 
@@ -121,7 +119,7 @@ Namespace UI
 
                         btnDownload.Focus()
                     Else
-                        lblStatus.Text = Language.strNoUpdateAvailable
+                        lblStatus.Text = Language.Language.strNoUpdateAvailable
                         lblStatus.ForeColor = Color.ForestGreen
 
                         If _appUpdate.CurrentUpdateInfo IsNot Nothing Then
@@ -134,10 +132,10 @@ Namespace UI
                         End If
                     End If
                 Catch ex As Exception
-                    lblStatus.Text = Language.strUpdateCheckFailedLabel
+                    lblStatus.Text = Language.Language.strUpdateCheckFailedLabel
                     lblStatus.ForeColor = Color.OrangeRed
 
-                    MessageCollector.AddExceptionMessage(Language.strUpdateCheckCompleteFailed, ex)
+                   App.Runtime.MessageCollector.AddExceptionMessage(Language.Language.strUpdateCheckCompleteFailed, ex)
                 End Try
             End Sub
 
@@ -156,7 +154,7 @@ Namespace UI
 
                     txtChangeLog.Text = _appUpdate.ChangeLog
                 Catch ex As Exception
-                    MessageCollector.AddExceptionMessage(Language.strUpdateGetChangeLogFailed, ex)
+                   App.Runtime.MessageCollector.AddExceptionMessage(Language.Language.strUpdateGetChangeLogFailed, ex)
                 End Try
             End Sub
 
@@ -174,7 +172,7 @@ Namespace UI
 
                     _appUpdate.DownloadUpdateAsync()
                 Catch ex As Exception
-                    MessageCollector.AddExceptionMessage(Language.strUpdateDownloadFailed, ex)
+                   App.Runtime.MessageCollector.AddExceptionMessage(Language.Language.strUpdateDownloadFailed, ex)
                 End Try
             End Sub
 #End Region
@@ -192,14 +190,14 @@ Namespace UI
                     If e.Cancelled Then Return
                     If e.Error IsNot Nothing Then Throw e.Error
 
-                    If MessageBox.Show(Language.strUpdateDownloadComplete, Language.strMenuCheckForUpdates, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) = System.Windows.Forms.DialogResult.OK Then
-                        Shutdown.Quit(_appUpdate.CurrentUpdateInfo.UpdateFilePath)
+                    If MessageBox.Show(Language.Language.strUpdateDownloadComplete, Language.Language.strMenuCheckForUpdates, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) = System.Windows.Forms.DialogResult.OK Then
+                        App.Runtime.Shutdown.Quit(_appUpdate.CurrentUpdateInfo.UpdateFilePath)
                         Return
                     Else
                         File.Delete(_appUpdate.CurrentUpdateInfo.UpdateFilePath)
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddExceptionMessage(Language.strUpdateDownloadCompleteFailed, ex)
+                   App.Runtime.MessageCollector.AddExceptionMessage(Language.Language.strUpdateDownloadCompleteFailed, ex)
                 End Try
             End Sub
 #End Region

@@ -1,6 +1,5 @@
-﻿Imports mRemoteNG.Forms.OptionsPages
-Imports mRemoteNG.App.Runtime
-Imports mRemoteNG.My
+﻿Imports mRemote3G.Forms.OptionsPages
+Imports mRemote3G.App.Runtime
 
 Namespace Forms
     Public Class OptionsForm
@@ -97,9 +96,9 @@ Namespace Forms
 #End Region
 
         Private Sub ApplyLanguage()
-            Text = Language.strMenuOptions
-            OkButton.Text = Language.strButtonOK
-            CancelButtonControl.Text = Language.strButtonCancel
+            Text = Language.Language.strMenuOptions
+            OkButton.Text = Language.Language.strButtonOK
+            CancelButtonControl.Text = Language.Language.strButtonCancel
 
             For Each page As OptionsPage In _pages.Keys
                 Try

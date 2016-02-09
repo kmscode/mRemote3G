@@ -1,6 +1,6 @@
 ﻿Imports System.IO
 Imports Microsoft.Win32
-Imports mRemoteNG.App.Runtime
+Imports mRemote3G.App.Runtime
 
 Namespace Tools
     Public Class IeBrowserEmulation

@@ -1,7 +1,6 @@
 ﻿Imports System.ComponentModel
-Imports mRemoteNG.Config.Connections
-Imports mRemoteNG.App
-Imports mRemoteNG.My
+Imports mRemote3G.App
+Imports mRemote3G.Config.Connections
 
 Namespace Forms
     Public Class ExportForm
@@ -17,16 +16,16 @@ Namespace Forms
             End Set
         End Property
 
-        Public Property SaveFormat As Config.Connections.Save.Format
+        Public Property SaveFormat As Config.Connections.ConnectionsSave.Format
             Get
                 Dim exportFormat As ExportFormat = TryCast(cboFileFormat.SelectedItem, ExportFormat)
                 If exportFormat Is Nothing Then
-                    Return Config.Connections.Save.Format.mRXML
+                    Return Config.Connections.ConnectionsSave.Format.mRXML
                 Else
                     Return exportFormat.Format
                 End If
             End Get
-            Set(value As Config.Connections.Save.Format)
+            Set(value As Config.Connections.ConnectionsSave.Format)
                 For Each item As Object In cboFileFormat.Items
                     Dim exportFormat As ExportFormat = TryCast(item, ExportFormat)
                     If exportFormat Is Nothing Then Continue For
@@ -133,7 +132,7 @@ Namespace Forms
         Public Sub New()
             InitializeComponent()
 
-            Runtime.FontOverride(Me)
+           App.Runtime.FontOverride(Me)
 
             SelectedFolder = Nothing
             SelectedConnection = Nothing
@@ -146,9 +145,9 @@ Namespace Forms
 #Region "Event Handlers"
         Private Sub ExportForm_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
             cboFileFormat.Items.Clear()
-            cboFileFormat.Items.Add(New ExportFormat(Save.Format.mRXML))
-            cboFileFormat.Items.Add(New ExportFormat(Save.Format.mRCSV))
-            cboFileFormat.Items.Add(New ExportFormat(Save.Format.vRDCSV))
+            cboFileFormat.Items.Add(New ExportFormat(ConnectionsSave.Format.mRXML))
+            cboFileFormat.Items.Add(New ExportFormat(ConnectionsSave.Format.mRCSV))
+            cboFileFormat.Items.Add(New ExportFormat(ConnectionsSave.Format.vRDCSV))
             cboFileFormat.SelectedIndex = 0
 
             ApplyLanguage()
@@ -166,10 +165,10 @@ Namespace Forms
                     .OverwritePrompt = True
 
                     Dim fileTypes As New List(Of String)
-                    fileTypes.AddRange({Language.strFiltermRemoteXML, "*.xml"})
-                    fileTypes.AddRange({Language.strFiltermRemoteCSV, "*.csv"})
-                    fileTypes.AddRange({Language.strFiltervRD2008CSV, "*.csv"})
-                    fileTypes.AddRange({Language.strFilterAll, "*.*"})
+                    fileTypes.AddRange({Language.Language.strFiltermRemoteXML, "*.xml"})
+                    fileTypes.AddRange({Language.Language.strFiltermRemoteCSV, "*.csv"})
+                    fileTypes.AddRange({Language.Language.strFiltervRD2008CSV, "*.csv"})
+                    fileTypes.AddRange({Language.Language.strFilterAll, "*.*"})
 
                     .Filter = String.Join("|", fileTypes.ToArray())
                 End With
@@ -190,27 +189,27 @@ Namespace Forms
 #End Region
 
         Private Sub ApplyLanguage()
-            Text = Language.strExport
+            Text = Language.Language.strExport
 
-            grpFile.Text = Language.strExportFile
-            lblFileName.Text = Language.strLabelFilename
-            btnBrowse.Text = Language.strButtonBrowse
-            lblFileFormat.Text = Language.strFileFormatLabel
+            grpFile.Text = Language.Language.strExportFile
+            lblFileName.Text = Language.Language.strLabelFilename
+            btnBrowse.Text = Language.Language.strButtonBrowse
+            lblFileFormat.Text = Language.Language.strFileFormatLabel
 
-            grpItems.Text = Language.strExportItems
-            rdoExportEverything.Text = Language.strExportEverything
-            rdoExportSelectedFolder.Text = Language.strExportSelectedFolder
-            rdoExportSelectedConnection.Text = Language.strExportSelectedConnection
+            grpItems.Text = Language.Language.strExportItems
+            rdoExportEverything.Text = Language.Language.strExportEverything
+            rdoExportSelectedFolder.Text = Language.Language.strExportSelectedFolder
+            rdoExportSelectedConnection.Text = Language.Language.strExportSelectedConnection
 
-            grpProperties.Text = Language.strExportProperties
-            chkUsername.Text = Language.strCheckboxUsername
-            chkPassword.Text = Language.strCheckboxPassword
-            chkDomain.Text = Language.strCheckboxDomain
-            chkInheritance.Text = Language.strCheckboxInheritance
-            lblUncheckProperties.Text = Language.strUncheckProperties
+            grpProperties.Text = Language.Language.strExportProperties
+            chkUsername.Text = Language.Language.strCheckboxUsername
+            chkPassword.Text = Language.Language.strCheckboxPassword
+            chkDomain.Text = Language.Language.strCheckboxDomain
+            chkInheritance.Text = Language.Language.strCheckboxInheritance
+            lblUncheckProperties.Text = Language.Language.strUncheckProperties
 
-            btnOK.Text = Language.strButtonOK
-            btnCancel.Text = Language.strButtonCancel
+            btnOK.Text = Language.Language.strButtonOK
+            btnCancel.Text = Language.Language.strButtonCancel
         End Sub
 #End Region
 
@@ -223,11 +222,11 @@ Namespace Forms
 #End Region
 
 #Region "Private Classes"
-        <ImmutableObject(True)> _
+        <ImmutableObject(True)>
         Private Class ExportFormat
 #Region "Public Properties"
-            Private ReadOnly _format As Config.Connections.Save.Format
-            Public ReadOnly Property Format As Config.Connections.Save.Format
+            Private ReadOnly _format As Config.Connections.ConnectionsSave.Format
+            Public ReadOnly Property Format As Config.Connections.ConnectionsSave.Format
                 Get
                     Return _format
                 End Get
@@ -235,7 +234,7 @@ Namespace Forms
 #End Region
 
 #Region "Constructors"
-            Public Sub New(ByVal format As Config.Connections.Save.Format)
+            Public Sub New(ByVal format As Config.Connections.ConnectionsSave.Format)
                 _format = format
             End Sub
 #End Region
@@ -243,12 +242,12 @@ Namespace Forms
 #Region "Public Methods"
             Public Overrides Function ToString() As String
                 Select Case Format
-                    Case Config.Connections.Save.Format.mRXML
-                        Return Language.strMremoteNgXml
-                    Case Config.Connections.Save.Format.mRCSV
-                        Return Language.strMremoteNgCsv
-                    Case Config.Connections.Save.Format.vRDCSV
-                        Return Language.strVisionAppRemoteDesktopCsv
+                    Case Config.Connections.ConnectionsSave.Format.mRXML
+                        Return Language.Language.strMremoteNgXml
+                    Case Config.Connections.ConnectionsSave.Format.mRCSV
+                        Return Language.Language.strMremoteNgCsv
+                    Case Config.Connections.ConnectionsSave.Format.vRDCSV
+                        Return Language.Language.strVisionAppRemoteDesktopCsv
                     Case Else
                         Return Format.ToString()
                 End Select

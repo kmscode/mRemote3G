@@ -1,6 +1,6 @@
 Imports System.Windows.Forms
 Imports System.ComponentModel
-Imports mRemoteNG.Tools.LocalizedAttributes
+Imports mRemote3G.Tools.LocalizedAttributes
 
 Namespace Root
     <DefaultProperty("Name")> _
@@ -12,7 +12,7 @@ Namespace Root
 #End Region
 
 #Region "Public Properties"
-        Private _name As String = My.Language.strConnections
+        Private _name As String = Language.Language.strConnections
         <LocalizedCategory("strCategoryDisplay", 1), _
             Browsable(True), _
             LocalizedDefaultValue("strConnections"), _

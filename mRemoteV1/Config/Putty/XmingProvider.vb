@@ -1,8 +1,8 @@
 ﻿Imports System.IO
-Imports mRemoteNG.App
-Imports mRemoteNG.Messages
-Imports mRemoteNG.Connection.Protocol
+Imports mRemote3G.App
+Imports mRemote3G.Messages
 Imports System.Text.RegularExpressions
+Imports mRemote3G.Connection.Protocol
 
 Namespace Config.Putty
     Public Class XmingProvider
@@ -44,7 +44,7 @@ Namespace Config.Putty
             Return sessionNames.ToArray()
         End Function
 
-        Public Overrides Function GetSession(ByVal sessionName As String) As Connection.PuttySession.Info
+        Public Overrides Function GetSession(ByVal sessionName As String) As Connection.PuttySession.PuttyInfo
             Dim registrySessionName As String = GetRegistrySessionName(sessionName)
             If Not String.IsNullOrEmpty(registrySessionName) Then
                 Return ModifyRegistrySessionInfo(RegistryProvider.GetSession(registrySessionName))
@@ -59,7 +59,7 @@ Namespace Config.Putty
             sessionName = Web.HttpUtility.UrlDecode(sessionName.Replace("+", "%2B"))
 
             Dim sessionFileReader As New SessionFileReader(sessionFile)
-            Dim sessionInfo As New Connection.PuttySession.Info
+            Dim sessionInfo As New Connection.PuttySession.PuttyInfo
             With sessionInfo
                 .PuttySession = sessionName
                 .Name = sessionName
@@ -112,7 +112,7 @@ Namespace Config.Putty
                 AddHandler _eventWatcher.Renamed, AddressOf OnFileSystemEventArrived
                 _eventWatcher.EnableRaisingEvents = True
             Catch ex As Exception
-                Runtime.MessageCollector.AddExceptionMessage("XmingPortablePuttySessions.Watcher.StartWatching() failed.", ex, MessageClass.WarningMsg, True)
+               App.Runtime.MessageCollector.AddExceptionMessage("XmingPortablePuttySessions.Watcher.StartWatching() failed.", ex, MessageClass.WarningMsg, True)
             End Try
         End Sub
 
@@ -165,7 +165,7 @@ Namespace Config.Putty
             Return groups(1).Value
         End Function
 
-        Private Shared Function ModifyRegistrySessionInfo(ByVal sessionInfo As Connection.PuttySession.Info) As Connection.PuttySession.Info
+        Private Shared Function ModifyRegistrySessionInfo(ByVal sessionInfo As Connection.PuttySession.PuttyInfo) As Connection.PuttySession.PuttyInfo
             sessionInfo.Name = String.Format(RegistrySessionNameFormat, sessionInfo.Name)
             sessionInfo.PuttySession = String.Format(RegistrySessionNameFormat, sessionInfo.PuttySession)
             Return sessionInfo
@@ -209,7 +209,7 @@ Namespace Config.Putty
                         Loop
                     End Using
                 Catch ex As Exception
-                    Runtime.MessageCollector.AddExceptionMessage("PuttyConfFileReader.LoadConfiguration() failed.", ex, MessageClass.ErrorMsg, True)
+                   App.Runtime.MessageCollector.AddExceptionMessage("PuttyConfFileReader.LoadConfiguration() failed.", ex, MessageClass.ErrorMsg, True)
                 End Try
             End Sub
 
@@ -244,7 +244,7 @@ Namespace Config.Putty
                         Loop
                     End Using
                 Catch ex As Exception
-                    Runtime.MessageCollector.AddExceptionMessage("SessionFileReader.LoadSessionInfo() failed.", ex, MessageClass.ErrorMsg, True)
+                   App.Runtime.MessageCollector.AddExceptionMessage("SessionFileReader.LoadSessionInfo() failed.", ex, MessageClass.ErrorMsg, True)
                 End Try
             End Sub
 

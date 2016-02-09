@@ -1,4 +1,5 @@
-Imports mRemoteNG.Tools.LocalizedAttributes
+
+Imports mRemote3G.Tools
 
 Namespace Connection
     Namespace Protocol
@@ -20,25 +21,25 @@ Namespace Connection
         End Class
 
         Public Enum Protocols
-            <LocalizedDescription("strRDP")>
+            <LocalizedAttributes.LocalizedDescription("strRDP")>
             RDP = 0
-            <LocalizedDescription("strVnc")>
+            <LocalizedAttributes.LocalizedDescription("strVnc")>
             VNC = 1
-            <LocalizedDescription("strSsh1")>
+            <LocalizedAttributes.LocalizedDescription("strSsh1")>
             SSH1 = 2
-            <LocalizedDescription("strSsh2")>
+            <LocalizedAttributes.LocalizedDescription("strSsh2")>
             SSH2 = 3
-            <LocalizedDescription("strTelnet")>
+            <LocalizedAttributes.LocalizedDescription("strTelnet")>
             Telnet = 4
-            <LocalizedDescription("strRlogin")>
+            <LocalizedAttributes.LocalizedDescription("strRlogin")>
             Rlogin = 5
-            <LocalizedDescription("strRAW")>
+            <LocalizedAttributes.LocalizedDescription("strRAW")>
             RAW = 6
-            <LocalizedDescription("strHttp")>
+            <LocalizedAttributes.LocalizedDescription("strHttp")>
             HTTP = 7
-            <LocalizedDescription("strHttps")>
+            <LocalizedAttributes.LocalizedDescription("strHttps")>
             HTTPS = 8
-            <LocalizedDescription("strExtApp")>
+            <LocalizedAttributes.LocalizedDescription("strExtApp")>
             IntApp = 20
         End Enum
     End Namespace

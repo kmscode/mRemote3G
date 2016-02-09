@@ -1,6 +1,8 @@
-Imports mRemoteNG.App.Runtime
-Imports System.Xml
 Imports System.IO
+Imports System.Xml
+Imports mRemote3G.My
+Imports mRemote3G.Tools
+Imports mRemote3G.Forms
 
 Namespace Config
     Namespace Settings
@@ -15,45 +17,45 @@ Namespace Config
                             .WindowState = FormWindowState.Maximized
                         End If
 
-                        My.Settings.MainFormLocation = .Location
-                        My.Settings.MainFormSize = .Size
+                        MySettingsProperty.Settings.MainFormLocation = .Location
+                        MySettingsProperty.Settings.MainFormSize = .Size
 
                         If Not .WindowState = FormWindowState.Normal Then
-                            My.Settings.MainFormRestoreLocation = .RestoreBounds.Location
-                            My.Settings.MainFormRestoreSize = .RestoreBounds.Size
+                            MySettingsProperty.Settings.MainFormRestoreLocation = .RestoreBounds.Location
+                            MySettingsProperty.Settings.MainFormRestoreSize = .RestoreBounds.Size
                         End If
 
-                        My.Settings.MainFormState = .WindowState
+                        MySettingsProperty.Settings.MainFormState = .WindowState
 
-                        My.Settings.MainFormKiosk = .Fullscreen.Value
+                        MySettingsProperty.Settings.MainFormKiosk = frmMain.Fullscreen.Value
 
-                        My.Settings.FirstStart = False
-                        My.Settings.ResetPanels = False
-                        My.Settings.ResetToolbars = False
-                        My.Settings.NoReconnect = False
+                        MySettingsProperty.Settings.FirstStart = False
+                        MySettingsProperty.Settings.ResetPanels = False
+                        MySettingsProperty.Settings.ResetToolbars = False
+                        MySettingsProperty.Settings.NoReconnect = False
 
-                        My.Settings.ExtAppsTBLocation = .tsExternalTools.Location
+                        MySettingsProperty.Settings.ExtAppsTBLocation = .tsExternalTools.Location
                         If .tsExternalTools.Parent IsNot Nothing Then
-                            My.Settings.ExtAppsTBParentDock = .tsExternalTools.Parent.Dock.ToString
+                            MySettingsProperty.Settings.ExtAppsTBParentDock = .tsExternalTools.Parent.Dock.ToString
                         End If
-                        My.Settings.ExtAppsTBVisible = .tsExternalTools.Visible
-                        My.Settings.ExtAppsTBShowText = .cMenToolbarShowText.Checked
+                        MySettingsProperty.Settings.ExtAppsTBVisible = .tsExternalTools.Visible
+                        MySettingsProperty.Settings.ExtAppsTBShowText = .cMenToolbarShowText.Checked
 
-                        My.Settings.QuickyTBLocation = .tsQuickConnect.Location
+                        MySettingsProperty.Settings.QuickyTBLocation = .tsQuickConnect.Location
                         If .tsQuickConnect.Parent IsNot Nothing Then
-                            My.Settings.QuickyTBParentDock = .tsQuickConnect.Parent.Dock.ToString
+                            MySettingsProperty.Settings.QuickyTBParentDock = .tsQuickConnect.Parent.Dock.ToString
                         End If
-                        My.Settings.QuickyTBVisible = .tsQuickConnect.Visible
+                        MySettingsProperty.Settings.QuickyTBVisible = .tsQuickConnect.Visible
 
-                        My.Settings.ConDefaultPassword = Security.Crypt.Encrypt(My.Settings.ConDefaultPassword, App.Info.General.EncryptionKey)
+                        MySettingsProperty.Settings.ConDefaultPassword = Security.Crypt.Encrypt(MySettingsProperty.Settings.ConDefaultPassword, App.Info.General.EncryptionKey)
 
-                        My.Settings.Save()
+                        MySettingsProperty.Settings.Save()
                     End With
 
                     SavePanelsToXML()
                     SaveExternalAppsToXML()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Saving settings failed" & vbNewLine & vbNewLine & ex.ToString(), False)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Saving settings failed" & vbNewLine & vbNewLine & ex.ToString(), False)
                 End Try
             End Sub
 
@@ -65,7 +67,7 @@ Namespace Config
 
                     frmMain.pnlDock.SaveAsXml(App.Info.Settings.SettingsPath & "\" & App.Info.Settings.LayoutFileName)
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SavePanelsToXML failed" & vbNewLine & vbNewLine & ex.ToString(), False)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SavePanelsToXML failed" & vbNewLine & vbNewLine & ex.ToString(), False)
                 End Try
             End Sub
 
@@ -82,7 +84,7 @@ Namespace Config
                     xmlTextWriter.WriteStartDocument()
                     xmlTextWriter.WriteStartElement("Apps")
 
-                    For Each extA As Tools.ExternalTool In ExternalTools
+                    For Each extA As Tools.ExternalTool In App.Runtime.ExternalTools
                         xmlTextWriter.WriteStartElement("App")
                         xmlTextWriter.WriteAttributeString("DisplayName", "", extA.DisplayName)
                         xmlTextWriter.WriteAttributeString("FileName", "", extA.FileName)
@@ -97,7 +99,7 @@ Namespace Config
 
                     xmlTextWriter.Close()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SaveExternalAppsToXML failed" & vbNewLine & vbNewLine & ex.ToString(), False)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SaveExternalAppsToXML failed" & vbNewLine & vbNewLine & ex.ToString(), False)
                 End Try
             End Sub
 

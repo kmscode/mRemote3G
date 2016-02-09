@@ -1,8 +1,8 @@
 Imports System.Windows.Forms
 Imports System.ComponentModel
-Imports mRemoteNG.Tools.LocalizedAttributes
-Imports mRemoteNG.App.Runtime
-Imports mRemoteNG.Config
+Imports mRemote3G.Tools.LocalizedAttributes
+Imports mRemote3G.App.Runtime
+Imports mRemote3G.Config
 Imports System.Reflection
 
 Namespace Connection
@@ -11,14 +11,14 @@ Namespace Connection
 #Region "Public Properties"
 #Region "Display"
         <LocalizedCategory("strCategoryDisplay", 1), _
-            LocalizedDisplayName("strPropertyNameName"), _
-            LocalizedDescription("strPropertyDescriptionName")> _
-        Public Overridable Property Name() As String = My.Language.strNewConnection
+            LocalizedDisplayName("strPropertyNameName"),
+            LocalizedDescription("strPropertyDescriptionName")>
+        Public Overridable Property Name() As String = Language.Language.strNewConnection
 
         Private _description As String = My.Settings.ConDefaultDescription
-        <LocalizedCategory("strCategoryDisplay", 1), _
-            LocalizedDisplayName("strPropertyNameDescription"), _
-            LocalizedDescription("strPropertyDescriptionDescription")> _
+        <LocalizedCategory("strCategoryDisplay", 1),
+            LocalizedDisplayName("strPropertyNameDescription"),
+            LocalizedDescription("strPropertyDescriptionDescription")>
         Public Overridable Property Description() As String
             Get
                 Return GetInheritedPropertyValue("Description", _description)
@@ -29,10 +29,10 @@ Namespace Connection
         End Property
 
         Private _icon As String = My.Settings.ConDefaultIcon
-        <LocalizedCategory("strCategoryDisplay", 1), _
-            TypeConverter(GetType(Icon)), _
-            LocalizedDisplayName("strPropertyNameIcon"), _
-            LocalizedDescription("strPropertyDescriptionIcon")> _
+        <LocalizedCategory("strCategoryDisplay", 1),
+            TypeConverter(GetType(Icon)),
+            LocalizedDisplayName("strPropertyNameIcon"),
+            LocalizedDescription("strPropertyDescriptionIcon")>
         Public Overridable Property Icon() As String
             Get
                 Return GetInheritedPropertyValue("Icon", _icon)
@@ -42,10 +42,10 @@ Namespace Connection
             End Set
         End Property
 
-        Private _panel As String = My.Language.strGeneral
-        <LocalizedCategory("strCategoryDisplay", 1), _
-            LocalizedDisplayName("strPropertyNamePanel"), _
-            LocalizedDescription("strPropertyDescriptionPanel")> _
+        Private _panel As String = Language.Language.strGeneral
+        <LocalizedCategory("strCategoryDisplay", 1),
+            LocalizedDisplayName("strPropertyNamePanel"),
+            LocalizedDescription("strPropertyDescriptionPanel")>
         Public Overridable Property Panel() As String
             Get
                 Return GetInheritedPropertyValue("Panel", _panel)
@@ -678,11 +678,11 @@ Namespace Connection
         End Property
 
         Private _vncProxyPassword As String = My.Settings.ConDefaultVNCProxyPassword
-        <LocalizedCategory("strCategoryMiscellaneous", 7), _
-            Browsable(False), _
-            LocalizedDisplayName("strPropertyNameVNCProxyPassword"), _
-            LocalizedDescription("strPropertyDescriptionVNCProxyPassword"), _
-            PasswordPropertyText(True)> _
+        <LocalizedCategory("strCategoryMiscellaneous", 7),
+            Browsable(False),
+            LocalizedDisplayName("strPropertyNameVNCProxyPassword"),
+            LocalizedDescription("strPropertyDescriptionVNCProxyPassword"),
+            PasswordPropertyText(True)>
         Public Property VNCProxyPassword() As String
             Get
                 Return GetInheritedPropertyValue("VNCProxyPassword", _vncProxyPassword)
@@ -693,11 +693,11 @@ Namespace Connection
         End Property
 
         Private _vncColors As Protocol.VNC.Colors = Tools.Misc.StringToEnum(GetType(Protocol.VNC.Colors), My.Settings.ConDefaultVNCColors)
-        <LocalizedCategory("strCategoryAppearance", 5), _
-            Browsable(False), _
-            LocalizedDisplayName("strPropertyNameColors"), _
-            LocalizedDescription("strPropertyDescriptionColors"), _
-            TypeConverter(GetType(Tools.Misc.EnumTypeConverter))> _
+        <LocalizedCategory("strCategoryAppearance", 5),
+            Browsable(False),
+            LocalizedDisplayName("strPropertyNameColors"),
+            LocalizedDescription("strPropertyDescriptionColors"),
+            TypeConverter(GetType(Tools.Misc.EnumTypeConverter))>
         Public Property VNCColors() As Protocol.VNC.Colors
             Get
                 Return GetInheritedPropertyValue("VNCColors", _vncColors)
@@ -708,10 +708,10 @@ Namespace Connection
         End Property
 
         Private _vncSmartSizeMode As Protocol.VNC.SmartSizeMode = Tools.Misc.StringToEnum(GetType(Protocol.VNC.SmartSizeMode), My.Settings.ConDefaultVNCSmartSizeMode)
-        <LocalizedCategory("strCategoryAppearance", 5), _
-            LocalizedDisplayName("strPropertyNameSmartSizeMode"), _
-            LocalizedDescription("strPropertyDescriptionSmartSizeMode"), _
-            TypeConverter(GetType(Tools.Misc.EnumTypeConverter))> _
+        <LocalizedCategory("strCategoryAppearance", 5),
+            LocalizedDisplayName("strPropertyNameSmartSizeMode"),
+            LocalizedDescription("strPropertyDescriptionSmartSizeMode"),
+            TypeConverter(GetType(Tools.Misc.EnumTypeConverter))>
         Public Property VNCSmartSizeMode() As Protocol.VNC.SmartSizeMode
             Get
                 Return GetInheritedPropertyValue("VNCSmartSizeMode", _vncSmartSizeMode)
@@ -722,10 +722,10 @@ Namespace Connection
         End Property
 
         Private _vncViewOnly As Boolean = My.Settings.ConDefaultVNCViewOnly
-        <LocalizedCategory("strCategoryAppearance", 5), _
-            LocalizedDisplayName("strPropertyNameViewOnly"), _
-            LocalizedDescription("strPropertyDescriptionViewOnly"), _
-            TypeConverter(GetType(Tools.Misc.YesNoTypeConverter))> _
+        <LocalizedCategory("strCategoryAppearance", 5),
+            LocalizedDisplayName("strPropertyNameViewOnly"),
+            LocalizedDescription("strPropertyDescriptionViewOnly"),
+            TypeConverter(GetType(Tools.Misc.YesNoTypeConverter))>
         Public Property VNCViewOnly() As Boolean
             Get
                 Return GetInheritedPropertyValue("VNCViewOnly", _vncViewOnly)
@@ -736,34 +736,34 @@ Namespace Connection
         End Property
 #End Region
 
-        <Browsable(False)> _
+        <Browsable(False)>
         Public Property Inherit() As New Inheritance(Me)
 
-        <Browsable(False)> _
-        Public Property OpenConnections() As New Protocol.List
+        <Browsable(False)>
+        Public Property OpenConnections() As New Protocol.ProtoList
 
-        <Browsable(False)> _
+        <Browsable(False)>
         Public Property IsContainer() As Boolean = False
 
-        <Browsable(False)> _
+        <Browsable(False)>
         Public Property IsDefault() As Boolean = False
 
-        <Browsable(False)> _
+        <Browsable(False)>
         Public Property Parent() As Container.Info
 
-        <Browsable(False)> _
+        <Browsable(False)>
         Public Property PositionID() As Integer = 0
 
-        <Browsable(False)> _
+        <Browsable(False)>
         Public Property ConstantID() As String = Tools.Misc.CreateConstantID
 
-        <Browsable(False)> _
+        <Browsable(False)>
         Public Property TreeNode() As TreeNode
 
-        <Browsable(False)> _
+        <Browsable(False)>
         Public Property IsQuickConnect() As Boolean = False
 
-        <Browsable(False)> _
+        <Browsable(False)>
         Public Property PleaseConnect() As Boolean = False
 #End Region
 
@@ -775,7 +775,7 @@ Namespace Connection
         Public Sub New(ByVal parent As Container.Info)
             SetDefaults()
             IsContainer = True
-            Me.Parent = Parent
+            Me.Parent = parent
         End Sub
 #End Region
 
@@ -783,7 +783,7 @@ Namespace Connection
         Public Function Copy() As Info
             Dim newConnectionInfo As Info = MemberwiseClone()
             newConnectionInfo.ConstantID = Tools.Misc.CreateConstantID()
-            newConnectionInfo._OpenConnections = New Protocol.List
+            newConnectionInfo._OpenConnections = New Protocol.ProtoList
             Return newConnectionInfo
         End Function
 
@@ -862,7 +862,7 @@ Namespace Connection
                         Return Connection.Protocol.IntegratedProgram.Defaults.Port
                 End Select
             Catch ex As Exception
-                MessageCollector.AddExceptionMessage(My.Language.strConnectionSetDefaultPortFailed, ex, Messages.MessageClass.ErrorMsg)
+                MessageCollector.AddExceptionMessage(Language.Language.strConnectionSetDefaultPortFailed, ex, Messages.MessageClass.ErrorMsg)
             End Try
         End Function
 #End Region

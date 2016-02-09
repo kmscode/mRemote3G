@@ -1,16 +1,16 @@
-Imports System.Windows.Forms
-Imports System.Xml
-Imports System.Globalization
-Imports mRemoteNG.App.Runtime
 Imports System.Data
 Imports System.Data.SqlClient
+Imports System.Globalization
 Imports System.IO
-Imports mRemoteNG.My
+Imports System.Windows.Forms
+Imports System.Xml
+Imports mRemote3G.Forms
+Imports mRemote3G.My
 Imports PSTaskDialog
 
 Namespace Config
     Namespace Connections
-        Public Class Load
+        Public Class ConnectionsLoad
 #Region "Private Properties"
             Private xDom As XmlDocument
             Private confVersion As Double
@@ -158,14 +158,14 @@ Namespace Config
 #Region "SQL"
             Private Delegate Sub LoadFromSqlDelegate()
             Private Sub LoadFromSQL()
-                If Windows.treeForm Is Nothing OrElse Windows.treeForm.tvConnections Is Nothing Then Return
-                If Windows.treeForm.tvConnections.InvokeRequired Then
-                    Windows.treeForm.tvConnections.Invoke(New LoadFromSqlDelegate(AddressOf LoadFromSQL))
+                If App.Runtime.Windows.treeForm Is Nothing OrElse App.Runtime.Windows.treeForm.tvConnections Is Nothing Then Return
+                If App.Runtime.Windows.treeForm.tvConnections.InvokeRequired Then
+                    App.Runtime.Windows.treeForm.tvConnections.Invoke(New LoadFromSqlDelegate(AddressOf LoadFromSQL))
                     Return
                 End If
 
                 Try
-                    IsConnectionsFileLoaded = False
+                    App.Runtime.IsConnectionsFileLoaded = False
 
                     If _SQLUsername <> "" Then
                         sqlCon = New SqlConnection("Data Source=" & _SQLHost & ";Initial Catalog=" & _SQLDatabaseName & ";User Id=" & _SQLUsername & ";Password=" & _SQLPassword)
@@ -181,7 +181,7 @@ Namespace Config
                     sqlRd.Read()
 
                     If sqlRd.HasRows = False Then
-                        SaveConnections()
+                        App.Runtime.SaveConnections()
 
                         sqlQuery = New SqlCommand("SELECT * FROM tblRoot", sqlCon)
                         sqlRd = sqlQuery.ExecuteReader(CommandBehavior.CloseConnection)
@@ -208,8 +208,8 @@ Namespace Config
 
                     If Security.Crypt.Decrypt(sqlRd.Item("Protected"), pW) <> "ThisIsNotProtected" Then
                         If Authenticate(sqlRd.Item("Protected"), False, rootInfo) = False Then
-                            My.Settings.LoadConsFromCustomLocation = False
-                            My.Settings.CustomConsPath = ""
+                            MySettingsProperty.Settings.LoadConsFromCustomLocation = False
+                            MySettingsProperty.Settings.CustomConsPath = ""
                             RootTreeNode.Remove()
                             Exit Sub
                         End If
@@ -217,7 +217,7 @@ Namespace Config
 
                     sqlRd.Close()
 
-                    Windows.treeForm.tvConnections.BeginUpdate()
+                    App.Runtime.Windows.treeForm.tvConnections.BeginUpdate()
 
                     ' SECTION 3. Populate the TreeView with the DOM nodes.
                     AddNodesFromSQL(RootTreeNode)
@@ -231,19 +231,19 @@ Namespace Config
                         End If
                     Next
 
-                    Windows.treeForm.tvConnections.EndUpdate()
+                    App.Runtime.Windows.treeForm.tvConnections.EndUpdate()
 
                     'open connections from last mremote session
-                    If My.Settings.OpenConsFromLastSession = True And My.Settings.NoReconnect = False Then
+                    If MySettingsProperty.Settings.OpenConsFromLastSession = True And MySettingsProperty.Settings.NoReconnect = False Then
                         For Each conI As Connection.Info In ConnectionList
                             If conI.PleaseConnect = True Then
-                                OpenConnection(conI)
+                                App.Runtime.OpenConnection(conI)
                             End If
                         Next
                     End If
 
-                    IsConnectionsFileLoaded = True
-                    Windows.treeForm.InitialRefresh()
+                    App.Runtime.IsConnectionsFileLoaded = True
+                    App.Runtime.Windows.treeForm.InitialRefresh()
                     SetSelectedNode(_selectedTreeNode)
                 Catch ex As Exception
                     Throw
@@ -257,10 +257,10 @@ Namespace Config
             Private Delegate Sub SetSelectedNodeDelegate(ByVal treeNode As TreeNode)
             Private Shared Sub SetSelectedNode(ByVal treeNode As TreeNode)
                 If Tree.Node.TreeView IsNot Nothing AndAlso Tree.Node.TreeView.InvokeRequired Then
-                    Windows.treeForm.Invoke(New SetSelectedNodeDelegate(AddressOf SetSelectedNode), New Object() {treeNode})
+                    App.Runtime.Windows.treeForm.Invoke(New SetSelectedNodeDelegate(AddressOf SetSelectedNode), New Object() {treeNode})
                     Return
                 End If
-                Windows.treeForm.tvConnections.SelectedNode = treeNode
+                App.Runtime.Windows.treeForm.tvConnections.SelectedNode = treeNode
             End Sub
 
             Private Sub AddNodesFromSQL(ByVal baseNode As TreeNode)
@@ -383,7 +383,7 @@ Namespace Config
                         'AddNodesFromSQL(tNode)
                     End While
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strAddNodesFromSqlFailed & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.Language.strAddNodesFromSqlFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -505,9 +505,9 @@ Namespace Config
                         End If
 
                         If Me.confVersion >= 2.2 Then
-                            conI.RDGatewayUsageMethod = Tools.Misc.StringToEnum(GetType(mRemoteNG.Connection.Protocol.RDP.RDGatewayUsageMethod), .Item("RDGatewayUsageMethod"))
+                            conI.RDGatewayUsageMethod = Tools.Misc.StringToEnum(GetType(mRemote3G.Connection.Protocol.RDP.RDGatewayUsageMethod), .Item("RDGatewayUsageMethod"))
                             conI.RDGatewayHostname = .Item("RDGatewayHostname")
-                            conI.RDGatewayUseConnectionCredentials = Tools.Misc.StringToEnum(GetType(mRemoteNG.Connection.Protocol.RDP.RDGatewayUseConnectionCredentials), .Item("RDGatewayUseConnectionCredentials"))
+                            conI.RDGatewayUseConnectionCredentials = Tools.Misc.StringToEnum(GetType(mRemote3G.Connection.Protocol.RDP.RDGatewayUseConnectionCredentials), .Item("RDGatewayUseConnectionCredentials"))
                             conI.RDGatewayUsername = .Item("RDGatewayUsername")
                             conI.RDGatewayPassword = Security.Crypt.Decrypt(.Item("RDGatewayPassword"), pW)
                             conI.RDGatewayDomain = .Item("RDGatewayDomain")
@@ -544,7 +544,7 @@ Namespace Config
 
                     Return conI
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strGetConnectionInfoFromSqlFailed & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.Language.strGetConnectionInfoFromSqlFailed & vbNewLine & ex.ToString(), True)
                 End Try
 
                 Return Nothing
@@ -601,7 +601,7 @@ Namespace Config
 
             Private Sub LoadFromXML(ByVal cons As String, ByVal import As Boolean)
                 Try
-                    If Not import Then IsConnectionsFileLoaded = False
+                    If Not import Then App.Runtime.IsConnectionsFileLoaded = False
 
                     ' SECTION 1. Create a DOM Document and load the XML data into it.
                     Me.xDom = New XmlDocument()
@@ -614,7 +614,7 @@ Namespace Config
                     If xDom.DocumentElement.HasAttribute("ConfVersion") Then
                         Me.confVersion = Convert.ToDouble(xDom.DocumentElement.Attributes("ConfVersion").Value.Replace(",", "."), CultureInfo.InvariantCulture)
                     Else
-                        MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Language.strOldConffile)
+                        App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, Language.Language.strOldConffile)
                     End If
 
                     Const maxSupportedConfVersion As Double = 2.5
@@ -647,8 +647,8 @@ Namespace Config
                     If Me.confVersion > 1.3 Then '1.4
                         If Security.Crypt.Decrypt(xDom.DocumentElement.Attributes("Protected").Value, pW) <> "ThisIsNotProtected" Then
                             If Authenticate(xDom.DocumentElement.Attributes("Protected").Value, False, rootInfo) = False Then
-                                My.Settings.LoadConsFromCustomLocation = False
-                                My.Settings.CustomConsPath = ""
+                                MySettingsProperty.Settings.LoadConsFromCustomLocation = False
+                                MySettingsProperty.Settings.CustomConsPath = ""
                                 RootTreeNode.Remove()
                                 Exit Sub
                             End If
@@ -663,7 +663,7 @@ Namespace Config
                     End If
 
                     If import And Not isExportFile Then
-                        MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, My.Language.strCannotImportNormalSessionFile)
+                        App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, Language.Language.strCannotImportNormalSessionFile)
                         Return
                     End If
 
@@ -672,7 +672,7 @@ Namespace Config
                         RootTreeNode.SelectedImageIndex = Images.Enums.TreeImage.Root
                     End If
 
-                    Windows.treeForm.tvConnections.BeginUpdate()
+                    App.Runtime.Windows.treeForm.tvConnections.BeginUpdate()
 
                     ' SECTION 3. Populate the TreeView with the DOM nodes.
                     AddNodeFromXml(xDom.DocumentElement, RootTreeNode)
@@ -686,25 +686,25 @@ Namespace Config
                         End If
                     Next
 
-                    Windows.treeForm.tvConnections.EndUpdate()
+                    App.Runtime.Windows.treeForm.tvConnections.EndUpdate()
 
                     'open connections from last mremote session
-                    If My.Settings.OpenConsFromLastSession = True And My.Settings.NoReconnect = False Then
+                    If MySettingsProperty.Settings.OpenConsFromLastSession = True And MySettingsProperty.Settings.NoReconnect = False Then
                         For Each conI As Connection.Info In _ConnectionList
                             If conI.PleaseConnect = True Then
-                                OpenConnection(conI)
+                                App.Runtime.OpenConnection(conI)
                             End If
                         Next
                     End If
 
                     RootTreeNode.EnsureVisible()
 
-                    If Not import Then IsConnectionsFileLoaded = True
-                    Windows.treeForm.InitialRefresh()
+                    If Not import Then App.Runtime.IsConnectionsFileLoaded = True
+                    App.Runtime.Windows.treeForm.InitialRefresh()
                     SetSelectedNode(RootTreeNode)
                 Catch ex As Exception
                     App.Runtime.IsConnectionsFileLoaded = False
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strLoadFromXmlFailed & vbNewLine & ex.ToString() & vbNewLine & ex.StackTrace, True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.Language.strLoadFromXmlFailed & vbNewLine & ex.ToString() & vbNewLine & ex.StackTrace, True)
                     Throw
                 End Try
             End Sub
@@ -780,7 +780,7 @@ Namespace Config
                         End If
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strAddNodeFromXmlFailed & vbNewLine & ex.ToString() & ex.StackTrace, True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.Language.strAddNodeFromXmlFailed & vbNewLine & ex.ToString() & ex.StackTrace, True)
                     Throw
                 End Try
             End Sub
@@ -921,7 +921,7 @@ Namespace Config
                             conI.Inherit = New Connection.Info.Inheritance(conI, .Attributes("Inherit").Value)
 
                             conI.Icon = .Attributes("Icon").Value.Replace(".ico", "")
-                            conI.Panel = My.Language.strGeneral
+                            conI.Panel = Language.Language.strGeneral
                         End If
 
                         If Me.confVersion > 1.4 Then '1.5
@@ -936,16 +936,16 @@ Namespace Config
                         End If
 
                         If Me.confVersion > 1.6 Then '1.7
-                            conI.VNCCompression = Tools.Misc.StringToEnum(GetType(mRemoteNG.Connection.Protocol.VNC.Compression), .Attributes("VNCCompression").Value)
-                            conI.VNCEncoding = Tools.Misc.StringToEnum(GetType(mRemoteNG.Connection.Protocol.VNC.Encoding), .Attributes("VNCEncoding").Value)
-                            conI.VNCAuthMode = Tools.Misc.StringToEnum(GetType(mRemoteNG.Connection.Protocol.VNC.AuthMode), .Attributes("VNCAuthMode").Value)
-                            conI.VNCProxyType = Tools.Misc.StringToEnum(GetType(mRemoteNG.Connection.Protocol.VNC.ProxyType), .Attributes("VNCProxyType").Value)
+                            conI.VNCCompression = Tools.Misc.StringToEnum(GetType(mRemote3G.Connection.Protocol.VNC.Compression), .Attributes("VNCCompression").Value)
+                            conI.VNCEncoding = Tools.Misc.StringToEnum(GetType(mRemote3G.Connection.Protocol.VNC.Encoding), .Attributes("VNCEncoding").Value)
+                            conI.VNCAuthMode = Tools.Misc.StringToEnum(GetType(mRemote3G.Connection.Protocol.VNC.AuthMode), .Attributes("VNCAuthMode").Value)
+                            conI.VNCProxyType = Tools.Misc.StringToEnum(GetType(mRemote3G.Connection.Protocol.VNC.ProxyType), .Attributes("VNCProxyType").Value)
                             conI.VNCProxyIP = .Attributes("VNCProxyIP").Value
                             conI.VNCProxyPort = .Attributes("VNCProxyPort").Value
                             conI.VNCProxyUsername = .Attributes("VNCProxyUsername").Value
                             conI.VNCProxyPassword = Security.Crypt.Decrypt(.Attributes("VNCProxyPassword").Value, pW)
-                            conI.VNCColors = Tools.Misc.StringToEnum(GetType(mRemoteNG.Connection.Protocol.VNC.Colors), .Attributes("VNCColors").Value)
-                            conI.VNCSmartSizeMode = Tools.Misc.StringToEnum(GetType(mRemoteNG.Connection.Protocol.VNC.SmartSizeMode), .Attributes("VNCSmartSizeMode").Value)
+                            conI.VNCColors = Tools.Misc.StringToEnum(GetType(mRemote3G.Connection.Protocol.VNC.Colors), .Attributes("VNCColors").Value)
+                            conI.VNCSmartSizeMode = Tools.Misc.StringToEnum(GetType(mRemote3G.Connection.Protocol.VNC.SmartSizeMode), .Attributes("VNCSmartSizeMode").Value)
                             conI.VNCViewOnly = .Attributes("VNCViewOnly").Value
 
                             conI.Inherit.VNCCompression = .Attributes("InheritVNCCompression").Value
@@ -962,13 +962,13 @@ Namespace Config
                         End If
 
                         If Me.confVersion > 1.7 Then '1.8
-                            conI.RDPAuthenticationLevel = Tools.Misc.StringToEnum(GetType(mRemoteNG.Connection.Protocol.RDP.AuthenticationLevel), .Attributes("RDPAuthenticationLevel").Value)
+                            conI.RDPAuthenticationLevel = Tools.Misc.StringToEnum(GetType(mRemote3G.Connection.Protocol.RDP.AuthenticationLevel), .Attributes("RDPAuthenticationLevel").Value)
 
                             conI.Inherit.RDPAuthenticationLevel = .Attributes("InheritRDPAuthenticationLevel").Value
                         End If
 
                         If Me.confVersion > 1.8 Then '1.9
-                            conI.RenderingEngine = Tools.Misc.StringToEnum(GetType(mRemoteNG.Connection.Protocol.HTTPBase.RenderingEngine), .Attributes("RenderingEngine").Value)
+                            conI.RenderingEngine = Tools.Misc.StringToEnum(GetType(mRemote3G.Connection.Protocol.HTTPBase.RenderingEngine), .Attributes("RenderingEngine").Value)
                             conI.MacAddress = .Attributes("MacAddress").Value
 
                             conI.Inherit.RenderingEngine = .Attributes("InheritRenderingEngine").Value
@@ -987,9 +987,9 @@ Namespace Config
 
                         If Me.confVersion > 2.1 Then '2.2
                             ' Get settings
-                            conI.RDGatewayUsageMethod = Tools.Misc.StringToEnum(GetType(mRemoteNG.Connection.Protocol.RDP.RDGatewayUsageMethod), .Attributes("RDGatewayUsageMethod").Value)
+                            conI.RDGatewayUsageMethod = Tools.Misc.StringToEnum(GetType(mRemote3G.Connection.Protocol.RDP.RDGatewayUsageMethod), .Attributes("RDGatewayUsageMethod").Value)
                             conI.RDGatewayHostname = .Attributes("RDGatewayHostname").Value
-                            conI.RDGatewayUseConnectionCredentials = Tools.Misc.StringToEnum(GetType(mRemoteNG.Connection.Protocol.RDP.RDGatewayUseConnectionCredentials), .Attributes("RDGatewayUseConnectionCredentials").Value)
+                            conI.RDGatewayUseConnectionCredentials = Tools.Misc.StringToEnum(GetType(mRemote3G.Connection.Protocol.RDP.RDGatewayUseConnectionCredentials), .Attributes("RDGatewayUseConnectionCredentials").Value)
                             conI.RDGatewayUsername = .Attributes("RDGatewayUsername").Value
                             conI.RDGatewayPassword = Security.Crypt.Decrypt(.Attributes("RDGatewayPassword").Value, pW)
                             conI.RDGatewayDomain = .Attributes("RDGatewayDomain").Value
@@ -1026,7 +1026,7 @@ Namespace Config
                         End If
                     End With
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Language.strGetConnectionInfoFromXmlFailed, conI.Name, Me.ConnectionFileName, ex.ToString()), False)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(Language.Language.strGetConnectionInfoFromXmlFailed, conI.Name, Me.ConnectionFileName, ex.ToString()), False)
                 End Try
                 Return conI
             End Function
@@ -1034,7 +1034,7 @@ Namespace Config
             Private Function Authenticate(ByVal Value As String, ByVal CompareToOriginalValue As Boolean, Optional ByVal rootInfo As Root.Info = Nothing) As Boolean
                 Dim passwordName As String
                 If UseSQL Then
-                    passwordName = Language.strSQLServer.TrimEnd(":")
+                    passwordName = Language.Language.strSQLServer.TrimEnd(":")
                 Else
                     passwordName = Path.GetFileName(ConnectionFileName)
                 End If

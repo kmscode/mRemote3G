@@ -1,5 +1,5 @@
 ﻿Imports System.ComponentModel
-Imports mRemoteNG.App.Runtime
+Imports mRemote3G.App.Runtime
 
 Namespace Connection
     Public Class Icon

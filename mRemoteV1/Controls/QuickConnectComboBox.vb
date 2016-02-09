@@ -1,4 +1,4 @@
-﻿Imports mRemoteNG.App.Runtime
+﻿Imports mRemote3G.App.Runtime
 
 Namespace Controls
     Public Class QuickConnectComboBox
@@ -111,7 +111,7 @@ Namespace Controls
                 historyItem.ConnectionInfo = connectionInfo
                 If Not Exists(historyItem) Then _comboBox.Items.Insert(0, historyItem)
             Catch ex As Exception
-                MessageCollector.AddExceptionMessage(My.Language.strQuickConnectAddFailed, ex, Messages.MessageClass.ErrorMsg, True)
+                MessageCollector.AddExceptionMessage(Language.Language.strQuickConnectAddFailed, ex, Messages.MessageClass.ErrorMsg, True)
             End Try
         End Sub
 

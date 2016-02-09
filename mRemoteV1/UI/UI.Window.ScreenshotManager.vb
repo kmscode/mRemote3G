@@ -1,6 +1,6 @@
-﻿Imports WeifenLuo.WinFormsUI.Docking
-Imports mRemoteNG.App.Runtime
-Imports System.IO
+﻿Imports System.IO
+Imports WeifenLuo.WinFormsUI.Docking
+Imports mRemote3G.Forms
 
 Namespace UI
     Namespace Window
@@ -61,21 +61,21 @@ Namespace UI
                 'mMenFile
                 '
                 Me.mMenFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mMenFileSaveAll, Me.mMenFileRemoveAll})
-                Me.mMenFile.Image = Global.mRemoteNG.My.Resources.Resources.File
+                Me.mMenFile.Image = Global.mRemote3G.My.Resources.Resources.File
                 Me.mMenFile.Name = "mMenFile"
                 Me.mMenFile.Size = New System.Drawing.Size(51, 20)
                 Me.mMenFile.Text = "&File"
                 '
                 'mMenFileSaveAll
                 '
-                Me.mMenFileSaveAll.Image = Global.mRemoteNG.My.Resources.Resources.Screenshot_Save
+                Me.mMenFileSaveAll.Image = Global.mRemote3G.My.Resources.Resources.Screenshot_Save
                 Me.mMenFileSaveAll.Name = "mMenFileSaveAll"
                 Me.mMenFileSaveAll.Size = New System.Drawing.Size(128, 22)
                 Me.mMenFileSaveAll.Text = "Save All"
                 '
                 'mMenFileRemoveAll
                 '
-                Me.mMenFileRemoveAll.Image = Global.mRemoteNG.My.Resources.Resources.Screenshot_Delete
+                Me.mMenFileRemoveAll.Image = Global.mRemote3G.My.Resources.Resources.Screenshot_Delete
                 Me.mMenFileRemoveAll.Name = "mMenFileRemoveAll"
                 Me.mMenFileRemoveAll.Size = New System.Drawing.Size(128, 22)
                 Me.mMenFileRemoveAll.Text = "Remove All"
@@ -88,22 +88,22 @@ Namespace UI
                 '
                 'cMenScreenshotCopy
                 '
-                Me.cMenScreenshotCopy.Image = Global.mRemoteNG.My.Resources.Resources.Screenshot_Copy
+                Me.cMenScreenshotCopy.Image = Global.mRemote3G.My.Resources.Resources.Screenshot_Copy
                 Me.cMenScreenshotCopy.Name = "cMenScreenshotCopy"
                 Me.cMenScreenshotCopy.Size = New System.Drawing.Size(99, 22)
                 Me.cMenScreenshotCopy.Text = "Copy"
                 '
                 'cMenScreenshotSave
                 '
-                Me.cMenScreenshotSave.Image = Global.mRemoteNG.My.Resources.Resources.Screenshot_Save
+                Me.cMenScreenshotSave.Image = Global.mRemote3G.My.Resources.Resources.Screenshot_Save
                 Me.cMenScreenshotSave.Name = "cMenScreenshotSave"
                 Me.cMenScreenshotSave.Size = New System.Drawing.Size(99, 22)
                 Me.cMenScreenshotSave.Text = "Save"
                 '
                 'dlgSaveSingleImage
                 '
-                Me.dlgSaveSingleImage.Filter = "Graphics Interchange Format File (.gif)|*.gif|Joint Photographic Experts Group Fi" & _
-                    "le (.jpeg)|*.jpeg|Joint Photographic Experts Group File (.jpg)|*.jpg|Portable Ne" & _
+                Me.dlgSaveSingleImage.Filter = "Graphics Interchange Format File (.gif)|*.gif|Joint Photographic Experts Group Fi" &
+                    "le (.jpeg)|*.jpeg|Joint Photographic Experts Group File (.jpg)|*.jpg|Portable Ne" &
                     "twork Graphics File (.png)|*.png"
                 Me.dlgSaveSingleImage.FilterIndex = 4
                 '
@@ -113,7 +113,7 @@ Namespace UI
                 Me.Controls.Add(Me.flpScreenshots)
                 Me.Controls.Add(Me.msMain)
                 Me.HideOnClose = True
-                Me.Icon = Global.mRemoteNG.My.Resources.Resources.Screenshot_Icon
+                Me.Icon = Global.mRemote3G.My.Resources.Resources.Screenshot_Icon
                 Me.MainMenuStrip = Me.msMain
                 Me.Name = "ScreenshotManager"
                 Me.TabText = "Screenshots"
@@ -133,14 +133,14 @@ Namespace UI
             End Sub
 
             Private Sub ApplyLanguage()
-                mMenFile.Text = My.Language.strMenuFile
-                mMenFileSaveAll.Text = My.Language.strSaveAll
-                mMenFileRemoveAll.Text = My.Language.strRemoveAll
-                cMenScreenshotCopy.Text = My.Language.strMenuCopy
-                cMenScreenshotSave.Text = My.Language.strSave
-                dlgSaveSingleImage.Filter = My.Language.strSaveImageFilter
-                TabText = My.Language.strScreenshots
-                Text = My.Language.strScreenshots
+                mMenFile.Text = Language.Language.strMenuFile
+                mMenFileSaveAll.Text = Language.Language.strSaveAll
+                mMenFileRemoveAll.Text = Language.Language.strRemoveAll
+                cMenScreenshotCopy.Text = Language.Language.strMenuCopy
+                cMenScreenshotSave.Text = Language.Language.strSave
+                dlgSaveSingleImage.Filter = Language.Language.strSaveImageFilter
+                TabText = Language.Language.strScreenshots
+                Text = Language.Language.strScreenshots
             End Sub
 #End Region
 
@@ -180,7 +180,7 @@ Namespace UI
 
                     Me.Show(frmMain.pnlDock)
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "AddScreenshot (UI.Window.ScreenshotManager) failed" & vbNewLine & ex.ToString(), True)
+                   App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "AddScreenshot (UI.Window.ScreenshotManager) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 #End Region
@@ -232,7 +232,7 @@ Namespace UI
 
                     nForm.ShowDialog()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "OpenScreenshot (UI.Window.ScreenshotManager) failed" & vbNewLine & ex.ToString(), True)
+                   App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "OpenScreenshot (UI.Window.ScreenshotManager) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -240,7 +240,7 @@ Namespace UI
                 Try
                     sender.Parent.Dispose()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "btnCloseScreenshot_Click (UI.Window.ScreenshotManager) failed" & vbNewLine & ex.ToString(), True)
+                   App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "btnCloseScreenshot_Click (UI.Window.ScreenshotManager) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -279,7 +279,7 @@ Namespace UI
                         Next
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SaveAllImages (UI.Window.ScreenshotManager) failed" & vbNewLine & ex.ToString(), True)
+                   App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SaveAllImages (UI.Window.ScreenshotManager) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -291,7 +291,7 @@ Namespace UI
                 Try
                     Clipboard.SetImage(TryCast(cMenScreenshot.Tag, PictureBox).Image)
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "CopyImageToClipboard (UI.Window.ScreenshotManager) failed" & vbNewLine & ex.ToString(), True)
+                   App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "CopyImageToClipboard (UI.Window.ScreenshotManager) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -314,7 +314,7 @@ Namespace UI
                         End Select
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SaveSingleImage (UI.Window.ScreenshotManager) failed" & vbNewLine & ex.ToString(), True)
+                   App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SaveSingleImage (UI.Window.ScreenshotManager) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 

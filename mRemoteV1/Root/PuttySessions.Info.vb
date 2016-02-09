@@ -1,17 +1,18 @@
-﻿Imports mRemoteNG.My
-Imports mRemoteNG.Tools.LocalizedAttributes
+﻿
+Imports mRemote3G.App.Info
+Imports mRemote3G.Tools
 
 Namespace Root
     Namespace PuttySessions
-        Public Class Info
+        Public Class PuttySessionsInfo
             Inherits Root.Info
 
             Public Sub New()
                 MyBase.New(RootType.PuttySessions)
             End Sub
 
-            Private _name As String = Language.strPuttySavedSessionsRootName
-            <LocalizedDefaultValue("strPuttySavedSessionsRootName")> _
+            Private _name As String = Language.Language.strPuttySavedSessionsRootName
+            <LocalizedAttributes.LocalizedDefaultValue("strPuttySavedSessionsRootName")>
             Public Overrides Property Name() As String
                 Get
                     Return _name
@@ -22,14 +23,14 @@ Namespace Root
                     If TreeNode IsNot Nothing Then
                         TreeNode.Text = value
                     End If
-                    Settings.PuttySavedSessionsName = value
+                    My.Settings.PuttySavedSessionsName = value
                 End Set
             End Property
 
-            Private _panel As String = My.Language.strGeneral
-            <LocalizedCategory("strCategoryDisplay", 1), _
-            LocalizedDisplayName("strPropertyNamePanel"), _
-            LocalizedDescription("strPropertyDescriptionPanel")> _
+            Private _panel As String = Language.Language.strGeneral
+            <LocalizedAttributes.LocalizedCategory("strCategoryDisplay", 1),
+            LocalizedAttributes.LocalizedDisplayName("strPropertyNamePanel"),
+            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionPanel")>
             Public Property Panel() As String
                 Get
                     Return _panel
@@ -37,7 +38,7 @@ Namespace Root
                 Set(ByVal value As String)
                     If _panel = value Then Return
                     _panel = value
-                    Settings.PuttySavedSessionsPanel = value
+                    My.Settings.PuttySavedSessionsPanel = value
                 End Set
             End Property
         End Class

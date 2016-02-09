@@ -1,6 +1,6 @@
 ﻿Namespace Connection
     Namespace Protocol
-        Public Class List
+        Public Class ProtoList
             Inherits CollectionBase
 
 #Region "Public Properties"

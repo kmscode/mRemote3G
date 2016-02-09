@@ -1,4 +1,4 @@
-﻿Imports mRemoteNG.App.Runtime
+﻿Imports mRemote3G.App.Runtime
 Imports System.IO
 Imports System.ComponentModel
 
@@ -30,11 +30,11 @@ Namespace Tools
                         i = Icon.ToBitmap
                         Return i
                     Else
-                        Return Global.mRemoteNG.My.Resources.Resources.mRemote_Icon.ToBitmap
+                        Return Global.mRemote3G.My.Resources.Resources.mRemote_Icon.ToBitmap
                     End If
                 Catch ex As Exception
                     MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "Could not convert image to Bitmap (Tools.ExternalTool) - using default icon. Exception:" & vbNewLine & ex.ToString(), True)
-                    Return Global.mRemoteNG.My.Resources.Resources.mRemote_Icon.ToBitmap
+                    Return Global.mRemote3G.My.Resources.Resources.mRemote_Icon.ToBitmap
                 End Try
             End Get
         End Property
@@ -94,7 +94,7 @@ Namespace Tools
                     .Protocol = Connection.Protocol.Protocols.IntApp
                     .ExtApp = DisplayName
                     .Name = DisplayName
-                    .Panel = My.Language.strMenuExternalTools
+                    .Panel = Language.Language.strMenuExternalTools
                 End With
 
                 OpenConnection(newConnectionInfo)

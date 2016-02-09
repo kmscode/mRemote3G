@@ -1,6 +1,6 @@
-Imports System.Windows.Forms
 Imports System.Threading
-Imports mRemoteNG.App.Runtime
+Imports System.Windows.Forms
+Imports mRemote3G.Tools
 
 Namespace Connection
     Namespace Protocol
@@ -49,12 +49,12 @@ Namespace Connection
             End Property
 #End Region
 
-            Private _Force As mRemoteNG.Connection.Info.Force
-            Public Property Force() As mRemoteNG.Connection.Info.Force
+            Private _Force As mRemote3G.Connection.Info.Force
+            Public Property Force() As mRemote3G.Connection.Info.Force
                 Get
                     Return Me._Force
                 End Get
-                Set(ByVal value As mRemoteNG.Connection.Info.Force)
+                Set(ByVal value As mRemote3G.Connection.Info.Force)
                     Me._Force = value
                 End Set
             End Property
@@ -68,7 +68,7 @@ Namespace Connection
                 Try
                     Me._Control.Focus()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't focus Control (Connection.Protocol.Base)" & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't focus Control (Connection.Protocol.Base)" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -99,7 +99,7 @@ Namespace Connection
 
                     Return True
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't SetProps (Connection.Protocol.Base)" & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't SetProps (Connection.Protocol.Base)" & vbNewLine & ex.ToString(), True)
                     Return False
                 End Try
             End Function
@@ -131,25 +131,25 @@ Namespace Connection
                         Try
                             Me.DisposeControl()
                         Catch ex As Exception
-                            MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "Could not dispose control, probably form is already closed (Connection.Protocol.Base)" & vbNewLine & ex.ToString(), True)
+                            App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "Could not dispose control, probably form is already closed (Connection.Protocol.Base)" & vbNewLine & ex.ToString(), True)
                         End Try
                     End If
 
-                    If Me._InterfaceControl IsNot Nothing Then
+                    If Me._interfaceControl IsNot Nothing Then
                         Try
-                            If Me._InterfaceControl.Parent IsNot Nothing Then
-                                If Me._InterfaceControl.Parent.Tag IsNot Nothing Then
+                            If Me._interfaceControl.Parent IsNot Nothing Then
+                                If Me._interfaceControl.Parent.Tag IsNot Nothing Then
                                     Me.SetTagToNothing()
                                 End If
 
                                 Me.DisposeInterface()
                             End If
                         Catch ex As Exception
-                            MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "Could not set InterfaceControl.Parent.Tag or Dispose Interface, probably form is already closed (Connection.Protocol.Base)" & vbNewLine & ex.ToString(), True)
+                            App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "Could not set InterfaceControl.Parent.Tag or Dispose Interface, probably form is already closed (Connection.Protocol.Base)" & vbNewLine & ex.ToString(), True)
                         End Try
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't Close InterfaceControl BG (Connection.Protocol.Base)" & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't Close InterfaceControl BG (Connection.Protocol.Base)" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 

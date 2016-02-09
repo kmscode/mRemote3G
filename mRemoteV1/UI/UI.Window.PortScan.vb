@@ -1,7 +1,5 @@
-﻿Imports mRemoteNG.Tools.PortScan
-Imports mRemoteNG.My
+﻿Imports mRemote3G.Tools.PortScan
 Imports WeifenLuo.WinFormsUI.Docking
-Imports mRemoteNG.App.Runtime
 
 Namespace UI
     Namespace Window
@@ -56,7 +54,7 @@ Namespace UI
                         ShowImportControls(False)
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddExceptionMessage(My.Language.strPortScanCouldNotLoadPanel, ex)
+                   App.Runtime.MessageCollector.AddExceptionMessage(Language.Language.strPortScanCouldNotLoadPanel, ex)
                 End Try
             End Sub
 
@@ -75,13 +73,13 @@ Namespace UI
                     If IpsValid Then
                         StartScan()
                     Else
-                        MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Language.strCannotStartPortScan)
+                       App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, Language.Language.strCannotStartPortScan)
                     End If
                 End If
             End Sub
 
             Private Sub btnImport_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btnImport.Click
-                Dim protocol As mRemoteNG.Connection.Protocol.Protocols = Tools.Misc.StringToEnum(GetType(mRemoteNG.Connection.Protocol.Protocols), cbProtocol.SelectedItem)
+                Dim protocol As mRemote3G.Connection.Protocol.Protocols = Tools.Misc.StringToEnum(GetType(mRemote3G.Connection.Protocol.Protocols), cbProtocol.SelectedItem)
 
                 Dim hosts As New List(Of ScanHost)
                 For Each item As ListViewItem In lvHosts.SelectedItems
@@ -97,18 +95,18 @@ Namespace UI
 #End Region
 
             Private Sub ApplyLanguage()
-                lblStartIP.Text = String.Format("{0}:", My.Language.strStartIP)
-                lblEndIP.Text = String.Format("{0}:", My.Language.strEndIP)
-                btnScan.Text = My.Language.strButtonScan
-                btnImport.Text = My.Language.strButtonImport
-                lblOnlyImport.Text = String.Format("{0}:", My.Language.strProtocolToImport)
-                clmHost.Text = My.Language.strColumnHostnameIP
-                clmOpenPorts.Text = My.Language.strOpenPorts
-                clmClosedPorts.Text = My.Language.strClosedPorts
-                Label2.Text = String.Format("{0}:", My.Language.strEndPort)
-                Label1.Text = String.Format("{0}:", My.Language.strStartPort)
-                TabText = My.Language.strMenuPortScan
-                Text = My.Language.strMenuPortScan
+                lblStartIP.Text = String.Format("{0}:", Language.Language.strStartIP)
+                lblEndIP.Text = String.Format("{0}:", Language.Language.strEndIP)
+                btnScan.Text = Language.Language.strButtonScan
+                btnImport.Text = Language.Language.strButtonImport
+                lblOnlyImport.Text = String.Format("{0}:", Language.Language.strProtocolToImport)
+                clmHost.Text = Language.Language.strColumnHostnameIP
+                clmOpenPorts.Text = Language.Language.strOpenPorts
+                clmClosedPorts.Text = Language.Language.strClosedPorts
+                Label2.Text = String.Format("{0}:", Language.Language.strEndPort)
+                Label1.Text = String.Format("{0}:", Language.Language.strStartPort)
+                TabText = Language.Language.strMenuPortScan
+                Text = Language.Language.strMenuPortScan
             End Sub
 
             Private Sub ShowImportControls(ByVal controlsVisible As Boolean)
@@ -142,7 +140,7 @@ Namespace UI
 
                     _portScanner.StartScan()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "StartScan failed (UI.Window.PortScan)" & vbNewLine & ex.ToString(), True)
+                   App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "StartScan failed (UI.Window.PortScan)" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -154,9 +152,9 @@ Namespace UI
 
             Private Sub SwitchButtonText()
                 If _scanning Then
-                    btnScan.Text = My.Language.strButtonStop
+                    btnScan.Text = Language.Language.strButtonStop
                 Else
-                    btnScan.Text = My.Language.strButtonScan
+                    btnScan.Text = Language.Language.strButtonScan
                 End If
 
                 prgBar.Maximum = 100
@@ -164,7 +162,7 @@ Namespace UI
             End Sub
 
             Private Shared Sub PortScanner_BeginHostScan(ByVal host As String)
-                MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, "Scanning " & host, True)
+               App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, "Scanning " & host, True)
             End Sub
 
             Private Delegate Sub PortScannerHostScannedDelegate(ByVal host As ScanHost, ByVal scannedCount As Integer, ByVal totalCount As Integer)
@@ -174,7 +172,7 @@ Namespace UI
                     Return
                 End If
 
-                MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, "Host scanned " & host.HostIp, True)
+               App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, "Host scanned " & host.HostIp, True)
 
                 Dim listViewItem As ListViewItem = host.ToListViewItem(_import)
                 If listViewItem IsNot Nothing Then
@@ -193,7 +191,7 @@ Namespace UI
                     Return
                 End If
 
-                MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, Language.strPortScanComplete)
+               App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, Language.Language.strPortScanComplete)
 
                 _scanning = False
                 SwitchButtonText()

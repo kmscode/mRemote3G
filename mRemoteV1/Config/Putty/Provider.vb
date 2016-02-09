@@ -1,4 +1,4 @@
-﻿Imports mRemoteNG.My
+﻿
 
 Namespace Config.Putty
     Public MustInherit Class Provider
@@ -11,8 +11,8 @@ Namespace Config.Putty
             End Get
         End Property
 
-        Private _rootInfo As Root.PuttySessions.Info
-        Public ReadOnly Property RootInfo() As Root.PuttySessions.Info
+        Private _rootInfo As Root.PuttySessions.PuttySessionsInfo
+        Public ReadOnly Property RootInfo() As Root.PuttySessions.PuttySessionsInfo
             Get
                 If _rootInfo Is Nothing Then _rootInfo = CreateRootInfo()
                 Return _rootInfo
@@ -20,10 +20,10 @@ Namespace Config.Putty
         End Property
 
         Public MustOverride Function GetSessionNames(Optional ByVal raw As Boolean = False) As String()
-        Public MustOverride Function GetSession(ByVal sessionName As String) As Connection.PuttySession.Info
+        Public MustOverride Function GetSession(ByVal sessionName As String) As Connection.PuttySession.PuttyInfo
 
-        Public Overridable Function GetSessions() As Connection.PuttySession.Info()
-            Dim sessionList As New List(Of Connection.PuttySession.Info)
+        Public Overridable Function GetSessions() As Connection.PuttySession.PuttyInfo()
+            Dim sessionList As New List(Of Connection.PuttySession.PuttyInfo)
             Dim sessionInfo As Connection.Info
             For Each sessionName As String In GetSessionNames(True)
                 sessionInfo = GetSession(sessionName)
@@ -73,17 +73,17 @@ Namespace Config.Putty
             Return newTreeNode
         End Function
 
-        Protected Overridable Function CreateRootInfo() As Root.PuttySessions.Info
-            Dim newRootInfo As New Root.PuttySessions.Info
+        Protected Overridable Function CreateRootInfo() As Root.PuttySessions.PuttySessionsInfo
+            Dim newRootInfo As New Root.PuttySessions.PuttySessionsInfo
 
             If String.IsNullOrEmpty(My.Settings.PuttySavedSessionsName) Then
-                newRootInfo.Name = Language.strPuttySavedSessionsRootName
+                newRootInfo.Name = Language.Language.strPuttySavedSessionsRootName
             Else
                 newRootInfo.Name = My.Settings.PuttySavedSessionsName
             End If
 
             If String.IsNullOrEmpty(My.Settings.PuttySavedSessionsPanel) Then
-                newRootInfo.Panel = Language.strGeneral
+                newRootInfo.Panel = Language.Language.strGeneral
             Else
                 newRootInfo.Panel = My.Settings.PuttySavedSessionsPanel
             End If

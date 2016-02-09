@@ -1,13 +1,13 @@
-﻿Imports mRemoteNG.My
-Imports mRemoteNG.App
-Imports mRemoteNG.App.Info
-Imports mRemoteNG.Security
+﻿
+Imports mRemote3G.App
+Imports mRemote3G.App.Info
+Imports mRemote3G.Security
 
 Namespace Forms.OptionsPages
     Public Class SqlServerPage
         Public Overrides Property PageName() As String
             Get
-                Return Language.strSQLServer.TrimEnd(":")
+                Return Language.Language.strSQLServer.TrimEnd(":")
             End Get
             Set(value As String)
             End Set
@@ -16,14 +16,14 @@ Namespace Forms.OptionsPages
         Public Overrides Sub ApplyLanguage()
             MyBase.ApplyLanguage()
 
-            lblExperimental.Text = Language.strExperimental.ToUpper
-            lblSQLInfo.Text = Language.strSQLInfo
+            lblExperimental.Text = Language.Language.strExperimental.ToUpper
+            lblSQLInfo.Text = Language.Language.strSQLInfo
 
-            chkUseSQLServer.Text = Language.strUseSQLServer
-            lblSQLServer.Text = Language.strLabelHostname
-            lblSQLDatabaseName.Text = Language.strLabelSQLServerDatabaseName
-            lblSQLUsername.Text = Language.strLabelUsername
-            lblSQLPassword.Text = Language.strLabelPassword
+            chkUseSQLServer.Text = Language.Language.strUseSQLServer
+            lblSQLServer.Text = Language.Language.strLabelHostname
+            lblSQLDatabaseName.Text = Language.Language.strLabelSQLServerDatabaseName
+            lblSQLUsername.Text = Language.Language.strLabelUsername
+            lblSQLPassword.Text = Language.Language.strLabelPassword
         End Sub
 
         Public Overrides Sub LoadSettings()
@@ -45,10 +45,10 @@ Namespace Forms.OptionsPages
             My.Settings.SQLUser = txtSQLUsername.Text
             My.Settings.SQLPass = Crypt.Encrypt(txtSQLPassword.Text, General.EncryptionKey)
 
-            Runtime.Startup.DestroySQLUpdateHandlerAndStopTimer()
+           App.Runtime.Startup.DestroySQLUpdateHandlerAndStopTimer()
             frmMain.UsingSqlServer = My.Settings.UseSQLServer
             If My.Settings.UseSQLServer Then
-                Runtime.Startup.CreateSQLUpdateHandlerAndStartTimer()
+               App.Runtime.Startup.CreateSQLUpdateHandlerAndStartTimer()
             End If
         End Sub
 

@@ -152,7 +152,7 @@
             '
             'btnLaunchPutty
             '
-            Me.btnLaunchPutty.Image = Global.mRemoteNG.My.Resources.Resources.PuttyConfig
+            Me.btnLaunchPutty.Image = Global.mRemote3G.My.Resources.Resources.PuttyConfig
             Me.btnLaunchPutty.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
             Me.btnLaunchPutty.Location = New System.Drawing.Point(497, 183)
             Me.btnLaunchPutty.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)

@@ -1,6 +1,6 @@
-Imports mRemoteNG.App.Runtime
 Imports System.ComponentModel
-Imports mRemoteNG.Tools.LocalizedAttributes
+Imports mRemote3G.Forms
+Imports mRemote3G.Tools
 
 Namespace Connection
     Namespace Protocol
@@ -112,7 +112,7 @@ Namespace Connection
 
                     Return True
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncSetPropsFailed & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.Language.strVncSetPropsFailed & vbNewLine & ex.ToString(), True)
                     Return False
                 End Try
             End Function
@@ -123,7 +123,7 @@ Namespace Connection
                 Try
                     VNC.Connect(Me.Info.Hostname, Me.Info.VNCViewOnly, Info.VNCSmartSizeMode <> SmartSizeMode.SmartSNo)
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncConnectionOpenFailed & vbNewLine & ex.ToString())
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.Language.strVncConnectionOpenFailed & vbNewLine & ex.ToString())
                     Return False
                 End Try
 
@@ -134,7 +134,7 @@ Namespace Connection
                 Try
                     VNC.Disconnect()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncConnectionDisconnectFailed & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.Language.strVncConnectionDisconnectFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -147,7 +147,7 @@ Namespace Connection
                             VNC.SendSpecialKeys(SpecialKeys.CtrlEsc)
                     End Select
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncSendSpecialKeysFailed & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.Language.strVncSendSpecialKeysFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -156,7 +156,7 @@ Namespace Connection
                     SmartSize = Not SmartSize
                     RefreshScreen()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncToggleSmartSizeFailed & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.Language.strVncToggleSmartSizeFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -164,7 +164,7 @@ Namespace Connection
                 Try
                     ViewOnly = Not ViewOnly
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncToggleViewOnlyFailed & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.Language.strVncToggleViewOnlyFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -177,7 +177,7 @@ Namespace Connection
                     '    mC.AddMessage(Messages.MessageClass.InformationMsg, "VNC Server doesn't support chat")
                     'End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncStartChatFailed & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.Language.strVncStartChatFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -197,7 +197,7 @@ Namespace Connection
                 Try
                     VNC.FullScreenUpdate()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncRefreshFailed & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.Language.strVncRefreshFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 #End Region
@@ -207,12 +207,12 @@ Namespace Connection
                 Try
                     AddHandler VNC.ConnectComplete, AddressOf VNCEvent_Connected
                     AddHandler VNC.ConnectionLost, AddressOf VNCEvent_Disconnected
-                    AddHandler mRemoteNG.frmMain.clipboardchange, AddressOf VNCEvent_ClipboardChanged
+                    AddHandler frmMain.clipboardchange, AddressOf VNCEvent_ClipboardChanged
                     If Not ((Force And Info.Force.NoCredentials) = Info.Force.NoCredentials) And Not String.IsNullOrEmpty(Info.Password) Then
                         VNC.GetPassword = AddressOf VNCEvent_Authenticate
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncSetEventHandlersFailed & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.Language.strVncSetEventHandlersFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 #End Region
@@ -249,7 +249,7 @@ Namespace Connection
             End Enum
 
             Public Enum Compression
-                <LocalizedDescription("strNoCompression")>
+                <LocalizedAttributes.LocalizedDescription("strNoCompression")>
                 CompNone = 99
                 <Description("0")>
                 Comp0 = 0
@@ -293,36 +293,36 @@ Namespace Connection
             End Enum
 
             Public Enum AuthMode
-                <LocalizedDescription("VNC")>
+                <LocalizedAttributes.LocalizedDescription("VNC")>
                 AuthVNC
-                <LocalizedDescription("Windows")>
+                <LocalizedAttributes.LocalizedDescription("Windows")>
                 AuthWin
             End Enum
 
             Public Enum ProxyType
-                <LocalizedDescription("strNone")>
+                <LocalizedAttributes.LocalizedDescription("strNone")>
                 ProxyNone
-                <LocalizedDescription("strHttp")>
+                <LocalizedAttributes.LocalizedDescription("strHttp")>
                 ProxyHTTP
-                <LocalizedDescription("strSocks5")>
+                <LocalizedAttributes.LocalizedDescription("strSocks5")>
                 ProxySocks5
-                <LocalizedDescription("strUltraVncRepeater")>
+                <LocalizedAttributes.LocalizedDescription("strUltraVncRepeater")>
                 ProxyUltra
             End Enum
 
             Public Enum Colors
-                <LocalizedDescription("strNormal")>
+                <LocalizedAttributes.LocalizedDescription("strNormal")>
                 ColNormal
                 <Description("8-bit")>
                 Col8Bit
             End Enum
 
             Public Enum SmartSizeMode
-                <LocalizedDescription("strNoSmartSize")>
+                <LocalizedAttributes.LocalizedDescription("strNoSmartSize")>
                 SmartSNo
-                <LocalizedDescription("strFree")>
+                <LocalizedAttributes.LocalizedDescription("strFree")>
                 SmartSFree
-                <LocalizedDescription("strAspect")>
+                <LocalizedAttributes.LocalizedDescription("strAspect")>
                 SmartSAspect
             End Enum
 #End Region

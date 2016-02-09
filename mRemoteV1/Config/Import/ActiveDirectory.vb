@@ -1,7 +1,6 @@
 ﻿Imports System.DirectoryServices
-Imports mRemoteNG.App.Runtime
+Imports mRemote3G.App.Runtime
 Imports System.Text.RegularExpressions
-Imports mRemoteNG.My
 
 Namespace Config.Import
     Public Class ActiveDirectory
@@ -18,7 +17,7 @@ Namespace Config.Import
                 If match.Success Then
                     name = match.Groups(1).Captures(0).Value
                 Else
-                    name = Language.strActiveDirectory
+                    name = Language.Language.strActiveDirectory
                 End If
 
                 containerInfo.Name = name

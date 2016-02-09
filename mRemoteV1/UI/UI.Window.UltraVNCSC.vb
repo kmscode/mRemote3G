@@ -1,5 +1,4 @@
 ﻿Imports WeifenLuo.WinFormsUI.Docking
-Imports mRemoteNG.App.Runtime
 
 Namespace UI
     Namespace Window
@@ -53,7 +52,7 @@ Namespace UI
                 Me.ClientSize = New System.Drawing.Size(446, 362)
                 Me.Controls.Add(Me.pnlContainer)
                 Me.Controls.Add(Me.tsMain)
-                Me.Icon = Global.mRemoteNG.My.Resources.UVNC_SC_Icon
+                Me.Icon = Global.mRemote3G.My.Resources.Resources.UVNC_SC_Icon
                 Me.Name = "UltraVNCSC"
                 Me.TabText = "UltraVNC SC"
                 Me.Text = "UltraVNC SC"
@@ -85,7 +84,7 @@ Namespace UI
             End Sub
 
             Private Sub ApplyLanguage()
-                btnDisconnect.Text = My.Language.strButtonDisconnect
+                btnDisconnect.Text = Language.Language.strButtonDisconnect
             End Sub
 
             Private Sub StartListening()
@@ -107,7 +106,7 @@ Namespace UI
 
                     'vnc.ListenEx(My.Settings.UVNCSCPort)
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "StartListening (UI.Window.UltraVNCSC) failed" & vbNewLine & ex.ToString(), False)
+                   App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "StartListening (UI.Window.UltraVNCSC) failed" & vbNewLine & ex.ToString(), False)
                     Close()
                 End Try
             End Sub
@@ -118,7 +117,7 @@ Namespace UI
                     'f = GetType(AxHost).GetField("licenseKey", Reflection.BindingFlags.NonPublic Or Reflection.BindingFlags.Instance)
                     'f.SetValue(vnc, "{072169039103041044176252035252117103057101225235137221179204110241121074}")
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "VNC SetupLicense failed (UI.Window.UltraVNCSC)" & vbNewLine & ex.ToString(), True)
+                   App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "VNC SetupLicense failed (UI.Window.UltraVNCSC)" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 

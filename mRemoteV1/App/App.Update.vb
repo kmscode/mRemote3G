@@ -2,7 +2,7 @@
 Imports System.Net
 Imports System.ComponentModel
 Imports System.Threading
-Imports mRemoteNG.Tools
+Imports mRemote3G.Tools
 Imports System.Reflection
 
 Namespace App
@@ -222,7 +222,7 @@ Namespace App
         End Function
 
         Private Sub GetUpdateInfo()
-            Dim updateFileUri As New Uri(New Uri(My.Settings.UpdateAddress), New Uri(Info.Update.FileName, UriKind.Relative))
+            Dim updateFileUri As New Uri(New Uri(My.Settings.UpdateAddress), New Uri(Info.UpdateApp.FileName, UriKind.Relative))
             Dim e As DownloadStringCompletedEventArgs = DownloadString(updateFileUri)
 
             If Not e.Cancelled And e.Error Is Nothing Then

@@ -1,5 +1,5 @@
-﻿Imports WeifenLuo.WinFormsUI.Docking
-Imports mRemoteNG.App
+﻿Imports mRemote3G.App
+Imports WeifenLuo.WinFormsUI.Docking
 
 Namespace UI
     Namespace Window
@@ -9,7 +9,7 @@ Namespace UI
             Public Sub New(ByVal panel As DockContent)
                 InitializeComponent()
 
-                Runtime.FontOverride(Me)
+                App.Runtime.FontOverride(Me)
 
                 WindowType = Type.ActiveDirectoryImport
                 DockPnl = panel
@@ -52,9 +52,9 @@ Namespace UI
 #End Region
 
             Private Sub ApplyLanguage()
-                btnImport.Text = My.Language.strButtonImport
-                lblDomain.Text = My.Language.strLabelDomain
-                btnChangeDomain.Text = My.Language.strButtonChange
+                btnImport.Text = Language.Language.strButtonImport
+                lblDomain.Text = Language.Language.strLabelDomain
+                btnChangeDomain.Text = Language.Language.strButtonChange
             End Sub
 
             Private Sub ChangeDomain()

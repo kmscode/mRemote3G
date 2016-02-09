@@ -1,6 +1,5 @@
 ﻿Imports System.ComponentModel
-Imports mRemoteNG.Tools.LocalizedAttributes
-Imports mRemoteNG.My
+Imports mRemote3G.Tools.LocalizedAttributes
 
 Namespace Themes
     Public Class ThemeInfo
@@ -43,7 +42,7 @@ Namespace Themes
 #End Region
 
 #Region "Properties"
-        Private _name As String = Language.strUnnamedTheme
+        Private _name As String = Language.Language.strUnnamedTheme
         <Browsable(False)> _
         Public Property Name As String
             Get

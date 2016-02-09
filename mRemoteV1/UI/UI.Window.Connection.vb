@@ -1,13 +1,11 @@
-Imports System
-Imports System.Windows
-Imports System.Windows.Forms
-Imports mRemoteNG.Connection
-Imports mRemoteNG.App
 Imports Crownwood
-Imports WeifenLuo.WinFormsUI.Docking
+Imports mRemote3G.Config
+Imports mRemote3G.Connection
+Imports mRemote3G.My
 Imports PSTaskDialog
-Imports mRemoteNG.App.Runtime
-Imports mRemoteNG.Config
+Imports WeifenLuo.WinFormsUI.Docking
+Imports mRemote3G.Forms
+Imports mRemote3G.App
 
 Namespace UI
     Namespace Window
@@ -87,14 +85,14 @@ Namespace UI
                 '
                 'cmenTabFullscreen
                 '
-                Me.cmenTabFullscreen.Image = Global.mRemoteNG.My.Resources.Resources.arrow_out
+                Me.cmenTabFullscreen.Image = Global.mRemote3G.My.Resources.Resources.arrow_out
                 Me.cmenTabFullscreen.Name = "cmenTabFullscreen"
                 Me.cmenTabFullscreen.Size = New System.Drawing.Size(244, 26)
                 Me.cmenTabFullscreen.Text = "Fullscreen (RDP)"
                 '
                 'cmenTabSmartSize
                 '
-                Me.cmenTabSmartSize.Image = Global.mRemoteNG.My.Resources.Resources.SmartSize
+                Me.cmenTabSmartSize.Image = Global.mRemote3G.My.Resources.Resources.SmartSize
                 Me.cmenTabSmartSize.Name = "cmenTabSmartSize"
                 Me.cmenTabSmartSize.Size = New System.Drawing.Size(244, 26)
                 Me.cmenTabSmartSize.Text = "SmartSize (RDP/VNC)"
@@ -112,14 +110,14 @@ Namespace UI
                 '
                 'cmenTabScreenshot
                 '
-                Me.cmenTabScreenshot.Image = Global.mRemoteNG.My.Resources.Resources.Screenshot_Add
+                Me.cmenTabScreenshot.Image = Global.mRemote3G.My.Resources.Resources.Screenshot_Add
                 Me.cmenTabScreenshot.Name = "cmenTabScreenshot"
                 Me.cmenTabScreenshot.Size = New System.Drawing.Size(244, 26)
                 Me.cmenTabScreenshot.Text = "Screenshot"
                 '
                 'cmenTabStartChat
                 '
-                Me.cmenTabStartChat.Image = Global.mRemoteNG.My.Resources.Resources.Chat
+                Me.cmenTabStartChat.Image = Global.mRemote3G.My.Resources.Resources.Chat
                 Me.cmenTabStartChat.Name = "cmenTabStartChat"
                 Me.cmenTabStartChat.Size = New System.Drawing.Size(244, 26)
                 Me.cmenTabStartChat.Text = "Start Chat (VNC)"
@@ -127,14 +125,14 @@ Namespace UI
                 '
                 'cmenTabTransferFile
                 '
-                Me.cmenTabTransferFile.Image = Global.mRemoteNG.My.Resources.Resources.SSHTransfer
+                Me.cmenTabTransferFile.Image = Global.mRemote3G.My.Resources.Resources.SSHTransfer
                 Me.cmenTabTransferFile.Name = "cmenTabTransferFile"
                 Me.cmenTabTransferFile.Size = New System.Drawing.Size(244, 26)
                 Me.cmenTabTransferFile.Text = "Transfer File (SSH)"
                 '
                 'cmenTabRefreshScreen
                 '
-                Me.cmenTabRefreshScreen.Image = Global.mRemoteNG.My.Resources.Resources.Refresh
+                Me.cmenTabRefreshScreen.Image = Global.mRemote3G.My.Resources.Resources.Refresh
                 Me.cmenTabRefreshScreen.Name = "cmenTabRefreshScreen"
                 Me.cmenTabRefreshScreen.Size = New System.Drawing.Size(244, 26)
                 Me.cmenTabRefreshScreen.Text = "Refresh Screen (VNC)"
@@ -142,7 +140,7 @@ Namespace UI
                 'cmenTabSendSpecialKeys
                 '
                 Me.cmenTabSendSpecialKeys.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cmenTabSendSpecialKeysCtrlAltDel, Me.cmenTabSendSpecialKeysCtrlEsc})
-                Me.cmenTabSendSpecialKeys.Image = Global.mRemoteNG.My.Resources.Resources.Keyboard
+                Me.cmenTabSendSpecialKeys.Image = Global.mRemote3G.My.Resources.Resources.Keyboard
                 Me.cmenTabSendSpecialKeys.Name = "cmenTabSendSpecialKeys"
                 Me.cmenTabSendSpecialKeys.Size = New System.Drawing.Size(244, 26)
                 Me.cmenTabSendSpecialKeys.Text = "Send special Keys (VNC)"
@@ -179,7 +177,7 @@ Namespace UI
                 '
                 'cmenTabRenameTab
                 '
-                Me.cmenTabRenameTab.Image = Global.mRemoteNG.My.Resources.Resources.Rename
+                Me.cmenTabRenameTab.Image = Global.mRemote3G.My.Resources.Resources.Rename
                 Me.cmenTabRenameTab.Name = "cmenTabRenameTab"
                 Me.cmenTabRenameTab.Size = New System.Drawing.Size(244, 26)
                 Me.cmenTabRenameTab.Text = "Rename Tab"
@@ -199,7 +197,7 @@ Namespace UI
                 '
                 'cmenTabDisconnect
                 '
-                Me.cmenTabDisconnect.Image = Global.mRemoteNG.My.Resources.Resources.Pause
+                Me.cmenTabDisconnect.Image = Global.mRemote3G.My.Resources.Resources.Pause
                 Me.cmenTabDisconnect.Name = "cmenTabDisconnect"
                 Me.cmenTabDisconnect.Size = New System.Drawing.Size(244, 26)
                 Me.cmenTabDisconnect.Text = "Disconnect"
@@ -209,7 +207,7 @@ Namespace UI
                 Me.ClientSize = New System.Drawing.Size(632, 453)
                 Me.Controls.Add(Me.TabController)
                 Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-                Me.Icon = Global.mRemoteNG.My.Resources.Resources.mRemote_Icon
+                Me.Icon = Global.mRemote3G.My.Resources.Resources.mRemote_Icon
                 Me.Name = "Connection"
                 Me.TabText = "UI.Window.Connection"
                 Me.Text = "UI.Window.Connection"
@@ -223,7 +221,7 @@ Namespace UI
             Public Sub New(ByVal Panel As DockContent, Optional ByVal FormText As String = "")
 
                 If FormText = "" Then
-                    FormText = My.Language.strNewPanel
+                    FormText = Language.Language.strNewPanel
                 End If
 
                 Me.WindowType = Type.Connection
@@ -233,12 +231,12 @@ Namespace UI
                 Me.TabText = FormText
             End Sub
 
-            Public Function AddConnectionTab(ByVal conI As mRemoteNG.Connection.Info) As Magic.Controls.TabPage
+            Public Function AddConnectionTab(ByVal conI As mRemote3G.Connection.Info) As Magic.Controls.TabPage
                 Try
                     Dim nTab As New Magic.Controls.TabPage
                     nTab.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right Or AnchorStyles.Top
 
-                    If My.Settings.ShowProtocolOnTabs Then
+                    If MySettingsProperty.Settings.ShowProtocolOnTabs Then
                         nTab.Title = conI.Protocol.ToString & ": "
                     Else
                         nTab.Title = ""
@@ -246,7 +244,7 @@ Namespace UI
 
                     nTab.Title &= conI.Name
 
-                    If My.Settings.ShowLogonInfoOnTabs Then
+                    If MySettingsProperty.Settings.ShowLogonInfoOnTabs Then
                         nTab.Title &= " ("
 
                         If conI.Domain <> "" Then
@@ -266,12 +264,12 @@ Namespace UI
 
                     nTab.Title = nTab.Title.Replace("&", "&&")
 
-                    Dim conIcon As Drawing.Icon = mRemoteNG.Connection.Icon.FromString(conI.Icon)
+                    Dim conIcon As Drawing.Icon = mRemote3G.Connection.Icon.FromString(conI.Icon)
                     If conIcon IsNot Nothing Then
                         nTab.Icon = conIcon
                     End If
 
-                    If My.Settings.OpenTabsRightOfSelected Then
+                    If MySettingsProperty.Settings.OpenTabsRightOfSelected Then
                         Me.TabController.TabPages.Insert(Me.TabController.SelectedIndex + 1, nTab)
                     Else
                         Me.TabController.TabPages.Add(nTab)
@@ -282,7 +280,7 @@ Namespace UI
 
                     Return nTab
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "AddConnectionTab (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "AddConnectionTab (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
                 End Try
 
                 Return Nothing
@@ -334,31 +332,31 @@ Namespace UI
             End Sub
 
             Private Sub ApplyLanguage()
-                cmenTabFullscreen.Text = My.Language.strMenuFullScreenRDP
-                cmenTabSmartSize.Text = My.Language.strMenuSmartSize
-                cmenTabViewOnly.Text = My.Language.strMenuViewOnly
-                cmenTabScreenshot.Text = My.Language.strMenuScreenshot
-                cmenTabStartChat.Text = My.Language.strMenuStartChat
-                cmenTabTransferFile.Text = My.Language.strMenuTransferFile
-                cmenTabRefreshScreen.Text = My.Language.strMenuRefreshScreen
-                cmenTabSendSpecialKeys.Text = My.Language.strMenuSendSpecialKeys
-                cmenTabSendSpecialKeysCtrlAltDel.Text = My.Language.strMenuCtrlAltDel
-                cmenTabSendSpecialKeysCtrlEsc.Text = My.Language.strMenuCtrlEsc
-                cmenTabExternalApps.Text = My.Language.strMenuExternalTools
-                cmenTabRenameTab.Text = My.Language.strMenuRenameTab
-                cmenTabDuplicateTab.Text = My.Language.strMenuDuplicateTab
-                cmenTabReconnect.Text = My.Language.strMenuReconnect
-                cmenTabDisconnect.Text = My.Language.strMenuDisconnect
-                cmenTabPuttySettings.Text = My.Language.strPuttySettings
+                cmenTabFullscreen.Text = Language.Language.strMenuFullScreenRDP
+                cmenTabSmartSize.Text = Language.Language.strMenuSmartSize
+                cmenTabViewOnly.Text = Language.Language.strMenuViewOnly
+                cmenTabScreenshot.Text = Language.Language.strMenuScreenshot
+                cmenTabStartChat.Text = Language.Language.strMenuStartChat
+                cmenTabTransferFile.Text = Language.Language.strMenuTransferFile
+                cmenTabRefreshScreen.Text = Language.Language.strMenuRefreshScreen
+                cmenTabSendSpecialKeys.Text = Language.Language.strMenuSendSpecialKeys
+                cmenTabSendSpecialKeysCtrlAltDel.Text = Language.Language.strMenuCtrlAltDel
+                cmenTabSendSpecialKeysCtrlEsc.Text = Language.Language.strMenuCtrlEsc
+                cmenTabExternalApps.Text = Language.Language.strMenuExternalTools
+                cmenTabRenameTab.Text = Language.Language.strMenuRenameTab
+                cmenTabDuplicateTab.Text = Language.Language.strMenuDuplicateTab
+                cmenTabReconnect.Text = Language.Language.strMenuReconnect
+                cmenTabDisconnect.Text = Language.Language.strMenuDisconnect
+                cmenTabPuttySettings.Text = Language.Language.strPuttySettings
             End Sub
 
             Private Sub Connection_FormClosing(ByVal sender As Object, ByVal e As FormClosingEventArgs) Handles Me.FormClosing
                 If Not frmMain.IsClosing And (
-                        (My.Settings.ConfirmCloseConnection = ConfirmClose.All And TabController.TabPages.Count > 0) Or
-                        (My.Settings.ConfirmCloseConnection = ConfirmClose.Multiple And TabController.TabPages.Count > 1)) Then
-                    Dim result As DialogResult = cTaskDialog.MessageBox(Me, My.Application.Info.ProductName, String.Format(My.Language.strConfirmCloseConnectionPanelMainInstruction, Me.Text), "", "", "", My.Language.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.YesNo, eSysIcons.Question, Nothing)
+                        (MySettingsProperty.Settings.ConfirmCloseConnection = ConfirmClose.All And TabController.TabPages.Count > 0) Or
+                        (MySettingsProperty.Settings.ConfirmCloseConnection = ConfirmClose.Multiple And TabController.TabPages.Count > 1)) Then
+                    Dim result As DialogResult = cTaskDialog.MessageBox(Me, My.Application.Info.ProductName, String.Format(Language.Language.strConfirmCloseConnectionPanelMainInstruction, Me.Text), "", "", "", Language.Language.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.YesNo, eSysIcons.Question, Nothing)
                     If cTaskDialog.VerificationChecked Then
-                        My.Settings.ConfirmCloseConnection = My.Settings.ConfirmCloseConnection - 1
+                        MySettingsProperty.Settings.ConfirmCloseConnection = MySettingsProperty.Settings.ConfirmCloseConnection - 1
                     End If
                     If result = DialogResult.No Then
                         e.Cancel = True
@@ -369,12 +367,12 @@ Namespace UI
                 Try
                     For Each tabP As Magic.Controls.TabPage In Me.TabController.TabPages
                         If tabP.Tag IsNot Nothing Then
-                            Dim interfaceControl As mRemoteNG.Connection.InterfaceControl = tabP.Tag
+                            Dim interfaceControl As mRemote3G.Connection.InterfaceControl = tabP.Tag
                             interfaceControl.Protocol.Close()
                         End If
                     Next
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "UI.Window.Connection.Connection_FormClosing() failed" & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "UI.Window.Connection.Connection_FormClosing() failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -400,10 +398,10 @@ Namespace UI
 
             Private Sub CloseConnectionTab()
                 Dim selectedTab As Magic.Controls.TabPage = TabController.SelectedTab
-                If My.Settings.ConfirmCloseConnection = ConfirmClose.All Then
-                    Dim result As DialogResult = cTaskDialog.MessageBox(Me, My.Application.Info.ProductName, String.Format(My.Language.strConfirmCloseConnectionMainInstruction, selectedTab.Title), "", "", "", My.Language.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.YesNo, eSysIcons.Question, Nothing)
+                If MySettingsProperty.Settings.ConfirmCloseConnection = ConfirmClose.All Then
+                    Dim result As DialogResult = cTaskDialog.MessageBox(Me, My.Application.Info.ProductName, String.Format(Language.Language.strConfirmCloseConnectionMainInstruction, selectedTab.Title), "", "", "", Language.Language.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.YesNo, eSysIcons.Question, Nothing)
                     If cTaskDialog.VerificationChecked Then
-                        My.Settings.ConfirmCloseConnection = My.Settings.ConfirmCloseConnection - 1
+                        MySettingsProperty.Settings.ConfirmCloseConnection = MySettingsProperty.Settings.ConfirmCloseConnection - 1
                     End If
                     If result = DialogResult.No Then
                         Exit Sub
@@ -412,13 +410,13 @@ Namespace UI
 
                 Try
                     If selectedTab.Tag IsNot Nothing Then
-                        Dim interfaceControl As mRemoteNG.Connection.InterfaceControl = selectedTab.Tag
+                        Dim interfaceControl As mRemote3G.Connection.InterfaceControl = selectedTab.Tag
                         interfaceControl.Protocol.Close()
                     Else
                         CloseTab(selectedTab)
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "UI.Window.Connection.CloseConnectionTab() failed" & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "UI.Window.Connection.CloseConnectionTab() failed" & vbNewLine & ex.ToString(), True)
                 End Try
 
                 UpdateSelectedConnection()
@@ -426,7 +424,7 @@ Namespace UI
 
             Private Sub TabController_DoubleClickTab(ByVal sender As Crownwood.Magic.Controls.TabControl, ByVal page As Crownwood.Magic.Controls.TabPage) Handles TabController.DoubleClickTab
                 _firstClickTicks = 0
-                If My.Settings.DoubleClickOnTabClosesIt Then
+                If MySettingsProperty.Settings.DoubleClickOnTabClosesIt Then
                     Me.CloseConnectionTab()
                 End If
             End Sub
@@ -434,7 +432,7 @@ Namespace UI
 #Region "Drag and Drop"
             Private Sub TabController_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles TabController.DragDrop
                 If e.Data.GetDataPresent("System.Windows.Forms.TreeNode", True) Then
-                    App.Runtime.OpenConnection(e.Data.GetData("System.Windows.Forms.TreeNode", True).Tag, Me, mRemoteNG.Connection.Info.Force.DoNotJump)
+                    App.Runtime.OpenConnection(e.Data.GetData("System.Windows.Forms.TreeNode", True).Tag, Me, mRemote3G.Connection.Info.Force.DoNotJump)
                 End If
             End Sub
 
@@ -457,14 +455,14 @@ Namespace UI
                         Exit Sub
                     End If
 
-                    Dim IC As mRemoteNG.Connection.InterfaceControl = Me.TabController.SelectedTab.Tag
+                    Dim IC As mRemote3G.Connection.InterfaceControl = Me.TabController.SelectedTab.Tag
 
                     If IC Is Nothing Then
                         Exit Sub
                     End If
 
-                    If IC.Info.Protocol = mRemoteNG.Connection.Protocol.Protocols.RDP Then
-                        Dim rdp As mRemoteNG.Connection.Protocol.RDP = IC.Protocol
+                    If IC.Info.Protocol = mRemote3G.Connection.Protocol.Protocols.RDP Then
+                        Dim rdp As mRemote3G.Connection.Protocol.RDP = IC.Protocol
 
                         cmenTabFullscreen.Visible = True
                         cmenTabFullscreen.Checked = rdp.Fullscreen
@@ -479,7 +477,7 @@ Namespace UI
                         ToolStripSeparator1.Visible = False
                     End If
 
-                    If IC.Info.Protocol = mRemoteNG.Connection.Protocol.Protocols.VNC Then
+                    If IC.Info.Protocol = mRemote3G.Connection.Protocol.Protocols.VNC Then
                         Me.cmenTabSendSpecialKeys.Visible = True
                         Me.cmenTabViewOnly.Visible = True
 
@@ -488,7 +486,7 @@ Namespace UI
                         Me.cmenTabRefreshScreen.Visible = True
                         Me.cmenTabTransferFile.Visible = False
 
-                        Dim vnc As mRemoteNG.Connection.Protocol.VNC = IC.Protocol
+                        Dim vnc As mRemote3G.Connection.Protocol.VNC = IC.Protocol
                         Me.cmenTabSmartSize.Checked = vnc.SmartSize
                         Me.cmenTabViewOnly.Checked = vnc.ViewOnly
                     Else
@@ -499,11 +497,11 @@ Namespace UI
                         Me.cmenTabTransferFile.Visible = False
                     End If
 
-                    If IC.Info.Protocol = mRemoteNG.Connection.Protocol.Protocols.SSH1 Or IC.Info.Protocol = mRemoteNG.Connection.Protocol.Protocols.SSH2 Then
+                    If IC.Info.Protocol = mRemote3G.Connection.Protocol.Protocols.SSH1 Or IC.Info.Protocol = mRemote3G.Connection.Protocol.Protocols.SSH2 Then
                         Me.cmenTabTransferFile.Visible = True
                     End If
 
-                    If TypeOf IC.Protocol Is mRemoteNG.Connection.Protocol.PuttyBase Then
+                    If TypeOf IC.Protocol Is mRemote3G.Connection.Protocol.PuttyBase Then
                         Me.cmenTabPuttySettings.Visible = True
                     Else
                         Me.cmenTabPuttySettings.Visible = False
@@ -511,14 +509,14 @@ Namespace UI
 
                     AddExternalApps()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ShowHideMenuButtons (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ShowHideMenuButtons (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
             Private Sub cmenTabScreenshot_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmenTabScreenshot.Click
                 cmenTab.Close()
                 Application.DoEvents()
-                Windows.screenshotForm.AddScreenshot(Tools.Misc.TakeScreenshot(Me))
+                App.Runtime.Windows.screenshotForm.AddScreenshot(Tools.Misc.TakeScreenshot(Me))
             End Sub
 
             Private Sub cmenTabSmartSize_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmenTabSmartSize.Click
@@ -546,11 +544,11 @@ Namespace UI
             End Sub
 
             Private Sub cmenTabSendSpecialKeysCtrlAltDel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmenTabSendSpecialKeysCtrlAltDel.Click
-                Me.SendSpecialKeys(mRemoteNG.Connection.Protocol.VNC.SpecialKeys.CtrlAltDel)
+                Me.SendSpecialKeys(mRemote3G.Connection.Protocol.VNC.SpecialKeys.CtrlAltDel)
             End Sub
 
             Private Sub cmenTabSendSpecialKeysCtrlEsc_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmenTabSendSpecialKeysCtrlEsc.Click
-                Me.SendSpecialKeys(mRemoteNG.Connection.Protocol.VNC.SpecialKeys.CtrlEsc)
+                Me.SendSpecialKeys(mRemote3G.Connection.Protocol.VNC.SpecialKeys.CtrlEsc)
             End Sub
 
             Private Sub cmenTabFullscreen_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmenTabFullscreen.Click
@@ -582,171 +580,171 @@ Namespace UI
             Private Sub ToggleSmartSize()
                 Try
                     If Me.TabController.SelectedTab IsNot Nothing Then
-                        If TypeOf Me.TabController.SelectedTab.Tag Is mRemoteNG.Connection.InterfaceControl Then
-                            Dim IC As mRemoteNG.Connection.InterfaceControl = Me.TabController.SelectedTab.Tag
+                        If TypeOf Me.TabController.SelectedTab.Tag Is mRemote3G.Connection.InterfaceControl Then
+                            Dim IC As mRemote3G.Connection.InterfaceControl = Me.TabController.SelectedTab.Tag
 
-                            If TypeOf IC.Protocol Is mRemoteNG.Connection.Protocol.RDP Then
-                                Dim rdp As mRemoteNG.Connection.Protocol.RDP = IC.Protocol
+                            If TypeOf IC.Protocol Is mRemote3G.Connection.Protocol.RDP Then
+                                Dim rdp As mRemote3G.Connection.Protocol.RDP = IC.Protocol
                                 rdp.ToggleSmartSize()
-                            ElseIf TypeOf IC.Protocol Is mRemoteNG.Connection.Protocol.VNC Then
-                                Dim vnc As mRemoteNG.Connection.Protocol.VNC = IC.Protocol
+                            ElseIf TypeOf IC.Protocol Is mRemote3G.Connection.Protocol.VNC Then
+                                Dim vnc As mRemote3G.Connection.Protocol.VNC = IC.Protocol
                                 vnc.ToggleSmartSize()
                             End If
                         End If
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ToggleSmartSize (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ToggleSmartSize (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
             Private Sub TransferFile()
                 Try
                     If Me.TabController.SelectedTab IsNot Nothing Then
-                        If TypeOf Me.TabController.SelectedTab.Tag Is mRemoteNG.Connection.InterfaceControl Then
-                            Dim IC As mRemoteNG.Connection.InterfaceControl = Me.TabController.SelectedTab.Tag
+                        If TypeOf Me.TabController.SelectedTab.Tag Is mRemote3G.Connection.InterfaceControl Then
+                            Dim IC As mRemote3G.Connection.InterfaceControl = Me.TabController.SelectedTab.Tag
 
-                            If IC.Info.Protocol = mRemoteNG.Connection.Protocol.Protocols.SSH1 Or IC.Info.Protocol = mRemoteNG.Connection.Protocol.Protocols.SSH2 Then
+                            If IC.Info.Protocol = mRemote3G.Connection.Protocol.Protocols.SSH1 Or IC.Info.Protocol = mRemote3G.Connection.Protocol.Protocols.SSH2 Then
                                 SSHTransferFile()
-                            ElseIf IC.Info.Protocol = mRemoteNG.Connection.Protocol.Protocols.VNC Then
+                            ElseIf IC.Info.Protocol = mRemote3G.Connection.Protocol.Protocols.VNC Then
                                 VNCTransferFile()
                             End If
                         End If
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "TransferFile (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "TransferFile (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
             Private Sub SSHTransferFile()
                 Try
 
-                    Dim IC As mRemoteNG.Connection.InterfaceControl = Me.TabController.SelectedTab.Tag
+                    Dim IC As mRemote3G.Connection.InterfaceControl = Me.TabController.SelectedTab.Tag
 
-                    Windows.Show(Type.SSHTransfer)
+                    App.Runtime.Windows.Show(Type.SSHTransfer)
 
-                    Dim conI As mRemoteNG.Connection.Info = IC.Info
+                    Dim conI As mRemote3G.Connection.Info = IC.Info
 
-                    Windows.sshtransferForm.Hostname = conI.Hostname
-                    Windows.sshtransferForm.Username = conI.Username
-                    Windows.sshtransferForm.Password = conI.Password
-                    Windows.sshtransferForm.Port = conI.Port
+                    App.Runtime.Windows.sshtransferForm.Hostname = conI.Hostname
+                    App.Runtime.Windows.sshtransferForm.Username = conI.Username
+                    App.Runtime.Windows.sshtransferForm.Password = conI.Password
+                    App.Runtime.Windows.sshtransferForm.Port = conI.Port
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SSHTransferFile (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SSHTransferFile (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
             Private Sub VNCTransferFile()
                 Try
-                    Dim IC As mRemoteNG.Connection.InterfaceControl = Me.TabController.SelectedTab.Tag
-                    Dim vnc As mRemoteNG.Connection.Protocol.VNC = IC.Protocol
+                    Dim IC As mRemote3G.Connection.InterfaceControl = Me.TabController.SelectedTab.Tag
+                    Dim vnc As mRemote3G.Connection.Protocol.VNC = IC.Protocol
                     vnc.StartFileTransfer()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "VNCTransferFile (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "VNCTransferFile (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
             Private Sub ToggleViewOnly()
                 Try
                     If Me.TabController.SelectedTab IsNot Nothing Then
-                        If TypeOf Me.TabController.SelectedTab.Tag Is mRemoteNG.Connection.InterfaceControl Then
-                            Dim IC As mRemoteNG.Connection.InterfaceControl = Me.TabController.SelectedTab.Tag
+                        If TypeOf Me.TabController.SelectedTab.Tag Is mRemote3G.Connection.InterfaceControl Then
+                            Dim IC As mRemote3G.Connection.InterfaceControl = Me.TabController.SelectedTab.Tag
 
-                            If TypeOf IC.Protocol Is mRemoteNG.Connection.Protocol.VNC Then
+                            If TypeOf IC.Protocol Is mRemote3G.Connection.Protocol.VNC Then
                                 cmenTabViewOnly.Checked = Not cmenTabViewOnly.Checked
 
-                                Dim vnc As mRemoteNG.Connection.Protocol.VNC = IC.Protocol
+                                Dim vnc As mRemote3G.Connection.Protocol.VNC = IC.Protocol
                                 vnc.ToggleViewOnly()
                             End If
                         End If
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ToggleViewOnly (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ToggleViewOnly (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
             Private Sub StartChat()
                 Try
                     If Me.TabController.SelectedTab IsNot Nothing Then
-                        If TypeOf Me.TabController.SelectedTab.Tag Is mRemoteNG.Connection.InterfaceControl Then
-                            Dim IC As mRemoteNG.Connection.InterfaceControl = Me.TabController.SelectedTab.Tag
+                        If TypeOf Me.TabController.SelectedTab.Tag Is mRemote3G.Connection.InterfaceControl Then
+                            Dim IC As mRemote3G.Connection.InterfaceControl = Me.TabController.SelectedTab.Tag
 
-                            If TypeOf IC.Protocol Is mRemoteNG.Connection.Protocol.VNC Then
-                                Dim vnc As mRemoteNG.Connection.Protocol.VNC = IC.Protocol
+                            If TypeOf IC.Protocol Is mRemote3G.Connection.Protocol.VNC Then
+                                Dim vnc As mRemote3G.Connection.Protocol.VNC = IC.Protocol
                                 vnc.StartChat()
                             End If
                         End If
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "StartChat (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "StartChat (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
             Private Sub RefreshScreen()
                 Try
                     If Me.TabController.SelectedTab IsNot Nothing Then
-                        If TypeOf Me.TabController.SelectedTab.Tag Is mRemoteNG.Connection.InterfaceControl Then
-                            Dim IC As mRemoteNG.Connection.InterfaceControl = Me.TabController.SelectedTab.Tag
+                        If TypeOf Me.TabController.SelectedTab.Tag Is mRemote3G.Connection.InterfaceControl Then
+                            Dim IC As mRemote3G.Connection.InterfaceControl = Me.TabController.SelectedTab.Tag
 
-                            If TypeOf IC.Protocol Is mRemoteNG.Connection.Protocol.VNC Then
-                                Dim vnc As mRemoteNG.Connection.Protocol.VNC = IC.Protocol
+                            If TypeOf IC.Protocol Is mRemote3G.Connection.Protocol.VNC Then
+                                Dim vnc As mRemote3G.Connection.Protocol.VNC = IC.Protocol
                                 vnc.RefreshScreen()
                             End If
                         End If
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "RefreshScreen (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "RefreshScreen (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
-            Private Sub SendSpecialKeys(ByVal Keys As mRemoteNG.Connection.Protocol.VNC.SpecialKeys)
+            Private Sub SendSpecialKeys(ByVal Keys As mRemote3G.Connection.Protocol.VNC.SpecialKeys)
                 Try
                     If Me.TabController.SelectedTab IsNot Nothing Then
-                        If TypeOf Me.TabController.SelectedTab.Tag Is mRemoteNG.Connection.InterfaceControl Then
-                            Dim IC As mRemoteNG.Connection.InterfaceControl = Me.TabController.SelectedTab.Tag
+                        If TypeOf Me.TabController.SelectedTab.Tag Is mRemote3G.Connection.InterfaceControl Then
+                            Dim IC As mRemote3G.Connection.InterfaceControl = Me.TabController.SelectedTab.Tag
 
-                            If TypeOf IC.Protocol Is mRemoteNG.Connection.Protocol.VNC Then
-                                Dim vnc As mRemoteNG.Connection.Protocol.VNC = IC.Protocol
+                            If TypeOf IC.Protocol Is mRemote3G.Connection.Protocol.VNC Then
+                                Dim vnc As mRemote3G.Connection.Protocol.VNC = IC.Protocol
                                 vnc.SendSpecialKeys(Keys)
                             End If
                         End If
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SendSpecialKeys (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SendSpecialKeys (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
             Private Sub ToggleFullscreen()
                 Try
                     If Me.TabController.SelectedTab IsNot Nothing Then
-                        If TypeOf Me.TabController.SelectedTab.Tag Is mRemoteNG.Connection.InterfaceControl Then
-                            Dim IC As mRemoteNG.Connection.InterfaceControl = Me.TabController.SelectedTab.Tag
+                        If TypeOf Me.TabController.SelectedTab.Tag Is mRemote3G.Connection.InterfaceControl Then
+                            Dim IC As mRemote3G.Connection.InterfaceControl = Me.TabController.SelectedTab.Tag
 
-                            If TypeOf IC.Protocol Is mRemoteNG.Connection.Protocol.RDP Then
-                                Dim rdp As mRemoteNG.Connection.Protocol.RDP = IC.Protocol
+                            If TypeOf IC.Protocol Is mRemote3G.Connection.Protocol.RDP Then
+                                Dim rdp As mRemote3G.Connection.Protocol.RDP = IC.Protocol
                                 rdp.ToggleFullscreen()
                             End If
                         End If
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ToggleFullscreen (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ToggleFullscreen (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
             Private Sub ShowPuttySettingsDialog()
                 Try
                     If Me.TabController.SelectedTab IsNot Nothing Then
-                        If TypeOf Me.TabController.SelectedTab.Tag Is mRemoteNG.Connection.InterfaceControl Then
-                            Dim objInterfaceControl As mRemoteNG.Connection.InterfaceControl = Me.TabController.SelectedTab.Tag
+                        If TypeOf Me.TabController.SelectedTab.Tag Is mRemote3G.Connection.InterfaceControl Then
+                            Dim objInterfaceControl As mRemote3G.Connection.InterfaceControl = Me.TabController.SelectedTab.Tag
 
-                            If TypeOf objInterfaceControl.Protocol Is mRemoteNG.Connection.Protocol.PuttyBase Then
-                                Dim objPuttyBase As mRemoteNG.Connection.Protocol.PuttyBase = objInterfaceControl.Protocol
+                            If TypeOf objInterfaceControl.Protocol Is mRemote3G.Connection.Protocol.PuttyBase Then
+                                Dim objPuttyBase As mRemote3G.Connection.Protocol.PuttyBase = objInterfaceControl.Protocol
 
                                 objPuttyBase.ShowSettingsDialog()
                             End If
                         End If
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ShowPuttySettingsDialog (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ShowPuttySettingsDialog (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -763,7 +761,7 @@ Namespace UI
 
 
                     'add ext apps
-                    For Each extA As Tools.ExternalTool In Runtime.ExternalTools
+                    For Each extA As Tools.ExternalTool In App.Runtime.ExternalTools
                         Dim nItem As New ToolStripMenuItem
                         nItem.Text = extA.DisplayName
                         nItem.Tag = extA
@@ -775,87 +773,87 @@ Namespace UI
                         cmenTabExternalApps.DropDownItems.Add(nItem)
                     Next
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "cMenTreeTools_DropDownOpening failed (UI.Window.Tree)" & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "cMenTreeTools_DropDownOpening failed (UI.Window.Tree)" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
             Private Sub StartExternalApp(ByVal ExtA As Tools.ExternalTool)
                 Try
                     If Me.TabController.SelectedTab IsNot Nothing Then
-                        If TypeOf Me.TabController.SelectedTab.Tag Is mRemoteNG.Connection.InterfaceControl Then
-                            Dim IC As mRemoteNG.Connection.InterfaceControl = Me.TabController.SelectedTab.Tag
+                        If TypeOf Me.TabController.SelectedTab.Tag Is mRemote3G.Connection.InterfaceControl Then
+                            Dim IC As mRemote3G.Connection.InterfaceControl = Me.TabController.SelectedTab.Tag
 
                             ExtA.Start(IC.Info)
                         End If
                     End If
 
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "cmenTabExternalAppsEntry_Click failed (UI.Window.Tree)" & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "cmenTabExternalAppsEntry_Click failed (UI.Window.Tree)" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
             Private Sub CloseTabMenu()
                 Try
                     If Me.TabController.SelectedTab IsNot Nothing Then
-                        If TypeOf Me.TabController.SelectedTab.Tag Is mRemoteNG.Connection.InterfaceControl Then
-                            Dim IC As mRemoteNG.Connection.InterfaceControl = Me.TabController.SelectedTab.Tag
+                        If TypeOf Me.TabController.SelectedTab.Tag Is mRemote3G.Connection.InterfaceControl Then
+                            Dim IC As mRemote3G.Connection.InterfaceControl = Me.TabController.SelectedTab.Tag
 
                             IC.Protocol.Close()
                         End If
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "CloseTabMenu (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "CloseTabMenu (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
             Private Sub DuplicateTab()
                 Try
                     If Me.TabController.SelectedTab IsNot Nothing Then
-                        If TypeOf Me.TabController.SelectedTab.Tag Is mRemoteNG.Connection.InterfaceControl Then
-                            Dim IC As mRemoteNG.Connection.InterfaceControl = Me.TabController.SelectedTab.Tag
+                        If TypeOf Me.TabController.SelectedTab.Tag Is mRemote3G.Connection.InterfaceControl Then
+                            Dim IC As mRemote3G.Connection.InterfaceControl = Me.TabController.SelectedTab.Tag
 
-                            App.Runtime.OpenConnection(IC.Info, mRemoteNG.Connection.Info.Force.DoNotJump)
+                            App.Runtime.OpenConnection(IC.Info, mRemote3G.Connection.Info.Force.DoNotJump)
                             _ignoreChangeSelectedTabClick = False
                         End If
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "DuplicateTab (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "DuplicateTab (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
             Private Sub Reconnect()
                 Try
                     If Me.TabController.SelectedTab IsNot Nothing Then
-                        If TypeOf Me.TabController.SelectedTab.Tag Is mRemoteNG.Connection.InterfaceControl Then
-                            Dim IC As mRemoteNG.Connection.InterfaceControl = Me.TabController.SelectedTab.Tag
-                            Dim conI As mRemoteNG.Connection.Info = IC.Info
+                        If TypeOf Me.TabController.SelectedTab.Tag Is mRemote3G.Connection.InterfaceControl Then
+                            Dim IC As mRemote3G.Connection.InterfaceControl = Me.TabController.SelectedTab.Tag
+                            Dim conI As mRemote3G.Connection.Info = IC.Info
 
                             IC.Protocol.Close()
 
-                            App.Runtime.OpenConnection(conI, mRemoteNG.Connection.Info.Force.DoNotJump)
+                            App.Runtime.OpenConnection(conI, mRemote3G.Connection.Info.Force.DoNotJump)
                         End If
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Reconnect (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Reconnect (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
             Private Sub RenameTab()
                 Try
-                    Dim nTitle As String = InputBox(My.Language.strNewTitle & ":", , Me.TabController.SelectedTab.Title.Replace("&&", "&"))
+                    Dim nTitle As String = InputBox(Language.Language.strNewTitle & ":", , Me.TabController.SelectedTab.Title.Replace("&&", "&"))
 
                     If nTitle <> "" Then
                         Me.TabController.SelectedTab.Title = nTitle.Replace("&", "&&")
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "RenameTab (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "RenameTab (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 #End Region
 
 #Region "Protocols"
             Public Sub Prot_Event_Closed(ByVal sender As Object)
-                Dim Prot As mRemoteNG.Connection.Protocol.Base = sender
+                Dim Prot As mRemote3G.Connection.Protocol.Base = sender
                 CloseTab(Prot.InterfaceControl.Parent)
             End Sub
 #End Region
@@ -871,7 +869,7 @@ Namespace UI
                     Catch comEx As System.Runtime.InteropServices.COMException
                         Me.TabController.Invoke(s, TabToBeClosed)
                     Catch ex As Exception
-                        MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't close tab" & vbNewLine & ex.ToString(), True)
+                        App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't close tab" & vbNewLine & ex.ToString(), True)
                     End Try
                 Else
                     Try
@@ -880,7 +878,7 @@ Namespace UI
                     Catch comEx As System.Runtime.InteropServices.COMException
                         CloseTab(TabToBeClosed)
                     Catch ex As Exception
-                        MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't close tab" & vbNewLine & ex.ToString(), True)
+                        App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't close tab" & vbNewLine & ex.ToString(), True)
                     End Try
 
                     If Me.TabController.TabPages.Count = 0 Then
@@ -929,36 +927,36 @@ Namespace UI
                             cmenTab.Show(TabController, e.Location)
                     End Select
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "TabController_MouseUp (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "TabController_MouseUp (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
             Private Sub FocusIC()
                 Try
                     If Me.TabController.SelectedTab IsNot Nothing Then
-                        If TypeOf Me.TabController.SelectedTab.Tag Is mRemoteNG.Connection.InterfaceControl Then
-                            Dim IC As mRemoteNG.Connection.InterfaceControl = Me.TabController.SelectedTab.Tag
+                        If TypeOf Me.TabController.SelectedTab.Tag Is mRemote3G.Connection.InterfaceControl Then
+                            Dim IC As mRemote3G.Connection.InterfaceControl = Me.TabController.SelectedTab.Tag
                             IC.Protocol.Focus()
                         End If
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "FocusIC (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "FocusIC (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
             Public Sub RefreshIC()
                 Try
                     If Me.TabController.SelectedTab IsNot Nothing Then
-                        If TypeOf Me.TabController.SelectedTab.Tag Is mRemoteNG.Connection.InterfaceControl Then
-                            Dim IC As mRemoteNG.Connection.InterfaceControl = Me.TabController.SelectedTab.Tag
+                        If TypeOf Me.TabController.SelectedTab.Tag Is mRemote3G.Connection.InterfaceControl Then
+                            Dim IC As mRemote3G.Connection.InterfaceControl = Me.TabController.SelectedTab.Tag
 
-                            If IC.Info.Protocol = mRemoteNG.Connection.Protocol.Protocols.VNC Then
-                                TryCast(IC.Protocol, mRemoteNG.Connection.Protocol.VNC).RefreshScreen()
+                            If IC.Info.Protocol = mRemote3G.Connection.Protocol.Protocols.VNC Then
+                                TryCast(IC.Protocol, mRemote3G.Connection.Protocol.VNC).RefreshScreen()
                             End If
                         End If
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "RefreshIC (UI.Window.Connection) failed" & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "RefreshIC (UI.Window.Connection) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 #End Region
@@ -982,7 +980,7 @@ Namespace UI
                         End If
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddExceptionMessage("UI.Window.Connection.WndProc() failed.", ex, , True)
+                    App.Runtime.MessageCollector.AddExceptionMessage("UI.Window.Connection.WndProc() failed.", ex, , True)
                 End Try
 
                 MyBase.WndProc(m)
@@ -1015,7 +1013,7 @@ Namespace UI
             Private Sub TabController_PageDragEnd(ByVal sender As Object, ByVal e As MouseEventArgs) Handles TabController.PageDragEnd, TabController.PageDragQuit
                 Cursor = Cursors.Default
                 InTabDrag = False
-                Dim interfaceControl As mRemoteNG.Connection.InterfaceControl = TryCast(TabController.SelectedTab.Tag, mRemoteNG.Connection.InterfaceControl)
+                Dim interfaceControl As mRemote3G.Connection.InterfaceControl = TryCast(TabController.SelectedTab.Tag, mRemote3G.Connection.InterfaceControl)
                 If interfaceControl IsNot Nothing Then interfaceControl.Protocol.Focus()
             End Sub
 #End Region

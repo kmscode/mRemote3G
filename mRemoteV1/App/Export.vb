@@ -1,5 +1,5 @@
-﻿Imports mRemoteNG.Forms
-Imports mRemoteNG.App.Runtime
+﻿Imports mRemote3G.Forms
+Imports mRemote3G.App.Runtime
 
 Namespace App
     Public Class Export
@@ -44,7 +44,7 @@ Namespace App
             End Try
         End Sub
 
-        Private Shared Sub SaveExportFile(ByVal fileName As String, ByVal saveFormat As Config.Connections.Save.Format, ByVal rootNode As TreeNode, ByVal saveSecurity As Security.Save)
+        Private Shared Sub SaveExportFile(ByVal fileName As String, ByVal saveFormat As Config.Connections.ConnectionsSave.Format, ByVal rootNode As TreeNode, ByVal saveSecurity As Security.Save)
             Dim previousTimerEnabled As Boolean = False
 
             Try
@@ -53,7 +53,7 @@ Namespace App
                     TimerSqlWatcher.Enabled = False
                 End If
 
-                Dim connectionsSave As New Config.Connections.Save
+                Dim connectionsSave As New Config.Connections.ConnectionsSave
                 With connectionsSave
                     .Export = True
                     .ConnectionFileName = fileName

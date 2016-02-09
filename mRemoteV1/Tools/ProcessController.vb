@@ -1,6 +1,5 @@
 ﻿Imports System.Runtime.InteropServices
 Imports System.Text
-Imports mRemoteNG.My
 
 Namespace Tools
     Public Class ProcessController
@@ -92,11 +91,11 @@ Namespace Tools
         Protected Function GetMainWindowHandle() As IntPtr
             If Process Is Nothing OrElse Process.HasExited Then Return IntPtr.Zero
 
-            Process.WaitForInputIdle(Settings.MaxPuttyWaitTime * 1000)
+            Process.WaitForInputIdle(My.Settings.MaxPuttyWaitTime * 1000)
 
             Handle = IntPtr.Zero
             Dim startTicks As Integer = Environment.TickCount
-            While Handle = IntPtr.Zero And Environment.TickCount < startTicks + (Settings.MaxPuttyWaitTime * 1000)
+            While Handle = IntPtr.Zero And Environment.TickCount < startTicks + (My.Settings.MaxPuttyWaitTime * 1000)
                 Process.Refresh()
                 Handle = Process.MainWindowHandle
                 If Handle = IntPtr.Zero Then Threading.Thread.Sleep(0)

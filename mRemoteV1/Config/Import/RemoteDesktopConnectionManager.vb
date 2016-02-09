@@ -1,8 +1,8 @@
 ﻿Imports System.Xml
 Imports System.IO
 Imports System.Runtime.InteropServices
-Imports mRemoteNG.Connection.Protocol
-Imports mRemoteNG.App.Runtime
+Imports mRemote3G.App.Runtime
+Imports mRemote3G.Connection.Protocol
 
 Namespace Config.Import
     Public Class RemoteDesktopConnectionManager

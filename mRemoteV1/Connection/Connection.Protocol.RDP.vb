@@ -1,10 +1,11 @@
-Imports System.Windows.Forms
+Imports System.ComponentModel
+Imports System.Runtime.InteropServices
 Imports System.Threading
 Imports AxMSTSCLib
-Imports System.ComponentModel
-Imports mRemoteNG.Messages
-Imports mRemoteNG.App.Runtime
-Imports mRemoteNG.Tools.LocalizedAttributes
+Imports mRemote3G.Forms
+Imports mRemote3G.Messages
+Imports mRemote3G.My
+Imports mRemote3G.Tools
 Imports MSTSCLib
 
 Namespace Connection
@@ -46,7 +47,7 @@ Namespace Connection
                         Dim msRdpClientSecuredSettings As MSTSCLib.IMsRdpClientSecuredSettings = _rdpClient.SecuredSettings2
                         msRdpClientSecuredSettings.KeyboardHookMode = 1 ' Apply key combinations at the remote server.
                     Catch ex As Exception
-                        MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetRedirectKeysFailed & vbNewLine & ex.ToString(), True)
+                        App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.Language.strRdpSetRedirectKeysFailed & vbNewLine & ex.ToString(), True)
                     End Try
                 End Set
             End Property
@@ -78,8 +79,8 @@ Namespace Connection
                         Loop
 
                         _rdpClient = CType(Control, AxMsRdpClient8NotSafeForScripting).GetOcx()
-                    Catch ex As Runtime.InteropServices.COMException
-                        MessageCollector.AddExceptionMessage(My.Language.strRdpControlCreationFailed, ex)
+                    Catch ex As COMException
+                        App.Runtime.MessageCollector.AddExceptionMessage(Language.Language.strRdpControlCreationFailed, ex)
                         Control.Dispose()
                         Return False
                     End Try
@@ -95,7 +96,7 @@ Namespace Connection
                     'not user changeable
                     _rdpClient.AdvancedSettings2.GrabFocusOnConnect = True
                     _rdpClient.AdvancedSettings3.EnableAutoReconnect = True
-                    _rdpClient.AdvancedSettings3.MaxReconnectAttempts = My.Settings.RdpReconnectionCount
+                    _rdpClient.AdvancedSettings3.MaxReconnectAttempts = MySettingsProperty.Settings.RdpReconnectionCount
                     _rdpClient.AdvancedSettings2.keepAliveInterval = 60000 'in milliseconds (10.000 = 10 seconds)
                     _rdpClient.AdvancedSettings5.AuthenticationLevel = 0
                     _rdpClient.AdvancedSettings2.EncryptionEnabled = 1
@@ -119,13 +120,13 @@ Namespace Connection
 
                     Me.SetPerformanceFlags()
 
-                    _rdpClient.ConnectingText = My.Language.strConnecting
+                    _rdpClient.ConnectingText = Language.Language.strConnecting
 
                     Control.Anchor = AnchorStyles.None
 
                     Return True
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetPropsFailed & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.Language.strRdpSetPropsFailed & vbNewLine & ex.ToString(), True)
                     Return False
                 End Try
             End Function
@@ -139,7 +140,7 @@ Namespace Connection
                     MyBase.Connect()
                     Return True
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpConnectionOpenFailed & vbNewLine & ex.ToString())
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.Language.strRdpConnectionOpenFailed & vbNewLine & ex.ToString())
                 End Try
 
                 Return False
@@ -149,7 +150,7 @@ Namespace Connection
                 Try
                     _rdpClient.Disconnect()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpDisconnectFailed & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.Language.strRdpDisconnectFailed & vbNewLine & ex.ToString(), True)
                     MyBase.Close()
                 End Try
             End Sub
@@ -158,7 +159,7 @@ Namespace Connection
                 Try
                     Me.Fullscreen = Not Me.Fullscreen
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpToggleFullscreenFailed & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.Language.strRdpToggleFullscreenFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -166,7 +167,7 @@ Namespace Connection
                 Try
                     Me.SmartSize = Not Me.SmartSize
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpToggleSmartSizeFailed & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.Language.strRdpToggleSmartSizeFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -176,7 +177,7 @@ Namespace Connection
                         Control.Focus()
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpFocusFailed & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.Language.strRdpFocusFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -238,10 +239,10 @@ Namespace Connection
             Private Sub SetRdGateway()
                 Try
                     If _rdpClient.TransportSettings.GatewayIsSupported = 0 Then
-                        MessageCollector.AddMessage(MessageClass.InformationMsg, My.Language.strRdpGatewayNotSupported, True)
+                        App.Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.Language.strRdpGatewayNotSupported, True)
                         Return
                     Else
-                        MessageCollector.AddMessage(MessageClass.InformationMsg, My.Language.strRdpGatewayIsSupported, True)
+                        App.Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.Language.strRdpGatewayIsSupported, True)
                     End If
 
                     If Not _connectionInfo.RDGatewayUsageMethod = RDGatewayUsageMethod.Never Then
@@ -267,7 +268,7 @@ Namespace Connection
                         End If
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strRdpSetGatewayFailed & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.Language.strRdpSetGatewayFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -284,14 +285,14 @@ Namespace Connection
                     End If
 
                     If _rdpVersion >= Versions.RDC61 Then
-                        MessageCollector.AddMessage(MessageClass.InformationMsg, String.Format(My.Language.strRdpSetConsoleSwitch, _rdpVersion.ToString()), True)
+                        App.Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, String.Format(Language.Language.strRdpSetConsoleSwitch, _rdpVersion.ToString()), True)
                         _rdpClient.AdvancedSettings7.ConnectToAdministerServer = value
                     Else
-                        MessageCollector.AddMessage(MessageClass.InformationMsg, String.Format(My.Language.strRdpSetConsoleSwitch, _rdpVersion.ToString()), True)
+                        App.Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, String.Format(Language.Language.strRdpSetConsoleSwitch, _rdpVersion.ToString()), True)
                         _rdpClient.AdvancedSettings2.ConnectToServerConsole = value
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddExceptionMessage(My.Language.strRdpSetConsoleSessionFailed, ex, MessageClass.ErrorMsg, True)
+                    App.Runtime.MessageCollector.AddExceptionMessage(Language.Language.strRdpSetConsoleSessionFailed, ex, MessageClass.ErrorMsg, True)
                 End Try
             End Sub
 
@@ -304,21 +305,21 @@ Namespace Connection
                     Dim domain As String = _connectionInfo.Domain
 
                     If userName = "" Then
-                        Select Case My.Settings.EmptyCredentials
+                        Select Case MySettingsProperty.Settings.EmptyCredentials
                             Case "windows"
                                 _rdpClient.UserName = Environment.UserName
                             Case "custom"
-                                _rdpClient.UserName = My.Settings.DefaultUsername
+                                _rdpClient.UserName = MySettingsProperty.Settings.DefaultUsername
                         End Select
                     Else
                         _rdpClient.UserName = userName
                     End If
 
                     If password = "" Then
-                        Select Case My.Settings.EmptyCredentials
+                        Select Case MySettingsProperty.Settings.EmptyCredentials
                             Case "custom"
-                                If My.Settings.DefaultPassword <> "" Then
-                                    _rdpClient.AdvancedSettings2.ClearTextPassword = Security.Crypt.Decrypt(My.Settings.DefaultPassword, App.Info.General.EncryptionKey)
+                                If MySettingsProperty.Settings.DefaultPassword <> "" Then
+                                    _rdpClient.AdvancedSettings2.ClearTextPassword = Security.Crypt.Decrypt(MySettingsProperty.Settings.DefaultPassword, App.Info.General.EncryptionKey)
                                 End If
                         End Select
                     Else
@@ -326,17 +327,17 @@ Namespace Connection
                     End If
 
                     If domain = "" Then
-                        Select Case My.Settings.EmptyCredentials
+                        Select Case MySettingsProperty.Settings.EmptyCredentials
                             Case "windows"
                                 _rdpClient.Domain = Environment.UserDomainName
                             Case "custom"
-                                _rdpClient.Domain = My.Settings.DefaultDomain
+                                _rdpClient.Domain = MySettingsProperty.Settings.DefaultDomain
                         End Select
                     Else
                         _rdpClient.Domain = domain
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetCredentialsFailed & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.Language.strRdpSetCredentialsFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -366,7 +367,7 @@ Namespace Connection
                             _rdpClient.DesktopHeight = resolution.Height
                     End Select
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetResolutionFailed & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.Language.strRdpSetResolutionFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -376,7 +377,7 @@ Namespace Connection
                         _rdpClient.AdvancedSettings2.RDPPort = _connectionInfo.Port
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetPortFailed & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.Language.strRdpSetPortFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -388,7 +389,7 @@ Namespace Connection
                     _rdpClient.AdvancedSettings2.RedirectSmartCards = Me._connectionInfo.RedirectSmartCards
                     _rdpClient.SecuredSettings2.AudioRedirectionMode = Int(Me._connectionInfo.RedirectSound)
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetRedirectionFailed & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.Language.strRdpSetRedirectionFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -413,7 +414,7 @@ Namespace Connection
 
                     _rdpClient.AdvancedSettings2.PerformanceFlags = pFlags
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetPerformanceFlagsFailed & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.Language.strRdpSetPerformanceFlagsFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -421,7 +422,7 @@ Namespace Connection
                 Try
                     _rdpClient.AdvancedSettings5.AuthenticationLevel = Me._connectionInfo.RDPAuthenticationLevel
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetAuthenticationLevelFailed & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.Language.strRdpSetAuthenticationLevelFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -430,7 +431,7 @@ Namespace Connection
                 Try
                     _rdpClient.AdvancedSettings2.LoadBalanceInfo = _connectionInfo.LoadBalanceInfo
                 Catch ex As Exception
-                    MessageCollector.AddExceptionMessage("Unable to set load balance info.", ex)
+                    App.Runtime.MessageCollector.AddExceptionMessage("Unable to set load balance info.", ex)
                 End Try
             End Sub
 
@@ -443,7 +444,7 @@ Namespace Connection
                     AddHandler _rdpClient.OnDisconnected, AddressOf RDPEvent_OnDisconnected
                     AddHandler _rdpClient.OnLeaveFullScreenMode, AddressOf RDPEvent_OnLeaveFullscreenMode
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetEventHandlersFailed & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.Language.strRdpSetEventHandlersFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 #End Region
@@ -460,7 +461,7 @@ Namespace Connection
                     Event_Disconnected(Me, discReason & vbCrLf & reason)
                 End If
 
-                If My.Settings.ReconnectOnDisconnect Then
+                If MySettingsProperty.Settings.ReconnectOnDisconnect Then
                     ReconnectGroup = New ReconnectGroup
                     ReconnectGroup.Left = (Control.Width / 2) - (ReconnectGroup.Width / 2)
                     ReconnectGroup.Top = (Control.Height / 2) - (ReconnectGroup.Height / 2)
@@ -504,24 +505,24 @@ Namespace Connection
 
             Public Enum RDPColors
                 None = 0
-                <LocalizedDescription("strRDP256Colors")>
+                <LocalizedAttributes.LocalizedDescription("strRDP256Colors")>
                 Colors256 = 8
-                <LocalizedDescription("strRDP32768Colors")>
+                <LocalizedAttributes.LocalizedDescription("strRDP32768Colors")>
                 Colors15Bit = 15
-                <LocalizedDescription("strRDP65536Colors")>
+                <LocalizedAttributes.LocalizedDescription("strRDP65536Colors")>
                 Colors16Bit = 16
-                <LocalizedDescription("strRDP16777216Colors")>
+                <LocalizedAttributes.LocalizedDescription("strRDP16777216Colors")>
                 Colors24Bit = 24
-                <LocalizedDescription("strRDP4294967296Colors")>
+                <LocalizedAttributes.LocalizedDescription("strRDP4294967296Colors")>
                 Colors32Bit = 32
             End Enum
 
             Public Enum RDPSounds
-                <LocalizedDescription("strRDPSoundBringToThisComputer")>
+                <LocalizedAttributes.LocalizedDescription("strRDPSoundBringToThisComputer")>
                 BringToThisComputer = 0
-                <LocalizedDescription("strRDPSoundLeaveAtRemoteComputer")>
+                <LocalizedAttributes.LocalizedDescription("strRDPSoundLeaveAtRemoteComputer")>
                 LeaveAtRemoteComputer = 1
-                <LocalizedDescription("strRDPSoundDoNotPlay")>
+                <LocalizedAttributes.LocalizedDescription("strRDPSoundDoNotPlay")>
                 DoNotPlay = 2
             End Enum
 
@@ -545,11 +546,11 @@ Namespace Connection
             End Enum
 
             Public Enum RDPResolutions
-                <LocalizedDescription("strRDPFitToPanel")>
+                <LocalizedAttributes.LocalizedDescription("strRDPFitToPanel")>
                 FitToWindow
-                <LocalizedDescription("strFullscreen")>
+                <LocalizedAttributes.LocalizedDescription("strFullscreen")>
                 Fullscreen
-                <LocalizedDescription("strRDPSmartSize")>
+                <LocalizedAttributes.LocalizedDescription("strRDPSmartSize")>
                 SmartSize
                 <Description("640x480")>
                 Res640x480
@@ -592,29 +593,29 @@ Namespace Connection
             End Enum
 
             Public Enum AuthenticationLevel
-                <LocalizedDescription("strAlwaysConnectEvenIfAuthFails")>
+                <LocalizedAttributes.LocalizedDescription("strAlwaysConnectEvenIfAuthFails")>
                 NoAuth = 0
-                <LocalizedDescription("strDontConnectWhenAuthFails")>
+                <LocalizedAttributes.LocalizedDescription("strDontConnectWhenAuthFails")>
                 AuthRequired = 1
-                <LocalizedDescription("strWarnIfAuthFails")>
+                <LocalizedAttributes.LocalizedDescription("strWarnIfAuthFails")>
                 WarnOnFailedAuth = 2
             End Enum
 
             Public Enum RDGatewayUsageMethod
-                <LocalizedDescription("strNever")>
+                <LocalizedAttributes.LocalizedDescription("strNever")>
                 Never = 0 ' TSC_PROXY_MODE_NONE_DIRECT
-                <LocalizedDescription("strAlways")>
+                <LocalizedAttributes.LocalizedDescription("strAlways")>
                 Always = 1 ' TSC_PROXY_MODE_DIRECT
-                <LocalizedDescription("strDetect")>
+                <LocalizedAttributes.LocalizedDescription("strDetect")>
                 Detect = 2 ' TSC_PROXY_MODE_DETECT
             End Enum
 
             Public Enum RDGatewayUseConnectionCredentials
-                <LocalizedDescription("strUseDifferentUsernameAndPassword")>
+                <LocalizedAttributes.LocalizedDescription("strUseDifferentUsernameAndPassword")>
                 No = 0
-                <LocalizedDescription("strUseSameUsernameAndPassword")>
+                <LocalizedAttributes.LocalizedDescription("strUseSameUsernameAndPassword")>
                 Yes = 1
-                <LocalizedDescription("strUseSmartCard")>
+                <LocalizedAttributes.LocalizedDescription("strUseSmartCard")>
                 SmartCard = 2
             End Enum
 #End Region
@@ -783,23 +784,23 @@ Namespace Connection
 #Region "Fatal Errors"
             Public Class FatalErrors
                 Protected Shared _description() As String = {
-                    0 = My.Language.strRdpErrorUnknown,
-                    1 = My.Language.strRdpErrorCode1,
-                    2 = My.Language.strRdpErrorOutOfMemory,
-                    3 = My.Language.strRdpErrorWindowCreation,
-                    4 = My.Language.strRdpErrorCode2,
-                    5 = My.Language.strRdpErrorCode3,
-                    6 = My.Language.strRdpErrorCode4,
-                    7 = My.Language.strRdpErrorConnection,
-                    100 = My.Language.strRdpErrorWinsock
+                    0 = Language.Language.strRdpErrorUnknown,
+                    1 = Language.Language.strRdpErrorCode1,
+                    2 = Language.Language.strRdpErrorOutOfMemory,
+                    3 = Language.Language.strRdpErrorWindowCreation,
+                    4 = Language.Language.strRdpErrorCode2,
+                    5 = Language.Language.strRdpErrorCode3,
+                    6 = Language.Language.strRdpErrorCode4,
+                    7 = Language.Language.strRdpErrorConnection,
+                    100 = Language.Language.strRdpErrorWinsock
                 }
 
                 Public Shared Function GetError(ByVal id As String) As String
                     Try
                         Return (_description(id))
                     Catch ex As Exception
-                        MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpErrorGetFailure & vbNewLine & ex.ToString(), True)
-                        Return String.Format(My.Language.strRdpErrorUnknown, id)
+                        App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.Language.strRdpErrorGetFailure & vbNewLine & ex.ToString(), True)
+                        Return String.Format(Language.Language.strRdpErrorUnknown, id)
                     End Try
                 End Function
 

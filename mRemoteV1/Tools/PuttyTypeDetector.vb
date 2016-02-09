@@ -1,4 +1,4 @@
-﻿Imports mRemoteNG.Connection.Protocol
+﻿Imports mRemote3G.Connection.Protocol
 
 Namespace Tools
     Public Class PuttyTypeDetector

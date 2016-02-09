@@ -1,6 +1,5 @@
-﻿Imports WeifenLuo.WinFormsUI.Docking
-Imports System.IO
-Imports mRemoteNG.App.Runtime
+﻿Imports System.IO
+Imports WeifenLuo.WinFormsUI.Docking
 
 Namespace UI
     Namespace Window
@@ -70,7 +69,7 @@ Namespace UI
                 '
                 'pbLogo
                 '
-                Me.pbLogo.Image = Global.mRemoteNG.My.Resources.Resources.Logo
+                Me.pbLogo.Image = Global.mRemote3G.My.Resources.Resources.Logo
                 Me.pbLogo.Location = New System.Drawing.Point(8, 8)
                 Me.pbLogo.Name = "pbLogo"
                 Me.pbLogo.Size = New System.Drawing.Size(492, 128)
@@ -228,7 +227,7 @@ Namespace UI
                 Me.Controls.Add(Me.pnlBottom)
                 Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                 Me.ForeColor = System.Drawing.SystemColors.ControlText
-                Me.Icon = Global.mRemoteNG.My.Resources.Resources.mRemote_Icon
+                Me.Icon = Global.mRemote3G.My.Resources.Resources.mRemote_Icon
                 Me.MaximumSize = New System.Drawing.Size(20000, 10000)
                 Me.Name = "About"
                 Me.TabText = "About"
@@ -254,10 +253,10 @@ Namespace UI
 
 #Region "Private Methods"
             Private Sub ApplyLanguage()
-                lblLicense.Text = My.Language.strLabelReleasedUnderGPL
-                lblChangeLog.Text = My.Language.strLabelChangeLog
-                TabText = My.Language.strAbout
-                Text = My.Language.strAbout
+                lblLicense.Text = Language.Language.strLabelReleasedUnderGPL
+                lblChangeLog.Text = Language.Language.strLabelChangeLog
+                TabText = Language.Language.strAbout
+                Text = Language.Language.strAbout
             End Sub
 
             Private Sub ApplyEditions()
@@ -295,9 +294,9 @@ Namespace UI
 
                     Me.lblVersion.Text = "Version " & My.Application.Info.Version.ToString
 
-                    FillLinkLabel(llblFAMFAMFAM, My.Language.strFAMFAMFAMAttribution, My.Language.strFAMFAMFAMAttributionURL)
-                    FillLinkLabel(llblMagicLibrary, My.Language.strMagicLibraryAttribution, My.Language.strMagicLibraryAttributionURL)
-                    FillLinkLabel(llblWeifenLuo, My.Language.strWeifenLuoAttribution, My.Language.strWeifenLuoAttributionURL)
+                    FillLinkLabel(llblFAMFAMFAM, Language.Language.strFAMFAMFAMAttribution, Language.Language.strFAMFAMFAMAttributionURL)
+                    FillLinkLabel(llblMagicLibrary, Language.Language.strMagicLibraryAttribution, Language.Language.strMagicLibraryAttributionURL)
+                    FillLinkLabel(llblWeifenLuo, Language.Language.strWeifenLuoAttribution, Language.Language.strWeifenLuoAttributionURL)
 
                     If File.Exists(My.Application.Info.DirectoryPath & "\CHANGELOG.TXT") Then
                         Dim sR As New StreamReader(My.Application.Info.DirectoryPath & "\CHANGELOG.TXT")
@@ -305,20 +304,20 @@ Namespace UI
                         sR.Close()
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Loading About failed" & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Loading About failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
             Private Sub llblFAMFAMFAM_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles llblFAMFAMFAM.LinkClicked
-                App.Runtime.GoToURL(My.Language.strFAMFAMFAMAttributionURL)
+                App.Runtime.GoToURL(Language.Language.strFAMFAMFAMAttributionURL)
             End Sub
 
             Private Sub llblMagicLibrary_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles llblMagicLibrary.LinkClicked
-                App.Runtime.GoToURL(My.Language.strMagicLibraryAttributionURL)
+                App.Runtime.GoToURL(Language.Language.strMagicLibraryAttributionURL)
             End Sub
 
             Private Sub llblWeifenLuo_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles llblWeifenLuo.LinkClicked
-                App.Runtime.GoToURL(My.Language.strWeifenLuoAttributionURL)
+                App.Runtime.GoToURL(Language.Language.strWeifenLuoAttributionURL)
             End Sub
 #End Region
         End Class

@@ -3,8 +3,8 @@ Imports System.ComponentModel
 Imports System.Runtime.InteropServices
 Imports System.Collections.Specialized
 Imports System.Text.RegularExpressions
-Imports mRemoteNG.Forms
-Imports mRemoteNG.App.Runtime
+Imports mRemote3G.Forms
+Imports mRemote3G.App.Runtime
 Imports System.IO
 Imports System.Data.SqlClient
 
@@ -56,7 +56,7 @@ Namespace Tools
                 Return myIcon
             Catch SAEx As ArgumentException
                 MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "GetIconFromFile failed (Tools.Misc) - using default icon. Exception:" & vbNewLine & SAEx.ToString(), True)
-                Return Global.mRemoteNG.My.Resources.Resources.mRemote_Icon
+                Return Global.mRemote3G.My.Resources.Resources.mRemote_Icon
             Catch ex As Exception
                 MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "GetIconFromFile failed (Tools.Misc)" & vbNewLine & ex.ToString(), True)
                 Return Nothing
@@ -94,7 +94,7 @@ Namespace Tools
                 If sqlRd.HasRows Then
                     LastUpdateInDB = sqlRd.Item("LastUpdate")
 
-                    If LastUpdateInDB > LastSQLUpdate Then
+                    If LastUpdateInDB > LastSqlUpdate Then
                         RaiseEvent SQLUpdateCheckFinished(True)
                         Return True
                     End If
@@ -247,11 +247,11 @@ Namespace Tools
 
             Public Overloads Overrides Function ConvertFrom(ByVal context As ITypeDescriptorContext, ByVal culture As System.Globalization.CultureInfo, ByVal value As Object) As Object
                 If value.GetType() Is GetType(String) Then
-                    If CStr(value).ToLower() = My.Language.strYes.ToLower Then
+                    If CStr(value).ToLower() = Language.Language.strYes.ToLower Then
                         Return True
                     End If
 
-                    If CStr(value).ToLower() = My.Language.strNo.ToLower Then
+                    If CStr(value).ToLower() = Language.Language.strNo.ToLower Then
                         Return False
                     End If
 
@@ -263,7 +263,7 @@ Namespace Tools
 
             Public Overloads Overrides Function ConvertTo(ByVal context As ITypeDescriptorContext, ByVal culture As System.Globalization.CultureInfo, ByVal value As Object, ByVal destinationType As Type) As Object
                 If destinationType Is GetType(String) Then
-                    Return IIf(CBool(value), My.Language.strYes, My.Language.strNo)
+                    Return IIf(CBool(value), Language.Language.strYes, Language.Language.strNo)
                 End If
 
                 Return MyBase.ConvertTo(context, culture, value, destinationType)

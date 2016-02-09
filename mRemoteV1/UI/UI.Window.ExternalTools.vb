@@ -1,7 +1,6 @@
-﻿Imports mRemoteNG.App
+﻿Imports mRemote3G.Tools
+Imports mRemote3G.Forms
 Imports WeifenLuo.WinFormsUI.Docking
-Imports mRemoteNG.App.Runtime
-Imports mRemoteNG.My
 
 Namespace UI
     Namespace Window
@@ -28,17 +27,17 @@ Namespace UI
             End Sub
 
             Private Shared Sub ExternalTools_FormClosed(sender As System.Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
-                mRemoteNG.Config.Settings.Save.SaveExternalAppsToXML()
+                mRemote3G.Config.Settings.Save.SaveExternalAppsToXML()
             End Sub
 
             Private Sub NewTool_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles NewToolMenuItem.Click, NewToolToolstripButton.Click
                 Try
-                    Dim externalTool As New Tools.ExternalTool(Language.strExternalToolDefaultName)
-                    Runtime.ExternalTools.Add(externalTool)
+                    Dim externalTool As New Tools.ExternalTool(Language.Language.strExternalToolDefaultName)
+                   App.Runtime.ExternalTools.Add(externalTool)
                     UpdateToolsListView(externalTool)
                     DisplayNameTextBox.Focus()
                 Catch ex As Exception
-                    MessageCollector.AddExceptionMessage("UI.Window.ExternalTools.NewTool_Click() failed.", ex, , True)
+                   App.Runtime.MessageCollector.AddExceptionMessage("UI.Window.ExternalTools.NewTool_Click() failed.", ex, , True)
                 End Try
             End Sub
 
@@ -47,9 +46,9 @@ Namespace UI
                     Dim message As String
                     Select Case ToolsListView.SelectedItems.Count
                         Case Is = 1
-                            message = String.Format(Language.strConfirmDeleteExternalTool, ToolsListView.SelectedItems(0).Text)
+                            message = String.Format(Language.Language.strConfirmDeleteExternalTool, ToolsListView.SelectedItems(0).Text)
                         Case Is > 1
-                            message = String.Format(Language.strConfirmDeleteExternalToolMultiple, ToolsListView.SelectedItems.Count)
+                            message = String.Format(Language.Language.strConfirmDeleteExternalToolMultiple, ToolsListView.SelectedItems.Count)
                         Case Else
                             Return
                     End Select
@@ -60,11 +59,11 @@ Namespace UI
                         Dim externalTool As Tools.ExternalTool = TryCast(listViewItem.Tag, Tools.ExternalTool)
                         If externalTool Is Nothing Then Continue For
 
-                        Runtime.ExternalTools.Remove(listViewItem.Tag)
+                       App.Runtime.ExternalTools.Remove(listViewItem.Tag)
                         listViewItem.Remove()
                     Next
                 Catch ex As Exception
-                    MessageCollector.AddExceptionMessage("UI.Window.ExternalTools.DeleteTool_Click() failed.", ex, , True)
+                   App.Runtime.MessageCollector.AddExceptionMessage("UI.Window.ExternalTools.DeleteTool_Click() failed.", ex, , True)
                 End Try
             End Sub
 
@@ -90,7 +89,7 @@ Namespace UI
                         PropertiesGroupBox.Enabled = False
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddExceptionMessage("UI.Window.ExternalTools.ToolsListView_SelectedIndexChanged() failed.", ex, , True)
+                   App.Runtime.MessageCollector.AddExceptionMessage("UI.Window.ExternalTools.ToolsListView_SelectedIndexChanged() failed.", ex, , True)
                 End Try
             End Sub
 
@@ -112,7 +111,7 @@ Namespace UI
 
                     UpdateToolsListView()
                 Catch ex As Exception
-                    MessageCollector.AddExceptionMessage("UI.Window.ExternalTools.PropertyControl_ChangedOrLostFocus() failed.", ex, , True)
+                   App.Runtime.MessageCollector.AddExceptionMessage("UI.Window.ExternalTools.PropertyControl_ChangedOrLostFocus() failed.", ex, , True)
                 End Try
             End Sub
 
@@ -120,12 +119,12 @@ Namespace UI
                 Try
                     Using browseDialog As New OpenFileDialog()
                         With browseDialog
-                            .Filter = String.Join("|", New String() {Language.strFilterApplication, "*.exe", Language.strFilterAll, "*.*"})
+                            .Filter = String.Join("|", New String() {Language.Language.strFilterApplication, "*.exe", Language.Language.strFilterAll, "*.*"})
                             If .ShowDialog = DialogResult.OK Then FilenameTextBox.Text = .FileName
                         End With
                     End Using
                 Catch ex As Exception
-                    MessageCollector.AddExceptionMessage("UI.Window.ExternalTools.BrowseButton_Click() failed.", ex, , True)
+                   App.Runtime.MessageCollector.AddExceptionMessage("UI.Window.ExternalTools.BrowseButton_Click() failed.", ex, , True)
                 End Try
             End Sub
 
@@ -140,31 +139,31 @@ Namespace UI
 #End Region
 
             Private Sub ApplyLanguage()
-                Text = Language.strMenuExternalTools
-                TabText = Language.strMenuExternalTools
+                Text = Language.Language.strMenuExternalTools
+                TabText = Language.Language.strMenuExternalTools
 
-                NewToolToolstripButton.Text = Language.strButtonNew
-                DeleteToolToolstripButton.Text = Language.strOptionsKeyboardButtonDelete
-                LaunchToolToolstripButton.Text = Language.strButtonLaunch
+                NewToolToolstripButton.Text = Language.Language.strButtonNew
+                DeleteToolToolstripButton.Text = Language.Language.strOptionsKeyboardButtonDelete
+                LaunchToolToolstripButton.Text = Language.Language.strButtonLaunch
 
-                DisplayNameColumnHeader.Text = Language.strColumnDisplayName
-                FilenameColumnHeader.Text = Language.strColumnFilename
-                ArgumentsColumnHeader.Text = Language.strColumnArguments
-                WaitForExitColumnHeader.Text = Language.strColumnWaitForExit
-                TryToIntegrateCheckBox.Text = Language.strTryIntegrate
+                DisplayNameColumnHeader.Text = Language.Language.strColumnDisplayName
+                FilenameColumnHeader.Text = Language.Language.strColumnFilename
+                ArgumentsColumnHeader.Text = Language.Language.strColumnArguments
+                WaitForExitColumnHeader.Text = Language.Language.strColumnWaitForExit
+                TryToIntegrateCheckBox.Text = Language.Language.strTryIntegrate
 
-                PropertiesGroupBox.Text = Language.strGroupboxExternalToolProperties
+                PropertiesGroupBox.Text = Language.Language.strGroupboxExternalToolProperties
 
-                DisplayNameLabel.Text = Language.strLabelDisplayName
-                FilenameLabel.Text = Language.strLabelFilename
-                ArgumentsLabel.Text = Language.strLabelArguments
-                OptionsLabel.Text = Language.strLabelOptions
-                WaitForExitCheckBox.Text = Language.strCheckboxWaitForExit
-                BrowseButton.Text = Language.strButtonBrowse
+                DisplayNameLabel.Text = Language.Language.strLabelDisplayName
+                FilenameLabel.Text = Language.Language.strLabelFilename
+                ArgumentsLabel.Text = Language.Language.strLabelArguments
+                OptionsLabel.Text = Language.Language.strLabelOptions
+                WaitForExitCheckBox.Text = Language.Language.strCheckboxWaitForExit
+                BrowseButton.Text = Language.Language.strButtonBrowse
 
-                NewToolMenuItem.Text = Language.strMenuNewExternalTool
-                DeleteToolMenuItem.Text = Language.strMenuDeleteExternalTool
-                LaunchToolMenuItem.Text = Language.strMenuLaunchExternalTool
+                NewToolMenuItem.Text = Language.Language.strMenuNewExternalTool
+                DeleteToolMenuItem.Text = Language.Language.strMenuDeleteExternalTool
+                LaunchToolMenuItem.Text = Language.Language.strMenuLaunchExternalTool
             End Sub
 
             Private Sub UpdateToolsListView(Optional ByVal selectTool As Tools.ExternalTool = Nothing)
@@ -182,7 +181,7 @@ Namespace UI
                     ToolsListView.BeginUpdate()
                     ToolsListView.Items.Clear()
 
-                    For Each externalTool As Tools.ExternalTool In Runtime.ExternalTools
+                    For Each externalTool As Tools.ExternalTool In App.Runtime.ExternalTools
                         Dim listViewItem As New ListViewItem
                         With listViewItem
                             .Text = externalTool.DisplayName
@@ -202,7 +201,7 @@ Namespace UI
 
                     frmMain.AddExternalToolsToToolBar()
                 Catch ex As Exception
-                    MessageCollector.AddExceptionMessage("UI.Window.ExternalTools.PopulateToolsListView()", ex, , True)
+                   App.Runtime.MessageCollector.AddExceptionMessage("UI.Window.ExternalTools.PopulateToolsListView()", ex, , True)
                 End Try
             End Sub
 
@@ -215,7 +214,7 @@ Namespace UI
                         externalTool.Start()
                     Next
                 Catch ex As Exception
-                    MessageCollector.AddExceptionMessage("UI.Window.ExternalTools.LaunchTool() failed.", ex, , True)
+                   App.Runtime.MessageCollector.AddExceptionMessage("UI.Window.ExternalTools.LaunchTool() failed.", ex, , True)
                 End Try
             End Sub
 #End Region

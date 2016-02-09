@@ -1,7 +1,7 @@
-﻿Imports mRemoteNG.App.NativeMethods
-Imports System.Threading
-Imports mRemoteNG.App.Runtime
-Imports mRemoteNG.Tools
+﻿Imports System.Threading
+Imports mRemote3G.App
+Imports mRemote3G.My
+Imports mRemote3G.Tools
 
 Namespace Connection
     Namespace Protocol
@@ -10,7 +10,7 @@ Namespace Connection
 #Region "Public Methods"
             Public Overrides Function SetProps() As Boolean
                 If InterfaceControl.Info IsNot Nothing Then
-                    _externalTool = GetExtAppByName(InterfaceControl.Info.ExtApp)
+                    _externalTool =App.Runtime.GetExtAppByName(InterfaceControl.Info.ExtApp)
                     _externalTool.ConnectionInfo = InterfaceControl.Info
                 End If
 
@@ -37,29 +37,29 @@ Namespace Connection
                     AddHandler _process.Exited, AddressOf ProcessExited
 
                     _process.Start()
-                    _process.WaitForInputIdle(My.Settings.MaxPuttyWaitTime * 1000)
+                    _process.WaitForInputIdle(MySettingsProperty.Settings.MaxPuttyWaitTime * 1000)
 
                     Dim startTicks As Integer = Environment.TickCount
-                    While _handle.ToInt32 = 0 And Environment.TickCount < startTicks + (My.Settings.MaxPuttyWaitTime * 1000)
+                    While _handle.ToInt32 = 0 And Environment.TickCount < startTicks + (MySettingsProperty.Settings.MaxPuttyWaitTime * 1000)
                         _process.Refresh()
                         If Not _process.MainWindowTitle = "Default IME" Then _handle = _process.MainWindowHandle
                         If _handle.ToInt32 = 0 Then Thread.Sleep(0)
                     End While
 
-                    SetParent(_handle, InterfaceControl.Handle)
+                    NativeMethods.SetParent(_handle, InterfaceControl.Handle)
 
-                    MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, My.Language.strIntAppStuff, True)
+                   App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, Language.Language.strIntAppStuff, True)
 
-                    MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, String.Format(My.Language.strIntAppHandle, _handle.ToString), True)
-                    MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, String.Format(My.Language.strIntAppTitle, _process.MainWindowTitle), True)
-                    MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, String.Format(My.Language.strIntAppParentHandle, InterfaceControl.Parent.Handle.ToString), True)
+                   App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, String.Format(Language.Language.strIntAppHandle, _handle.ToString), True)
+                   App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, String.Format(Language.Language.strIntAppTitle, _process.MainWindowTitle), True)
+                   App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, String.Format(Language.Language.strIntAppParentHandle, InterfaceControl.Parent.Handle.ToString), True)
 
                     Resize(Me, New EventArgs)
 
                     MyBase.Connect()
                     Return True
                 Catch ex As Exception
-                    MessageCollector.AddExceptionMessage(My.Language.strIntAppConnectionFailed, ex)
+                   App.Runtime.MessageCollector.AddExceptionMessage(Language.Language.strIntAppConnectionFailed, ex)
                     Return False
                 End Try
             End Function
@@ -67,18 +67,18 @@ Namespace Connection
             Public Overrides Sub Focus()
                 Try
                     If ConnectionWindow.InTabDrag Then Return
-                    SetForegroundWindow(_handle)
+                    NativeMethods.SetForegroundWindow(_handle)
                 Catch ex As Exception
-                    MessageCollector.AddExceptionMessage(My.Language.strIntAppFocusFailed, ex, , True)
+                   App.Runtime.MessageCollector.AddExceptionMessage(Language.Language.strIntAppFocusFailed, ex, , True)
                 End Try
             End Sub
 
             Public Overrides Sub Resize(ByVal sender As Object, ByVal e As EventArgs)
                 Try
                     If InterfaceControl.Size = Size.Empty Then Return
-                    MoveWindow(_handle, -SystemInformation.FrameBorderSize.Width, -(SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height), InterfaceControl.Width + (SystemInformation.FrameBorderSize.Width * 2), InterfaceControl.Height + SystemInformation.CaptionHeight + (SystemInformation.FrameBorderSize.Height * 2), True)
+                    NativeMethods.MoveWindow(_handle, -SystemInformation.FrameBorderSize.Width, -(SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height), InterfaceControl.Width + (SystemInformation.FrameBorderSize.Width * 2), InterfaceControl.Height + SystemInformation.CaptionHeight + (SystemInformation.FrameBorderSize.Height * 2), True)
                 Catch ex As Exception
-                    MessageCollector.AddExceptionMessage(My.Language.strIntAppResizeFailed, ex, , True)
+                   App.Runtime.MessageCollector.AddExceptionMessage(Language.Language.strIntAppResizeFailed, ex, , True)
                 End Try
             End Sub
 
@@ -86,13 +86,13 @@ Namespace Connection
                 Try
                     If Not _process.HasExited Then _process.Kill()
                 Catch ex As Exception
-                    MessageCollector.AddExceptionMessage(My.Language.strIntAppKillFailed, ex, , True)
+                   App.Runtime.MessageCollector.AddExceptionMessage(Language.Language.strIntAppKillFailed, ex, , True)
                 End Try
 
                 Try
                     If Not _process.HasExited Then _process.Dispose()
                 Catch ex As Exception
-                    MessageCollector.AddExceptionMessage(My.Language.strIntAppDisposeFailed, ex, , True)
+                   App.Runtime.MessageCollector.AddExceptionMessage(Language.Language.strIntAppDisposeFailed, ex, , True)
                 End Try
 
                 MyBase.Close()

@@ -1,8 +1,8 @@
 Imports System.IO
-Imports WeifenLuo.WinFormsUI.Docking
-Imports mRemoteNG.App.Runtime
 Imports System.Xml
-Imports System.Environment
+Imports mRemote3G.Forms
+Imports mRemote3G.My
+Imports WeifenLuo.WinFormsUI.Docking
 
 Namespace Config
     Namespace Settings
@@ -28,37 +28,37 @@ Namespace Config
                 Try
                     With Me._MainForm
                         ' Migrate settings from previous version
-                        If My.Settings.DoUpgrade Then
+                        If MySettingsProperty.Settings.DoUpgrade Then
                             Try
-                                My.Settings.Upgrade()
+                                MySettingsProperty.Settings.Upgrade()
                             Catch ex As Exception
-                                Log.Error("My.Settings.Upgrade() failed" & vbNewLine & ex.ToString())
+                                App.Runtime.Log.Error("My.Settings.Upgrade() failed" & vbNewLine & ex.ToString())
                             End Try
-                            My.Settings.DoUpgrade = False
+                            MySettingsProperty.Settings.DoUpgrade = False
 
                             ' Clear pending update flag
                             ' This is used for automatic updates, not for settings migration, but it
                             ' needs to be cleared here because we know that we just updated.
-                            My.Settings.UpdatePending = False
+                            MySettingsProperty.Settings.UpdatePending = False
                         End If
 
                         App.SupportedCultures.InstantiateSingleton()
-                        If Not My.Settings.OverrideUICulture = "" And App.SupportedCultures.IsNameSupported(My.Settings.OverrideUICulture) Then
-                            Threading.Thread.CurrentThread.CurrentUICulture = New Globalization.CultureInfo(My.Settings.OverrideUICulture)
-                            log.InfoFormat("Override Culture: {0}/{1}", Threading.Thread.CurrentThread.CurrentUICulture.Name, Threading.Thread.CurrentThread.CurrentUICulture.NativeName)
+                        If Not MySettingsProperty.Settings.OverrideUICulture = "" And App.SupportedCultures.IsNameSupported(MySettingsProperty.Settings.OverrideUICulture) Then
+                            Threading.Thread.CurrentThread.CurrentUICulture = New Globalization.CultureInfo(MySettingsProperty.Settings.OverrideUICulture)
+                            App.Runtime.Log.InfoFormat("Override Culture: {0}/{1}", Threading.Thread.CurrentThread.CurrentUICulture.Name, Threading.Thread.CurrentThread.CurrentUICulture.NativeName)
                         End If
 
-                        Themes.ThemeManager.LoadTheme(My.Settings.ThemeName)
+                        Themes.ThemeManager.LoadTheme(MySettingsProperty.Settings.ThemeName)
 
                         .WindowState = FormWindowState.Normal
-                        If My.Settings.MainFormState = FormWindowState.Normal Then
-                            If Not My.Settings.MainFormLocation.IsEmpty Then .Location = My.Settings.MainFormLocation
-                            If Not My.Settings.MainFormSize.IsEmpty Then .Size = My.Settings.MainFormSize
+                        If MySettingsProperty.Settings.MainFormState = FormWindowState.Normal Then
+                            If Not MySettingsProperty.Settings.MainFormLocation.IsEmpty Then .Location = MySettingsProperty.Settings.MainFormLocation
+                            If Not MySettingsProperty.Settings.MainFormSize.IsEmpty Then .Size = MySettingsProperty.Settings.MainFormSize
                         Else
-                            If Not My.Settings.MainFormRestoreLocation.IsEmpty Then .Location = My.Settings.MainFormRestoreLocation
-                            If Not My.Settings.MainFormRestoreSize.IsEmpty Then .Size = My.Settings.MainFormRestoreSize
+                            If Not MySettingsProperty.Settings.MainFormRestoreLocation.IsEmpty Then .Location = MySettingsProperty.Settings.MainFormRestoreLocation
+                            If Not MySettingsProperty.Settings.MainFormRestoreSize.IsEmpty Then .Size = MySettingsProperty.Settings.MainFormRestoreSize
                         End If
-                        If My.Settings.MainFormState = FormWindowState.Maximized Then
+                        If MySettingsProperty.Settings.MainFormState = FormWindowState.Maximized Then
                             .WindowState = FormWindowState.Maximized
                         End If
 
@@ -83,43 +83,43 @@ Namespace Config
 
                         .Location = newBounds.Location
 
-                        If My.Settings.MainFormKiosk = True Then
+                        If MySettingsProperty.Settings.MainFormKiosk = True Then
                             .Fullscreen.Value = True
                             .mMenViewFullscreen.Checked = True
                         End If
 
-                        If My.Settings.UseCustomPuttyPath Then
-                            Connection.Protocol.PuttyBase.PuttyPath = My.Settings.CustomPuttyPath
+                        If MySettingsProperty.Settings.UseCustomPuttyPath Then
+                            Connection.Protocol.PuttyBase.PuttyPath = MySettingsProperty.Settings.CustomPuttyPath
                         Else
                             Connection.Protocol.PuttyBase.PuttyPath = App.Info.General.PuttyPath
                         End If
 
-                        If My.Settings.ShowSystemTrayIcon Then
+                        If MySettingsProperty.Settings.ShowSystemTrayIcon Then
                             App.Runtime.NotificationAreaIcon = New Tools.Controls.NotificationAreaIcon()
                         End If
 
-                        If My.Settings.AutoSaveEveryMinutes > 0 Then
-                            .tmrAutoSave.Interval = My.Settings.AutoSaveEveryMinutes * 60000
+                        If MySettingsProperty.Settings.AutoSaveEveryMinutes > 0 Then
+                            .tmrAutoSave.Interval = MySettingsProperty.Settings.AutoSaveEveryMinutes * 60000
                             .tmrAutoSave.Enabled = True
                         End If
 
-                        My.Settings.ConDefaultPassword = Security.Crypt.Decrypt(My.Settings.ConDefaultPassword, App.Info.General.EncryptionKey)
+                        MySettingsProperty.Settings.ConDefaultPassword = Security.Crypt.Decrypt(MySettingsProperty.Settings.ConDefaultPassword, App.Info.General.EncryptionKey)
 
                         Me.LoadPanelsFromXML()
                         Me.LoadExternalAppsFromXML()
 
-                        If My.Settings.AlwaysShowPanelTabs Then
+                        If MySettingsProperty.Settings.AlwaysShowPanelTabs Then
                             frmMain.pnlDock.DocumentStyle = DocumentStyle.DockingWindow
                         End If
 
-                        If My.Settings.ResetToolbars = False Then
+                        If MySettingsProperty.Settings.ResetToolbars = False Then
                             LoadToolbarsFromSettings()
                         Else
                             SetToolbarsDefault()
                         End If
                     End With
                 Catch ex As Exception
-                    Log.Error("Loading settings failed" & vbNewLine & ex.ToString())
+                    App.Runtime.Log.Error("Loading settings failed" & vbNewLine & ex.ToString())
                 End Try
             End Sub
 
@@ -134,7 +134,7 @@ Namespace Config
 
             Public Sub LoadToolbarsFromSettings()
                 With Me.MainForm
-                    If My.Settings.QuickyTBLocation.X > My.Settings.ExtAppsTBLocation.X Then
+                    If MySettingsProperty.Settings.QuickyTBLocation.X > MySettingsProperty.Settings.ExtAppsTBLocation.X Then
                         AddDynamicPanels()
                         AddStaticPanels()
                     Else
@@ -146,15 +146,15 @@ Namespace Config
 
             Private Sub AddStaticPanels()
                 With MainForm
-                    ToolStripPanelFromString(My.Settings.QuickyTBParentDock).Join(.tsQuickConnect, My.Settings.QuickyTBLocation)
-                    .tsQuickConnect.Visible = My.Settings.QuickyTBVisible
+                    ToolStripPanelFromString(MySettingsProperty.Settings.QuickyTBParentDock).Join(.tsQuickConnect, MySettingsProperty.Settings.QuickyTBLocation)
+                    .tsQuickConnect.Visible = MySettingsProperty.Settings.QuickyTBVisible
                 End With
             End Sub
 
             Private Sub AddDynamicPanels()
                 With MainForm
-                    ToolStripPanelFromString(My.Settings.ExtAppsTBParentDock).Join(.tsExternalTools, My.Settings.ExtAppsTBLocation)
-                    .tsExternalTools.Visible = My.Settings.ExtAppsTBVisible
+                    ToolStripPanelFromString(MySettingsProperty.Settings.ExtAppsTBParentDock).Join(.tsExternalTools, MySettingsProperty.Settings.ExtAppsTBLocation)
+                    .tsExternalTools.Visible = MySettingsProperty.Settings.ExtAppsTBVisible
                 End With
             End Sub
 
@@ -176,18 +176,18 @@ Namespace Config
             Public Sub LoadPanelsFromXML()
                 Try
                     With MainForm
-                        Windows.treePanel = Nothing
-                        Windows.configPanel = Nothing
-                        Windows.errorsPanel = Nothing
+                        App.Runtime.Windows.treePanel = Nothing
+                        App.Runtime.Windows.configPanel = Nothing
+                        App.Runtime.Windows.errorsPanel = Nothing
 
                         Do While .pnlDock.Contents.Count > 0
                             Dim dc As WeifenLuo.WinFormsUI.Docking.DockContent = .pnlDock.Contents(0)
                             dc.Close()
                         Loop
 
-                        Startup.CreatePanels()
+                        App.Runtime.Startup.CreatePanels()
 
-                        Dim oldPath As String = GetFolderPath(SpecialFolder.LocalApplicationData) & "\" & My.Application.Info.ProductName & "\" & App.Info.Settings.LayoutFileName
+                        Dim oldPath As String = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) & "\" & My.Application.Info.ProductName & "\" & App.Info.Settings.LayoutFileName
                         Dim newPath As String = App.Info.Settings.SettingsPath & "\" & App.Info.Settings.LayoutFileName
                         If File.Exists(newPath) Then
                             .pnlDock.LoadFromXml(newPath, AddressOf GetContentFromPersistString)
@@ -196,16 +196,16 @@ Namespace Config
                             .pnlDock.LoadFromXml(oldPath, AddressOf GetContentFromPersistString)
 #End If
                         Else
-                            Startup.SetDefaultLayout()
+                            App.Runtime.Startup.SetDefaultLayout()
                         End If
                     End With
                 Catch ex As Exception
-                    Log.Error("LoadPanelsFromXML failed" & vbNewLine & ex.ToString())
+                    App.Runtime.Log.Error("LoadPanelsFromXML failed" & vbNewLine & ex.ToString())
                 End Try
             End Sub
 
             Public Sub LoadExternalAppsFromXML()
-                Dim oldPath As String = GetFolderPath(SpecialFolder.LocalApplicationData) & "\" & My.Application.Info.ProductName & "\" & App.Info.Settings.ExtAppsFilesName
+                Dim oldPath As String = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) & "\" & My.Application.Info.ProductName & "\" & App.Info.Settings.ExtAppsFilesName
                 Dim newPath As String = App.Info.Settings.SettingsPath & "\" & App.Info.Settings.ExtAppsFilesName
                 Dim xDom As New XmlDocument()
                 If File.Exists(newPath) Then
@@ -232,10 +232,10 @@ Namespace Config
                         extA.TryIntegrate = xEl.Attributes("TryToIntegrate").Value
                     End If
 
-                    ExternalTools.Add(extA)
+                    App.Runtime.ExternalTools.Add(extA)
                 Next
 
-                MainForm.SwitchToolBarText(My.Settings.ExtAppsTBShowText)
+                MainForm.SwitchToolBarText(MySettingsProperty.Settings.ExtAppsTBShowText)
 
                 xDom = Nothing
 
@@ -247,27 +247,27 @@ Namespace Config
             Private Function GetContentFromPersistString(ByVal persistString As String) As IDockContent
                 ' pnlLayout.xml persistence XML fix for refactoring to mRemoteNG
                 If (persistString.StartsWith("mRemote.")) Then
-                    persistString = persistString.Replace("mRemote.", "mRemoteNG.")
+                    persistString = persistString.Replace("mRemote.", "mRemote3G.")
                 End If
 
                 Try
                     If persistString = GetType(UI.Window.Config).ToString Then
-                        Return Windows.configPanel
+                        Return App.Runtime.Windows.configPanel
                     End If
 
                     If persistString = GetType(UI.Window.Tree).ToString Then
-                        Return Windows.treePanel
+                        Return App.Runtime.Windows.treePanel
                     End If
 
                     If persistString = GetType(UI.Window.ErrorsAndInfos).ToString Then
-                        Return Windows.errorsPanel
+                        Return App.Runtime.Windows.errorsPanel
                     End If
 
                     If persistString = GetType(UI.Window.ScreenshotManager).ToString Then
-                        Return Windows.screenshotPanel
+                        Return App.Runtime.Windows.screenshotPanel
                     End If
                 Catch ex As Exception
-                    Log.Error("GetContentFromPersistString failed" & vbNewLine & ex.ToString())
+                    App.Runtime.Log.Error("GetContentFromPersistString failed" & vbNewLine & ex.ToString())
                 End Try
 
                 Return Nothing

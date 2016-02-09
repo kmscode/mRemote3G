@@ -1,5 +1,6 @@
-Imports System.Environment
 Imports System.Threading
+Imports System.Windows.Forms
+Imports mRemote3G.My
 
 Namespace App
     Namespace Info
@@ -15,14 +16,14 @@ Namespace App
                 Get
                     Dim details As New List(Of String)
                     details.Add("compatible")
-                    If OSVersion.Platform = PlatformID.Win32NT Then
-                        details.Add(String.Format("Windows NT {0}.{1}", OSVersion.Version.Major, OSVersion.Version.Minor))
+                    If Environment.OSVersion.Platform = PlatformID.Win32NT Then
+                        details.Add(String.Format("Windows NT {0}.{1}", Environment.OSVersion.Version.Major, Environment.OSVersion.Version.Minor))
                     Else
-                        details.Add(OSVersion.VersionString)
+                        details.Add(Environment.OSVersion.VersionString)
                     End If
                     If Tools.EnvironmentInfo.IsWow64 Then details.Add("WOW64")
                     details.Add(Thread.CurrentThread.CurrentUICulture.Name)
-                    details.Add(String.Format(".NET CLR {0}", Version.ToString()))
+                    details.Add(String.Format(".NET CLR {0}", Environment.Version.ToString()))
                     Dim detailsString As String = String.Join("; ", details.ToArray())
 
                     Return String.Format("Mozilla/4.0 ({0}) {1}/{2}", detailsString, Application.ProductName, Application.ProductVersion)
@@ -35,7 +36,7 @@ Namespace App
 
         Public Class Settings
 #If Not PORTABLE Then
-            Public Shared ReadOnly SettingsPath As String = GetFolderPath(SpecialFolder.ApplicationData) & "\" & My.Application.Info.ProductName
+            Public Shared ReadOnly SettingsPath As String = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\" & Application.ProductName
 #Else
             Public Shared ReadOnly SettingsPath As String = My.Application.Info.DirectoryPath
 #End If
@@ -48,13 +49,13 @@ Namespace App
 
         End Class
 
-        Public Class Update
+        Public Class UpdateApp
             Public Shared ReadOnly Property FileName As String
                 Get
 #If DEBUG Then
                     Return "update-debug.txt"
 #End If
-                    Select Case My.Settings.UpdateChannel.ToLowerInvariant()
+                    Select Case MySettingsProperty.Settings.UpdateChannel.ToLowerInvariant()
                         Case "beta"
                             Return "update-beta.txt"
                         Case "debug"

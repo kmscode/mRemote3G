@@ -1,5 +1,5 @@
-﻿Imports System.Configuration
-Imports System.Collections.Specialized
+﻿Imports System.Collections.Specialized
+Imports System.Configuration
 Imports System.Xml
 
 Namespace Config

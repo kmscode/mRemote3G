@@ -1,6 +1,4 @@
-﻿Imports System.Windows.Forms
-Imports mRemoteNG.App.Runtime
-Imports mRemoteNG.Tools.LocalizedAttributes
+﻿Imports mRemote3G.Tools
 
 Namespace Connection
     Namespace Protocol
@@ -21,7 +19,7 @@ Namespace Connection
 
                     NewExtended()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strHttpConnectionFailed & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.Language.strHttpConnectionFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -52,7 +50,7 @@ Namespace Connection
 
                     Return True
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strHttpSetPropsFailed & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.Language.strHttpSetPropsFailed & vbNewLine & ex.ToString(), True)
                     Return False
                 End Try
             End Function
@@ -89,7 +87,7 @@ Namespace Connection
                     MyBase.Connect()
                     Return True
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strHttpConnectFailed & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.Language.strHttpConnectFailed & vbNewLine & ex.ToString(), True)
                     Return False
                 End Try
             End Function
@@ -144,7 +142,7 @@ Namespace Connection
                         End If
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Language.strHttpDocumentTileChangeFailed & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, Language.Language.strHttpDocumentTileChangeFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 #End Region
@@ -152,7 +150,7 @@ Namespace Connection
 #Region "Enums"
             Public Enum RenderingEngine
                 None = 0
-                <LocalizedDescription("strHttpInternetExplorer")>
+                <LocalizedAttributes.LocalizedDescription("strHttpInternetExplorer")>
                 IE = 1
             End Enum
 

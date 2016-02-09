@@ -1,11 +1,11 @@
-﻿Imports mRemoteNG.App
-Imports mRemoteNG.My
+﻿Imports mRemote3G.App
+Imports mRemote3G.App.Info
 
 Namespace Forms.OptionsPages
     Public Class AppearancePage
         Public Overrides Property PageName() As String
             Get
-                Return Language.strTabAppearance
+                Return Language.Language.strTabAppearance
             End Get
             Set(value As String)
             End Set
@@ -14,62 +14,62 @@ Namespace Forms.OptionsPages
         Public Overrides Sub ApplyLanguage()
             MyBase.ApplyLanguage()
 
-            lblLanguage.Text = Language.strLanguage
-            lblLanguageRestartRequired.Text = String.Format(Language.strLanguageRestartRequired, Application.Info.ProductName)
-            chkShowDescriptionTooltipsInTree.Text = Language.strShowDescriptionTooltips
-            chkShowFullConnectionsFilePathInTitle.Text = Language.strShowFullConsFilePath
-            chkShowSystemTrayIcon.Text = Language.strAlwaysShowSysTrayIcon
-            chkMinimizeToSystemTray.Text = Language.strMinimizeToSysTray
+            lblLanguage.Text = Language.Language.strLanguage
+            lblLanguageRestartRequired.Text = String.Format(Language.Language.strLanguageRestartRequired, Application.ProductName)
+            chkShowDescriptionTooltipsInTree.Text = Language.Language.strShowDescriptionTooltips
+            chkShowFullConnectionsFilePathInTitle.Text = Language.Language.strShowFullConsFilePath
+            chkShowSystemTrayIcon.Text = Language.Language.strAlwaysShowSysTrayIcon
+            chkMinimizeToSystemTray.Text = Language.Language.strMinimizeToSysTray
         End Sub
 
         Public Overrides Sub LoadSettings()
             MyBase.SaveSettings()
 
             cboLanguage.Items.Clear()
-            cboLanguage.Items.Add(Language.strLanguageDefault)
+            cboLanguage.Items.Add(Language.Language.strLanguageDefault)
 
             For Each nativeName As String In SupportedCultures.CultureNativeNames
                 cboLanguage.Items.Add(nativeName)
             Next
-            If Not String.IsNullOrEmpty(Settings.OverrideUICulture) AndAlso SupportedCultures.IsNameSupported(Settings.OverrideUICulture) Then
-                cboLanguage.SelectedItem = SupportedCultures.CultureNativeName(Settings.OverrideUICulture)
+            If Not String.IsNullOrEmpty(My.Settings.OverrideUICulture) AndAlso SupportedCultures.IsNameSupported(My.Settings.OverrideUICulture) Then
+                cboLanguage.SelectedItem = SupportedCultures.CultureNativeName(My.Settings.OverrideUICulture)
             End If
             If cboLanguage.SelectedIndex = -1 Then
                 cboLanguage.SelectedIndex = 0
             End If
 
-            chkShowDescriptionTooltipsInTree.Checked = Settings.ShowDescriptionTooltipsInTree
-            chkShowFullConnectionsFilePathInTitle.Checked = Settings.ShowCompleteConsPathInTitle
-            chkShowSystemTrayIcon.Checked = Settings.ShowSystemTrayIcon
-            chkMinimizeToSystemTray.Checked = Settings.MinimizeToTray
+            chkShowDescriptionTooltipsInTree.Checked = My.Settings.ShowDescriptionTooltipsInTree
+            chkShowFullConnectionsFilePathInTitle.Checked = My.Settings.ShowCompleteConsPathInTitle
+            chkShowSystemTrayIcon.Checked = My.Settings.ShowSystemTrayIcon
+            chkMinimizeToSystemTray.Checked = My.Settings.MinimizeToTray
         End Sub
 
         Public Overrides Sub SaveSettings()
             MyBase.SaveSettings()
 
             If cboLanguage.SelectedIndex > 0 And SupportedCultures.IsNativeNameSupported(cboLanguage.SelectedItem) Then
-                Settings.OverrideUICulture = SupportedCultures.CultureName(cboLanguage.SelectedItem)
+                My.Settings.OverrideUICulture = SupportedCultures.CultureName(cboLanguage.SelectedItem)
             Else
-                Settings.OverrideUICulture = String.Empty
+                My.Settings.OverrideUICulture = String.Empty
             End If
 
-            Settings.ShowDescriptionTooltipsInTree = chkShowDescriptionTooltipsInTree.Checked
-            Settings.ShowCompleteConsPathInTitle = chkShowFullConnectionsFilePathInTitle.Checked
+            My.Settings.ShowDescriptionTooltipsInTree = chkShowDescriptionTooltipsInTree.Checked
+            My.Settings.ShowCompleteConsPathInTitle = chkShowFullConnectionsFilePathInTitle.Checked
             frmMain.ShowFullPathInTitle = chkShowFullConnectionsFilePathInTitle.Checked
 
-            Settings.ShowSystemTrayIcon = chkShowSystemTrayIcon.Checked
-            If Settings.ShowSystemTrayIcon Then
-                If Runtime.NotificationAreaIcon Is Nothing Then
-                    Runtime.NotificationAreaIcon = New Tools.Controls.NotificationAreaIcon
+            My.Settings.ShowSystemTrayIcon = chkShowSystemTrayIcon.Checked
+            If My.Settings.ShowSystemTrayIcon Then
+                If App.Runtime.NotificationAreaIcon Is Nothing Then
+                    App.Runtime.NotificationAreaIcon = New Tools.Controls.NotificationAreaIcon
                 End If
             Else
-                If Runtime.NotificationAreaIcon IsNot Nothing Then
-                    Runtime.NotificationAreaIcon.Dispose()
-                    Runtime.NotificationAreaIcon = Nothing
+                If App.Runtime.NotificationAreaIcon IsNot Nothing Then
+                    App.Runtime.NotificationAreaIcon.Dispose()
+                    App.Runtime.NotificationAreaIcon = Nothing
                 End If
             End If
 
-            Settings.MinimizeToTray = chkMinimizeToSystemTray.Checked
+            My.Settings.MinimizeToTray = chkMinimizeToSystemTray.Checked
         End Sub
     End Class
 End Namespace

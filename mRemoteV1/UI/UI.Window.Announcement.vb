@@ -1,7 +1,5 @@
 ﻿Imports System.ComponentModel
-Imports mRemoteNG.My
 Imports WeifenLuo.WinFormsUI.Docking
-Imports mRemoteNG.App.Runtime
 
 Namespace UI
     Namespace Window
@@ -65,7 +63,7 @@ Namespace UI
 
                     webBrowser.Navigate(_appUpdate.CurrentAnnouncementInfo.Address)
                 Catch ex As Exception
-                    MessageCollector.AddExceptionMessage(Language.strUpdateGetAnnouncementInfoFailed, ex)
+                   App.Runtime.MessageCollector.AddExceptionMessage(Language.Language.strUpdateGetAnnouncementInfoFailed, ex)
                 End Try
             End Sub
 #End Region

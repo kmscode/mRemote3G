@@ -1,7 +1,7 @@
 Imports System.IO
 Imports System.Security.Cryptography
 Imports System.Text
-Imports mRemoteNG.App.Runtime
+Imports mRemote3G.App.Runtime
 
 Namespace Security
     Public Class Crypt
@@ -37,7 +37,7 @@ Namespace Security
 
                 Return Convert.ToBase64String(encdata)
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Language.strErrorEncryptionFailed, ex.ToString()))
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(Language.Language.strErrorEncryptionFailed, ex.ToString()))
             End Try
 
             Return StrToEncrypt
@@ -78,7 +78,7 @@ Namespace Security
             Catch ex As Exception
                 ' Ignore CryptographicException "Padding is invalid and cannot be removed." when password is incorrect.
                 If Not TypeOf ex Is CryptographicException Then
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Language.strErrorDecryptionFailed, ex.ToString()))
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(Language.Language.strErrorDecryptionFailed, ex.ToString()))
                 End If
             End Try
 

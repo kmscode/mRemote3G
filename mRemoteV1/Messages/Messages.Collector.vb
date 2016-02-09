@@ -1,4 +1,4 @@
-Imports System.Windows.Forms
+Imports mRemote3G.Forms
 
 Namespace Messages
     Public Class Collector
@@ -134,11 +134,11 @@ Namespace Messages
         Private Shared Sub ShowMessageBox(ByVal Msg As Messages.Message)
             Select Case Msg.MsgClass
                 Case Messages.MessageClass.InformationMsg
-                    MessageBox.Show(Msg.MsgText, String.Format(My.Language.strTitleInformation, Msg.MsgDate), MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    MessageBox.Show(Msg.MsgText, String.Format(Language.Language.strTitleInformation, Msg.MsgDate), MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Case Messages.MessageClass.WarningMsg
-                    MessageBox.Show(Msg.MsgText, String.Format(My.Language.strTitleWarning, Msg.MsgDate), MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    MessageBox.Show(Msg.MsgText, String.Format(Language.Language.strTitleWarning, Msg.MsgDate), MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Case Messages.MessageClass.ErrorMsg
-                    MessageBox.Show(Msg.MsgText, String.Format(My.Language.strTitleError, Msg.MsgDate), MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    MessageBox.Show(Msg.MsgText, String.Format(Language.Language.strTitleError, Msg.MsgDate), MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Select
         End Sub
 

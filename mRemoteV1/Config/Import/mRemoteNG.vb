@@ -1,9 +1,9 @@
 ﻿Imports System.IO
-Imports mRemoteNG.App.Runtime
+Imports mRemote3G.App.Runtime
 
 Namespace Config.Import
     ' ReSharper disable once InconsistentNaming
-    Public Class mRemoteNG
+    Public Class mRemote3G
         Public Shared Sub Import(ByVal fileName As String, ByVal parentTreeNode As TreeNode)
             Dim name As String = Path.GetFileNameWithoutExtension(fileName)
             Dim treeNode As New TreeNode(name)
@@ -33,7 +33,7 @@ Namespace Config.Import
             treeNode.ImageIndex = Images.Enums.TreeImage.Container
             treeNode.SelectedImageIndex = Images.Enums.TreeImage.Container
 
-            Dim connectionsLoad As New Connections.Load
+            Dim connectionsLoad As New Connections.ConnectionsLoad
             With connectionsLoad
                 .ConnectionFileName = fileName
                 .RootTreeNode = treeNode

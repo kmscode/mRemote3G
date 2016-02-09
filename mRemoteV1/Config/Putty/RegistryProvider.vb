@@ -1,9 +1,9 @@
 ﻿Imports System.Management
-Imports mRemoteNG.App
-Imports mRemoteNG.Messages
+Imports mRemote3G.App
+Imports mRemote3G.Messages
 Imports Microsoft.Win32
-Imports mRemoteNG.Connection.Protocol
 Imports System.Security.Principal
+Imports mRemote3G.Connection.Protocol
 
 Namespace Config.Putty
     Public Class RegistryProvider
@@ -36,7 +36,7 @@ Namespace Config.Putty
             Return sessionNames.ToArray()
         End Function
 
-        Public Overrides Function GetSession(ByVal sessionName As String) As Connection.PuttySession.Info
+        Public Overrides Function GetSession(ByVal sessionName As String) As Connection.PuttySession.PuttyInfo
             Dim sessionsKey As RegistryKey = Registry.CurrentUser.OpenSubKey(PuttySessionsKey)
             If sessionsKey Is Nothing Then Return Nothing
 
@@ -45,7 +45,7 @@ Namespace Config.Putty
 
             sessionName = Web.HttpUtility.UrlDecode(sessionName.Replace("+", "%2B"))
 
-            Dim sessionInfo As New Connection.PuttySession.Info
+            Dim sessionInfo As New Connection.PuttySession.PuttyInfo
             With sessionInfo
                 .PuttySession = sessionName
                 .Name = sessionName
@@ -94,7 +94,7 @@ Namespace Config.Putty
                 AddHandler _eventWatcher.EventArrived, AddressOf OnManagementEventArrived
                 _eventWatcher.Start()
             Catch ex As Exception
-                Runtime.MessageCollector.AddExceptionMessage("PuttySessions.Watcher.StartWatching() failed.", ex, MessageClass.WarningMsg, True)
+               App.Runtime.MessageCollector.AddExceptionMessage("PuttySessions.Watcher.StartWatching() failed.", ex, MessageClass.WarningMsg, True)
             End Try
         End Sub
 

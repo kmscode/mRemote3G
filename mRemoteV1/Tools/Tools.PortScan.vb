@@ -1,7 +1,6 @@
-﻿Imports System.Threading
-Imports mRemoteNG.App.Runtime
+﻿Imports System.Net
 Imports System.Net.NetworkInformation
-Imports System.Net
+Imports System.Threading
 
 Namespace Tools
     Namespace PortScan
@@ -206,7 +205,7 @@ Namespace Tools
                 Try
                     Return "SSH: " & _SSH & " Telnet: " & _Telnet & " HTTP: " & _HTTP & " HTTPS: " & _HTTPS & " Rlogin: " & _Rlogin & " RDP: " & _RDP & " VNC: " & _VNC
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "ToString failed (Tools.PortScan)", True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "ToString failed (Tools.PortScan)", True)
                     Return ""
                 End Try
             End Function
@@ -247,16 +246,16 @@ Namespace Tools
 
                     Return listViewItem
                 Catch ex As Exception
-                    MessageCollector.AddExceptionMessage("Tools.PortScan.ToListViewItem() failed.", ex, Messages.MessageClass.WarningMsg, True)
+                    App.Runtime.MessageCollector.AddExceptionMessage("Tools.PortScan.ToListViewItem() failed.", ex, Messages.MessageClass.WarningMsg, True)
                     Return Nothing
                 End Try
             End Function
 
             Private Function BoolToYesNo(ByVal value As Boolean) As String
                 If value Then
-                    Return My.Language.strYes
+                    Return Language.Language.strYes
                 Else
-                    Return My.Language.strNo
+                    Return Language.Language.strNo
                 End If
             End Function
 
@@ -287,8 +286,8 @@ Namespace Tools
                 Dim ipAddressEnd As IPAddress = IpAddressMax(ipAddress1, ipAddress2)
 
                 _ports.Clear()
-                _ports.AddRange(New Integer() {ScanHost.SSHPort, ScanHost.TelnetPort, ScanHost.HTTPPort, _
-                                              ScanHost.HTTPSPort, ScanHost.RloginPort, ScanHost.RDPPort, _
+                _ports.AddRange(New Integer() {ScanHost.SSHPort, ScanHost.TelnetPort, ScanHost.HTTPPort,
+                                              ScanHost.HTTPSPort, ScanHost.RloginPort, ScanHost.RDPPort,
                                               ScanHost.VNCPort})
 
                 _ipAddresses.Clear()
@@ -301,7 +300,7 @@ Namespace Tools
                 Me.New(ipAddress1, ipAddress2)
 
                 Dim portStart As Integer = Math.Min(port1, port2)
-                Dim portEnd As Integer= Math.Max(port1, port2)
+                Dim portEnd As Integer = Math.Max(port1, port2)
 
                 _ports.Clear()
                 For port As Integer = portStart To portEnd
@@ -393,7 +392,7 @@ Namespace Tools
 
                     RaiseEvent ScanComplete(_scannedHosts)
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "StartScanBG failed (Tools.PortScan)" & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "StartScanBG failed (Tools.PortScan)" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 

@@ -1,14 +1,14 @@
-Imports System.Windows.Forms
-Imports System.Xml
-Imports System.IO
-Imports System.Globalization
-Imports mRemoteNG.App.Runtime
 Imports System.Data.SqlClient
-Imports mRemoteNG.Tools.Misc
+Imports System.Globalization
+Imports System.IO
+Imports System.Xml
+Imports mRemote3G.Forms
+Imports mRemote3G.My
+Imports mRemote3G.Tools
 
 Namespace Config
     Namespace Connections
-        Public Class Save
+        Public Class ConnectionsSave
 #Region "Public Enums"
             Public Enum Format
                 None
@@ -59,7 +59,7 @@ Namespace Config
                         SaveTovRDCSV()
                     Case Else
                         SaveToXml()
-                        If My.Settings.EncryptCompleteConnectionsFile Then
+                        If MySettingsProperty.Settings.EncryptCompleteConnectionsFile Then
                             EncryptCompleteFile()
                         End If
                         If Not Export Then frmMain.ConnectionsFileName = ConnectionFileName
@@ -84,21 +84,21 @@ Namespace Config
                     sqlDataReader.Close()
 
                     If databaseVersion.CompareTo(New System.Version(2, 2)) = 0 Then ' 2.2
-                        MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, String.Format("Upgrading database from version {0} to version {1}.", databaseVersion.ToString, "2.3"))
+                        App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, String.Format("Upgrading database from version {0} to version {1}.", databaseVersion.ToString, "2.3"))
                         sqlCommand = New SqlCommand("ALTER TABLE tblCons ADD EnableFontSmoothing bit NOT NULL DEFAULT 0, EnableDesktopComposition bit NOT NULL DEFAULT 0, InheritEnableFontSmoothing bit NOT NULL DEFAULT 0, InheritEnableDesktopComposition bit NOT NULL DEFAULT 0;", sqlConnection)
                         sqlCommand.ExecuteNonQuery()
                         databaseVersion = New System.Version(2, 3)
                     End If
 
                     If databaseVersion.CompareTo(New System.Version(2, 3)) = 0 Then ' 2.3
-                        MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, String.Format("Upgrading database from version {0} to version {1}.", databaseVersion.ToString, "2.4"))
+                        App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, String.Format("Upgrading database from version {0} to version {1}.", databaseVersion.ToString, "2.4"))
                         sqlCommand = New SqlCommand("ALTER TABLE tblCons ADD UseCredSsp bit NOT NULL DEFAULT 1, InheritUseCredSsp bit NOT NULL DEFAULT 0;", sqlConnection)
                         sqlCommand.ExecuteNonQuery()
                         databaseVersion = New Version(2, 4)
                     End If
 
                     If databaseVersion.CompareTo(New Version(2, 4)) = 0 Then ' 2.4
-                        MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, String.Format("Upgrading database from version {0} to version {1}.", databaseVersion.ToString, "2.5"))
+                        App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, String.Format("Upgrading database from version {0} to version {1}.", databaseVersion.ToString, "2.5"))
                         sqlCommand = New SqlCommand("ALTER TABLE tblCons ADD LoadBalanceInfo varchar (1024) COLLATE SQL_Latin1_General_CP1_CI_AS NULL, AutomaticResize bit NOT NULL DEFAULT 1, InheritLoadBalanceInfo bit NOT NULL DEFAULT 0, InheritAutomaticResize bit NOT NULL DEFAULT 0;", sqlConnection)
                         sqlCommand.ExecuteNonQuery()
                         databaseVersion = New Version(2, 5)
@@ -109,10 +109,10 @@ Namespace Config
                     End If
 
                     If isVerified = False Then
-                        MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, String.Format(My.Language.strErrorBadDatabaseVersion, databaseVersion.ToString, My.Application.Info.ProductName))
+                        App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, String.Format(Language.Language.strErrorBadDatabaseVersion, databaseVersion.ToString, My.Application.Info.ProductName))
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Language.strErrorVerifyDatabaseVersionFailed, ex.ToString()))
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(Language.Language.strErrorVerifyDatabaseVersionFailed, ex.ToString()))
                 Finally
                     If sqlDataReader IsNot Nothing Then
                         If Not sqlDataReader.IsClosed Then sqlDataReader.Close()
@@ -131,7 +131,7 @@ Namespace Config
                 _sqlConnection.Open()
 
                 If Not VerifyDatabaseVersion(_sqlConnection) Then
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strErrorConnectionListSaveFailed)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.Language.strErrorConnectionListSaveFailed)
                     Return
                 End If
 
@@ -140,8 +140,8 @@ Namespace Config
 
                 Dim strProtected As String
                 If tN.Tag IsNot Nothing Then
-                    If TryCast(tN.Tag, mRemoteNG.Root.Info).Password = True Then
-                        _password = TryCast(tN.Tag, mRemoteNG.Root.Info).PasswordString
+                    If TryCast(tN.Tag, mRemote3G.Root.Info).Password = True Then
+                        _password = TryCast(tN.Tag, mRemote3G.Root.Info).PasswordString
                         strProtected = Security.Crypt.Encrypt("ThisIsProtected", _password)
                     Else
                         strProtected = Security.Crypt.Encrypt("ThisIsNotProtected", _password)
@@ -153,7 +153,7 @@ Namespace Config
                 _sqlQuery = New SqlCommand("DELETE FROM tblRoot", _sqlConnection)
                 _sqlQuery.ExecuteNonQuery()
 
-                _sqlQuery = New SqlCommand("INSERT INTO tblRoot (Name, Export, Protected, ConfVersion) VALUES('" & PrepareValueForDB(tN.Text) & "', 0, '" & strProtected & "'," & App.Info.Connections.ConnectionFileVersion.ToString(CultureInfo.InvariantCulture) & ")", _sqlConnection)
+                _sqlQuery = New SqlCommand("INSERT INTO tblRoot (Name, Export, Protected, ConfVersion) VALUES('" & Misc.PrepareValueForDB(tN.Text) & "', 0, '" & strProtected & "'," & App.Info.Connections.ConnectionFileVersion.ToString(CultureInfo.InvariantCulture) & ")", _sqlConnection)
                 _sqlQuery.ExecuteNonQuery()
 
                 _sqlQuery = New SqlCommand("DELETE FROM tblCons", _sqlConnection)
@@ -205,7 +205,7 @@ Namespace Config
 
                     If Tree.Node.GetNodeType(node) = Tree.Node.Type.Connection Or Tree.Node.GetNodeType(node) = Tree.Node.Type.Container Then
                         '_xmlTextWriter.WriteStartElement("Node")
-                        _sqlQuery.CommandText &= "'" & PrepareValueForDB(node.Text) & "'," 'Name
+                        _sqlQuery.CommandText &= "'" & Misc.PrepareValueForDB(node.Text) & "'," 'Name
                         _sqlQuery.CommandText &= "'" & Tree.Node.GetNodeType(node).ToString & "'," 'Type
                     End If
 
@@ -236,31 +236,31 @@ Namespace Config
 
             Private Sub SaveConnectionFieldsSQL(ByVal curConI As Connection.Info)
                 With curConI
-                    _sqlQuery.CommandText &= "'" & PrepareValueForDB(.Description) & "',"
-                    _sqlQuery.CommandText &= "'" & PrepareValueForDB(.Icon) & "',"
-                    _sqlQuery.CommandText &= "'" & PrepareValueForDB(.Panel) & "',"
+                    _sqlQuery.CommandText &= "'" & Misc.PrepareValueForDB(.Description) & "',"
+                    _sqlQuery.CommandText &= "'" & Misc.PrepareValueForDB(.Icon) & "',"
+                    _sqlQuery.CommandText &= "'" & Misc.PrepareValueForDB(.Panel) & "',"
 
                     If Me._SaveSecurity.Username = True Then
-                        _sqlQuery.CommandText &= "'" & PrepareValueForDB(.Username) & "',"
+                        _sqlQuery.CommandText &= "'" & Misc.PrepareValueForDB(.Username) & "',"
                     Else
                         _sqlQuery.CommandText &= "'" & "" & "',"
                     End If
 
                     If Me._SaveSecurity.Domain = True Then
-                        _sqlQuery.CommandText &= "'" & PrepareValueForDB(.Domain) & "',"
+                        _sqlQuery.CommandText &= "'" & Misc.PrepareValueForDB(.Domain) & "',"
                     Else
                         _sqlQuery.CommandText &= "'" & "" & "',"
                     End If
 
                     If Me._SaveSecurity.Password = True Then
-                        _sqlQuery.CommandText &= "'" & PrepareValueForDB(Security.Crypt.Encrypt(.Password, _password)) & "',"
+                        _sqlQuery.CommandText &= "'" & Misc.PrepareValueForDB(Security.Crypt.Encrypt(.Password, _password)) & "',"
                     Else
                         _sqlQuery.CommandText &= "'" & "" & "',"
                     End If
 
-                    _sqlQuery.CommandText &= "'" & PrepareValueForDB(.Hostname) & "',"
+                    _sqlQuery.CommandText &= "'" & Misc.PrepareValueForDB(.Hostname) & "',"
                     _sqlQuery.CommandText &= "'" & .Protocol.ToString & "',"
-                    _sqlQuery.CommandText &= "'" & PrepareValueForDB(.PuttySession) & "',"
+                    _sqlQuery.CommandText &= "'" & Misc.PrepareValueForDB(.PuttySession) & "',"
                     _sqlQuery.CommandText &= "'" & .Port & "',"
                     _sqlQuery.CommandText &= "'" & .UseConsoleSession & "',"
                     _sqlQuery.CommandText &= "'" & .RenderingEngine.ToString & "',"
@@ -480,7 +480,7 @@ Namespace Config
 
             Private Sub SaveToXml()
                 Try
-                    If Not IsConnectionsFileLoaded Then Exit Sub
+                    If Not App.Runtime.IsConnectionsFileLoaded Then Exit Sub
 
                     Dim treeNode As TreeNode
 
@@ -535,7 +535,7 @@ Namespace Config
                     End If
                     File.Move(tempFileName, ConnectionFileName)
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SaveToXml failed" & vbNewLine & ex.ToString(), False)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SaveToXml failed" & vbNewLine & ex.ToString(), False)
                 End Try
             End Sub
 
@@ -565,7 +565,7 @@ Namespace Config
                         End If
                     Next
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SaveNode failed" & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SaveNode failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -791,7 +791,7 @@ Namespace Config
                         _xmlTextWriter.WriteAttributeString("InheritRDGatewayDomain", "", False)
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SaveConnectionFields failed" & vbNewLine & ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SaveConnectionFields failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 #End Region

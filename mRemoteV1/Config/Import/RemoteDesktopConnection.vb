@@ -1,5 +1,5 @@
 ﻿Imports System.IO
-Imports mRemoteNG.App.Runtime
+Imports mRemote3G.App.Runtime
 
 Namespace Config.Import
     Public Class RemoteDesktopConnection

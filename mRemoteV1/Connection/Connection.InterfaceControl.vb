@@ -1,6 +1,6 @@
 Imports System.Windows.Forms
 Imports System.Drawing
-Imports mRemoteNG.App.Runtime
+Imports mRemote3G.App.Runtime
 
 Namespace Connection
     Public Class InterfaceControl

@@ -1,8 +1,9 @@
 ﻿Imports System.IO
-Imports mRemoteNG.App.Info
-Imports mRemoteNG.My
-Imports mRemoteNG.Connection.Protocol
-Imports mRemoteNG.Tools
+Imports mRemote3G.App.Info
+Imports mRemote3G.Connection.Protocol
+Imports mRemote3G.My
+Imports mRemote3G.My.Resources
+Imports mRemote3G.Tools
 Imports PSTaskDialog
 
 Namespace Forms.OptionsPages
@@ -10,7 +11,7 @@ Namespace Forms.OptionsPages
 #Region "Public Methods"
         Public Overrides Property PageName() As String
             Get
-                Return Language.strTabAdvanced
+                Return Language.Language.strTabAdvanced
             End Get
             Set(value As String)
             End Set
@@ -19,17 +20,17 @@ Namespace Forms.OptionsPages
         Public Overrides Sub ApplyLanguage()
             MyBase.ApplyLanguage()
 
-            lblSeconds.Text = Language.strLabelSeconds
-            lblMaximumPuttyWaitTime.Text = Language.strLabelPuttyTimeout
-            chkAutomaticReconnect.Text = Language.strCheckboxAutomaticReconnect
-            lblConfigurePuttySessions.Text = Language.strLabelPuttySessionsConfig
-            btnLaunchPutty.Text = Language.strButtonLaunchPutty
-            btnBrowseCustomPuttyPath.Text = Language.strButtonBrowse
-            chkUseCustomPuttyPath.Text = Language.strCheckboxPuttyPath
-            chkAutomaticallyGetSessionInfo.Text = Language.strAutomaticallyGetSessionInfo
-            chkWriteLogFile.Text = Language.strWriteLogFile
-            lblUVNCSCPort.Text = Language.strUltraVNCSCListeningPort
-            chkEncryptCompleteFile.Text = Language.strEncryptCompleteConnectionFile
+            lblSeconds.Text = Language.Language.strLabelSeconds
+            lblMaximumPuttyWaitTime.Text = Language.Language.strLabelPuttyTimeout
+            chkAutomaticReconnect.Text = Language.Language.strCheckboxAutomaticReconnect
+            lblConfigurePuttySessions.Text = Language.Language.strLabelPuttySessionsConfig
+            btnLaunchPutty.Text = Language.Language.strButtonLaunchPutty
+            btnBrowseCustomPuttyPath.Text = Language.Language.strButtonBrowse
+            chkUseCustomPuttyPath.Text = Language.Language.strCheckboxPuttyPath
+            chkAutomaticallyGetSessionInfo.Text = Language.Language.strAutomaticallyGetSessionInfo
+            chkWriteLogFile.Text = Language.Language.strWriteLogFile
+            lblUVNCSCPort.Text = Language.Language.strUltraVNCSCListeningPort
+            chkEncryptCompleteFile.Text = Language.Language.strEncryptCompleteConnectionFile
         End Sub
 
         Public Overrides Sub LoadSettings()
@@ -97,7 +98,7 @@ Namespace Forms.OptionsPages
         Private Sub btnBrowseCustomPuttyPath_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnBrowseCustomPuttyPath.Click
             Using openFileDialog As New OpenFileDialog()
                 With openFileDialog
-                    .Filter = String.Format("{0}|*.exe|{1}|*.*", Language.strFilterApplication, Language.strFilterAll)
+                    .Filter = String.Format("{0}|*.exe|{1}|*.*", Language.Language.strFilterApplication, Language.Language.strFilterAll)
                     .FileName = Path.GetFileName(General.PuttyPath)
                     .CheckFileExists = True
                     .Multiselect = False
@@ -124,7 +125,7 @@ Namespace Forms.OptionsPages
                 puttyProcess.SetControlVisible("Button", "&Open", False)
                 puttyProcess.WaitForExit()
             Catch ex As Exception
-                cTaskDialog.MessageBox(Application.Info.ProductName, Language.strErrorCouldNotLaunchPutty, "", ex.ToString(), "", "", eTaskDialogButtons.OK, eSysIcons.Error, Nothing)
+                cTaskDialog.MessageBox(Application.Info.ProductName, Language.Language.strErrorCouldNotLaunchPutty, "", ex.ToString(), "", "", eTaskDialogButtons.OK, eSysIcons.Error, Nothing)
             End Try
         End Sub
 

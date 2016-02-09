@@ -1,5 +1,5 @@
-Imports System.Windows.Forms
-Imports mRemoteNG.App.Runtime
+Imports mRemote3G.Forms
+Imports mRemote3G.App.Runtime
 
 Namespace Tools
     Public Class Controls
@@ -63,13 +63,13 @@ Namespace Tools
             Public Sub New()
                 Try
                     Me._cMenCons = New ToolStripMenuItem
-                    Me._cMenCons.Text = My.Language.strConnections
+                    Me._cMenCons.Text = Language.Language.strConnections
                     Me._cMenCons.Image = My.Resources.Root
 
                     Me._cMenSep1 = New ToolStripSeparator
 
                     Me._cMenExit = New ToolStripMenuItem
-                    Me._cMenExit.Text = My.Language.strMenuExit
+                    Me._cMenExit.Text = Language.Language.strMenuExit
                     AddHandler Me._cMenExit.Click, AddressOf cMenExit_Click
 
                     Me._cMen = New ContextMenuStrip
@@ -184,7 +184,7 @@ Namespace Tools
             saveFileDialog.FileName = App.Info.Connections.DefaultConnectionsFile
             saveFileDialog.OverwritePrompt = True
 
-            saveFileDialog.Filter = My.Language.strFiltermRemoteXML & "|*.xml|" & My.Language.strFilterAll & "|*.*"
+            saveFileDialog.Filter = Language.Language.strFiltermRemoteXML & "|*.xml|" & Language.Language.strFilterAll & "|*.*"
 
             Return saveFileDialog
         End Function
@@ -196,7 +196,7 @@ Namespace Tools
             saveFileDialog.FileName = App.Info.Connections.DefaultConnectionsFile
             saveFileDialog.OverwritePrompt = True
 
-            saveFileDialog.Filter = My.Language.strFiltermRemoteXML & "|*.xml|" & My.Language.strFiltermRemoteCSV & "|*.csv|" & My.Language.strFiltervRD2008CSV & "|*.csv|" & My.Language.strFilterAll & "|*.*"
+            saveFileDialog.Filter = Language.Language.strFiltermRemoteXML & "|*.xml|" & Language.Language.strFiltermRemoteCSV & "|*.csv|" & Language.Language.strFiltervRD2008CSV & "|*.csv|" & Language.Language.strFilterAll & "|*.*"
 
             Return saveFileDialog
         End Function
@@ -205,7 +205,7 @@ Namespace Tools
             Dim lDlg As New OpenFileDialog()
             lDlg.CheckFileExists = True
             lDlg.InitialDirectory = App.Info.Connections.DefaultConnectionsPath
-            lDlg.Filter = My.Language.strFiltermRemoteXML & "|*.xml|" & My.Language.strFilterAll & "|*.*"
+            lDlg.Filter = Language.Language.strFiltermRemoteXML & "|*.xml|" & Language.Language.strFilterAll & "|*.*"
 
             Return lDlg
         End Function
@@ -214,7 +214,7 @@ Namespace Tools
             Dim openFileDialog As New OpenFileDialog()
             openFileDialog.CheckFileExists = True
             openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal)
-            openFileDialog.Filter = String.Join("|", {My.Language.strFilterRDP, "*.rdp", My.Language.strFilterAll, "*.*"})
+            openFileDialog.Filter = String.Join("|", {Language.Language.strFilterRDP, "*.rdp", Language.Language.strFilterAll, "*.*"})
             openFileDialog.Multiselect = True
             Return openFileDialog
         End Function

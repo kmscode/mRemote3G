@@ -1,8 +1,8 @@
 ﻿Imports System.Xml
 Imports System.IO
-Imports mRemoteNG.App.Runtime
-Imports mRemoteNG.Connection.Protocol
+Imports mRemote3G.App.Runtime
 Imports System.Globalization
+Imports mRemote3G.Connection.Protocol
 
 Namespace Config.Import
     Public Class PuttyConnectionManager

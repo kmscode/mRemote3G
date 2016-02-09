@@ -1,4 +1,4 @@
-﻿Imports mRemoteNG.My
+﻿
 
 Namespace Forms
     Public Class PasswordForm
@@ -63,16 +63,16 @@ Namespace Forms
 #Region "Private Methods"
         Private Sub ApplyLanguage()
             If String.IsNullOrEmpty(_passwordName) Then
-                Text = Language.strTitlePassword
+                Text = Language.Language.strTitlePassword
             Else
-                Text = String.Format(Language.strTitlePasswordWithName, _passwordName)
+                Text = String.Format(Language.Language.strTitlePasswordWithName, _passwordName)
             End If
 
-            lblPassword.Text = Language.strLabelPassword
-            lblVerify.Text = Language.strLabelVerify
+            lblPassword.Text = Language.Language.strLabelPassword
+            lblVerify.Text = Language.Language.strLabelVerify
 
-            btnCancel.Text = Language.strButtonCancel
-            btnOK.Text = Language.strButtonOK
+            btnCancel.Text = Language.Language.strButtonCancel
+            btnOK.Text = Language.Language.strButtonOK
         End Sub
 
         Private Function VerifyPassword() As Boolean
@@ -80,11 +80,11 @@ Namespace Forms
                 If txtPassword.Text = txtVerify.Text Then
                     Return True
                 Else
-                    ShowStatus(Language.strPasswordStatusMustMatch)
+                    ShowStatus(Language.Language.strPasswordStatusMustMatch)
                     Return False
                 End If
             Else
-                ShowStatus(Language.strPasswordStatusTooShort)
+                ShowStatus(Language.Language.strPasswordStatusTooShort)
                 Return False
             End If
         End Function

@@ -1,7 +1,7 @@
-﻿Imports WeifenLuo.WinFormsUI.Docking
-Imports System.IO
-Imports mRemoteNG.App.Runtime
+﻿Imports System.IO
 Imports System.Threading
+Imports mRemote3G.My
+Imports WeifenLuo.WinFormsUI.Docking
 
 Namespace UI
     Namespace Window
@@ -278,7 +278,7 @@ Namespace UI
                 Me.Controls.Add(Me.chkAlwaysShow)
                 Me.Controls.Add(Me.btnCheckAgain)
                 Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-                Me.Icon = Global.mRemoteNG.My.Resources.Resources.ComponentsCheck_Icon
+                Me.Icon = Global.mRemote3G.My.Resources.Resources.ComponentsCheck_Icon
                 Me.Name = "ComponentsCheck"
                 Me.TabText = "Components Check"
                 Me.Text = "Components Check"
@@ -311,15 +311,15 @@ Namespace UI
             Private Sub ComponentsCheck_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
                 ApplyLanguage()
 
-                chkAlwaysShow.Checked = My.Settings.StartupComponentsCheck
+                chkAlwaysShow.Checked = MySettingsProperty.Settings.StartupComponentsCheck
                 CheckComponents()
             End Sub
 
             Private Sub ApplyLanguage()
-                TabText = My.Language.strComponentsCheck
-                Text = My.Language.strComponentsCheck
-                chkAlwaysShow.Text = My.Language.strCcAlwaysShowScreen
-                btnCheckAgain.Text = My.Language.strCcCheckAgain
+                TabText = Language.Language.strComponentsCheck
+                Text = Language.Language.strComponentsCheck
+                chkAlwaysShow.Text = Language.Language.strCcAlwaysShowScreen
+                btnCheckAgain.Text = Language.Language.strCcCheckAgain
             End Sub
 
             Private Sub btnCheckAgain_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCheckAgain.Click
@@ -327,14 +327,14 @@ Namespace UI
             End Sub
 
             Private Sub chkAlwaysShow_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkAlwaysShow.CheckedChanged
-                My.Settings.StartupComponentsCheck = chkAlwaysShow.Checked
-                My.Settings.Save()
+                MySettingsProperty.Settings.StartupComponentsCheck = chkAlwaysShow.Checked
+                MySettingsProperty.Settings.Save()
             End Sub
 #End Region
 
 #Region "Private Methods"
             Private Sub CheckComponents()
-                Dim errorMsg As String = My.Language.strCcNotInstalledProperly
+                Dim errorMsg As String = Language.Language.strCcNotInstalledProperly
 
                 pnlCheck1.Visible = True
                 pnlCheck2.Visible = True
@@ -352,22 +352,22 @@ Namespace UI
                         System.Windows.Forms.Application.DoEvents()
                     Loop
 
-                    If Not New Version(rdpClient.Version) >= mRemoteNG.Connection.Protocol.RDP.Versions.RDC80 Then
-                        Throw New Exception(String.Format("Found RDC Client version {0} but version {1} or higher is required.", rdpClient.Version, mRemoteNG.Connection.Protocol.RDP.Versions.RDC60))
+                    If Not New Version(rdpClient.Version) >= mRemote3G.Connection.Protocol.RDP.Versions.RDC80 Then
+                        Throw New Exception(String.Format("Found RDC Client version {0} but version {1} or higher is required.", rdpClient.Version, mRemote3G.Connection.Protocol.RDP.Versions.RDC60))
                     End If
 
                     pbCheck1.Image = My.Resources.Good_Symbol
                     lblCheck1.ForeColor = Color.DarkOliveGreen
-                    lblCheck1.Text = "RDP (Remote Desktop) " & My.Language.strCcCheckSucceeded
-                    txtCheck1.Text = String.Format(My.Language.strCcRDPOK, rdpClient.Version)
+                    lblCheck1.Text = "RDP (Remote Desktop) " & Language.Language.strCcCheckSucceeded
+                    txtCheck1.Text = String.Format(Language.Language.strCcRDPOK, rdpClient.Version)
                 Catch ex As Exception
                     pbCheck1.Image = My.Resources.Bad_Symbol
                     lblCheck1.ForeColor = Color.Firebrick
-                    lblCheck1.Text = "RDP (Remote Desktop) " & My.Language.strCcCheckFailed
-                    txtCheck1.Text = My.Language.strCcRDPFailed
+                    lblCheck1.Text = "RDP (Remote Desktop) " & Language.Language.strCcCheckFailed
+                    txtCheck1.Text = Language.Language.strCcRDPFailed
 
-                    MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "RDP " & errorMsg, True)
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, ex.ToString(), True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "RDP " & errorMsg, True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, ex.ToString(), True)
                 End Try
 
                 If rdpClient IsNot Nothing Then rdpClient.Dispose()
@@ -386,40 +386,40 @@ Namespace UI
 
                     pbCheck2.Image = My.Resources.Good_Symbol
                     lblCheck2.ForeColor = Color.DarkOliveGreen
-                    lblCheck2.Text = "VNC (Virtual Network Computing) " & My.Language.strCcCheckSucceeded
-                    txtCheck2.Text = String.Format(My.Language.strCcVNCOK, VNC.ProductVersion)
+                    lblCheck2.Text = "VNC (Virtual Network Computing) " & Language.Language.strCcCheckSucceeded
+                    txtCheck2.Text = String.Format(Language.Language.strCcVNCOK, VNC.ProductVersion)
                 Catch ex As Exception
                     pbCheck2.Image = My.Resources.Bad_Symbol
                     lblCheck2.ForeColor = Color.Firebrick
-                    lblCheck2.Text = "VNC (Virtual Network Computing) " & My.Language.strCcCheckFailed
-                    txtCheck2.Text = My.Language.strCcVNCFailed
+                    lblCheck2.Text = "VNC (Virtual Network Computing) " & Language.Language.strCcCheckFailed
+                    txtCheck2.Text = Language.Language.strCcVNCFailed
 
-                    MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "VNC " & errorMsg, True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "VNC " & errorMsg, True)
                 End Try
 
                 If VNC IsNot Nothing Then VNC.Dispose()
 
 
                 Dim pPath As String = ""
-                If My.Settings.UseCustomPuttyPath = False Then
+                If MySettingsProperty.Settings.UseCustomPuttyPath = False Then
                     pPath = My.Application.Info.DirectoryPath & "\PuTTYNG.exe"
                 Else
-                    pPath = My.Settings.CustomPuttyPath
+                    pPath = MySettingsProperty.Settings.CustomPuttyPath
                 End If
 
                 If File.Exists(pPath) Then
                     pbCheck3.Image = My.Resources.Good_Symbol
                     lblCheck3.ForeColor = Color.DarkOliveGreen
-                    lblCheck3.Text = "PuTTY (SSH/Telnet/Rlogin/RAW) " & My.Language.strCcCheckSucceeded
-                    txtCheck3.Text = My.Language.strCcPuttyOK
+                    lblCheck3.Text = "PuTTY (SSH/Telnet/Rlogin/RAW) " & Language.Language.strCcCheckSucceeded
+                    txtCheck3.Text = Language.Language.strCcPuttyOK
                 Else
                     pbCheck3.Image = My.Resources.Bad_Symbol
                     lblCheck3.ForeColor = Color.Firebrick
-                    lblCheck3.Text = "PuTTY (SSH/Telnet/Rlogin/RAW) " & My.Language.strCcCheckFailed
-                    txtCheck3.Text = My.Language.strCcPuttyFailed
+                    lblCheck3.Text = "PuTTY (SSH/Telnet/Rlogin/RAW) " & Language.Language.strCcCheckFailed
+                    txtCheck3.Text = Language.Language.strCcPuttyFailed
 
-                    MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "PuTTY " & errorMsg, True)
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "File " & pPath & " does not exist.", True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "PuTTY " & errorMsg, True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "File " & pPath & " does not exist.", True)
                 End If
 
             End Sub

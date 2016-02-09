@@ -193,7 +193,7 @@ Namespace UI
                 '
                 Me.ClientSize = New System.Drawing.Size(542, 323)
                 Me.Controls.Add(Me.pnlSplitter)
-                Me.Icon = Global.mRemoteNG.My.Resources.Resources.Help_Icon
+                Me.Icon = Global.mRemote3G.My.Resources.Resources.Help_Icon
                 Me.Name = "Help"
                 Me.TabText = "Help"
                 Me.Text = "Help"
@@ -227,7 +227,7 @@ Namespace UI
                 ' This can only be set once the WebBrowser control is shown, it will throw a COM exception otherwise.
                 wbHelp.AllowWebBrowserDrop = False
             End Sub
-            
+
             Private Sub tvIndex_NodeMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.TreeNodeMouseClickEventArgs) Handles tvIndex.NodeMouseClick
                 Me.tvIndex.SelectedNode = e.Node
             End Sub

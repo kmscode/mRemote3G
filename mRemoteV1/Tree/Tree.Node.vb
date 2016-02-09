@@ -1,5 +1,5 @@
 Imports System.Windows.Forms
-Imports mRemoteNG.App.Runtime
+Imports mRemote3G.App.Runtime
 Imports System.DirectoryServices
 
 Namespace Tree
@@ -48,9 +48,9 @@ Namespace Tree
         Public Shared Function GetConstantID(ByVal node As TreeNode) As String
             Select Case GetNodeType(node)
                 Case Type.Connection
-                    Return TryCast(node.Tag, mRemoteNG.Connection.Info).ConstantID
+                    Return TryCast(node.Tag, mRemote3G.Connection.Info).ConstantID
                 Case Type.Container
-                    Return TryCast(node.Tag, mRemoteNG.Container.Info).ConnectionInfo.ConstantID
+                    Return TryCast(node.Tag, mRemote3G.Container.Info).ConnectionInfo.ConstantID
             End Select
 
             Return Nothing
@@ -94,13 +94,13 @@ Namespace Tree
                     Return Type.NONE
                 End If
 
-                If TypeOf treeNode.Tag Is Root.PuttySessions.Info Then
+                If TypeOf treeNode.Tag Is Root.PuttySessions.PuttySessionsInfo Then
                     Return Type.PuttyRoot
                 ElseIf TypeOf treeNode.Tag Is Root.Info Then
                     Return Type.Root
                 ElseIf TypeOf treeNode.Tag Is Container.Info Then
                     Return Type.Container
-                ElseIf TypeOf treeNode.Tag Is Connection.PuttySession.Info Then
+                ElseIf TypeOf treeNode.Tag Is Connection.PuttySession.PuttyInfo Then
                     Return Type.PuttySession
                 ElseIf TypeOf treeNode.Tag Is Connection.Info Then
                     Return Type.Connection
@@ -192,15 +192,15 @@ Namespace Tree
 
                 Select Case nodeType
                     Case Type.Connection, Type.PuttySession
-                        defaultName = My.Language.strNewConnection
+                        defaultName = Language.Language.strNewConnection
                         treeNode.ImageIndex = Images.Enums.TreeImage.ConnectionClosed
                         treeNode.SelectedImageIndex = Images.Enums.TreeImage.ConnectionClosed
                     Case Type.Container
-                        defaultName = My.Language.strNewFolder
+                        defaultName = Language.Language.strNewFolder
                         treeNode.ImageIndex = Images.Enums.TreeImage.Container
                         treeNode.SelectedImageIndex = Images.Enums.TreeImage.Container
                     Case Type.Root
-                        defaultName = My.Language.strNewRoot
+                        defaultName = Language.Language.strNewRoot
                         treeNode.ImageIndex = Images.Enums.TreeImage.Root
                         treeNode.SelectedImageIndex = Images.Enums.TreeImage.Root
                 End Select
@@ -278,7 +278,7 @@ Namespace Tree
                     newTreeNode.Expand()
                 End If
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, String.Format(My.Language.strErrorCloneNodeFailed, ex.ToString()))
+                MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, String.Format(Language.Language.strErrorCloneNodeFailed, ex.ToString()))
             End Try
         End Sub
 
@@ -313,7 +313,7 @@ Namespace Tree
                     Else
                         'Get this node's object data.
                         If GetNodeType(old_node) = Type.Connection Then
-                            tTip.SetToolTip(_TreeView, TryCast(old_node.Tag, mRemoteNG.Connection.Info).Description)
+                            tTip.SetToolTip(_TreeView, TryCast(old_node.Tag, mRemote3G.Connection.Info).Description)
                         End If
                     End If
                 End If
@@ -332,11 +332,11 @@ Namespace Tree
                         MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "The root item cannot be deleted!")
                     Case Type.Container
                         If Tree.Node.IsEmpty(SelectedNode) = False Then
-                            If MsgBox(String.Format(My.Language.strConfirmDeleteNodeFolder, SelectedNode.Text), MsgBoxStyle.YesNo Or MsgBoxStyle.Question) = MsgBoxResult.Yes Then
+                            If MsgBox(String.Format(Language.Language.strConfirmDeleteNodeFolder, SelectedNode.Text), MsgBoxStyle.YesNo Or MsgBoxStyle.Question) = MsgBoxResult.Yes Then
                                 SelectedNode.Remove()
                             End If
                         Else
-                            If MsgBox(String.Format(My.Language.strConfirmDeleteNodeFolderNotEmpty, SelectedNode.Text), MsgBoxStyle.YesNo Or MsgBoxStyle.Question) = MsgBoxResult.Yes Then
+                            If MsgBox(String.Format(Language.Language.strConfirmDeleteNodeFolderNotEmpty, SelectedNode.Text), MsgBoxStyle.YesNo Or MsgBoxStyle.Question) = MsgBoxResult.Yes Then
                                 For Each tNode As TreeNode In SelectedNode.Nodes
                                     tNode.Remove()
                                 Next
@@ -344,7 +344,7 @@ Namespace Tree
                             End If
                         End If
                     Case Type.Connection
-                        If MsgBox(String.Format(My.Language.strConfirmDeleteNodeConnection, SelectedNode.Text), MsgBoxStyle.YesNo Or MsgBoxStyle.Question) = MsgBoxResult.Yes Then
+                        If MsgBox(String.Format(Language.Language.strConfirmDeleteNodeConnection, SelectedNode.Text), MsgBoxStyle.YesNo Or MsgBoxStyle.Question) = MsgBoxResult.Yes Then
                             SelectedNode.Remove()
                         End If
                     Case Else
@@ -485,7 +485,7 @@ Namespace Tree
             Else
                 TreeView.BeginUpdate()
                 TreeView.Nodes.Clear()
-                TreeView.Nodes.Add(My.Language.strConnections)
+                TreeView.Nodes.Add(Language.Language.strConnections)
                 TreeView.EndUpdate()
             End If
         End Sub

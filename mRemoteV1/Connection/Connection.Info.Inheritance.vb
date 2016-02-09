@@ -1,5 +1,5 @@
 ﻿Imports System.ComponentModel
-Imports mRemoteNG.Tools.LocalizedAttributes
+Imports mRemote3G.Tools.LocalizedAttributes
 
 Namespace Connection
     Partial Public Class Info

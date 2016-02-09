@@ -24,7 +24,7 @@ Namespace Tools
                     OrderPrefix &= vbTab
                 Next
 
-                Return OrderPrefix & My.Language.ResourceManager.GetString(value)
+                Return OrderPrefix & Language.Language.ResourceManager.GetString(value)
             End Function
         End Class
 
@@ -43,7 +43,7 @@ Namespace Tools
                 Get
                     If Not Me.Localized Then
                         Me.Localized = True
-                        Me.DisplayNameValue = My.Language.ResourceManager.GetString(Me.DisplayNameValue)
+                        Me.DisplayNameValue = Language.Language.ResourceManager.GetString(Me.DisplayNameValue)
                     End If
 
                     Return MyBase.DisplayName
@@ -66,7 +66,7 @@ Namespace Tools
                 Get
                     If Not Me.Localized Then
                         Me.Localized = True
-                        Me.DescriptionValue = My.Language.ResourceManager.GetString(Me.DescriptionValue)
+                        Me.DescriptionValue = Language.Language.ResourceManager.GetString(Me.DescriptionValue)
                     End If
 
                     Return MyBase.Description
@@ -79,7 +79,7 @@ Namespace Tools
             Inherits DefaultValueAttribute
 
             Public Sub New(ByVal name As String)
-                MyBase.New(My.Language.ResourceManager.GetString(name))
+                MyBase.New(Language.Language.ResourceManager.GetString(name))
             End Sub
 
             ' This allows localized attributes in a derived class to override a matching
@@ -109,7 +109,7 @@ Namespace Tools
                 Get
                     If Not Me.Localized Then
                         Me.Localized = True
-                        Me.DisplayNameValue = String.Format(My.Language.strFormatInherit, My.Language.ResourceManager.GetString(Me.DisplayNameValue))
+                        Me.DisplayNameValue = String.Format(Language.Language.strFormatInherit, Language.Language.ResourceManager.GetString(Me.DisplayNameValue))
                     End If
 
                     Return MyBase.DisplayName
@@ -133,7 +133,7 @@ Namespace Tools
                 Get
                     If Not Me.Localized Then
                         Me.Localized = True
-                        Me.DescriptionValue = String.Format(My.Language.strFormatInheritDescription, My.Language.ResourceManager.GetString(Me.DescriptionValue))
+                        Me.DescriptionValue = String.Format(Language.Language.strFormatInheritDescription, Language.Language.ResourceManager.GetString(Me.DescriptionValue))
                     End If
 
                     Return MyBase.Description

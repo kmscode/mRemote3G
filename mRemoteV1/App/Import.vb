@@ -1,7 +1,6 @@
 ﻿Imports System.Windows.Forms
 Imports System.IO
-Imports mRemoteNG.My
-Imports mRemoteNG.App.Runtime
+Imports mRemote3G.App.Runtime
 Imports PSTaskDialog
 
 Namespace App
@@ -16,12 +15,12 @@ Namespace App
                         .Multiselect = True
 
                         Dim fileTypes As New List(Of String)
-                        fileTypes.AddRange({Language.strFilterAllImportable, "*.xml;*.rdp;*.rdg;*.dat"})
-                        fileTypes.AddRange({Language.strFiltermRemoteXML, "*.xml"})
-                        fileTypes.AddRange({Language.strFilterRDP, "*.rdp"})
-                        fileTypes.AddRange({Language.strFilterRdgFiles, "*.rdg"})
-                        fileTypes.AddRange({Language.strFilterPuttyConnectionManager, "*.dat"})
-                        fileTypes.AddRange({Language.strFilterAll, "*.*"})
+                        fileTypes.AddRange({Language.Language.strFilterAllImportable, "*.xml;*.rdp;*.rdg;*.dat"})
+                        fileTypes.AddRange({Language.Language.strFiltermRemoteXML, "*.xml"})
+                        fileTypes.AddRange({Language.Language.strFilterRDP, "*.rdp"})
+                        fileTypes.AddRange({Language.Language.strFilterRdgFiles, "*.rdg"})
+                        fileTypes.AddRange({Language.Language.strFilterPuttyConnectionManager, "*.dat"})
+                        fileTypes.AddRange({Language.Language.strFilterAll, "*.*"})
 
                         .Filter = String.Join("|", fileTypes.ToArray())
                     End With
@@ -35,7 +34,7 @@ Namespace App
                         Try
                             Select Case DetermineFileType(fileName)
                                 Case FileType.mRemoteXml
-                                    Config.Import.mRemoteNG.Import(fileName, parentTreeNode)
+                                    Config.Import.mRemote3G.Import(fileName, parentTreeNode)
                                 Case FileType.RemoteDesktopConnection
                                     Config.Import.RemoteDesktopConnection.Import(fileName, parentTreeNode)
                                 Case FileType.RemoteDesktopConnectionManager
@@ -46,7 +45,7 @@ Namespace App
                                     Throw New FileFormatException("Unrecognized file format.")
                             End Select
                         Catch ex As Exception
-                            cTaskDialog.ShowTaskDialogBox(Application.ProductName, Language.strImportFileFailedMainInstruction, String.Format(Language.strImportFileFailedContent, fileName), Tools.Misc.GetExceptionMessageRecursive(ex), "", "", "", "", eTaskDialogButtons.OK, eSysIcons.Error, Nothing)
+                            cTaskDialog.ShowTaskDialogBox(Application.ProductName, Language.Language.strImportFileFailedMainInstruction, String.Format(Language.Language.strImportFileFailedContent, fileName), Tools.Misc.GetExceptionMessageRecursive(ex), "", "", "", "", eTaskDialogButtons.OK, eSysIcons.Error, Nothing)
                         End Try
                     Next
 
@@ -113,7 +112,7 @@ Namespace App
                 If alwaysUseSelectedTreeNode Then
                     parentTreeNode = GetContainerTreeNode(selectedTreeNode)
                 Else
-                    cTaskDialog.ShowCommandBox(Application.ProductName, Language.strImportLocationMainInstruction, Language.strImportLocationContent, "", "", "", String.Format(Language.strImportLocationCommandButtons, vbLf, rootTreeNode.Text, selectedTreeNode.Text), True, eSysIcons.Question, 0)
+                    cTaskDialog.ShowCommandBox(Application.ProductName, Language.Language.strImportLocationMainInstruction, Language.Language.strImportLocationContent, "", "", "", String.Format(Language.Language.strImportLocationCommandButtons, vbLf, rootTreeNode.Text, selectedTreeNode.Text), True, eSysIcons.Question, 0)
                     Select Case cTaskDialog.CommandButtonResult
                         Case 0 ' Root
                             parentTreeNode = rootTreeNode
