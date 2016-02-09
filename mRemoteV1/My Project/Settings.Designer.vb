@@ -2358,30 +2358,17 @@ Namespace My
                 Me("CompatibilityWarnLenovoAutoScrollUtility") = value
             End Set
         End Property
-
-        <Global.System.Configuration.ApplicationScopedSettingAttribute(),
-         Global.System.Configuration.SettingsProviderAttribute(GetType(mRemoteNG.Config.Settings.Providers.ChooseProvider)),
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-         Global.System.Configuration.DefaultSettingValueAttribute("localhost")>
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Configuration.SettingsProviderAttribute(GetType(mRemoteNG.Config.Settings.Providers.ChooseProvider)),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("localhost")>  _
         Public ReadOnly Property AnnouncementAddress() As String
             Get
-                Return CType(Me("AnnouncementAddress"), String)
+                Return CType(Me("AnnouncementAddress"),String)
             End Get
         End Property
-
-        <Global.System.Configuration.UserScopedSettingAttribute(),
-         Global.System.Configuration.SettingsProviderAttribute(GetType(mRemoteNG.Config.Settings.Providers.ChooseProvider)),
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-         Global.System.Configuration.DefaultSettingValueAttribute("localhost")>
-        Public Property UpdateAddress() As String
-            Get
-                Return CType(Me("UpdateAddress"), String)
-            End Get
-            Set
-                Me("UpdateAddress") = Value
-            End Set
-        End Property
-
+        
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Configuration.SettingsProviderAttribute(GetType(mRemoteNG.Config.Settings.Providers.ChooseProvider)),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -2473,6 +2460,19 @@ Namespace My
             End Get
             Set
                 Me("KeysNextTab") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Configuration.SettingsProviderAttribute(GetType(mRemoteNG.Config.Settings.Providers.ChooseProvider)),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("https://localhost/")>  _
+        Public Property UpdateAddress() As String
+            Get
+                Return CType(Me("UpdateAddress"),String)
+            End Get
+            Set
+                Me("UpdateAddress") = value
             End Set
         End Property
     End Class

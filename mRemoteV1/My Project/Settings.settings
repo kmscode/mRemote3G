@@ -539,9 +539,6 @@
     <Setting Name="AnnouncementAddress" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="Application">
       <Value Profile="(Default)">localhost</Value>
     </Setting>
-    <Setting Name="UpdateAddress" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
-      <Value Profile="(Default)">localhost</Value>
-    </Setting>
     <Setting Name="ConDefaultLoadBalanceInfo" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
@@ -562,6 +559,9 @@
     </Setting>
     <Setting Name="KeysNextTab" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Roaming="true" Type="System.String" Scope="User">
       <Value Profile="(Default)">9/8, 34/8</Value>
+    </Setting>
+    <Setting Name="UpdateAddress" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://localhost/</Value>
     </Setting>
   </Settings>
 </SettingsFile>
