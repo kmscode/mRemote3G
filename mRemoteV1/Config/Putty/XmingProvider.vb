@@ -107,8 +107,14 @@ Namespace Config.Putty
 
             If _eventWatcher IsNot Nothing Then Return
 
+            Dim sessDir = GetSessionsFolderPath()
+            If Not Directory.Exists(sessDir) Then
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "XmingProvider: Could not find Session Dir. Cannot watch sessions.", True)
+                Return
+            End If
+
             Try
-                _eventWatcher = New FileSystemWatcher(GetSessionsFolderPath())
+                _eventWatcher = New FileSystemWatcher(sessDir)
                 _eventWatcher.NotifyFilter = (NotifyFilters.FileName Or NotifyFilters.LastWrite)
                 AddHandler _eventWatcher.Changed, AddressOf OnFileSystemEventArrived
                 AddHandler _eventWatcher.Created, AddressOf OnFileSystemEventArrived
