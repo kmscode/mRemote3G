@@ -9,6 +9,7 @@ Imports System.Text.RegularExpressions
 Imports System.Threading
 Imports mRemote3G.App
 Imports mRemote3G.App.Info
+Imports mRemote3G.App.Runtime
 Imports mRemote3G.Forms
 Imports mRemote3G.Messages
 Imports mRemote3G.My.Resources

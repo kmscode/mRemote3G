@@ -2,6 +2,7 @@ Imports System.IO
 Imports System.Security.Cryptography
 Imports System.Text
 Imports mRemote3G.App
+Imports mRemote3G.App.Runtime
 Imports mRemote3G.Messages
 
 Namespace Security

@@ -1,5 +1,6 @@
 Imports System.Data.SqlClient
 Imports System.Globalization
+Imports System.Windows.Forms
 Imports System.IO
 Imports System.Xml
 Imports mRemote3G.App
