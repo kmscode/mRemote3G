@@ -104,7 +104,7 @@ for /F "usebackq delims=. tokens=1-4" %%i in (`!SIGCHECK! /accepteula -q -n "%~d
    set PRODUCT_VERSION_SHORT=%%i.%%j
    set PRODUCT_VERSION=%%i.%%j.%%k.%%l
    echo ^^!define PRODUCT_VERSION "%%i.%%j.%%k.%%l" > %VERSIONNSH%
-   echo ^^!define PRODUCT_VERSION_SHORT "%%i.%%j.%%k" >> %VERSIONNSH%
+   echo ^^!define PRODUCT_VERSION_SHORT "%%i.%%j.%%k.%%l" >> %VERSIONNSH%
    echo ^^!define PRODUCT_VERSION_MAJOR "%%i" >> %VERSIONNSH%
    echo ^^!define PRODUCT_VERSION_MINOR "%%j" >> %VERSIONNSH%
 )
