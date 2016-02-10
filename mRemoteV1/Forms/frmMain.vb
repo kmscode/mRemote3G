@@ -1,89 +1,110 @@
+Imports System.ComponentModel
 Imports System.IO
 Imports System.Reflection
 Imports System.Runtime.InteropServices
 Imports System.Text
-Imports Crownwood
+Imports Crownwood.Magic.Controls
+Imports Microsoft.Win32
 Imports mRemote3G.App
 Imports mRemote3G.Config
+Imports mRemote3G.Config.Putty
+Imports mRemote3G.Config.Settings
+Imports mRemote3G.Connection
+Imports mRemote3G.Connection.Protocol
+Imports mRemote3G.Controls
+Imports mRemote3G.Messages
 Imports mRemote3G.My
 Imports mRemote3G.Themes
+Imports mRemote3G.Tools
+Imports mRemote3G.Tree
+Imports mRemote3G.UI.Window
 Imports PSTaskDialog
 Imports WeifenLuo.WinFormsUI.Docking
+Imports List = mRemote3G.UI.Window.List
 
 Namespace Forms
-
     Public Class frmMain
         Private _previousWindowState As FormWindowState
+
         Public Property PreviousWindowState As FormWindowState
             Get
                 Return _previousWindowState
             End Get
-            Set(value As FormWindowState)
-                _previousWindowState = value
+            Set
+                _previousWindowState = Value
             End Set
         End Property
+
         Public Shared Event clipboardchange()
         Private fpChainedWindowHandle As IntPtr
 
 #Region "Properties"
+
         Private _isClosing As Boolean = False
-        Public ReadOnly Property IsClosing() As Boolean
+
+        Public ReadOnly Property IsClosing As Boolean
             Get
                 Return _isClosing
             End Get
         End Property
 
         Private _usingSqlServer As Boolean = False
+
         Public Property UsingSqlServer As Boolean
             Get
                 Return _usingSqlServer
             End Get
-            Set(value As Boolean)
-                If _usingSqlServer = value Then Return
-                _usingSqlServer = value
+            Set
+                If _usingSqlServer = Value Then Return
+                _usingSqlServer = Value
                 UpdateWindowTitle()
             End Set
         End Property
 
         Private _connectionsFileName As String = Nothing
+
         Public Property ConnectionsFileName As String
             Get
                 Return _connectionsFileName
             End Get
-            Set(value As String)
-                If _connectionsFileName = value Then Return
-                _connectionsFileName = value
+            Set
+                If _connectionsFileName = Value Then Return
+                _connectionsFileName = Value
                 UpdateWindowTitle()
             End Set
         End Property
 
         Private _showFullPathInTitle As Boolean = My.Settings.ShowCompleteConsPathInTitle
+
         Public Property ShowFullPathInTitle As Boolean
             Get
                 Return _showFullPathInTitle
             End Get
-            Set(value As Boolean)
-                If _showFullPathInTitle = value Then Return
-                _showFullPathInTitle = value
+            Set
+                If _showFullPathInTitle = Value Then Return
+                _showFullPathInTitle = Value
                 UpdateWindowTitle()
             End Set
         End Property
 
-        Private _selectedConnection As Connection.Info = Nothing
-        Public Property SelectedConnection As Connection.Info
+        Private _selectedConnection As Info = Nothing
+
+        Public Property SelectedConnection As Info
             Get
                 Return _selectedConnection
             End Get
-            Set(value As Connection.Info)
-                If _selectedConnection Is value Then Return
-                _selectedConnection = value
+            Set
+                If _selectedConnection Is Value Then Return
+                _selectedConnection = Value
                 UpdateWindowTitle()
             End Set
         End Property
+
 #End Region
 
 #Region "Startup & Shutdown"
-        Private Sub frmMain_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
+        Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles Me.Load
             Runtime.MainForm = Me
 
             Runtime.Startup.CheckCompatibility()
@@ -91,7 +112,7 @@ Namespace Forms
             Runtime.Startup.CreateLogger()
 
             ' Create gui config load and save objects
-            Dim SettingsLoad As New Config.Settings.Load(Me)
+            Dim SettingsLoad As New Load(Me)
 
             ' Load GUI Configuration
             SettingsLoad.Load()
@@ -108,20 +129,20 @@ Namespace Forms
 
             fpChainedWindowHandle = NativeMethods.SetClipboardViewer(Me.Handle)
 
-            Runtime.MessageCollector = New Messages.Collector(Runtime.Windows.errorsForm)
+            Runtime.MessageCollector = New Collector(Runtime.Windows.errorsForm)
 
-            Runtime.WindowList = New UI.Window.List
+            Runtime.WindowList = New List
 
-            Tools.IeBrowserEmulation.Register()
+            IeBrowserEmulation.Register()
 
             Runtime.Startup.GetConnectionIcons()
             Runtime.Windows.treePanel.Focus()
 
-            Tree.Node.TreeView = Runtime.Windows.treeForm.tvConnections
+            Node.TreeView = Runtime.Windows.treeForm.tvConnections
 
             If My.Settings.FirstStart And
                Not My.Settings.LoadConsFromCustomLocation And
-               Not IO.File.Exists(Runtime.GetStartupConnectionFileName()) Then
+               Not File.Exists(Runtime.GetStartupConnectionFileName()) Then
                 Runtime.NewConnections(Runtime.GetStartupConnectionFileName())
             End If
 
@@ -132,10 +153,10 @@ Namespace Forms
                 Return
             End If
 
-            Putty.Sessions.StartWatcher()
+            Sessions.StartWatcher()
 
             If My.Settings.StartupComponentsCheck Then
-                Runtime.Windows.Show(UI.Window.Type.ComponentsCheck)
+                Runtime.Windows.Show(Type.ComponentsCheck)
             End If
 
 #If PORTABLE Then
@@ -147,10 +168,9 @@ Namespace Forms
             Runtime.Startup.CreateSQLUpdateHandlerAndStartTimer()
 
             AddSysMenuItems()
-            AddHandler Microsoft.Win32.SystemEvents.DisplaySettingsChanged, AddressOf DisplayChanged
+            AddHandler SystemEvents.DisplaySettingsChanged, AddressOf DisplayChanged
 
             Me.Opacity = 1
-
         End Sub
 
         Private Sub ApplyLanguage()
@@ -261,8 +281,15 @@ Namespace Forms
             ' Temporary
             Return
             If Not My.Settings.CheckForUpdatesAsked Then
-                Dim commandButtons() As String = {Language.Language.strAskUpdatesCommandRecommended, Language.Language.strAskUpdatesCommandCustom, Language.Language.strAskUpdatesCommandAskLater}
-                cTaskDialog.ShowTaskDialogBox(Me, My.Application.Info.ProductName, Language.Language.strAskUpdatesMainInstruction, String.Format(Language.Language.strAskUpdatesContent, My.Application.Info.ProductName), "", "", "", "", String.Join("|", commandButtons), eTaskDialogButtons.None, eSysIcons.Question, eSysIcons.Question)
+                Dim commandButtons() As String =
+                        {Language.Language.strAskUpdatesCommandRecommended, Language.Language.strAskUpdatesCommandCustom,
+                         Language.Language.strAskUpdatesCommandAskLater}
+                cTaskDialog.ShowTaskDialogBox(Me, Application.Info.ProductName,
+                                              Language.Language.strAskUpdatesMainInstruction,
+                                              String.Format(Language.Language.strAskUpdatesContent,
+                                                            Application.Info.ProductName), "", "", "", "",
+                                              String.Join("|", commandButtons), eTaskDialogButtons.None,
+                                              eSysIcons.Question, eSysIcons.Question)
                 If cTaskDialog.CommandButtonResult = 0 Or cTaskDialog.CommandButtonResult = 1 Then
                     My.Settings.CheckForUpdatesAsked = True
                 End If
@@ -274,18 +301,20 @@ Namespace Forms
 
             If Not My.Settings.CheckForUpdatesOnStartup Then Return
 
-            Dim nextUpdateCheck As Date = My.Settings.CheckForUpdatesLastCheck.Add(TimeSpan.FromDays(My.Settings.CheckForUpdatesFrequencyDays))
+            Dim nextUpdateCheck As Date =
+                    My.Settings.CheckForUpdatesLastCheck.Add(TimeSpan.FromDays(My.Settings.CheckForUpdatesFrequencyDays))
             If My.Settings.UpdatePending Or Date.UtcNow > nextUpdateCheck Then
-                If Not IsHandleCreated Then CreateHandle() ' Make sure the handle is created so that InvokeRequired returns the correct result
+                If Not IsHandleCreated Then CreateHandle() _
+                ' Make sure the handle is created so that InvokeRequired returns the correct result
                 Runtime.Startup.CheckForUpdate()
                 Runtime.Startup.CheckForAnnouncement()
             End If
         End Sub
 
-        Private Sub frmMain_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
+        Private Sub frmMain_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
             If Not (Runtime.WindowList Is Nothing OrElse Runtime.WindowList.Count = 0) Then
                 Dim connectionWindow As UI.Window.Connection
-                Dim openConnections As Integer = 0
+                Dim openConnections = 0
                 For Each window As UI.Window.Base In Runtime.WindowList
                     connectionWindow = TryCast(window, UI.Window.Connection)
                     If connectionWindow IsNot Nothing Then
@@ -297,7 +326,13 @@ Namespace Forms
                    (My.Settings.ConfirmCloseConnection = ConfirmClose.All Or
                     (My.Settings.ConfirmCloseConnection = ConfirmClose.Multiple And openConnections > 1) Or
                     My.Settings.ConfirmCloseConnection = ConfirmClose.Exit) Then
-                    Dim result As DialogResult = cTaskDialog.MessageBox(Me, My.Application.Info.ProductName, Language.Language.strConfirmExitMainInstruction, "", "", "", Language.Language.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.YesNo, eSysIcons.Question, Nothing)
+                    Dim result As DialogResult = cTaskDialog.MessageBox(Me, Application.Info.ProductName,
+                                                                        Language.Language.strConfirmExitMainInstruction,
+                                                                        "", "", "",
+                                                                        Language.Language.
+                                                                           strCheckboxDoNotShowThisMessageAgain,
+                                                                        eTaskDialogButtons.YesNo, eSysIcons.Question,
+                                                                        Nothing)
                     If cTaskDialog.VerificationChecked Then
                         My.Settings.ConfirmCloseConnection = My.Settings.ConfirmCloseConnection - 1
                     End If
@@ -322,17 +357,21 @@ Namespace Forms
 
             Debug.Print("[END] - " & Now)
         End Sub
+
 #End Region
 
 #Region "Timer"
-        Private Sub tmrAutoSave_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrAutoSave.Tick
-            Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, "Doing AutoSave", True)
-            App.Runtime.SaveConnections()
+
+        Private Sub tmrAutoSave_Tick(sender As Object, e As EventArgs) Handles tmrAutoSave.Tick
+            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Doing AutoSave", True)
+            Runtime.SaveConnections()
         End Sub
+
 #End Region
 
 #Region "Ext Apps Toolbar"
-        Private Sub cMenToolbarShowText_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cMenToolbarShowText.Click
+
+        Private Sub cMenToolbarShowText_Click(sender As Object, e As EventArgs) Handles cMenToolbarShowText.Click
             SwitchToolBarText(Not cMenToolbarShowText.Checked)
         End Sub
 
@@ -344,7 +383,7 @@ Namespace Forms
                 tsExternalTools.Items.Clear()
 
                 Dim button As ToolStripButton
-                For Each tool As Tools.ExternalTool In Runtime.ExternalTools
+                For Each tool As ExternalTool In Runtime.ExternalTools
                     button = tsExternalTools.Items.Add(tool.DisplayName, tool.Image, AddressOf tsExtAppEntry_Click)
 
                     If cMenToolbarShowText.Checked = True Then
@@ -360,22 +399,25 @@ Namespace Forms
                     button.Tag = tool
                 Next
             Catch ex As Exception
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(Language.Language.strErrorAddExternalToolsToToolBarFailed, ex.ToString()), True)
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                                                    String.Format(
+                                                        Language.Language.strErrorAddExternalToolsToToolBarFailed,
+                                                        ex.ToString()), True)
             End Try
         End Sub
 
-        Private Sub tsExtAppEntry_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-            Dim extA As Tools.ExternalTool = sender.Tag
+        Private Sub tsExtAppEntry_Click(sender As Object, e As EventArgs)
+            Dim extA As ExternalTool = sender.Tag
 
-            If Tree.Node.GetNodeType(Tree.Node.SelectedNode) = Tree.Node.Type.Connection Or
-               Tree.Node.GetNodeType(Tree.Node.SelectedNode) = Tree.Node.Type.PuttySession Then
-                extA.Start(Tree.Node.SelectedNode.Tag)
+            If Node.GetNodeType(Node.SelectedNode) = Node.Type.Connection Or
+               Node.GetNodeType(Node.SelectedNode) = Node.Type.PuttySession Then
+                extA.Start(Node.SelectedNode.Tag)
             Else
                 extA.Start()
             End If
         End Sub
 
-        Public Sub SwitchToolBarText(ByVal show As Boolean)
+        Public Sub SwitchToolBarText(show As Boolean)
             For Each tItem As ToolStripButton In tsExternalTools.Items
                 If show = True Then
                     tItem.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText
@@ -390,13 +432,16 @@ Namespace Forms
 
             cMenToolbarShowText.Checked = show
         End Sub
+
 #End Region
 
 #Region "Menu"
+
 #Region "File"
-        Private Sub mMenFile_DropDownOpening(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenFile.DropDownOpening
-            Select Case Tree.Node.GetNodeType(Tree.Node.SelectedNode)
-                Case Tree.Node.Type.Root
+
+        Private Sub mMenFile_DropDownOpening(sender As Object, e As EventArgs) Handles mMenFile.DropDownOpening
+            Select Case Node.GetNodeType(Node.SelectedNode)
+                Case Node.Type.Root
                     mMenFileNewConnection.Enabled = True
                     mMenFileNewFolder.Enabled = True
                     mMenFileDelete.Enabled = False
@@ -405,7 +450,7 @@ Namespace Forms
                     mMenFileDelete.Text = Language.Language.strMenuDelete
                     mMenFileRename.Text = Language.Language.strMenuRenameFolder
                     mMenFileDuplicate.Text = Language.Language.strMenuDuplicate
-                Case Tree.Node.Type.Container
+                Case Node.Type.Container
                     mMenFileNewConnection.Enabled = True
                     mMenFileNewFolder.Enabled = True
                     mMenFileDelete.Enabled = True
@@ -414,7 +459,7 @@ Namespace Forms
                     mMenFileDelete.Text = Language.Language.strMenuDeleteFolder
                     mMenFileRename.Text = Language.Language.strMenuRenameFolder
                     mMenFileDuplicate.Text = Language.Language.strMenuDuplicateFolder
-                Case Tree.Node.Type.Connection
+                Case Node.Type.Connection
                     mMenFileNewConnection.Enabled = True
                     mMenFileNewFolder.Enabled = True
                     mMenFileDelete.Enabled = True
@@ -423,7 +468,7 @@ Namespace Forms
                     mMenFileDelete.Text = Language.Language.strMenuDeleteConnection
                     mMenFileRename.Text = Language.Language.strMenuRenameConnection
                     mMenFileDuplicate.Text = Language.Language.strMenuDuplicateConnection
-                Case Tree.Node.Type.PuttyRoot, Tree.Node.Type.PuttySession
+                Case Node.Type.PuttyRoot, Node.Type.PuttySession
                     mMenFileNewConnection.Enabled = False
                     mMenFileNewFolder.Enabled = False
                     mMenFileDelete.Enabled = False
@@ -444,26 +489,29 @@ Namespace Forms
             End Select
         End Sub
 
-        Private Shared Sub mMenFileNewConnection_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles mMenFileNewConnection.Click
+        Private Shared Sub mMenFileNewConnection_Click(sender As Object, e As EventArgs) _
+            Handles mMenFileNewConnection.Click
             Runtime.Windows.treeForm.AddConnection()
             Runtime.SaveConnectionsBG()
         End Sub
 
-        Private Shared Sub mMenFileNewFolder_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles mMenFileNewFolder.Click
+        Private Shared Sub mMenFileNewFolder_Click(sender As Object, e As EventArgs) Handles mMenFileNewFolder.Click
             Runtime.Windows.treeForm.AddFolder()
             Runtime.SaveConnectionsBG()
         End Sub
 
-        Private Shared Sub mMenFileNew_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles mMenFileNew.Click
+        Private Shared Sub mMenFileNew_Click(sender As Object, e As EventArgs) Handles mMenFileNew.Click
             Dim saveFileDialog As SaveFileDialog = Tools.Controls.ConnectionsSaveAsDialog
             If Not saveFileDialog.ShowDialog() = DialogResult.OK Then Return
 
             Runtime.NewConnections(saveFileDialog.FileName)
         End Sub
 
-        Private Shared Sub mMenFileLoad_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles mMenFileLoad.Click
+        Private Shared Sub mMenFileLoad_Click(sender As Object, e As EventArgs) Handles mMenFileLoad.Click
             If Runtime.IsConnectionsFileLoaded Then
-                Select Case MsgBox(Language.Language.strSaveConnectionsFileBeforeOpeningAnother, MsgBoxStyle.YesNoCancel Or MsgBoxStyle.Question)
+                Select Case _
+                    MsgBox(Language.Language.strSaveConnectionsFileBeforeOpeningAnother,
+                           MsgBoxStyle.YesNoCancel Or MsgBoxStyle.Question)
                     Case MsgBoxResult.Yes
                         Runtime.SaveConnections()
                     Case MsgBoxResult.Cancel
@@ -474,52 +522,59 @@ Namespace Forms
             Runtime.LoadConnections(True)
         End Sub
 
-        Private Shared Sub mMenFileSave_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles mMenFileSave.Click
+        Private Shared Sub mMenFileSave_Click(sender As Object, e As EventArgs) Handles mMenFileSave.Click
             Runtime.SaveConnections()
         End Sub
 
-        Private Shared Sub mMenFileSaveAs_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles mMenFileSaveAs.Click
+        Private Shared Sub mMenFileSaveAs_Click(sender As Object, e As EventArgs) Handles mMenFileSaveAs.Click
             Runtime.SaveConnectionsAs()
         End Sub
 
-        Private Shared Sub mMenFileDelete_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles mMenFileDelete.Click
-            Tree.Node.DeleteSelectedNode()
+        Private Shared Sub mMenFileDelete_Click(sender As Object, e As EventArgs) Handles mMenFileDelete.Click
+            Node.DeleteSelectedNode()
             Runtime.SaveConnectionsBG()
         End Sub
 
-        Private Shared Sub mMenFileRename_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles mMenFileRename.Click
-            Tree.Node.StartRenameSelectedNode()
+        Private Shared Sub mMenFileRename_Click(sender As Object, e As EventArgs) Handles mMenFileRename.Click
+            Node.StartRenameSelectedNode()
             Runtime.SaveConnectionsBG()
         End Sub
 
-        Private Shared Sub mMenFileDuplicate_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles mMenFileDuplicate.Click
-            Tree.Node.CloneNode(Tree.Node.SelectedNode)
+        Private Shared Sub mMenFileDuplicate_Click(sender As Object, e As EventArgs) Handles mMenFileDuplicate.Click
+            Node.CloneNode(Node.SelectedNode)
             Runtime.SaveConnectionsBG()
         End Sub
 
-        Private Shared Sub mMenFileImportFromFile_Click(sender As System.Object, e As EventArgs) Handles mMenFileImportFromFile.Click
-            Import.ImportFromFile(Runtime.Windows.treeForm.tvConnections.Nodes(0), Runtime.Windows.treeForm.tvConnections.SelectedNode)
+        Private Shared Sub mMenFileImportFromFile_Click(sender As Object, e As EventArgs) _
+            Handles mMenFileImportFromFile.Click
+            Import.ImportFromFile(Runtime.Windows.treeForm.tvConnections.Nodes(0),
+                                  Runtime.Windows.treeForm.tvConnections.SelectedNode)
         End Sub
 
-        Private Shared Sub mMenFileImportFromActiveDirectory_Click(sender As System.Object, e As EventArgs) Handles mMenFileImportFromActiveDirectory.Click
-            Runtime.Windows.Show(UI.Window.Type.ActiveDirectoryImport)
+        Private Shared Sub mMenFileImportFromActiveDirectory_Click(sender As Object, e As EventArgs) _
+            Handles mMenFileImportFromActiveDirectory.Click
+            Runtime.Windows.Show(Type.ActiveDirectoryImport)
         End Sub
 
-        Private Shared Sub mMenFileImportFromPortScan_Click(sender As System.Object, e As EventArgs) Handles mMenFileImportFromPortScan.Click
-            Runtime.Windows.Show(UI.Window.Type.PortScan, True)
+        Private Shared Sub mMenFileImportFromPortScan_Click(sender As Object, e As EventArgs) _
+            Handles mMenFileImportFromPortScan.Click
+            Runtime.Windows.Show(Type.PortScan, True)
         End Sub
 
-        Private Shared Sub mMenFileExport_Click(sender As System.Object, e As EventArgs) Handles mMenFileExport.Click
-            Export.ExportToFile(Runtime.Windows.treeForm.tvConnections.Nodes(0), Runtime.Windows.treeForm.tvConnections.SelectedNode)
+        Private Shared Sub mMenFileExport_Click(sender As Object, e As EventArgs) Handles mMenFileExport.Click
+            Export.ExportToFile(Runtime.Windows.treeForm.tvConnections.Nodes(0),
+                                Runtime.Windows.treeForm.tvConnections.SelectedNode)
         End Sub
 
-        Private Shared Sub mMenFileExit_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles mMenFileExit.Click
+        Private Shared Sub mMenFileExit_Click(sender As Object, e As EventArgs) Handles mMenFileExit.Click
             Runtime.Shutdown.Quit()
         End Sub
+
 #End Region
 
 #Region "View"
-        Private Sub mMenView_DropDownOpening(ByVal sender As Object, ByVal e As System.EventArgs) Handles mMenView.DropDownOpening
+
+        Private Sub mMenView_DropDownOpening(sender As Object, e As EventArgs) Handles mMenView.DropDownOpening
             Me.mMenViewConnections.Checked = Not Runtime.Windows.treeForm.IsHidden
             Me.mMenViewConfig.Checked = Not Runtime.Windows.configForm.IsHidden
             Me.mMenViewErrorsAndInfos.Checked = Not Runtime.Windows.errorsForm.IsHidden
@@ -530,8 +585,11 @@ Namespace Forms
 
             Me.mMenViewConnectionPanels.DropDownItems.Clear()
 
-            For i As Integer = 0 To Runtime.WindowList.Count - 1
-                Dim tItem As New ToolStripMenuItem(Runtime.WindowList(i).Text, Runtime.WindowList(i).Icon.ToBitmap, AddressOf ConnectionPanelMenuItem_Click)
+            For i = 0 To Runtime.WindowList.Count - 1
+                Dim _
+                    tItem As _
+                        New ToolStripMenuItem(Runtime.WindowList(i).Text, Runtime.WindowList(i).Icon.ToBitmap,
+                                              AddressOf ConnectionPanelMenuItem_Click)
                 tItem.Tag = Runtime.WindowList(i)
 
                 Me.mMenViewConnectionPanels.DropDownItems.Add(tItem)
@@ -544,12 +602,12 @@ Namespace Forms
             End If
         End Sub
 
-        Private Sub ConnectionPanelMenuItem_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+        Private Sub ConnectionPanelMenuItem_Click(sender As Object, e As EventArgs)
             TryCast(sender.Tag, UI.Window.Base).Show(Me.pnlDock)
             TryCast(sender.Tag, UI.Window.Base).Focus()
         End Sub
 
-        Private Sub mMenViewConnections_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenViewConnections.Click
+        Private Sub mMenViewConnections_Click(sender As Object, e As EventArgs) Handles mMenViewConnections.Click
             If Me.mMenViewConnections.Checked = False Then
                 Runtime.Windows.treePanel.Show(Me.pnlDock)
                 Me.mMenViewConnections.Checked = True
@@ -559,7 +617,7 @@ Namespace Forms
             End If
         End Sub
 
-        Private Sub mMenViewConfig_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenViewConfig.Click
+        Private Sub mMenViewConfig_Click(sender As Object, e As EventArgs) Handles mMenViewConfig.Click
             If Me.mMenViewConfig.Checked = False Then
                 Runtime.Windows.configPanel.Show(Me.pnlDock)
                 Me.mMenViewConfig.Checked = True
@@ -569,7 +627,7 @@ Namespace Forms
             End If
         End Sub
 
-        Private Sub mMenViewErrorsAndInfos_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenViewErrorsAndInfos.Click
+        Private Sub mMenViewErrorsAndInfos_Click(sender As Object, e As EventArgs) Handles mMenViewErrorsAndInfos.Click
             If Me.mMenViewErrorsAndInfos.Checked = False Then
                 Runtime.Windows.errorsPanel.Show(Me.pnlDock)
                 Me.mMenViewErrorsAndInfos.Checked = True
@@ -579,7 +637,8 @@ Namespace Forms
             End If
         End Sub
 
-        Private Sub mMenViewScreenshotManager_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenViewScreenshotManager.Click
+        Private Sub mMenViewScreenshotManager_Click(sender As Object, e As EventArgs) _
+            Handles mMenViewScreenshotManager.Click
             If Me.mMenViewScreenshotManager.Checked = False Then
                 Runtime.Windows.screenshotPanel.Show(Me.pnlDock)
                 Me.mMenViewScreenshotManager.Checked = True
@@ -589,7 +648,8 @@ Namespace Forms
             End If
         End Sub
 
-        Private Sub mMenViewJumpToConnectionsConfig_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles mMenViewJumpToConnectionsConfig.Click
+        Private Sub mMenViewJumpToConnectionsConfig_Click(sender As Object, e As EventArgs) _
+            Handles mMenViewJumpToConnectionsConfig.Click
             If pnlDock.ActiveContent Is Runtime.Windows.treePanel Then
                 Runtime.Windows.configForm.Activate()
             Else
@@ -597,21 +657,25 @@ Namespace Forms
             End If
         End Sub
 
-        Private Sub mMenViewJumpToErrorsInfos_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles mMenViewJumpToErrorsInfos.Click
+        Private Sub mMenViewJumpToErrorsInfos_Click(sender As Object, e As EventArgs) _
+            Handles mMenViewJumpToErrorsInfos.Click
             Runtime.Windows.errorsForm.Activate()
         End Sub
 
-        Private Sub mMenViewResetLayout_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenViewResetLayout.Click
-            If MsgBox(Language.Language.strConfirmResetLayout, MsgBoxStyle.Question Or MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
-                App.Runtime.Startup.SetDefaultLayout()
+        Private Sub mMenViewResetLayout_Click(sender As Object, e As EventArgs) Handles mMenViewResetLayout.Click
+            If _
+                MsgBox(Language.Language.strConfirmResetLayout, MsgBoxStyle.Question Or MsgBoxStyle.YesNo) =
+                MsgBoxResult.Yes Then
+                Runtime.Startup.SetDefaultLayout()
             End If
         End Sub
 
-        Private Sub mMenViewAddConnectionPanel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenViewAddConnectionPanel.Click
+        Private Sub mMenViewAddConnectionPanel_Click(sender As Object, e As EventArgs) _
+            Handles mMenViewAddConnectionPanel.Click
             Runtime.AddPanel()
         End Sub
 
-        Private Sub mMenViewExtAppsToolbar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenViewExtAppsToolbar.Click
+        Private Sub mMenViewExtAppsToolbar_Click(sender As Object, e As EventArgs) Handles mMenViewExtAppsToolbar.Click
             If mMenViewExtAppsToolbar.Checked = False Then
                 tsExternalTools.Visible = True
                 mMenViewExtAppsToolbar.Checked = True
@@ -621,7 +685,8 @@ Namespace Forms
             End If
         End Sub
 
-        Private Sub mMenViewQuickConnectToolbar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenViewQuickConnectToolbar.Click
+        Private Sub mMenViewQuickConnectToolbar_Click(sender As Object, e As EventArgs) _
+            Handles mMenViewQuickConnectToolbar.Click
             If mMenViewQuickConnectToolbar.Checked = False Then
                 tsQuickConnect.Visible = True
                 mMenViewQuickConnectToolbar.Checked = True
@@ -631,48 +696,54 @@ Namespace Forms
             End If
         End Sub
 
-        Public Fullscreen As New Tools.Misc.Fullscreen(Me)
-        Private Sub mMenViewFullscreen_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenViewFullscreen.Click
+        Public Fullscreen As New Misc.Fullscreen(Me)
+
+        Private Sub mMenViewFullscreen_Click(sender As Object, e As EventArgs) Handles mMenViewFullscreen.Click
             Fullscreen.Value = Not Fullscreen.Value
             mMenViewFullscreen.Checked = Fullscreen.Value
         End Sub
+
 #End Region
 
 #Region "Tools"
-        Private Sub mMenToolsUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenToolsUpdate.Click
-            App.Runtime.Windows.Show(UI.Window.Type.Update)
+
+        Private Sub mMenToolsUpdate_Click(sender As Object, e As EventArgs) Handles mMenToolsUpdate.Click
+            Runtime.Windows.Show(Type.Update)
         End Sub
 
-        Private Sub mMenToolsSSHTransfer_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenToolsSSHTransfer.Click
-            App.Runtime.Windows.Show(UI.Window.Type.SSHTransfer)
+        Private Sub mMenToolsSSHTransfer_Click(sender As Object, e As EventArgs) Handles mMenToolsSSHTransfer.Click
+            Runtime.Windows.Show(Type.SSHTransfer)
         End Sub
 
-        Private Sub mMenToolsUVNCSC_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenToolsUVNCSC.Click
-            App.Runtime.Windows.Show(UI.Window.Type.UltraVNCSC)
+        Private Sub mMenToolsUVNCSC_Click(sender As Object, e As EventArgs) Handles mMenToolsUVNCSC.Click
+            Runtime.Windows.Show(Type.UltraVNCSC)
         End Sub
 
-        Private Sub mMenToolsExternalApps_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenToolsExternalApps.Click
-            App.Runtime.Windows.Show(UI.Window.Type.ExternalApps)
+        Private Sub mMenToolsExternalApps_Click(sender As Object, e As EventArgs) Handles mMenToolsExternalApps.Click
+            Runtime.Windows.Show(Type.ExternalApps)
         End Sub
 
-        Private Sub mMenToolsPortScan_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles mMenToolsPortScan.Click
-            App.Runtime.Windows.Show(UI.Window.Type.PortScan, False)
+        Private Sub mMenToolsPortScan_Click(sender As Object, e As EventArgs) Handles mMenToolsPortScan.Click
+            Runtime.Windows.Show(Type.PortScan, False)
         End Sub
 
-        Private Sub mMenToolsComponentsCheck_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenToolsComponentsCheck.Click
-            App.Runtime.Windows.Show(UI.Window.Type.ComponentsCheck)
+        Private Sub mMenToolsComponentsCheck_Click(sender As Object, e As EventArgs) _
+            Handles mMenToolsComponentsCheck.Click
+            Runtime.Windows.Show(Type.ComponentsCheck)
         End Sub
 
-        Private Sub mMenToolsOptions_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenToolsOptions.Click
-            App.Runtime.Windows.Show(UI.Window.Type.Options)
+        Private Sub mMenToolsOptions_Click(sender As Object, e As EventArgs) Handles mMenToolsOptions.Click
+            Runtime.Windows.Show(Type.Options)
         End Sub
+
 #End Region
 
 #Region "Quick Connect"
+
         Private Sub PopulateQuickConnectProtocolMenu()
             Try
                 mnuQuickConnectProtocol.Items.Clear()
-                For Each fieldInfo As FieldInfo In GetType(Connection.Protocol.Protocols).GetFields
+                For Each fieldInfo As FieldInfo In GetType(Protocols).GetFields
                     If Not (fieldInfo.Name = "value__" Or fieldInfo.Name = "IntApp") Then
                         Dim menuItem As New ToolStripMenuItem(fieldInfo.Name)
                         If fieldInfo.Name = My.Settings.QuickConnectProtocol Then
@@ -683,21 +754,26 @@ Namespace Forms
                     End If
                 Next
             Catch ex As Exception
-                Runtime.MessageCollector.AddExceptionMessage("PopulateQuickConnectProtocolMenu() failed.", ex, Messages.MessageClass.ErrorMsg, True)
+                Runtime.MessageCollector.AddExceptionMessage("PopulateQuickConnectProtocolMenu() failed.", ex,
+                                                             MessageClass.ErrorMsg, True)
             End Try
         End Sub
 
-        Private Sub lblQuickConnect_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles lblQuickConnect.Click
+        Private Sub lblQuickConnect_Click(sender As Object, e As EventArgs) Handles lblQuickConnect.Click
             cmbQuickConnect.Focus()
         End Sub
 
-        Private Sub cmbQuickConnect_ConnectRequested(ByVal sender As Object, ByVal e As Controls.QuickConnectComboBox.ConnectRequestedEventArgs) Handles cmbQuickConnect.ConnectRequested
+        Private Sub cmbQuickConnect_ConnectRequested(sender As Object,
+                                                     e As QuickConnectComboBox.ConnectRequestedEventArgs) _
+            Handles cmbQuickConnect.ConnectRequested
             btnQuickConnect_ButtonClick(sender, e)
         End Sub
 
-        Private Sub btnQuickConnect_ButtonClick(ByVal sender As Object, ByVal e As EventArgs) Handles btnQuickConnect.ButtonClick
+        Private Sub btnQuickConnect_ButtonClick(sender As Object, e As EventArgs) Handles btnQuickConnect.ButtonClick
             Try
-                Dim connectionInfo As Connection.Info = Runtime.CreateQuickConnect(cmbQuickConnect.Text.Trim(), Connection.Protocol.Converter.StringToProtocol(My.Settings.QuickConnectProtocol))
+                Dim connectionInfo As Info = Runtime.CreateQuickConnect(cmbQuickConnect.Text.Trim(),
+                                                                        Converter.StringToProtocol(
+                                                                            My.Settings.QuickConnectProtocol))
                 If connectionInfo Is Nothing Then
                     cmbQuickConnect.Focus()
                     Return
@@ -705,21 +781,24 @@ Namespace Forms
 
                 cmbQuickConnect.Add(connectionInfo)
 
-                Runtime.OpenConnection(connectionInfo, Connection.Info.Force.DoNotJump)
+                Runtime.OpenConnection(connectionInfo, Info.Force.DoNotJump)
             Catch ex As Exception
-                Runtime.MessageCollector.AddExceptionMessage("btnQuickConnect_ButtonClick() failed.", ex, Messages.MessageClass.ErrorMsg, True)
+                Runtime.MessageCollector.AddExceptionMessage("btnQuickConnect_ButtonClick() failed.", ex,
+                                                             MessageClass.ErrorMsg, True)
             End Try
         End Sub
 
-        Private Sub cmbQuickConnect_ProtocolChanged(ByVal sender As Object, ByVal e As Controls.QuickConnectComboBox.ProtocolChangedEventArgs) Handles cmbQuickConnect.ProtocolChanged
-            SetQuickConnectProtocol(Connection.Protocol.Converter.ProtocolToString(e.Protocol))
+        Private Sub cmbQuickConnect_ProtocolChanged(sender As Object, e As QuickConnectComboBox.ProtocolChangedEventArgs) _
+            Handles cmbQuickConnect.ProtocolChanged
+            SetQuickConnectProtocol(Converter.ProtocolToString(e.Protocol))
         End Sub
 
-        Private Sub btnQuickConnect_DropDownItemClicked(sender As System.Object, e As System.Windows.Forms.ToolStripItemClickedEventArgs) Handles btnQuickConnect.DropDownItemClicked
+        Private Sub btnQuickConnect_DropDownItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) _
+            Handles btnQuickConnect.DropDownItemClicked
             SetQuickConnectProtocol(e.ClickedItem.Text)
         End Sub
 
-        Private Sub SetQuickConnectProtocol(ByVal protocol As String)
+        Private Sub SetQuickConnectProtocol(protocol As String)
             My.Settings.QuickConnectProtocol = protocol
             btnQuickConnect.Text = protocol
             For Each menuItem As ToolStripMenuItem In mnuQuickConnectProtocol.Items
@@ -730,33 +809,39 @@ Namespace Forms
                 End If
             Next
         End Sub
+
 #End Region
 
 #Region "Info"
-        Private Sub mMenInfoHelp_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenInfoHelp.Click
-            App.Runtime.Windows.Show(UI.Window.Type.Help)
+
+        Private Sub mMenInfoHelp_Click(sender As Object, e As EventArgs) Handles mMenInfoHelp.Click
+            Runtime.Windows.Show(Type.Help)
         End Sub
 
-        Private Sub mMenInfoBugReport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenInfoBugReport.Click
-            App.Runtime.GoToBugs()
+        Private Sub mMenInfoBugReport_Click(sender As Object, e As EventArgs) Handles mMenInfoBugReport.Click
+            Runtime.GoToBugs()
         End Sub
 
-        Private Sub mMenInfoWebsite_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenInfoWebsite.Click
-            App.Runtime.GoToWebsite()
+        Private Sub mMenInfoWebsite_Click(sender As Object, e As EventArgs) Handles mMenInfoWebsite.Click
+            Runtime.GoToWebsite()
         End Sub
 
-        Private Sub mMenInfoAnnouncements_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenInfoAnnouncements.Click
-            App.Runtime.Windows.Show(UI.Window.Type.Announcement)
+        Private Sub mMenInfoAnnouncements_Click(sender As Object, e As EventArgs) Handles mMenInfoAnnouncements.Click
+            Runtime.Windows.Show(Type.Announcement)
         End Sub
 
-        Private Sub mMenInfoAbout_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenInfoAbout.Click
-            App.Runtime.Windows.Show(UI.Window.Type.About)
+        Private Sub mMenInfoAbout_Click(sender As Object, e As EventArgs) Handles mMenInfoAbout.Click
+            Runtime.Windows.Show(Type.About)
         End Sub
+
 #End Region
+
 #End Region
 
 #Region "Connections DropDown"
-        Private Sub btnConnections_DropDownOpening(ByVal sender As Object, ByVal e As EventArgs) Handles btnConnections.DropDownOpening
+
+        Private Sub btnConnections_DropDownOpening(sender As Object, e As EventArgs) _
+            Handles btnConnections.DropDownOpening
             btnConnections.DropDownItems.Clear()
 
             For Each treeNode As TreeNode In Runtime.Windows.treeForm.tvConnections.Nodes
@@ -764,21 +849,22 @@ Namespace Forms
             Next
         End Sub
 
-        Private Shared Sub AddNodeToMenu(ByVal treeNodeCollection As TreeNodeCollection, ByVal toolStripMenuItem As ToolStripDropDownItem)
+        Private Shared Sub AddNodeToMenu(treeNodeCollection As TreeNodeCollection,
+                                         toolStripMenuItem As ToolStripDropDownItem)
             Try
                 For Each treeNode As TreeNode In treeNodeCollection
                     Dim menuItem As New ToolStripMenuItem()
                     menuItem.Text = treeNode.Text
                     menuItem.Tag = treeNode
 
-                    If Tree.Node.GetNodeType(treeNode) = Tree.Node.Type.Container Then
+                    If Node.GetNodeType(treeNode) = Node.Type.Container Then
                         menuItem.Image = My.Resources.Folder
                         menuItem.Tag = treeNode.Tag
 
                         toolStripMenuItem.DropDownItems.Add(menuItem)
                         AddNodeToMenu(treeNode.Nodes, menuItem)
-                    ElseIf Tree.Node.GetNodeType(treeNode) = Tree.Node.Type.Connection Or
-                           Tree.Node.GetNodeType(treeNode) = Tree.Node.Type.PuttySession Then
+                    ElseIf Node.GetNodeType(treeNode) = Node.Type.Connection Or
+                           Node.GetNodeType(treeNode) = Node.Type.PuttySession Then
                         menuItem.Image = Runtime.Windows.treeForm.imgListTree.Images(treeNode.ImageIndex)
                         menuItem.Tag = treeNode.Tag
 
@@ -788,26 +874,30 @@ Namespace Forms
                     AddHandler menuItem.MouseUp, AddressOf ConnectionsMenuItem_MouseUp
                 Next
             Catch ex As Exception
-                Runtime.MessageCollector.AddExceptionMessage("frmMain.AddNodeToMenu() failed", ex, Messages.MessageClass.ErrorMsg, True)
+                Runtime.MessageCollector.AddExceptionMessage("frmMain.AddNodeToMenu() failed", ex, MessageClass.ErrorMsg,
+                                                             True)
             End Try
         End Sub
 
-        Private Shared Sub ConnectionsMenuItem_MouseUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs)
+        Private Shared Sub ConnectionsMenuItem_MouseUp(sender As Object, e As MouseEventArgs)
             If e.Button = MouseButtons.Left Then
-                If TypeOf sender.Tag Is Connection.Info Then
-                    App.Runtime.OpenConnection(sender.Tag)
+                If TypeOf sender.Tag Is Info Then
+                    Runtime.OpenConnection(sender.Tag)
                 End If
             End If
         End Sub
+
 #End Region
 
 #Region "Window Overrides and DockPanel Stuff"
+
         Private _inSizeMove As Boolean = False
-        Private Sub frmMain_ResizeBegin(ByVal sender As Object, ByVal e As EventArgs) Handles Me.ResizeBegin
+
+        Private Sub frmMain_ResizeBegin(sender As Object, e As EventArgs) Handles Me.ResizeBegin
             _inSizeMove = True
         End Sub
 
-        Private Sub frmMain_Resize(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Resize
+        Private Sub frmMain_Resize(sender As Object, e As EventArgs) Handles Me.Resize
             If WindowState = FormWindowState.Minimized Then
                 If My.Settings.MinimizeToTray Then
                     If Runtime.NotificationAreaIcon Is Nothing Then
@@ -820,7 +910,7 @@ Namespace Forms
             End If
         End Sub
 
-        Private Sub frmMain_ResizeEnd(ByVal sender As Object, ByVal e As EventArgs) Handles Me.ResizeEnd
+        Private Sub frmMain_ResizeEnd(sender As Object, e As EventArgs) Handles Me.ResizeEnd
             _inSizeMove = False
 
             ' This handles activations from clicks that started a size/move operation
@@ -828,7 +918,8 @@ Namespace Forms
         End Sub
 
         Private _inMouseActivate As Boolean = False
-        Protected Overloads Overrides Sub WndProc(ByRef m As Message)
+
+        Protected Overloads Overrides Sub WndProc(ByRef m As System.Windows.Forms.Message)
             Try
                 Select Case m.Msg
                     Case NativeMethods.WM_MOUSEACTIVATE
@@ -844,10 +935,16 @@ Namespace Forms
                             ' Let TreeViews and ComboBoxes get focus but don't simulate a mouse event
                             If TypeOf control Is TreeView Or TypeOf control Is ComboBox Then Exit Select
 
-                            If control.CanSelect Or TypeOf control Is MenuStrip Or TypeOf control Is ToolStrip Or TypeOf control Is Magic.Controls.TabControl Or TypeOf control Is Magic.Controls.InertButton Then
+                            If _
+                                control.CanSelect Or TypeOf control Is MenuStrip Or TypeOf control Is ToolStrip Or
+                                TypeOf control Is TabControl Or TypeOf control Is Crownwood.Magic.Controls.InertButton _
+                                Then
                                 ' Simulate a mouse event since one wasn't generated by Windows
                                 Dim clientMousePosition As Point = control.PointToClient(MousePosition)
-                                NativeMethods.SendMessage(control.Handle, NativeMethods.WM_LBUTTONDOWN, NativeMethods.MK_LBUTTON, NativeMethods.MAKELPARAM(clientMousePosition.X, clientMousePosition.Y))
+                                NativeMethods.SendMessage(control.Handle, NativeMethods.WM_LBUTTONDOWN,
+                                                          NativeMethods.MK_LBUTTON,
+                                                          NativeMethods.MAKELPARAM(clientMousePosition.X,
+                                                                                   clientMousePosition.Y))
 
                                 control.Focus()
                                 Exit Select
@@ -858,13 +955,15 @@ Namespace Forms
                         ActivateConnection()
                     Case NativeMethods.WM_WINDOWPOSCHANGED
                         ' Ignore this message if the window wasn't activated
-                        Dim windowPos As NativeMethods.WINDOWPOS = Marshal.PtrToStructure(m.LParam, GetType(NativeMethods.WINDOWPOS))
+                        Dim windowPos As NativeMethods.WINDOWPOS = Marshal.PtrToStructure(m.LParam,
+                                                                                          GetType(
+                                                                                             NativeMethods.WINDOWPOS))
                         If (Not (windowPos.flags And NativeMethods.SWP_NOACTIVATE) = 0) Then Exit Select
 
                         ' This handles all other activations
                         If Not _inMouseActivate And Not _inSizeMove Then ActivateConnection()
                     Case NativeMethods.WM_SYSCOMMAND
-                        For i As Integer = 0 To SysMenSubItems.Length - 1
+                        For i = 0 To SysMenSubItems.Length - 1
                             If SysMenSubItems(i) = m.WParam Then
                                 Runtime.Screens.SendFormToScreen(Screen.AllScreens(i))
                                 Exit For
@@ -888,17 +987,18 @@ Namespace Forms
             If TypeOf pnlDock.ActiveDocument Is UI.Window.Connection Then
                 Dim cW As UI.Window.Connection = pnlDock.ActiveDocument
                 If cW.TabController.SelectedTab IsNot Nothing Then
-                    Dim tab As Magic.Controls.TabPage = cW.TabController.SelectedTab
-                    Dim ifc As Connection.InterfaceControl = TryCast(tab.Tag, Connection.InterfaceControl)
+                    Dim tab As TabPage = cW.TabController.SelectedTab
+                    Dim ifc = TryCast(tab.Tag, InterfaceControl)
                     ifc.Protocol.Focus()
                     TryCast(ifc.FindForm, UI.Window.Connection).RefreshIC()
                 End If
             End If
         End Sub
 
-        Private Sub pnlDock_ActiveDocumentChanged(ByVal sender As Object, ByVal e As EventArgs) Handles pnlDock.ActiveDocumentChanged
+        Private Sub pnlDock_ActiveDocumentChanged(sender As Object, e As EventArgs) _
+            Handles pnlDock.ActiveDocumentChanged
             ActivateConnection()
-            Dim connectionWindow As UI.Window.Connection = TryCast(pnlDock.ActiveDocument, UI.Window.Connection)
+            Dim connectionWindow = TryCast(pnlDock.ActiveDocument, UI.Window.Connection)
             If connectionWindow IsNot Nothing Then connectionWindow.UpdateSelectedConnection()
         End Sub
 
@@ -909,7 +1009,7 @@ Namespace Forms
             End If
 
             Dim titleBuilder As New StringBuilder(Application.Info.ProductName)
-            Const separator As String = " - "
+            Const separator = " - "
 
             If Runtime.IsConnectionsFileLoaded Then
                 If UsingSqlServer Then
@@ -941,9 +1041,11 @@ Namespace Forms
             If My.Settings.AlwaysShowPanelTabs Then
                 newDocumentStyle = DocumentStyle.DockingWindow ' Show the panel tabs
             Else
-                Dim nonConnectionPanelCount As Integer = 0
+                Dim nonConnectionPanelCount = 0
                 For Each document As DockContent In pnlDock.Documents
-                    If (closingDocument Is Nothing OrElse document IsNot closingDocument) And Not TypeOf document Is UI.Window.Connection Then
+                    If _
+                        (closingDocument Is Nothing OrElse document IsNot closingDocument) And
+                        Not TypeOf document Is UI.Window.Connection Then
                         nonConnectionPanelCount = nonConnectionPanelCount + 1
                     End If
                 Next
@@ -961,11 +1063,11 @@ Namespace Forms
             End If
         End Sub
 
-        Private Sub SelectTabRelative(ByVal relativeIndex As Integer)
+        Private Sub SelectTabRelative(relativeIndex As Integer)
             If Not TypeOf pnlDock.ActiveDocument Is UI.Window.Connection Then Return
 
             Dim connectionWindow As UI.Window.Connection = pnlDock.ActiveDocument
-            Dim tabController As Magic.Controls.TabControl = connectionWindow.TabController
+            Dim tabController As TabControl = connectionWindow.TabController
 
             Dim newIndex As Integer = tabController.SelectedIndex + relativeIndex
             While newIndex < 0 Or newIndex >= tabController.TabPages.Count
@@ -975,35 +1077,43 @@ Namespace Forms
 
             tabController.SelectedIndex = newIndex
         End Sub
+
 #End Region
 
 #Region "Screen Stuff"
-        Private Sub DisplayChanged(ByVal sender As Object, ByVal e As System.EventArgs)
+
+        Private Sub DisplayChanged(sender As Object, e As EventArgs)
             ResetSysMenuItems()
             AddSysMenuItems()
         End Sub
 
-        Private SysMenSubItems(50) As Integer
+        Private ReadOnly SysMenSubItems(50) As Integer
+
         Private Shared Sub ResetSysMenuItems()
             Runtime.SystemMenu.Reset()
         End Sub
 
         Private Sub AddSysMenuItems()
-            Runtime.SystemMenu = New Tools.SystemMenu(Me.Handle)
+            Runtime.SystemMenu = New SystemMenu(Me.Handle)
             Dim popMen As IntPtr = Runtime.SystemMenu.CreatePopupMenuItem()
 
-            For i As Integer = 0 To Screen.AllScreens.Length - 1
+            For i = 0 To Screen.AllScreens.Length - 1
                 SysMenSubItems(i) = 200 + i
-                Runtime.SystemMenu.AppendMenuItem(popMen, Tools.SystemMenu.Flags.MF_STRING, SysMenSubItems(i), Language.Language.strScreen & " " & i + 1)
+                Runtime.SystemMenu.AppendMenuItem(popMen, SystemMenu.Flags.MF_STRING, SysMenSubItems(i),
+                                                  Language.Language.strScreen & " " & i + 1)
             Next
 
-            Runtime.SystemMenu.InsertMenuItem(Runtime.SystemMenu.SystemMenuHandle, 0, Tools.SystemMenu.Flags.MF_POPUP Or Tools.SystemMenu.Flags.MF_BYPOSITION, popMen, Language.Language.strSendTo)
-            Runtime.SystemMenu.InsertMenuItem(Runtime.SystemMenu.SystemMenuHandle, 1, Tools.SystemMenu.Flags.MF_BYPOSITION Or Tools.SystemMenu.Flags.MF_SEPARATOR, IntPtr.Zero, Nothing)
+            Runtime.SystemMenu.InsertMenuItem(Runtime.SystemMenu.SystemMenuHandle, 0,
+                                              SystemMenu.Flags.MF_POPUP Or SystemMenu.Flags.MF_BYPOSITION, popMen,
+                                              Language.Language.strSendTo)
+            Runtime.SystemMenu.InsertMenuItem(Runtime.SystemMenu.SystemMenuHandle, 1,
+                                              SystemMenu.Flags.MF_BYPOSITION Or SystemMenu.Flags.MF_SEPARATOR,
+                                              IntPtr.Zero, Nothing)
         End Sub
 
-        Private Sub mnuConnections_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs)
-
+        Private Sub mnuConnections_Opening(sender As Object, e As CancelEventArgs)
         End Sub
+
 #End Region
     End Class
 End Namespace
