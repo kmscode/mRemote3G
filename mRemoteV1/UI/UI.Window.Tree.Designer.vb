@@ -124,7 +124,7 @@
                 '
                 'cMenTreeConnect
                 '
-                Me.cMenTreeConnect.Image = Global.mRemote3G.My.Resources.Resources.Play
+                Me.cMenTreeConnect.Image = Global.mRemote3G.My.Resources.Resources.Play1
                 Me.cMenTreeConnect.Name = "cMenTreeConnect"
                 Me.cMenTreeConnect.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Shift) _
                     Or System.Windows.Forms.Keys.C), System.Windows.Forms.Keys)
@@ -176,7 +176,7 @@
                 '
                 'cMenTreeDisconnect
                 '
-                Me.cMenTreeDisconnect.Image = Global.mRemote3G.My.Resources.Resources.Pause
+                Me.cMenTreeDisconnect.Image = Global.mRemote3G.My.Resources.Resources.Pause1
                 Me.cMenTreeDisconnect.Name = "cMenTreeDisconnect"
                 Me.cMenTreeDisconnect.Size = New System.Drawing.Size(186, 22)
                 Me.cMenTreeDisconnect.Text = "Disconnect"

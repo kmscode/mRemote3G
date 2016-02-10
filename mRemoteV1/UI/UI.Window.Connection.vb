@@ -197,7 +197,7 @@ Namespace UI
                 '
                 'cmenTabDisconnect
                 '
-                Me.cmenTabDisconnect.Image = Global.mRemote3G.My.Resources.Resources.Pause
+                Me.cmenTabDisconnect.Image = Global.mRemote3G.My.Resources.Resources.Pause1
                 Me.cmenTabDisconnect.Name = "cmenTabDisconnect"
                 Me.cmenTabDisconnect.Size = New System.Drawing.Size(244, 26)
                 Me.cmenTabDisconnect.Text = "Disconnect"

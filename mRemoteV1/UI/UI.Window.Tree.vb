@@ -103,8 +103,8 @@ Namespace UI
                 Try
                     imgListTree.Images.Add(My.Resources.Root)
                     imgListTree.Images.Add(My.Resources.Folder)
-                    imgListTree.Images.Add(My.Resources.Play)
-                    imgListTree.Images.Add(My.Resources.Pause)
+                    imgListTree.Images.Add(My.Resources.Play1)
+                    imgListTree.Images.Add(My.Resources.Pause1)
                     imgListTree.Images.Add(My.Resources.PuttySessions)
                 Catch ex As Exception
                     Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "FillImageList (UI.Window.Tree) failed" & vbNewLine & ex.ToString(), True)
