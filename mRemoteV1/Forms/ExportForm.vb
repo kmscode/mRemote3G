@@ -7,27 +7,28 @@ Namespace Forms
         Inherits Form
 
 #Region "Public Properties"
+
         Public Property FileName As String
             Get
                 Return txtFileName.Text
             End Get
-            Set(value As String)
+            Set
                 txtFileName.Text = value
             End Set
         End Property
 
-        Public Property SaveFormat As Config.Connections.ConnectionsSave.Format
+        Public Property SaveFormat As ConnectionsSave.Format
             Get
-                Dim exportFormat As ExportFormat = TryCast(cboFileFormat.SelectedItem, ExportFormat)
+                Dim exportFormat = TryCast(cboFileFormat.SelectedItem, ExportFormat)
                 If exportFormat Is Nothing Then
-                    Return Config.Connections.ConnectionsSave.Format.mRXML
+                    Return ConnectionsSave.Format.mRXML
                 Else
                     Return exportFormat.Format
                 End If
             End Get
-            Set(value As Config.Connections.ConnectionsSave.Format)
+            Set
                 For Each item As Object In cboFileFormat.Items
-                    Dim exportFormat As ExportFormat = TryCast(item, ExportFormat)
+                    Dim exportFormat = TryCast(item, ExportFormat)
                     If exportFormat Is Nothing Then Continue For
                     If exportFormat.Format = value Then
                         cboFileFormat.SelectedItem = item
@@ -47,7 +48,7 @@ Namespace Forms
                     Return ExportScope.Everything
                 End If
             End Get
-            Set(value As ExportScope)
+            Set
                 Select Case value
                     Case ExportScope.Everything
                         rdoExportEverything.Checked = True
@@ -60,11 +61,12 @@ Namespace Forms
         End Property
 
         Private _selectedFolder As TreeNode
+
         Public Property SelectedFolder As TreeNode
             Get
                 Return _selectedFolder
             End Get
-            Set(value As TreeNode)
+            Set
                 _selectedFolder = value
                 If value Is Nothing Then
                     lblSelectedFolder.Text = String.Empty
@@ -76,11 +78,12 @@ Namespace Forms
         End Property
 
         Private _selectedConnection As TreeNode
+
         Public Property SelectedConnection As TreeNode
             Get
                 Return _selectedConnection
             End Get
-            Set(value As TreeNode)
+            Set
                 _selectedConnection = value
                 If value Is Nothing Then
                     lblSelectedConnection.Text = String.Empty
@@ -95,7 +98,7 @@ Namespace Forms
             Get
                 Return chkUsername.Checked
             End Get
-            Set(value As Boolean)
+            Set
                 chkUsername.Checked = value
             End Set
         End Property
@@ -104,7 +107,7 @@ Namespace Forms
             Get
                 Return chkPassword.Checked
             End Get
-            Set(value As Boolean)
+            Set
                 chkPassword.Checked = value
             End Set
         End Property
@@ -113,7 +116,7 @@ Namespace Forms
             Get
                 Return chkDomain.Checked
             End Get
-            Set(value As Boolean)
+            Set
                 chkDomain.Checked = value
             End Set
         End Property
@@ -122,28 +125,33 @@ Namespace Forms
             Get
                 Return chkInheritance.Checked
             End Get
-            Set(value As Boolean)
+            Set
                 chkInheritance.Checked = value
             End Set
         End Property
+
 #End Region
 
 #Region "Constructors"
+
         Public Sub New()
             InitializeComponent()
 
-           App.Runtime.FontOverride(Me)
+            Runtime.FontOverride(Me)
 
             SelectedFolder = Nothing
             SelectedConnection = Nothing
 
             btnOK.Enabled = False
         End Sub
+
 #End Region
 
 #Region "Private Methods"
+
 #Region "Event Handlers"
-        Private Sub ExportForm_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
+
+        Private Sub ExportForm_Load(sender As Object, e As EventArgs) Handles Me.Load
             cboFileFormat.Items.Clear()
             cboFileFormat.Items.Add(New ExportFormat(ConnectionsSave.Format.mRXML))
             cboFileFormat.Items.Add(New ExportFormat(ConnectionsSave.Format.mRCSV))
@@ -153,11 +161,11 @@ Namespace Forms
             ApplyLanguage()
         End Sub
 
-        Private Sub txtFileName_TextChanged(sender As System.Object, e As EventArgs) Handles txtFileName.TextChanged
+        Private Sub txtFileName_TextChanged(sender As Object, e As EventArgs) Handles txtFileName.TextChanged
             btnOK.Enabled = Not String.IsNullOrEmpty(txtFileName.Text)
         End Sub
 
-        Private Sub btnBrowse_Click(sender As System.Object, e As EventArgs) Handles btnBrowse.Click
+        Private Sub btnBrowse_Click(sender As Object, e As EventArgs) Handles btnBrowse.Click
             Using saveFileDialog As New SaveFileDialog()
                 With saveFileDialog
                     .CheckPathExists = True
@@ -179,13 +187,14 @@ Namespace Forms
             End Using
         End Sub
 
-        Private Sub btnOK_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btnOK.Click
+        Private Sub btnOK_Click(sender As Object, e As EventArgs) Handles btnOK.Click
             DialogResult = DialogResult.OK
         End Sub
 
-        Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btnCancel.Click
+        Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
             DialogResult = DialogResult.Cancel
         End Sub
+
 #End Region
 
         Private Sub ApplyLanguage()
@@ -211,49 +220,62 @@ Namespace Forms
             btnOK.Text = Language.Language.strButtonOK
             btnCancel.Text = Language.Language.strButtonCancel
         End Sub
+
 #End Region
 
 #Region "Public Enumerations"
+
         Public Enum ExportScope
             Everything
             SelectedFolder
             SelectedConnection
         End Enum
+
 #End Region
 
 #Region "Private Classes"
+
         <ImmutableObject(True)>
         Private Class ExportFormat
+
 #Region "Public Properties"
-            Private ReadOnly _format As Config.Connections.ConnectionsSave.Format
-            Public ReadOnly Property Format As Config.Connections.ConnectionsSave.Format
+
+            Private ReadOnly _format As ConnectionsSave.Format
+
+            Public ReadOnly Property Format As ConnectionsSave.Format
                 Get
                     Return _format
                 End Get
             End Property
+
 #End Region
 
 #Region "Constructors"
-            Public Sub New(ByVal format As Config.Connections.ConnectionsSave.Format)
+
+            Public Sub New(format As ConnectionsSave.Format)
                 _format = format
             End Sub
+
 #End Region
 
 #Region "Public Methods"
+
             Public Overrides Function ToString() As String
                 Select Case Format
-                    Case Config.Connections.ConnectionsSave.Format.mRXML
+                    Case ConnectionsSave.Format.mRXML
                         Return Language.Language.strMremoteNgXml
-                    Case Config.Connections.ConnectionsSave.Format.mRCSV
+                    Case ConnectionsSave.Format.mRCSV
                         Return Language.Language.strMremoteNgCsv
-                    Case Config.Connections.ConnectionsSave.Format.vRDCSV
+                    Case ConnectionsSave.Format.vRDCSV
                         Return Language.Language.strVisionAppRemoteDesktopCsv
                     Case Else
                         Return Format.ToString()
                 End Select
             End Function
+
 #End Region
         End Class
+
 #End Region
     End Class
 End Namespace

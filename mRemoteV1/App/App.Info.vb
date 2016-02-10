@@ -1,32 +1,38 @@
 Imports System.Threading
-Imports System.Windows.Forms
 Imports mRemote3G.My
+Imports mRemote3G.Tools
 
 Namespace App
+
     Namespace Info
         Public Class General
             Public Shared ReadOnly URLHome As String = "https://github.com/kmscode/mRemote3G"
             Public Shared ReadOnly URLForum As String = "https://github.com/kmscode/mRemote3G/issues"
             Public Shared ReadOnly URLBugs As String = "https://github.com/kmscode/mRemote3G/issues"
-            Public Shared ReadOnly HomePath As String = My.Application.Info.DirectoryPath
+            Public Shared ReadOnly HomePath As String = Application.Info.DirectoryPath
             Public Shared EncryptionKey As String = "mR3m"
             Public Shared ReportingFilePath As String = ""
-            Public Shared ReadOnly PuttyPath As String = My.Application.Info.DirectoryPath & "\PuTTYNG.exe"
+            Public Shared ReadOnly PuttyPath As String = Application.Info.DirectoryPath & "\PuTTYNG.exe"
+
             Public Shared ReadOnly Property UserAgent As String
                 Get
                     Dim details As New List(Of String)
                     details.Add("compatible")
                     If Environment.OSVersion.Platform = PlatformID.Win32NT Then
-                        details.Add(String.Format("Windows NT {0}.{1}", Environment.OSVersion.Version.Major, Environment.OSVersion.Version.Minor))
+                        details.Add(String.Format("Windows NT {0}.{1}", Environment.OSVersion.Version.Major,
+                                                  Environment.OSVersion.Version.Minor))
                     Else
                         details.Add(Environment.OSVersion.VersionString)
                     End If
-                    If Tools.EnvironmentInfo.IsWow64 Then details.Add("WOW64")
+                    If EnvironmentInfo.IsWow64 Then details.Add("WOW64")
                     details.Add(Thread.CurrentThread.CurrentUICulture.Name)
                     details.Add(String.Format(".NET CLR {0}", Environment.Version.ToString()))
                     Dim detailsString As String = String.Join("; ", details.ToArray())
 
-                    Return String.Format("Mozilla/4.0 ({0}) {1}/{2}", detailsString, Application.ProductName, Application.ProductVersion)
+                    Return _
+                        String.Format("Mozilla/4.0 ({0}) {1}/{2}", detailsString,
+                                      System.Windows.Forms.Application.ProductName,
+                                      System.Windows.Forms.Application.ProductVersion)
                 End Get
             End Property
 
@@ -36,7 +42,11 @@ Namespace App
 
         Public Class Settings
 #If Not PORTABLE Then
-            Public Shared ReadOnly SettingsPath As String = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\" & Application.ProductName
+
+            Public Shared ReadOnly _
+                SettingsPath As String = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\" &
+                                         System.Windows.Forms.Application.ProductName
+
 #Else
             Public Shared ReadOnly SettingsPath As String = My.Application.Info.DirectoryPath
 #End If
@@ -46,7 +56,6 @@ Namespace App
 
             Private Sub New()
             End Sub
-
         End Class
 
         Public Class UpdateApp
@@ -71,7 +80,7 @@ Namespace App
         End Class
 
         Public Class Connections
-            Public Shared ReadOnly DefaultConnectionsPath As String = App.Info.Settings.SettingsPath
+            Public Shared ReadOnly DefaultConnectionsPath As String = Settings.SettingsPath
             Public Shared ReadOnly DefaultConnectionsFile As String = "confCons.xml"
             Public Shared ReadOnly DefaultConnectionsFileNew As String = "confConsNew.xml"
             Public Shared ReadOnly ConnectionFileVersion As Double = 2.5
@@ -81,7 +90,7 @@ Namespace App
         End Class
 
         Public Class Credentials
-            Public Shared ReadOnly CredentialsPath As String = App.Info.Settings.SettingsPath
+            Public Shared ReadOnly CredentialsPath As String = Settings.SettingsPath
             Public Shared ReadOnly CredentialsFile As String = "confCreds.xml"
             Public Shared ReadOnly CredentialsFileNew As String = "confCredsNew.xml"
             Public Shared ReadOnly CredentialsFileVersion As Double = 1.0
@@ -90,4 +99,5 @@ Namespace App
             End Sub
         End Class
     End Namespace
+
 End Namespace

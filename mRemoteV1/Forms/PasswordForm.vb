@@ -2,7 +2,9 @@
 
 Namespace Forms
     Public Class PasswordForm
+
 #Region "Public Properties"
+
         Public Property Verify As Boolean = True
 
         Public ReadOnly Property Password As String
@@ -14,10 +16,12 @@ Namespace Forms
                 End If
             End Get
         End Property
+
 #End Region
 
 
 #Region "Constructors"
+
         Public Sub New(Optional ByVal passwordName As String = Nothing, Optional ByVal verify As Boolean = True)
             ' This call is required by the designer.
             InitializeComponent()
@@ -26,10 +30,12 @@ Namespace Forms
             _passwordName = passwordName
             Me.Verify = verify
         End Sub
+
 #End Region
 
 #Region "Event Handlers"
-        Private Sub frmPassword_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
+
+        Private Sub frmPassword_Load(sender As Object, e As EventArgs) Handles Me.Load
             ApplyLanguage()
 
             If Not Verify Then
@@ -39,11 +45,11 @@ Namespace Forms
             End If
         End Sub
 
-        Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btnCancel.Click
+        Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
             DialogResult = DialogResult.Cancel
         End Sub
 
-        Private Sub btnOK_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btnOK.Click
+        Private Sub btnOK_Click(sender As Object, e As EventArgs) Handles btnOK.Click
             If Verify Then
                 If VerifyPassword() Then DialogResult = DialogResult.OK
             Else
@@ -51,16 +57,21 @@ Namespace Forms
             End If
         End Sub
 
-        Private Sub txtPassword_TextChanged(sender As System.Object, e As EventArgs) Handles txtPassword.TextChanged, txtVerify.TextChanged
+        Private Sub txtPassword_TextChanged(sender As Object, e As EventArgs) _
+            Handles txtPassword.TextChanged, txtVerify.TextChanged
             HideStatus()
         End Sub
+
 #End Region
 
 #Region "Private Fields"
+
         Private ReadOnly _passwordName As String
+
 #End Region
 
 #Region "Private Methods"
+
         Private Sub ApplyLanguage()
             If String.IsNullOrEmpty(_passwordName) Then
                 Text = Language.Language.strTitlePassword
@@ -89,7 +100,7 @@ Namespace Forms
             End If
         End Function
 
-        Private Sub ShowStatus(ByVal status As String)
+        Private Sub ShowStatus(status As String)
             lblStatus.Visible = True
             lblStatus.Text = status
         End Sub
@@ -97,6 +108,7 @@ Namespace Forms
         Private Sub HideStatus()
             lblStatus.Visible = False
         End Sub
+
 #End Region
     End Class
 End Namespace

@@ -1,7 +1,8 @@
 Namespace Connection
+
     Namespace Protocol
         Public Class RAW
-            Inherits Connection.Protocol.PuttyBase
+            Inherits PuttyBase
 
             Public Sub New()
                 Me.PuttyProtocol = Putty_Protocol.raw
@@ -13,4 +14,5 @@ Namespace Connection
             End Enum
         End Class
     End Namespace
+
 End Namespace

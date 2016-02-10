@@ -1,13 +1,13 @@
 ﻿
-Imports mRemote3G.App.Info
+
 
 Namespace Forms.OptionsPages
     Public Class TabsPanelsPage
-        Public Overrides Property PageName() As String
+        Public Overrides Property PageName As String
             Get
                 Return Language.Language.strTabsAndPanels.Replace("&&", "&")
             End Get
-            Set(value As String)
+            Set
             End Set
         End Property
 
@@ -65,7 +65,8 @@ Namespace Forms.OptionsPages
             My.Settings.SwitchToMCOnError = chkMCErrors.Checked
         End Sub
 
-        Private Sub chkUseOnlyErrorsAndInfosPanel_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chkUseOnlyErrorsAndInfosPanel.CheckedChanged
+        Private Sub chkUseOnlyErrorsAndInfosPanel_CheckedChanged(sender As Object, e As EventArgs) _
+            Handles chkUseOnlyErrorsAndInfosPanel.CheckedChanged
             chkMCInformation.Enabled = chkUseOnlyErrorsAndInfosPanel.Checked
             chkMCWarnings.Enabled = chkUseOnlyErrorsAndInfosPanel.Checked
             chkMCErrors.Enabled = chkUseOnlyErrorsAndInfosPanel.Checked

@@ -1,22 +1,29 @@
 Imports System.ComponentModel
 Imports System.IO
+Imports System.Net
+Imports mRemote3G.App
 Imports WeifenLuo.WinFormsUI.Docking
 
 Namespace UI
+
     Namespace Window
         Public Class Update
             Inherits Base
+
 #Region "Public Methods"
-            Public Sub New(ByVal panel As DockContent)
+
+            Public Sub New(panel As DockContent)
                 WindowType = Type.Update
                 DockPnl = panel
                 InitializeComponent()
-                App.Runtime.FontOverride(Me)
+                Runtime.FontOverride(Me)
             End Sub
+
 #End Region
 
 #Region "Form Stuff"
-            Private Sub Update_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
+
+            Private Sub Update_Load(sender As Object, e As EventArgs) Handles Me.Load
                 ApplyLanguage()
                 CheckForUpdate()
             End Sub
@@ -33,27 +40,31 @@ Namespace UI
                 lblLatestVersionLabel.Text = String.Format("{0}:", Language.Language.strAvailableVersion)
             End Sub
 
-            Private Sub btnCheckForUpdate_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btnCheckForUpdate.Click
+            Private Sub btnCheckForUpdate_Click(sender As Object, e As EventArgs) Handles btnCheckForUpdate.Click
                 CheckForUpdate()
             End Sub
 
-            Private Sub btnDownload_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btnDownload.Click
+            Private Sub btnDownload_Click(sender As Object, e As EventArgs) Handles btnDownload.Click
                 DownloadUpdate()
             End Sub
 
-            Private Sub pbUpdateImage_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles pbUpdateImage.Click
-                Dim linkUri As Uri = TryCast(pbUpdateImage.Tag, Uri)
+            Private Sub pbUpdateImage_Click(sender As Object, e As EventArgs) Handles pbUpdateImage.Click
+                Dim linkUri = TryCast(pbUpdateImage.Tag, Uri)
                 If linkUri Is Nothing OrElse linkUri.IsFile Or linkUri.IsUnc Or linkUri.IsLoopback Then Return
                 Process.Start(linkUri.ToString())
             End Sub
+
 #End Region
 
 #Region "Private Fields"
+
             Private _appUpdate As App.Update
             Private _isUpdateDownloadHandlerDeclared As Boolean = False
+
 #End Region
 
 #Region "Private Methods"
+
             Private Sub CheckForUpdate()
                 If _appUpdate Is Nothing Then
                     _appUpdate = New App.Update
@@ -78,7 +89,7 @@ Namespace UI
                 _appUpdate.GetUpdateInfoAsync()
             End Sub
 
-            Private Sub GetUpdateInfoCompleted(ByVal sender As Object, ByVal e As AsyncCompletedEventArgs)
+            Private Sub GetUpdateInfoCompleted(sender As Object, e As AsyncCompletedEventArgs)
                 If InvokeRequired Then
                     Dim myDelegate As New AsyncCompletedEventHandler(AddressOf GetUpdateInfoCompleted)
                     Invoke(myDelegate, New Object() {sender, e})
@@ -106,7 +117,9 @@ Namespace UI
                         lblLatestVersionLabel.Visible = True
                         lblLatestVersion.Visible = True
 
-                        If updateInfo.ImageAddress Is Nothing OrElse String.IsNullOrEmpty(updateInfo.ImageAddress.ToString()) Then
+                        If _
+                            updateInfo.ImageAddress Is Nothing OrElse
+                            String.IsNullOrEmpty(updateInfo.ImageAddress.ToString()) Then
                             pbUpdateImage.Visible = False
                         Else
                             pbUpdateImage.ImageLocation = updateInfo.ImageAddress.ToString()
@@ -135,11 +148,11 @@ Namespace UI
                     lblStatus.Text = Language.Language.strUpdateCheckFailedLabel
                     lblStatus.ForeColor = Color.OrangeRed
 
-                   App.Runtime.MessageCollector.AddExceptionMessage(Language.Language.strUpdateCheckCompleteFailed, ex)
+                    Runtime.MessageCollector.AddExceptionMessage(Language.Language.strUpdateCheckCompleteFailed, ex)
                 End Try
             End Sub
 
-            Private Sub GetChangeLogCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.AsyncCompletedEventArgs)
+            Private Sub GetChangeLogCompleted(sender As Object, e As AsyncCompletedEventArgs)
                 If InvokeRequired Then
                     Dim myDelegate As New AsyncCompletedEventHandler(AddressOf GetChangeLogCompleted)
                     Invoke(myDelegate, New Object() {sender, e})
@@ -154,7 +167,7 @@ Namespace UI
 
                     txtChangeLog.Text = _appUpdate.ChangeLog
                 Catch ex As Exception
-                   App.Runtime.MessageCollector.AddExceptionMessage(Language.Language.strUpdateGetChangeLogFailed, ex)
+                    Runtime.MessageCollector.AddExceptionMessage(Language.Language.strUpdateGetChangeLogFailed, ex)
                 End Try
             End Sub
 
@@ -165,24 +178,27 @@ Namespace UI
                     prgbDownload.Value = 0
 
                     If _isUpdateDownloadHandlerDeclared = False Then
-                        AddHandler _appUpdate.DownloadUpdateProgressChangedEvent, AddressOf DownloadUpdateProgressChanged
+                        AddHandler _appUpdate.DownloadUpdateProgressChangedEvent,
+                            AddressOf DownloadUpdateProgressChanged
                         AddHandler _appUpdate.DownloadUpdateCompletedEvent, AddressOf DownloadUpdateCompleted
                         _isUpdateDownloadHandlerDeclared = True
                     End If
 
                     _appUpdate.DownloadUpdateAsync()
                 Catch ex As Exception
-                   App.Runtime.MessageCollector.AddExceptionMessage(Language.Language.strUpdateDownloadFailed, ex)
+                    Runtime.MessageCollector.AddExceptionMessage(Language.Language.strUpdateDownloadFailed, ex)
                 End Try
             End Sub
+
 #End Region
 
 #Region "Events"
-            Private Sub DownloadUpdateProgressChanged(ByVal sender As Object, ByVal e As Net.DownloadProgressChangedEventArgs)
+
+            Private Sub DownloadUpdateProgressChanged(sender As Object, e As DownloadProgressChangedEventArgs)
                 prgbDownload.Value = e.ProgressPercentage
             End Sub
 
-            Private Sub DownloadUpdateCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.AsyncCompletedEventArgs)
+            Private Sub DownloadUpdateCompleted(sender As Object, e As AsyncCompletedEventArgs)
                 Try
                     btnDownload.Enabled = True
                     prgbDownload.Visible = False
@@ -190,17 +206,22 @@ Namespace UI
                     If e.Cancelled Then Return
                     If e.Error IsNot Nothing Then Throw e.Error
 
-                    If MessageBox.Show(Language.Language.strUpdateDownloadComplete, Language.Language.strMenuCheckForUpdates, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) = System.Windows.Forms.DialogResult.OK Then
-                        App.Runtime.Shutdown.Quit(_appUpdate.CurrentUpdateInfo.UpdateFilePath)
+                    If _
+                        MessageBox.Show(Language.Language.strUpdateDownloadComplete,
+                                        Language.Language.strMenuCheckForUpdates, MessageBoxButtons.OKCancel,
+                                        MessageBoxIcon.Warning) = DialogResult.OK Then
+                        Runtime.Shutdown.Quit(_appUpdate.CurrentUpdateInfo.UpdateFilePath)
                         Return
                     Else
                         File.Delete(_appUpdate.CurrentUpdateInfo.UpdateFilePath)
                     End If
                 Catch ex As Exception
-                   App.Runtime.MessageCollector.AddExceptionMessage(Language.Language.strUpdateDownloadCompleteFailed, ex)
+                    Runtime.MessageCollector.AddExceptionMessage(Language.Language.strUpdateDownloadCompleteFailed, ex)
                 End Try
             End Sub
+
 #End Region
         End Class
     End Namespace
+
 End Namespace

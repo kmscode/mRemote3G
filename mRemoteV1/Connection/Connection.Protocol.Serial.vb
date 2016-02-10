@@ -1,7 +1,8 @@
 Namespace Connection
+
     Namespace Protocol
         Public Class Serial
-            Inherits Connection.Protocol.PuttyBase
+            Inherits PuttyBase
 
             Public Sub New()
                 Me.PuttyProtocol = Putty_Protocol.serial
@@ -13,4 +14,5 @@ Namespace Connection
             End Enum
         End Class
     End Namespace
+
 End Namespace

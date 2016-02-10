@@ -1,54 +1,70 @@
-﻿Imports mRemote3G.Tools
+﻿Imports mRemote3G.App
+Imports mRemote3G.Config.Settings
 Imports mRemote3G.Forms
+Imports mRemote3G.Tools
 Imports WeifenLuo.WinFormsUI.Docking
 
 Namespace UI
+
     Namespace Window
         Public Class ExternalTools
             Inherits Base
+
 #Region "Constructors"
-            Public Sub New(ByVal panel As DockContent)
+
+            Public Sub New(panel As DockContent)
                 InitializeComponent()
 
                 WindowType = Type.ExternalApps
                 DockPnl = panel
             End Sub
+
 #End Region
 
 #Region "Private Fields"
-            Private _selectedTool As Tools.ExternalTool = Nothing
+
+            Private _selectedTool As ExternalTool = Nothing
+
 #End Region
 
 #Region "Private Methods"
+
 #Region "Event Handlers"
-            Private Sub ExternalTools_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
+
+            Private Sub ExternalTools_Load(sender As Object, e As EventArgs) Handles Me.Load
                 ApplyLanguage()
                 UpdateToolsListView()
             End Sub
 
-            Private Shared Sub ExternalTools_FormClosed(sender As System.Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
-                mRemote3G.Config.Settings.Save.SaveExternalAppsToXML()
+            Private Shared Sub ExternalTools_FormClosed(sender As Object, e As FormClosedEventArgs) _
+                Handles MyBase.FormClosed
+                Save.SaveExternalAppsToXML()
             End Sub
 
-            Private Sub NewTool_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles NewToolMenuItem.Click, NewToolToolstripButton.Click
+            Private Sub NewTool_Click(sender As Object, e As EventArgs) _
+                Handles NewToolMenuItem.Click, NewToolToolstripButton.Click
                 Try
-                    Dim externalTool As New Tools.ExternalTool(Language.Language.strExternalToolDefaultName)
-                   App.Runtime.ExternalTools.Add(externalTool)
+                    Dim externalTool As New ExternalTool(Language.Language.strExternalToolDefaultName)
+                    Runtime.ExternalTools.Add(externalTool)
                     UpdateToolsListView(externalTool)
                     DisplayNameTextBox.Focus()
                 Catch ex As Exception
-                   App.Runtime.MessageCollector.AddExceptionMessage("UI.Window.ExternalTools.NewTool_Click() failed.", ex, , True)
+                    Runtime.MessageCollector.AddExceptionMessage("UI.Window.ExternalTools.NewTool_Click() failed.", ex, ,
+                                                                 True)
                 End Try
             End Sub
 
-            Private Sub DeleteTool_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles DeleteToolMenuItem.Click, DeleteToolToolstripButton.Click
+            Private Sub DeleteTool_Click(sender As Object, e As EventArgs) _
+                Handles DeleteToolMenuItem.Click, DeleteToolToolstripButton.Click
                 Try
                     Dim message As String
                     Select Case ToolsListView.SelectedItems.Count
                         Case Is = 1
-                            message = String.Format(Language.Language.strConfirmDeleteExternalTool, ToolsListView.SelectedItems(0).Text)
+                            message = String.Format(Language.Language.strConfirmDeleteExternalTool,
+                                                    ToolsListView.SelectedItems(0).Text)
                         Case Is > 1
-                            message = String.Format(Language.Language.strConfirmDeleteExternalToolMultiple, ToolsListView.SelectedItems.Count)
+                            message = String.Format(Language.Language.strConfirmDeleteExternalToolMultiple,
+                                                    ToolsListView.SelectedItems.Count)
                         Case Else
                             Return
                     End Select
@@ -56,26 +72,29 @@ Namespace UI
                     If Not MsgBox(message, MsgBoxStyle.Question Or MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then Return
 
                     For Each listViewItem As ListViewItem In ToolsListView.SelectedItems
-                        Dim externalTool As Tools.ExternalTool = TryCast(listViewItem.Tag, Tools.ExternalTool)
+                        Dim externalTool = TryCast(listViewItem.Tag, ExternalTool)
                         If externalTool Is Nothing Then Continue For
 
-                       App.Runtime.ExternalTools.Remove(listViewItem.Tag)
+                        Runtime.ExternalTools.Remove(listViewItem.Tag)
                         listViewItem.Remove()
                     Next
                 Catch ex As Exception
-                   App.Runtime.MessageCollector.AddExceptionMessage("UI.Window.ExternalTools.DeleteTool_Click() failed.", ex, , True)
+                    Runtime.MessageCollector.AddExceptionMessage("UI.Window.ExternalTools.DeleteTool_Click() failed.",
+                                                                 ex, , True)
                 End Try
             End Sub
 
-            Private Sub LaunchTool_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles LaunchToolMenuItem.Click, LaunchToolToolstripButton.Click
+            Private Sub LaunchTool_Click(sender As Object, e As EventArgs) _
+                Handles LaunchToolMenuItem.Click, LaunchToolToolstripButton.Click
                 LaunchTool()
             End Sub
 
-            Private Sub ToolsListView_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles ToolsListView.SelectedIndexChanged
+            Private Sub ToolsListView_SelectedIndexChanged(sender As Object, e As EventArgs) _
+                Handles ToolsListView.SelectedIndexChanged
                 Try
                     If ToolsListView.SelectedItems.Count = 1 Then
                         PropertiesGroupBox.Enabled = True
-                        _selectedTool = TryCast(ToolsListView.SelectedItems(0).Tag, Tools.ExternalTool)
+                        _selectedTool = TryCast(ToolsListView.SelectedItems(0).Tag, ExternalTool)
                         If _selectedTool Is Nothing Then Return
 
                         With _selectedTool
@@ -89,15 +108,19 @@ Namespace UI
                         PropertiesGroupBox.Enabled = False
                     End If
                 Catch ex As Exception
-                   App.Runtime.MessageCollector.AddExceptionMessage("UI.Window.ExternalTools.ToolsListView_SelectedIndexChanged() failed.", ex, , True)
+                    Runtime.MessageCollector.AddExceptionMessage(
+                        "UI.Window.ExternalTools.ToolsListView_SelectedIndexChanged() failed.", ex, , True)
                 End Try
             End Sub
 
-            Private Sub ToolsListView_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles ToolsListView.DoubleClick
+            Private Sub ToolsListView_DoubleClick(sender As Object, e As EventArgs) Handles ToolsListView.DoubleClick
                 If ToolsListView.SelectedItems.Count > 0 Then LaunchTool()
             End Sub
 
-            Private Sub PropertyControl_ChangedOrLostFocus(ByVal sender As Object, ByVal e As EventArgs) Handles DisplayNameTextBox.LostFocus, ArgumentsCheckBox.LostFocus, FilenameTextBox.LostFocus, BrowseButton.LostFocus, WaitForExitCheckBox.LostFocus, WaitForExitCheckBox.Click, TryToIntegrateCheckBox.Click
+            Private Sub PropertyControl_ChangedOrLostFocus(sender As Object, e As EventArgs) _
+                Handles DisplayNameTextBox.LostFocus, ArgumentsCheckBox.LostFocus, FilenameTextBox.LostFocus,
+                        BrowseButton.LostFocus, WaitForExitCheckBox.LostFocus, WaitForExitCheckBox.Click,
+                        TryToIntegrateCheckBox.Click
                 If _selectedTool Is Nothing Then Return
 
                 Try
@@ -111,24 +134,30 @@ Namespace UI
 
                     UpdateToolsListView()
                 Catch ex As Exception
-                   App.Runtime.MessageCollector.AddExceptionMessage("UI.Window.ExternalTools.PropertyControl_ChangedOrLostFocus() failed.", ex, , True)
+                    Runtime.MessageCollector.AddExceptionMessage(
+                        "UI.Window.ExternalTools.PropertyControl_ChangedOrLostFocus() failed.", ex, , True)
                 End Try
             End Sub
 
-            Private Sub BrowseButton_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles BrowseButton.Click
+            Private Sub BrowseButton_Click(sender As Object, e As EventArgs) Handles BrowseButton.Click
                 Try
                     Using browseDialog As New OpenFileDialog()
                         With browseDialog
-                            .Filter = String.Join("|", New String() {Language.Language.strFilterApplication, "*.exe", Language.Language.strFilterAll, "*.*"})
+                            .Filter = String.Join("|",
+                                                  New String() _
+                                                     {Language.Language.strFilterApplication, "*.exe",
+                                                      Language.Language.strFilterAll, "*.*"})
                             If .ShowDialog = DialogResult.OK Then FilenameTextBox.Text = .FileName
                         End With
                     End Using
                 Catch ex As Exception
-                   App.Runtime.MessageCollector.AddExceptionMessage("UI.Window.ExternalTools.BrowseButton_Click() failed.", ex, , True)
+                    Runtime.MessageCollector.AddExceptionMessage("UI.Window.ExternalTools.BrowseButton_Click() failed.",
+                                                                 ex, , True)
                 End Try
             End Sub
 
-            Private Sub TryToIntegrateCheckBox_CheckedChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles TryToIntegrateCheckBox.CheckedChanged
+            Private Sub TryToIntegrateCheckBox_CheckedChanged(sender As Object, e As EventArgs) _
+                Handles TryToIntegrateCheckBox.CheckedChanged
                 If TryToIntegrateCheckBox.Checked Then
                     WaitForExitCheckBox.Enabled = False
                     WaitForExitCheckBox.Checked = False
@@ -136,6 +165,7 @@ Namespace UI
                     WaitForExitCheckBox.Enabled = True
                 End If
             End Sub
+
 #End Region
 
             Private Sub ApplyLanguage()
@@ -166,12 +196,12 @@ Namespace UI
                 LaunchToolMenuItem.Text = Language.Language.strMenuLaunchExternalTool
             End Sub
 
-            Private Sub UpdateToolsListView(Optional ByVal selectTool As Tools.ExternalTool = Nothing)
+            Private Sub UpdateToolsListView(Optional ByVal selectTool As ExternalTool = Nothing)
                 Try
-                    Dim selectedTools As New List(Of Tools.ExternalTool)
+                    Dim selectedTools As New List(Of ExternalTool)
                     If selectTool Is Nothing Then
                         For Each listViewItem As ListViewItem In ToolsListView.SelectedItems
-                            Dim externalTool As Tools.ExternalTool = TryCast(listViewItem.Tag, Tools.ExternalTool)
+                            Dim externalTool = TryCast(listViewItem.Tag, ExternalTool)
                             If externalTool IsNot Nothing Then selectedTools.Add(externalTool)
                         Next
                     Else
@@ -181,7 +211,7 @@ Namespace UI
                     ToolsListView.BeginUpdate()
                     ToolsListView.Items.Clear()
 
-                    For Each externalTool As Tools.ExternalTool In App.Runtime.ExternalTools
+                    For Each externalTool As ExternalTool In Runtime.ExternalTools
                         Dim listViewItem As New ListViewItem
                         With listViewItem
                             .Text = externalTool.DisplayName
@@ -201,23 +231,27 @@ Namespace UI
 
                     frmMain.AddExternalToolsToToolBar()
                 Catch ex As Exception
-                   App.Runtime.MessageCollector.AddExceptionMessage("UI.Window.ExternalTools.PopulateToolsListView()", ex, , True)
+                    Runtime.MessageCollector.AddExceptionMessage("UI.Window.ExternalTools.PopulateToolsListView()", ex, ,
+                                                                 True)
                 End Try
             End Sub
 
             Private Sub LaunchTool()
                 Try
                     For Each listViewItem As ListViewItem In ToolsListView.SelectedItems
-                        Dim externalTool As Tools.ExternalTool = TryCast(listViewItem.Tag, Tools.ExternalTool)
+                        Dim externalTool = TryCast(listViewItem.Tag, ExternalTool)
                         If externalTool Is Nothing Then Continue For
 
                         externalTool.Start()
                     Next
                 Catch ex As Exception
-                   App.Runtime.MessageCollector.AddExceptionMessage("UI.Window.ExternalTools.LaunchTool() failed.", ex, , True)
+                    Runtime.MessageCollector.AddExceptionMessage("UI.Window.ExternalTools.LaunchTool() failed.", ex, ,
+                                                                 True)
                 End Try
             End Sub
+
 #End Region
         End Class
     End Namespace
+
 End Namespace

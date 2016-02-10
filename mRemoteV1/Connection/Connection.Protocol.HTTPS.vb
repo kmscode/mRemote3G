@@ -1,9 +1,10 @@
 ﻿Namespace Connection
+
     Namespace Protocol
         Public Class HTTPS
-            Inherits Connection.Protocol.HTTPBase
+            Inherits HTTPBase
 
-            Public Sub New(ByVal RenderingEngine As RenderingEngine)
+            Public Sub New(RenderingEngine As RenderingEngine)
                 MyBase.New(RenderingEngine)
             End Sub
 
@@ -20,4 +21,5 @@
             End Enum
         End Class
     End Namespace
+
 End Namespace

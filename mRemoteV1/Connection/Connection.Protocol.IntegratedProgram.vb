@@ -1,16 +1,20 @@
 ﻿Imports System.Threading
 Imports mRemote3G.App
+Imports mRemote3G.Messages
 Imports mRemote3G.My
 Imports mRemote3G.Tools
 
 Namespace Connection
+
     Namespace Protocol
         Public Class IntegratedProgram
             Inherits Base
+
 #Region "Public Methods"
+
             Public Overrides Function SetProps() As Boolean
                 If InterfaceControl.Info IsNot Nothing Then
-                    _externalTool =App.Runtime.GetExtAppByName(InterfaceControl.Info.ExtApp)
+                    _externalTool = Runtime.GetExtAppByName(InterfaceControl.Info.ExtApp)
                     _externalTool.ConnectionInfo = InterfaceControl.Info
                 End If
 
@@ -37,10 +41,10 @@ Namespace Connection
                     AddHandler _process.Exited, AddressOf ProcessExited
 
                     _process.Start()
-                    _process.WaitForInputIdle(MySettingsProperty.Settings.MaxPuttyWaitTime * 1000)
+                    _process.WaitForInputIdle(Settings.MaxPuttyWaitTime*1000)
 
                     Dim startTicks As Integer = Environment.TickCount
-                    While _handle.ToInt32 = 0 And Environment.TickCount < startTicks + (MySettingsProperty.Settings.MaxPuttyWaitTime * 1000)
+                    While _handle.ToInt32 = 0 And Environment.TickCount < startTicks + (Settings.MaxPuttyWaitTime*1000)
                         _process.Refresh()
                         If Not _process.MainWindowTitle = "Default IME" Then _handle = _process.MainWindowHandle
                         If _handle.ToInt32 = 0 Then Thread.Sleep(0)
@@ -59,7 +63,7 @@ Namespace Connection
                     MyBase.Connect()
                     Return True
                 Catch ex As Exception
-                   App.Runtime.MessageCollector.AddExceptionMessage(Language.Language.strIntAppConnectionFailed, ex)
+                    Runtime.MessageCollector.AddExceptionMessage(Language.Language.strIntAppConnectionFailed, ex)
                     Return False
                 End Try
             End Function
@@ -69,14 +73,18 @@ Namespace Connection
                     If ConnectionWindow.InTabDrag Then Return
                     NativeMethods.SetForegroundWindow(_handle)
                 Catch ex As Exception
-                   App.Runtime.MessageCollector.AddExceptionMessage(Language.Language.strIntAppFocusFailed, ex, , True)
+                    Runtime.MessageCollector.AddExceptionMessage(Language.Language.strIntAppFocusFailed, ex, , True)
                 End Try
             End Sub
 
-            Public Overrides Sub Resize(ByVal sender As Object, ByVal e As EventArgs)
+            Public Overrides Sub Resize(sender As Object, e As EventArgs)
                 Try
                     If InterfaceControl.Size = Size.Empty Then Return
-                    NativeMethods.MoveWindow(_handle, -SystemInformation.FrameBorderSize.Width, -(SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height), InterfaceControl.Width + (SystemInformation.FrameBorderSize.Width * 2), InterfaceControl.Height + SystemInformation.CaptionHeight + (SystemInformation.FrameBorderSize.Height * 2), True)
+                    NativeMethods.MoveWindow(_handle, -SystemInformation.FrameBorderSize.Width,
+                                             (SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height),
+                                             InterfaceControl.Width + (SystemInformation.FrameBorderSize.Width * 2),
+                                             InterfaceControl.Height + SystemInformation.CaptionHeight +
+                                             (SystemInformation.FrameBorderSize.Height * 2), True)
                 Catch ex As Exception
                    App.Runtime.MessageCollector.AddExceptionMessage(Language.Language.strIntAppResizeFailed, ex, , True)
                 End Try
@@ -97,25 +105,33 @@ Namespace Connection
 
                 MyBase.Close()
             End Sub
+
 #End Region
 
 #Region "Private Fields"
+
             Private _externalTool As ExternalTool
             Private _handle As IntPtr
             Private _process As Process
+
 #End Region
 
 #Region "Private Methods"
-            Private Sub ProcessExited(ByVal sender As Object, ByVal e As EventArgs)
+
+            Private Sub ProcessExited(sender As Object, e As EventArgs)
                 Event_Closed(Me)
             End Sub
+
 #End Region
 
 #Region "Enumerations"
+
             Public Enum Defaults
                 Port = 0
             End Enum
+
 #End Region
         End Class
     End Namespace
+
 End Namespace

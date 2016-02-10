@@ -1,19 +1,21 @@
 ﻿Imports System.IO
 Imports mRemote3G.App.Info
+Imports mRemote3G.Config.Putty
 Imports mRemote3G.Connection.Protocol
 Imports mRemote3G.My
-Imports mRemote3G.My.Resources
 Imports mRemote3G.Tools
 Imports PSTaskDialog
 
 Namespace Forms.OptionsPages
     Public Class AdvancedPage
+
 #Region "Public Methods"
-        Public Overrides Property PageName() As String
+
+        Public Overrides Property PageName As String
             Get
                 Return Language.Language.strTabAdvanced
             End Get
-            Set(value As String)
+            Set
             End Set
         End Property
 
@@ -47,7 +49,6 @@ Namespace Forms.OptionsPages
             SetPuttyLaunchButtonEnabled()
 
             numUVNCSCPort.Value = My.Settings.UVNCSCPort
-
         End Sub
 
         Public Overrides Sub SaveSettings()
@@ -58,7 +59,7 @@ Namespace Forms.OptionsPages
             My.Settings.AutomaticallyGetSessionInfo = chkAutomaticallyGetSessionInfo.Checked
             My.Settings.ReconnectOnDisconnect = chkAutomaticReconnect.Checked
 
-            Dim puttyPathChanged As Boolean = False
+            Dim puttyPathChanged = False
             If Not MySettingsProperty.Settings.CustomPuttyPath = txtCustomPuttyPath.Text Then
                 puttyPathChanged = True
                 MySettingsProperty.Settings.CustomPuttyPath = txtCustomPuttyPath.Text
@@ -73,32 +74,38 @@ Namespace Forms.OptionsPages
                 Else
                     PuttyBase.PuttyPath = General.PuttyPath
                 End If
-                Config.Putty.Sessions.AddSessionsToTree()
+                Sessions.AddSessionsToTree()
             End If
 
             My.Settings.MaxPuttyWaitTime = numPuttyWaitTime.Value
 
             My.Settings.UVNCSCPort = numUVNCSCPort.Value
-
         End Sub
+
 #End Region
 
 #Region "Private Methods"
+
 #Region "Event Handlers"
-        Private Sub chkUseCustomPuttyPath_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chkUseCustomPuttyPath.CheckedChanged
+
+        Private Sub chkUseCustomPuttyPath_CheckedChanged(sender As Object, e As EventArgs) _
+            Handles chkUseCustomPuttyPath.CheckedChanged
             txtCustomPuttyPath.Enabled = chkUseCustomPuttyPath.Checked
             btnBrowseCustomPuttyPath.Enabled = chkUseCustomPuttyPath.Checked
             SetPuttyLaunchButtonEnabled()
         End Sub
 
-        Private Sub txtCustomPuttyPath_TextChanged(sender As Object, e As EventArgs) Handles txtCustomPuttyPath.TextChanged
+        Private Sub txtCustomPuttyPath_TextChanged(sender As Object, e As EventArgs) _
+            Handles txtCustomPuttyPath.TextChanged
             SetPuttyLaunchButtonEnabled()
         End Sub
 
-        Private Sub btnBrowseCustomPuttyPath_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnBrowseCustomPuttyPath.Click
+        Private Sub btnBrowseCustomPuttyPath_Click(sender As Object, e As EventArgs) _
+            Handles btnBrowseCustomPuttyPath.Click
             Using openFileDialog As New OpenFileDialog()
                 With openFileDialog
-                    .Filter = String.Format("{0}|*.exe|{1}|*.*", Language.Language.strFilterApplication, Language.Language.strFilterAll)
+                    .Filter = String.Format("{0}|*.exe|{1}|*.*", Language.Language.strFilterApplication,
+                                            Language.Language.strFilterAll)
                     .FileName = Path.GetFileName(General.PuttyPath)
                     .CheckFileExists = True
                     .Multiselect = False
@@ -111,7 +118,7 @@ Namespace Forms.OptionsPages
             End Using
         End Sub
 
-        Private Sub btnLaunchPutty_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnLaunchPutty.Click
+        Private Sub btnLaunchPutty_Click(sender As Object, e As EventArgs) Handles btnLaunchPutty.Click
             Try
                 Dim puttyProcess As New PuttyProcessController
                 Dim fileName As String
@@ -125,7 +132,8 @@ Namespace Forms.OptionsPages
                 puttyProcess.SetControlVisible("Button", "&Open", False)
                 puttyProcess.WaitForExit()
             Catch ex As Exception
-                cTaskDialog.MessageBox(Application.Info.ProductName, Language.Language.strErrorCouldNotLaunchPutty, "", ex.ToString(), "", "", eTaskDialogButtons.OK, eSysIcons.Error, Nothing)
+                cTaskDialog.MessageBox(Application.Info.ProductName, Language.Language.strErrorCouldNotLaunchPutty, "",
+                                       ex.ToString(), "", "", eTaskDialogButtons.OK, eSysIcons.Error, Nothing)
             End Try
         End Sub
 
@@ -139,7 +147,7 @@ Namespace Forms.OptionsPages
                 puttyPath = General.PuttyPath
             End If
 
-            Dim exists As Boolean = False
+            Dim exists = False
             Try
                 exists = File.Exists(puttyPath)
             Catch
@@ -153,6 +161,7 @@ Namespace Forms.OptionsPages
                 btnLaunchPutty.Enabled = False
             End If
         End Sub
+
 #End Region
     End Class
 End Namespace

@@ -1,22 +1,32 @@
-﻿Imports mRemote3G.Tools.PortScan
+﻿Imports System.Net
+Imports mRemote3G.App
+Imports mRemote3G.Connection.Protocol
+Imports mRemote3G.Messages
+Imports mRemote3G.Tools
+Imports mRemote3G.Tools.PortScan
 Imports WeifenLuo.WinFormsUI.Docking
 
 Namespace UI
+
     Namespace Window
         Public Class PortScan
             Inherits Base
+
 #Region "Constructors"
-            Public Sub New(ByVal panel As DockContent, ByVal import As Boolean)
+
+            Public Sub New(panel As DockContent, import As Boolean)
                 InitializeComponent()
 
                 WindowType = Type.PortScan
                 DockPnl = panel
                 _import = import
             End Sub
+
 #End Region
 
 #Region "Private Properties"
-            Private ReadOnly Property IpsValid() As Boolean
+
+            Private ReadOnly Property IpsValid As Boolean
                 Get
                     If String.IsNullOrEmpty(ipStart.Octet1) Then Return False
                     If String.IsNullOrEmpty(ipStart.Octet2) Then Return False
@@ -31,22 +41,29 @@ Namespace UI
                     Return True
                 End Get
             End Property
+
 #End Region
 
 #Region "Private Fields"
+
             Private ReadOnly _import As Boolean
             Private _portScanner As Scanner
             Private _scanning As Boolean = False
+
 #End Region
 
 #Region "Private Methods"
+
 #Region "Event Handlers"
-            Private Sub PortScan_Load(ByVal sender As System.Object, ByVal e As EventArgs) Handles MyBase.Load
+
+            Private Sub PortScan_Load(sender As Object, e As EventArgs) Handles MyBase.Load
                 ApplyLanguage()
 
                 Try
                     If _import Then
-                        lvHosts.Columns.AddRange(New ColumnHeader() {clmHost, clmSSH, clmTelnet, clmHTTP, clmHTTPS, clmRlogin, clmRDP, clmVNC})
+                        lvHosts.Columns.AddRange(New ColumnHeader() _
+                                                    {clmHost, clmSSH, clmTelnet, clmHTTP, clmHTTPS, clmRlogin, clmRDP,
+                                                     clmVNC})
                         ShowImportControls(True)
                         cbProtocol.SelectedIndex = 0
                     Else
@@ -54,44 +71,46 @@ Namespace UI
                         ShowImportControls(False)
                     End If
                 Catch ex As Exception
-                   App.Runtime.MessageCollector.AddExceptionMessage(Language.Language.strPortScanCouldNotLoadPanel, ex)
+                    Runtime.MessageCollector.AddExceptionMessage(Language.Language.strPortScanCouldNotLoadPanel, ex)
                 End Try
             End Sub
 
-            Private Sub portStart_Enter(sender As System.Object, e As EventArgs) Handles portStart.Enter
+            Private Sub portStart_Enter(sender As Object, e As EventArgs) Handles portStart.Enter
                 portStart.Select(0, portStart.Text.Length)
             End Sub
 
-            Private Sub portEnd_Enter(sender As System.Object, e As EventArgs) Handles portEnd.Enter
+            Private Sub portEnd_Enter(sender As Object, e As EventArgs) Handles portEnd.Enter
                 portEnd.Select(0, portEnd.Text.Length)
             End Sub
 
-            Private Sub btnScan_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btnScan.Click
+            Private Sub btnScan_Click(sender As Object, e As EventArgs) Handles btnScan.Click
                 If _scanning Then
                     StopScan()
                 Else
                     If IpsValid Then
                         StartScan()
                     Else
-                       App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, Language.Language.strCannotStartPortScan)
+                        Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
+                                                            Language.Language.strCannotStartPortScan)
                     End If
                 End If
             End Sub
 
-            Private Sub btnImport_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btnImport.Click
-                Dim protocol As mRemote3G.Connection.Protocol.Protocols = Tools.Misc.StringToEnum(GetType(mRemote3G.Connection.Protocol.Protocols), cbProtocol.SelectedItem)
+            Private Sub btnImport_Click(sender As Object, e As EventArgs) Handles btnImport.Click
+                Dim protocol As Protocols = Misc.StringToEnum(GetType(Protocols), cbProtocol.SelectedItem)
 
                 Dim hosts As New List(Of ScanHost)
                 For Each item As ListViewItem In lvHosts.SelectedItems
-                    Dim scanHost As ScanHost = TryCast(item.Tag, ScanHost)
+                    Dim scanHost = TryCast(item.Tag, ScanHost)
                     If scanHost IsNot Nothing Then hosts.Add(item.Tag)
                 Next
 
-                App.Import.ImportFromPortScan(hosts, protocol)
+                Import.ImportFromPortScan(hosts, protocol)
 
                 DialogResult = DialogResult.OK
                 Close()
             End Sub
+
 #End Region
 
             Private Sub ApplyLanguage()
@@ -109,7 +128,7 @@ Namespace UI
                 Text = Language.Language.strMenuPortScan
             End Sub
 
-            Private Sub ShowImportControls(ByVal controlsVisible As Boolean)
+            Private Sub ShowImportControls(controlsVisible As Boolean)
                 pnlPorts.Visible = controlsVisible
                 pnlImport.Visible = controlsVisible
                 If controlsVisible Then
@@ -125,8 +144,8 @@ Namespace UI
                     SwitchButtonText()
                     lvHosts.Items.Clear()
 
-                    Dim ipAddressStart As Net.IPAddress = Net.IPAddress.Parse(ipStart.Text)
-                    Dim ipAddressEnd As Net.IPAddress = Net.IPAddress.Parse(ipEnd.Text)
+                    Dim ipAddressStart As IPAddress = IPAddress.Parse(ipStart.Text)
+                    Dim ipAddressEnd As IPAddress = IPAddress.Parse(ipEnd.Text)
 
                     If _import Then
                         _portScanner = New Scanner(ipAddressStart, ipAddressEnd)
@@ -140,7 +159,9 @@ Namespace UI
 
                     _portScanner.StartScan()
                 Catch ex As Exception
-                   App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "StartScan failed (UI.Window.PortScan)" & vbNewLine & ex.ToString(), True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                                                        "StartScan failed (UI.Window.PortScan)" & vbNewLine &
+                                                        ex.ToString(), True)
                 End Try
             End Sub
 
@@ -161,18 +182,21 @@ Namespace UI
                 prgBar.Value = 0
             End Sub
 
-            Private Shared Sub PortScanner_BeginHostScan(ByVal host As String)
-               App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, "Scanning " & host, True)
+            Private Shared Sub PortScanner_BeginHostScan(host As String)
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Scanning " & host, True)
             End Sub
 
-            Private Delegate Sub PortScannerHostScannedDelegate(ByVal host As ScanHost, ByVal scannedCount As Integer, ByVal totalCount As Integer)
-            Private Sub PortScanner_HostScanned(ByVal host As ScanHost, ByVal scannedCount As Integer, ByVal totalCount As Integer)
+            Private Delegate Sub PortScannerHostScannedDelegate _
+                (host As ScanHost, scannedCount As Integer, totalCount As Integer)
+
+            Private Sub PortScanner_HostScanned(host As ScanHost, scannedCount As Integer, totalCount As Integer)
                 If InvokeRequired Then
-                    Invoke(New PortScannerHostScannedDelegate(AddressOf PortScanner_HostScanned), New Object() {host, scannedCount, totalCount})
+                    Invoke(New PortScannerHostScannedDelegate(AddressOf PortScanner_HostScanned),
+                           New Object() {host, scannedCount, totalCount})
                     Return
                 End If
 
-               App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, "Host scanned " & host.HostIp, True)
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Host scanned " & host.HostIp, True)
 
                 Dim listViewItem As ListViewItem = host.ToListViewItem(_import)
                 If listViewItem IsNot Nothing Then
@@ -184,19 +208,22 @@ Namespace UI
                 prgBar.Value = scannedCount
             End Sub
 
-            Private Delegate Sub PortScannerScanComplete(ByVal hosts As List(Of ScanHost))
-            Private Sub PortScanner_ScanComplete(ByVal hosts As List(Of ScanHost))
+            Private Delegate Sub PortScannerScanComplete(hosts As List(Of ScanHost))
+
+            Private Sub PortScanner_ScanComplete(hosts As List(Of ScanHost))
                 If InvokeRequired Then
                     Invoke(New PortScannerScanComplete(AddressOf PortScanner_ScanComplete), New Object() {hosts})
                     Return
                 End If
 
-               App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, Language.Language.strPortScanComplete)
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.Language.strPortScanComplete)
 
                 _scanning = False
                 SwitchButtonText()
             End Sub
+
 #End Region
         End Class
     End Namespace
+
 End Namespace

@@ -3,23 +3,25 @@
 Namespace Tools
     Public Class ReconnectGroup
         Private _ServerReady As Boolean
-        Public Property ServerReady() As Boolean
+
+        Public Property ServerReady As Boolean
             Get
                 Return _ServerReady
             End Get
-            Set(ByVal value As Boolean)
+            Set
                 If value = True Then
-                    SetStatusImage(Resources.HostStatus_On)
+                    SetStatusImage(HostStatus_On)
                 Else
-                    SetStatusImage(Resources.HostStatus_Off)
+                    SetStatusImage(HostStatus_Off)
                 End If
 
                 _ServerReady = value
             End Set
         End Property
 
-        Private Delegate Sub SetStatusImageCB(ByVal Img As Image)
-        Private Sub SetStatusImage(ByVal Img As Image)
+        Private Delegate Sub SetStatusImageCB(Img As Image)
+
+        Private Sub SetStatusImage(Img As Image)
             If pbServerStatus.InvokeRequired Then
                 Dim d As New SetStatusImageCB(AddressOf SetStatusImage)
                 ParentForm.Invoke(d, New Object() {Img})
@@ -28,23 +30,26 @@ Namespace Tools
             End If
         End Sub
 
-        Private Sub chkReconnectWhenReady_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkReconnectWhenReady.CheckedChanged
+        Private Sub chkReconnectWhenReady_CheckedChanged(sender As Object, e As EventArgs) _
+            Handles chkReconnectWhenReady.CheckedChanged
             _ReconnectWhenReady = chkReconnectWhenReady.Checked
         End Sub
 
         Private _ReconnectWhenReady As Boolean
-        Public Property ReconnectWhenReady() As Boolean
+
+        Public Property ReconnectWhenReady As Boolean
             Get
                 Return _ReconnectWhenReady
             End Get
-            Set(ByVal value As Boolean)
+            Set
                 _ReconnectWhenReady = value
                 SetCheckbox(value)
             End Set
         End Property
 
-        Private Delegate Sub SetCheckboxCB(ByVal Val As Boolean)
-        Private Sub SetCheckbox(ByVal Val As Boolean)
+        Private Delegate Sub SetCheckboxCB(Val As Boolean)
+
+        Private Sub SetCheckbox(Val As Boolean)
             If chkReconnectWhenReady.InvokeRequired Then
                 Dim d As New SetCheckboxCB(AddressOf SetCheckbox)
                 ParentForm.Invoke(d, New Object() {Val})
@@ -55,11 +60,11 @@ Namespace Tools
 
         Public Event CloseClicked()
 
-        Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
+        Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
             RaiseEvent CloseClicked()
         End Sub
 
-        Private Sub tmrAnimation_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrAnimation.Tick
+        Private Sub tmrAnimation_Tick(sender As Object, e As EventArgs) Handles tmrAnimation.Tick
             Select Case lblAnimation.Text
                 Case ""
                     lblAnimation.Text = "»"
@@ -73,6 +78,7 @@ Namespace Tools
         End Sub
 
         Private Delegate Sub DisposeReconnectGroupCB()
+
         Public Sub DisposeReconnectGroup()
             If Me.InvokeRequired Then
                 Dim d As New DisposeReconnectGroupCB(AddressOf DisposeReconnectGroup)
@@ -82,7 +88,7 @@ Namespace Tools
             End If
         End Sub
 
-        Private Sub ReconnectGroup_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        Private Sub ReconnectGroup_Load(sender As Object, e As EventArgs) Handles Me.Load
             ApplyLanguage()
         End Sub
 

@@ -1,15 +1,20 @@
 ﻿Imports System.ComponentModel
+Imports mRemote3G.App
+Imports mRemote3G.Connection.Protocol
 Imports mRemote3G.Messages
+Imports mRemote3G.Root.PuttySessions
 Imports mRemote3G.Tools
 
 Namespace Connection
+
     Namespace PuttySession
         Public Class PuttyInfo
-            Inherits Connection.Info
+            Inherits Info
             Implements IComponent
 
 #Region "Commands"
-            <Command(),
+
+            <Command,
                 LocalizedAttributes.LocalizedDisplayName("strPuttySessionSettings")>
             Public Sub SessionSettings()
                 Try
@@ -25,84 +30,86 @@ Namespace Connection
                    App.Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.Language.strErrorCouldNotLaunchPutty & vbNewLine & ex.ToString(), False)
                 End Try
             End Sub
+
 #End Region
 
 #Region "Properties"
+
             <Browsable(False)>
-            Public Property RootPuttySessionsInfo() As Root.PuttySessions.PuttySessionsInfo
+            Public Property RootPuttySessionsInfo As PuttySessionsInfo
 
             <[ReadOnly](True)>
-            Public Overrides Property PuttySession() As String
+            Public Overrides Property PuttySession As String
 
             <[ReadOnly](True)>
-            Public Overrides Property Name() As String
+            Public Overrides Property Name As String
 
             <[ReadOnly](True),
-            Browsable(False)>
-            Public Overrides Property Description() As String
+                Browsable(False)>
+            Public Overrides Property Description As String
 
             <[ReadOnly](True),
-            Browsable(False)>
-            Public Overrides Property Icon() As String
+                Browsable(False)>
+            Public Overrides Property Icon As String
                 Get
                     Return "PuTTY"
                 End Get
-                Set(value As String)
-
+                Set
                 End Set
             End Property
 
             <[ReadOnly](True),
-            Browsable(False)>
-            Public Overrides Property Panel() As String
+                Browsable(False)>
+            Public Overrides Property Panel As String
                 Get
                     Return RootPuttySessionsInfo.Panel
                 End Get
-                Set(value As String)
-
+                Set
                 End Set
             End Property
 
             <[ReadOnly](True)>
-            Public Overrides Property Hostname() As String
+            Public Overrides Property Hostname As String
 
             <[ReadOnly](True)>
-            Public Overrides Property Username() As String
+            Public Overrides Property Username As String
 
             <[ReadOnly](True),
-            Browsable(False)>
-            Public Overrides Property Password() As String
+                Browsable(False)>
+            Public Overrides Property Password As String
 
             <[ReadOnly](True)>
-            Public Overrides Property Protocol() As Protocol.Protocols
+            Public Overrides Property Protocol As Protocols
 
             <[ReadOnly](True)>
-            Public Overrides Property Port() As Integer
+            Public Overrides Property Port As Integer
 
             <[ReadOnly](True),
-            Browsable(False)>
-            Public Overrides Property PreExtApp() As String
+                Browsable(False)>
+            Public Overrides Property PreExtApp As String
 
             <[ReadOnly](True),
-            Browsable(False)>
-            Public Overrides Property PostExtApp() As String
+                Browsable(False)>
+            Public Overrides Property PostExtApp As String
 
             <[ReadOnly](True),
-            Browsable(False)>
-            Public Overrides Property MacAddress() As String
+                Browsable(False)>
+            Public Overrides Property MacAddress As String
 
             <[ReadOnly](True),
-            Browsable(False)>
-            Public Overrides Property UserField() As String
+                Browsable(False)>
+            Public Overrides Property UserField As String
+
 #End Region
 
 #Region "IComponent"
+
             <Browsable(False)>
-            Public Property Site() As ISite Implements IComponent.Site
+            Public Property Site As ISite Implements IComponent.Site
                 Get
                     Return New PropertyGridCommandSite(Me)
                 End Get
-                Set(value As ISite)
+                Set
                     Throw New NotImplementedException()
                 End Set
             End Property
@@ -112,8 +119,10 @@ Namespace Connection
             End Sub
 
             Public Event Disposed As EventHandler Implements IComponent.Disposed
+
 #End Region
         End Class
     End Namespace
+
 End Namespace
 

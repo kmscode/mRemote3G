@@ -858,7 +858,7 @@ Namespace Forms
                     menuItem.Tag = treeNode
 
                     If Node.GetNodeType(treeNode) = Node.Type.Container Then
-                        menuItem.Image = My.Resources.Folder
+                        menuItem.Image = Resources.Folder
                         menuItem.Tag = treeNode.Tag
 
                         toolStripMenuItem.DropDownItems.Add(menuItem)

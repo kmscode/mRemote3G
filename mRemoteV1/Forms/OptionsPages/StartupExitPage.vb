@@ -1,13 +1,13 @@
 ﻿
-Imports mRemote3G.App.Info
+
 
 Namespace Forms.OptionsPages
     Public Class StartupExitPage
-        Public Overrides Property PageName() As String
+        Public Overrides Property PageName As String
             Get
                 Return Language.Language.strStartupExit
             End Get
-            Set(value As String)
+            Set
             End Set
         End Property
 
@@ -17,7 +17,8 @@ Namespace Forms.OptionsPages
             chkSaveConsOnExit.Text = Language.Language.strSaveConsOnExit
             chkReconnectOnStart.Text = Language.Language.strReconnectAtStartup
             chkSingleInstance.Text = Language.Language.strAllowOnlySingleInstance
-            chkProperInstallationOfComponentsAtStartup.Text = Language.Language.strCheckProperInstallationOfComponentsAtStartup
+            chkProperInstallationOfComponentsAtStartup.Text =
+                Language.Language.strCheckProperInstallationOfComponentsAtStartup
         End Sub
 
         Public Overrides Sub SaveSettings()
@@ -29,7 +30,7 @@ Namespace Forms.OptionsPages
             My.Settings.StartupComponentsCheck = chkProperInstallationOfComponentsAtStartup.Checked
         End Sub
 
-        Private Sub StartupExitPage_Load(sender As System.Object, e As EventArgs) Handles MyBase.Load
+        Private Sub StartupExitPage_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             chkSaveConsOnExit.Checked = My.Settings.SaveConsOnExit
             chkReconnectOnStart.Checked = My.Settings.OpenConsFromLastSession
             chkSingleInstance.Checked = My.Settings.SingleInstance

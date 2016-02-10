@@ -5,15 +5,20 @@
 ' UnhandledException: Raised if the application encounters an unhandled exception.
 ' StartupNextInstance: Raised when launching a single-instance application and the application is already active. 
 ' NetworkAvailabilityChanged: Raised when the network connection is connected or disconnected.
+Imports System.Threading
+Imports mRemote3G.App
+
 Partial Friend Class MyApplication
-    Public mutex As System.Threading.Mutex
+    Public mutex As Mutex
 
     Private Function GetCurrentInstanceWindowHandle() As IntPtr
         Dim hWnd As IntPtr = IntPtr.Zero
         Dim curProc As Process = Process.GetCurrentProcess
 
         For Each proc As Process In Process.GetProcessesByName(curProc.ProcessName)
-            If proc.Id <> curProc.Id And proc.MainModule.FileName = curProc.MainModule.FileName And proc.MainWindowHandle <> IntPtr.Zero Then
+            If _
+                proc.Id <> curProc.Id And proc.MainModule.FileName = curProc.MainModule.FileName And
+                proc.MainWindowHandle <> IntPtr.Zero Then
                 hWnd = proc.MainWindowHandle
                 Exit For
             End If
@@ -29,11 +34,11 @@ Partial Friend Class MyApplication
             'Restore window if minimized. Do not restore if already in
             'normal or maximised window state, since we don't want to
             'change the current state of the window.
-            If App.NativeMethods.IsIconic(hWnd) <> 0 Then
-                App.NativeMethods.ShowWindow(hWnd, App.NativeMethods.SW_RESTORE)
+            If NativeMethods.IsIconic(hWnd) <> 0 Then
+                NativeMethods.ShowWindow(hWnd, NativeMethods.SW_RESTORE)
             End If
 
-            App.NativeMethods.SetForegroundWindow(hWnd)
+            NativeMethods.SetForegroundWindow(hWnd)
         End If
     End Sub
 End Class

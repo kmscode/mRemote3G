@@ -1,40 +1,49 @@
 Imports System.ComponentModel
+Imports mRemote3G.App
 Imports mRemote3G.Forms
+Imports mRemote3G.Messages
 Imports mRemote3G.Tools
+Imports VncSharp
 
 Namespace Connection
+
     Namespace Protocol
         Public Class VNC
-            Inherits Connection.Protocol.Base
+            Inherits Base
 
 #Region "Properties"
-            Public Property SmartSize() As Boolean
+
+            Public Property SmartSize As Boolean
                 Get
                     Return VNC.Scaled
                 End Get
-                Set(ByVal value As Boolean)
+                Set
                     VNC.Scaled = value
                 End Set
             End Property
 
-            Public Property ViewOnly() As Boolean
+            Public Property ViewOnly As Boolean
                 Get
                     Return VNC.ViewOnly
                 End Get
-                Set(ByVal value As Boolean)
+                Set
                     VNC.ViewOnly = value
                 End Set
             End Property
+
 #End Region
 
 #Region "Private Declarations"
-            Private VNC As VncSharp.RemoteDesktop
-            Private Info As Connection.Info
+
+            Private VNC As RemoteDesktop
+            Private Info As Info
+
 #End Region
 
 #Region "Public Methods"
+
             Public Sub New()
-                Me.Control = New VncSharp.RemoteDesktop
+                Me.Control = New RemoteDesktop
             End Sub
 
             Public Overrides Function SetProps() As Boolean
@@ -138,7 +147,7 @@ Namespace Connection
                 End Try
             End Sub
 
-            Public Sub SendSpecialKeys(ByVal Keys As SpecialKeys)
+            Public Sub SendSpecialKeys(Keys As SpecialKeys)
                 Try
                     Select Case Keys
                         Case SpecialKeys.CtrlAltDel
@@ -200,30 +209,36 @@ Namespace Connection
                     App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.Language.strVncRefreshFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
+
 #End Region
 
 #Region "Private Methods"
+
             Private Sub SetEventHandlers()
                 Try
                     AddHandler VNC.ConnectComplete, AddressOf VNCEvent_Connected
                     AddHandler VNC.ConnectionLost, AddressOf VNCEvent_Disconnected
                     AddHandler frmMain.clipboardchange, AddressOf VNCEvent_ClipboardChanged
-                    If Not ((Force And Info.Force.NoCredentials) = Info.Force.NoCredentials) And Not String.IsNullOrEmpty(Info.Password) Then
+                    If _
+                        Not ((Force And Info.Force.NoCredentials) = Info.Force.NoCredentials) And
+                        Not String.IsNullOrEmpty(Info.Password) Then
                         VNC.GetPassword = AddressOf VNCEvent_Authenticate
                     End If
                 Catch ex As Exception
                     App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.Language.strVncSetEventHandlersFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
+
 #End Region
 
 #Region "Private Events & Handlers"
-            Private Sub VNCEvent_Connected(ByVal sender As Object, ByVal e As EventArgs)
+
+            Private Sub VNCEvent_Connected(sender As Object, e As EventArgs)
                 MyBase.Event_Connected(Me)
                 VNC.AutoScroll = Info.VNCSmartSizeMode = SmartSizeMode.SmartSNo
             End Sub
 
-            Private Sub VNCEvent_Disconnected(ByVal sender As Object, ByVal e As EventArgs)
+            Private Sub VNCEvent_Disconnected(sender As Object, e As EventArgs)
                 MyBase.Event_Disconnected(sender, e.ToString)
                 MyBase.Close()
             End Sub
@@ -235,9 +250,11 @@ Namespace Connection
             Private Function VNCEvent_Authenticate() As String
                 Return Info.Password
             End Function
+
 #End Region
 
 #Region "Enums"
+
             Public Enum Defaults
                 None = 0
                 Port = 5900
@@ -325,7 +342,9 @@ Namespace Connection
                 <LocalizedAttributes.LocalizedDescription("strAspect")>
                 SmartSAspect
             End Enum
+
 #End Region
         End Class
     End Namespace
+
 End Namespace

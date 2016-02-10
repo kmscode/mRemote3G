@@ -1,13 +1,12 @@
 ﻿Imports mRemote3G.App
-Imports mRemote3G.App.Info
 
 Namespace Forms.OptionsPages
     Public Class AppearancePage
-        Public Overrides Property PageName() As String
+        Public Overrides Property PageName As String
             Get
                 Return Language.Language.strTabAppearance
             End Get
-            Set(value As String)
+            Set
             End Set
         End Property
 
@@ -15,7 +14,8 @@ Namespace Forms.OptionsPages
             MyBase.ApplyLanguage()
 
             lblLanguage.Text = Language.Language.strLanguage
-            lblLanguageRestartRequired.Text = String.Format(Language.Language.strLanguageRestartRequired, Application.ProductName)
+            lblLanguageRestartRequired.Text = String.Format(Language.Language.strLanguageRestartRequired,
+                                                            Application.ProductName)
             chkShowDescriptionTooltipsInTree.Text = Language.Language.strShowDescriptionTooltips
             chkShowFullConnectionsFilePathInTitle.Text = Language.Language.strShowFullConsFilePath
             chkShowSystemTrayIcon.Text = Language.Language.strAlwaysShowSysTrayIcon
@@ -31,10 +31,12 @@ Namespace Forms.OptionsPages
             For Each nativeName As String In SupportedCultures.CultureNativeNames
                 cboLanguage.Items.Add(nativeName)
             Next
-            If Not String.IsNullOrEmpty(My.Settings.OverrideUICulture) AndAlso SupportedCultures.IsNameSupported(My.Settings.OverrideUICulture) Then
+            If _
+                Not String.IsNullOrEmpty(My.Settings.OverrideUICulture) AndAlso
+                SupportedCultures.IsNameSupported(My.Settings.OverrideUICulture) Then
                 cboLanguage.SelectedItem = SupportedCultures.CultureNativeName(My.Settings.OverrideUICulture)
             End If
-            If cboLanguage.SelectedIndex = -1 Then
+            If cboLanguage.SelectedIndex = - 1 Then
                 cboLanguage.SelectedIndex = 0
             End If
 
@@ -59,13 +61,13 @@ Namespace Forms.OptionsPages
 
             My.Settings.ShowSystemTrayIcon = chkShowSystemTrayIcon.Checked
             If My.Settings.ShowSystemTrayIcon Then
-                If App.Runtime.NotificationAreaIcon Is Nothing Then
-                    App.Runtime.NotificationAreaIcon = New Tools.Controls.NotificationAreaIcon
+                If Runtime.NotificationAreaIcon Is Nothing Then
+                    Runtime.NotificationAreaIcon = New Tools.Controls.NotificationAreaIcon
                 End If
             Else
-                If App.Runtime.NotificationAreaIcon IsNot Nothing Then
-                    App.Runtime.NotificationAreaIcon.Dispose()
-                    App.Runtime.NotificationAreaIcon = Nothing
+                If Runtime.NotificationAreaIcon IsNot Nothing Then
+                    Runtime.NotificationAreaIcon.Dispose()
+                    Runtime.NotificationAreaIcon = Nothing
                 End If
             End If
 

@@ -5,11 +5,11 @@ Imports mRemote3G.Security
 
 Namespace Forms.OptionsPages
     Public Class SqlServerPage
-        Public Overrides Property PageName() As String
+        Public Overrides Property PageName As String
             Get
                 Return Language.Language.strSQLServer.TrimEnd(":")
             End Get
-            Set(value As String)
+            Set
             End Set
         End Property
 
@@ -45,14 +45,15 @@ Namespace Forms.OptionsPages
             My.Settings.SQLUser = txtSQLUsername.Text
             My.Settings.SQLPass = Crypt.Encrypt(txtSQLPassword.Text, General.EncryptionKey)
 
-           App.Runtime.Startup.DestroySQLUpdateHandlerAndStopTimer()
+            Runtime.Startup.DestroySQLUpdateHandlerAndStopTimer()
             frmMain.UsingSqlServer = My.Settings.UseSQLServer
             If My.Settings.UseSQLServer Then
-               App.Runtime.Startup.CreateSQLUpdateHandlerAndStartTimer()
+                Runtime.Startup.CreateSQLUpdateHandlerAndStartTimer()
             End If
         End Sub
 
-        Private Sub chkUseSQLServer_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chkUseSQLServer.CheckedChanged
+        Private Sub chkUseSQLServer_CheckedChanged(sender As Object, e As EventArgs) _
+            Handles chkUseSQLServer.CheckedChanged
             lblSQLServer.Enabled = chkUseSQLServer.Checked
             lblSQLDatabaseName.Enabled = chkUseSQLServer.Checked
             lblSQLUsername.Enabled = chkUseSQLServer.Checked

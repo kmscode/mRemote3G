@@ -1,9 +1,17 @@
 ﻿
+Imports mRemote3G.Connection
+Imports mRemote3G.Connection.PuttySession
+Imports mRemote3G.Images
+Imports mRemote3G.Root.PuttySessions
+Imports mRemote3G.Tree
 
 Namespace Config.Putty
     Public MustInherit Class Provider
+
 #Region "Public Methods"
+
         Private _rootTreeNode As TreeNode
+
         Public ReadOnly Property RootTreeNode As TreeNode
             Get
                 If _rootTreeNode Is Nothing Then _rootTreeNode = CreateRootTreeNode()
@@ -11,8 +19,9 @@ Namespace Config.Putty
             End Get
         End Property
 
-        Private _rootInfo As Root.PuttySessions.PuttySessionsInfo
-        Public ReadOnly Property RootInfo() As Root.PuttySessions.PuttySessionsInfo
+        Private _rootInfo As PuttySessionsInfo
+
+        Public ReadOnly Property RootInfo As PuttySessionsInfo
             Get
                 If _rootInfo Is Nothing Then _rootInfo = CreateRootInfo()
                 Return _rootInfo
@@ -20,11 +29,11 @@ Namespace Config.Putty
         End Property
 
         Public MustOverride Function GetSessionNames(Optional ByVal raw As Boolean = False) As String()
-        Public MustOverride Function GetSession(ByVal sessionName As String) As Connection.PuttySession.PuttyInfo
+        Public MustOverride Function GetSession(sessionName As String) As PuttyInfo
 
-        Public Overridable Function GetSessions() As Connection.PuttySession.PuttyInfo()
-            Dim sessionList As New List(Of Connection.PuttySession.PuttyInfo)
-            Dim sessionInfo As Connection.Info
+        Public Overridable Function GetSessions() As PuttyInfo()
+            Dim sessionList As New List(Of PuttyInfo)
+            Dim sessionInfo As Info
             For Each sessionName As String In GetSessionNames(True)
                 sessionInfo = GetSession(sessionName)
                 If sessionInfo Is Nothing OrElse String.IsNullOrEmpty(sessionInfo.Hostname) Then Continue For
@@ -34,28 +43,33 @@ Namespace Config.Putty
         End Function
 
         Public Overridable Sub StartWatcher()
-
         End Sub
 
         Public Overridable Sub StopWatcher()
-
         End Sub
+
 #End Region
 
 #Region "Public Events"
-        Public Event SessionChanged(ByVal sender As Object, ByVal e As SessionChangedEventArgs)
+
+        Public Event SessionChanged(sender As Object, e As SessionChangedEventArgs)
+
 #End Region
 
 #Region "Public Classes"
+
         Public Class SessionChangedEventArgs
             Inherits EventArgs
         End Class
+
 #End Region
 
 #Region "Protected Methods"
+
         Private Delegate Function CreateRootTreeNodeDelegate() As TreeNode
+
         Protected Overridable Function CreateRootTreeNode() As TreeNode
-            Dim treeView As TreeView = Tree.Node.TreeView
+            Dim treeView As TreeView = Node.TreeView
             If treeView Is Nothing Then Return Nothing
             If treeView.InvokeRequired Then
                 Return treeView.Invoke(New CreateRootTreeNodeDelegate(AddressOf CreateRootTreeNode))
@@ -67,14 +81,14 @@ Namespace Config.Putty
             newTreeNode.Name = _rootInfo.Name
             newTreeNode.Text = _rootInfo.Name
             newTreeNode.Tag = _rootInfo
-            newTreeNode.ImageIndex = Images.Enums.TreeImage.PuttySessions
-            newTreeNode.SelectedImageIndex = Images.Enums.TreeImage.PuttySessions
+            newTreeNode.ImageIndex = Enums.TreeImage.PuttySessions
+            newTreeNode.SelectedImageIndex = Enums.TreeImage.PuttySessions
 
             Return newTreeNode
         End Function
 
-        Protected Overridable Function CreateRootInfo() As Root.PuttySessions.PuttySessionsInfo
-            Dim newRootInfo As New Root.PuttySessions.PuttySessionsInfo
+        Protected Overridable Function CreateRootInfo() As PuttySessionsInfo
+            Dim newRootInfo As New PuttySessionsInfo
 
             If String.IsNullOrEmpty(My.Settings.PuttySavedSessionsName) Then
                 newRootInfo.Name = Language.Language.strPuttySavedSessionsRootName
@@ -91,9 +105,10 @@ Namespace Config.Putty
             Return newRootInfo
         End Function
 
-        Protected Overridable Sub OnSessionChanged(ByVal e As SessionChangedEventArgs)
+        Protected Overridable Sub OnSessionChanged(e As SessionChangedEventArgs)
             RaiseEvent SessionChanged(Me, New SessionChangedEventArgs())
         End Sub
+
 #End Region
     End Class
 End Namespace

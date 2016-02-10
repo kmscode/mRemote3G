@@ -8,12 +8,14 @@ Imports PSTaskDialog
 
 Namespace Forms.OptionsPages
     Public Class UpdatesPage
+
 #Region "Public Methods"
-        Public Overrides Property PageName() As String
+
+        Public Overrides Property PageName As String
             Get
                 Return Language.Language.strTabUpdates
             End Get
-            Set(value As String)
+            Set
             End Set
         End Property
 
@@ -64,7 +66,9 @@ Namespace Forms.OptionsPages
                 Case 31 ' Monthly
                     cboUpdateCheckFrequency.SelectedIndex = nMonthly
                 Case Else
-                    Dim nCustom As Integer = cboUpdateCheckFrequency.Items.Add(String.Format(Language.Language.strUpdateFrequencyCustom, My.Settings.CheckForUpdatesFrequencyDays))
+                    Dim nCustom As Integer =
+                            cboUpdateCheckFrequency.Items.Add(String.Format(Language.Language.strUpdateFrequencyCustom,
+                                                                            My.Settings.CheckForUpdatesFrequencyDays))
                     cboUpdateCheckFrequency.SelectedIndex = nCustom
             End Select
 
@@ -112,27 +116,34 @@ Namespace Forms.OptionsPages
             My.Settings.UpdateProxyAuthUser = txtProxyUsername.Text
             My.Settings.UpdateProxyAuthPass = Crypt.Encrypt(txtProxyPassword.Text, General.EncryptionKey)
         End Sub
+
 #End Region
 
 #Region "Private Fields"
+
         Private _appUpdate As App.Update
+
 #End Region
 
 #Region "Private Methods"
+
 #Region "Event Handlers"
-        Private Sub chkCheckForUpdatesOnStartup_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chkCheckForUpdatesOnStartup.CheckedChanged
+
+        Private Sub chkCheckForUpdatesOnStartup_CheckedChanged(sender As Object, e As EventArgs) _
+            Handles chkCheckForUpdatesOnStartup.CheckedChanged
             ' Temporary
             Return
             cboUpdateCheckFrequency.Enabled = chkCheckForUpdatesOnStartup.Checked
         End Sub
 
-        Private Sub btnUpdateCheckNow_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnUpdateCheckNow.Click
+        Private Sub btnUpdateCheckNow_Click(sender As Object, e As EventArgs) Handles btnUpdateCheckNow.Click
             ' Temporary
             Return
-           App.Runtime.Windows.Show(Type.Update)
+            Runtime.Windows.Show(Type.Update)
         End Sub
 
-        Private Sub chkUseProxyForAutomaticUpdates_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chkUseProxyForAutomaticUpdates.CheckedChanged
+        Private Sub chkUseProxyForAutomaticUpdates_CheckedChanged(sender As Object, e As EventArgs) _
+            Handles chkUseProxyForAutomaticUpdates.CheckedChanged
             ' Temporary
             Return
             pnlProxyBasic.Enabled = chkUseProxyForAutomaticUpdates.Checked
@@ -150,7 +161,7 @@ Namespace Forms.OptionsPages
             End If
         End Sub
 
-        Private Sub btnTestProxy_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnTestProxy.Click
+        Private Sub btnTestProxy_Click(sender As Object, e As EventArgs) Handles btnTestProxy.Click
             ' Temporary
             Return
             If _appUpdate IsNot Nothing Then
@@ -158,7 +169,8 @@ Namespace Forms.OptionsPages
             End If
 
             _appUpdate = New App.Update
-            _appUpdate.SetProxySettings(chkUseProxyForAutomaticUpdates.Checked, txtProxyAddress.Text, numProxyPort.Value, chkUseProxyAuthentication.Checked, txtProxyUsername.Text, txtProxyPassword.Text)
+            _appUpdate.SetProxySettings(chkUseProxyForAutomaticUpdates.Checked, txtProxyAddress.Text, numProxyPort.Value,
+                                        chkUseProxyAuthentication.Checked, txtProxyUsername.Text, txtProxyPassword.Text)
 
             btnTestProxy.Enabled = False
             btnTestProxy.Text = Language.Language.strOptionsProxyTesting
@@ -168,7 +180,8 @@ Namespace Forms.OptionsPages
             _appUpdate.GetUpdateInfoAsync()
         End Sub
 
-        Private Sub chkUseProxyAuthentication_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chkUseProxyAuthentication.CheckedChanged
+        Private Sub chkUseProxyAuthentication_CheckedChanged(sender As Object, e As EventArgs) _
+            Handles chkUseProxyAuthentication.CheckedChanged
             ' Temporary
             Return
             If chkUseProxyForAutomaticUpdates.Checked Then
@@ -179,9 +192,10 @@ Namespace Forms.OptionsPages
                 End If
             End If
         End Sub
+
 #End Region
 
-        Private Sub GetUpdateInfoCompleted(ByVal sender As Object, ByVal e As AsyncCompletedEventArgs)
+        Private Sub GetUpdateInfoCompleted(sender As Object, e As AsyncCompletedEventArgs)
             ' Temporary
             Return
             If InvokeRequired Then
@@ -199,11 +213,15 @@ Namespace Forms.OptionsPages
                 If e.Cancelled Then Return
                 If e.Error IsNot Nothing Then Throw e.Error
 
-                cTaskDialog.ShowCommandBox(Me, Application.ProductName, Language.Language.strProxyTestSucceeded, "", Language.Language.strButtonOK, False)
+                cTaskDialog.ShowCommandBox(Me, Application.ProductName, Language.Language.strProxyTestSucceeded, "",
+                                           Language.Language.strButtonOK, False)
             Catch ex As Exception
-                cTaskDialog.ShowCommandBox(Me, Application.ProductName, Language.Language.strProxyTestFailed, Misc.GetExceptionMessageRecursive(ex), "", "", "", Language.Language.strButtonOK, False, eSysIcons.Error, 0)
+                cTaskDialog.ShowCommandBox(Me, Application.ProductName, Language.Language.strProxyTestFailed,
+                                           Misc.GetExceptionMessageRecursive(ex), "", "", "",
+                                           Language.Language.strButtonOK, False, eSysIcons.Error, 0)
             End Try
         End Sub
+
 #End Region
     End Class
 End Namespace

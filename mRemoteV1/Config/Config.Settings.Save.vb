@@ -1,17 +1,25 @@
 Imports System.IO
+Imports System.Text
 Imports System.Xml
-Imports mRemote3G.My
-Imports mRemote3G.Tools
+Imports mRemote3G.App
+Imports mRemote3G.App.Info
 Imports mRemote3G.Forms
+Imports mRemote3G.Messages
+Imports mRemote3G.My
+Imports mRemote3G.Security
+Imports mRemote3G.Tools
 
 Namespace Config
+
     Namespace Settings
         Public Class Save
+
 #Region "Public Methods"
+
             Public Shared Sub Save()
                 Try
                     With frmMain
-                        Dim windowPlacement As New Tools.WindowPlacement(frmMain)
+                        Dim windowPlacement As New WindowPlacement(frmMain)
                         If .WindowState = FormWindowState.Minimized And windowPlacement.RestoreToMaximized Then
                             .Opacity = 0
                             .WindowState = FormWindowState.Maximized
@@ -47,7 +55,8 @@ Namespace Config
                         End If
                         MySettingsProperty.Settings.QuickyTBVisible = .tsQuickConnect.Visible
 
-                        MySettingsProperty.Settings.ConDefaultPassword = Security.Crypt.Encrypt(MySettingsProperty.Settings.ConDefaultPassword, App.Info.General.EncryptionKey)
+                        MySettingsProperty.Settings.ConDefaultPassword =
+                            Crypt.Encrypt(MySettingsProperty.Settings.ConDefaultPassword, General.EncryptionKey)
 
                         MySettingsProperty.Settings.Save()
                     End With
@@ -61,11 +70,11 @@ Namespace Config
 
             Public Shared Sub SavePanelsToXML()
                 Try
-                    If Directory.Exists(App.Info.Settings.SettingsPath) = False Then
-                        Directory.CreateDirectory(App.Info.Settings.SettingsPath)
+                    If Directory.Exists(Info.Settings.SettingsPath) = False Then
+                        Directory.CreateDirectory(Info.Settings.SettingsPath)
                     End If
 
-                    frmMain.pnlDock.SaveAsXml(App.Info.Settings.SettingsPath & "\" & App.Info.Settings.LayoutFileName)
+                    frmMain.pnlDock.SaveAsXml(Info.Settings.SettingsPath & "\" & Info.Settings.LayoutFileName)
                 Catch ex As Exception
                     App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SavePanelsToXML failed" & vbNewLine & vbNewLine & ex.ToString(), False)
                 End Try
@@ -73,18 +82,21 @@ Namespace Config
 
             Public Shared Sub SaveExternalAppsToXML()
                 Try
-                    If Directory.Exists(App.Info.Settings.SettingsPath) = False Then
-                        Directory.CreateDirectory(App.Info.Settings.SettingsPath)
+                    If Directory.Exists(Info.Settings.SettingsPath) = False Then
+                        Directory.CreateDirectory(Info.Settings.SettingsPath)
                     End If
 
-                    Dim xmlTextWriter As New XmlTextWriter(App.Info.Settings.SettingsPath & "\" & App.Info.Settings.ExtAppsFilesName, System.Text.Encoding.UTF8)
+                    Dim _
+                        xmlTextWriter As _
+                            New XmlTextWriter(Info.Settings.SettingsPath & "\" & Info.Settings.ExtAppsFilesName,
+                                              Encoding.UTF8)
                     xmlTextWriter.Formatting = Formatting.Indented
                     xmlTextWriter.Indentation = 4
 
                     xmlTextWriter.WriteStartDocument()
                     xmlTextWriter.WriteStartElement("Apps")
 
-                    For Each extA As Tools.ExternalTool In App.Runtime.ExternalTools
+                    For Each extA As ExternalTool In Runtime.ExternalTools
                         xmlTextWriter.WriteStartElement("App")
                         xmlTextWriter.WriteAttributeString("DisplayName", "", extA.DisplayName)
                         xmlTextWriter.WriteAttributeString("FileName", "", extA.FileName)
@@ -105,7 +117,9 @@ Namespace Config
 
             Private Sub New()
             End Sub
+
 #End Region
         End Class
     End Namespace
+
 End Namespace

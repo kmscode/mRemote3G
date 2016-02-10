@@ -466,14 +466,14 @@ Namespace App
             Public Shared Sub SetDefaultLayout()
                 frmMain.pnlDock.Visible = False
 
-                frmMain.pnlDock.DockLeftPortion = frmMain.pnlDock.Width * 0.2
-                frmMain.pnlDock.DockRightPortion = frmMain.pnlDock.Width * 0.2
-                frmMain.pnlDock.DockTopPortion = frmMain.pnlDock.Height * 0.25
-                frmMain.pnlDock.DockBottomPortion = frmMain.pnlDock.Height * 0.25
+                frmMain.pnlDock.DockLeftPortion = frmMain.pnlDock.Width*0.2
+                frmMain.pnlDock.DockRightPortion = frmMain.pnlDock.Width*0.2
+                frmMain.pnlDock.DockTopPortion = frmMain.pnlDock.Height*0.25
+                frmMain.pnlDock.DockBottomPortion = frmMain.pnlDock.Height*0.25
 
                 Windows.treePanel.Show(frmMain.pnlDock, DockState.DockLeft)
                 Windows.configPanel.Show(frmMain.pnlDock)
-                Windows.configPanel.DockTo(Windows.treePanel.Pane, DockStyle.Bottom, -1)
+                Windows.configPanel.DockTo(Windows.treePanel.Pane, DockStyle.Bottom, - 1)
 
                 Windows.screenshotForm.Hide()
 
@@ -533,7 +533,7 @@ Language.strLabelPortableEdition)
                     Dim osVersion As String = String.Empty
                     Dim servicePack As String = String.Empty
                     Try
-                        For Each managementObject As ManagementObject In
+                        For Each managementObject As ManagementObject In _
                             New ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem WHERE Primary=True").Get()
                             osVersion = managementObject.GetPropertyValue("Caption").Trim()
                             Dim servicePackNumber As Integer =
@@ -547,7 +547,7 @@ Language.strLabelPortableEdition)
 
                     Dim architecture As String = String.Empty
                     Try
-                        For Each managementObject As ManagementObject In
+                        For Each managementObject As ManagementObject In _
                             New ManagementObjectSearcher("SELECT * FROM Win32_Processor WHERE DeviceID='CPU0'").Get()
                             Dim addressWidth As Integer = managementObject.GetPropertyValue("AddressWidth")
                             architecture = String.Format("{0}-bit", addressWidth)
@@ -1448,7 +1448,7 @@ Language.strLabelPortableEdition)
 
                 newConnectionInfo.Protocol = protocol
                 newConnectionInfo.Hostname = uri.Host
-                If uri.Port = -1 Then
+                If uri.Port = - 1 Then
                     newConnectionInfo.SetDefaultPort()
                 Else
                     newConnectionInfo.Port = uri.Port
@@ -1773,7 +1773,7 @@ Language.strLabelPortableEdition)
                 Dim Prot As Protocol.Base = sender
 
                 If Prot.InterfaceControl.Info.Protocol = Protocols.RDP Then
-                    If ErrorMessage > -1 Then
+                    If ErrorMessage > - 1 Then
                         MessageCollector.AddMessage(MessageClass.WarningMsg,
                                                     String.Format(Language.Language.strConnectionRdpErrorDetail,
                                                                   ErrorMessage, RDP.FatalErrors.GetError(ErrorMessage)))

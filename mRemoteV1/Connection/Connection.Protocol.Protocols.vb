@@ -2,13 +2,14 @@
 Imports mRemote3G.Tools
 
 Namespace Connection
+
     Namespace Protocol
         Public Class Converter
-            Public Shared Function ProtocolToString(ByVal protocol As Protocols) As String
+            Public Shared Function ProtocolToString(protocol As Protocols) As String
                 Return protocol.ToString()
             End Function
 
-            Public Shared Function StringToProtocol(ByVal protocol As String) As Protocols
+            Public Shared Function StringToProtocol(protocol As String) As Protocols
                 Try
                     Return [Enum].Parse(GetType(Protocols), protocol, True)
                 Catch ex As Exception
@@ -43,4 +44,5 @@ Namespace Connection
             IntApp = 20
         End Enum
     End Namespace
+
 End Namespace

@@ -1,16 +1,15 @@
 ﻿
-
 Imports mRemote3G.App.Info
 Imports mRemote3G.Config
 Imports mRemote3G.Security
 
 Namespace Forms.OptionsPages
     Public Class ConnectionsPage
-        Public Overrides Property PageName() As String
+        Public Overrides Property PageName As String
             Get
                 Return Language.Language.strConnections
             End Get
-            Set(value As String)
+            Set
             End Set
         End Property
 
@@ -18,7 +17,8 @@ Namespace Forms.OptionsPages
             MyBase.ApplyLanguage()
 
             chkSingleClickOnConnectionOpensIt.Text = Language.Language.strSingleClickOnConnectionOpensIt
-            chkSingleClickOnOpenedConnectionSwitchesToIt.Text = Language.Language.strSingleClickOnOpenConnectionSwitchesToIt
+            chkSingleClickOnOpenedConnectionSwitchesToIt.Text =
+                Language.Language.strSingleClickOnOpenConnectionSwitchesToIt
             chkHostnameLikeDisplayName.Text = Language.Language.strSetHostnameLikeDisplayName
 
             lblRdpReconnectionCount.Text = Language.Language.strRdpReconnectCount
@@ -89,7 +89,7 @@ Namespace Forms.OptionsPages
 
             My.Settings.AutoSaveEveryMinutes = numAutoSave.Value
             If My.Settings.AutoSaveEveryMinutes > 0 Then
-                frmMain.tmrAutoSave.Interval = My.Settings.AutoSaveEveryMinutes * 60000
+                frmMain.tmrAutoSave.Interval = My.Settings.AutoSaveEveryMinutes*60000
                 frmMain.tmrAutoSave.Enabled = True
             Else
                 frmMain.tmrAutoSave.Enabled = False
@@ -114,7 +114,8 @@ Namespace Forms.OptionsPages
             If radCloseWarnNever.Checked Then My.Settings.ConfirmCloseConnection = ConfirmClose.Never
         End Sub
 
-        Private Sub radCredentialsCustom_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles radCredentialsCustom.CheckedChanged
+        Private Sub radCredentialsCustom_CheckedChanged(sender As Object, e As EventArgs) _
+            Handles radCredentialsCustom.CheckedChanged
             lblCredentialsUsername.Enabled = radCredentialsCustom.Checked
             lblCredentialsPassword.Enabled = radCredentialsCustom.Checked
             lblCredentialsDomain.Enabled = radCredentialsCustom.Checked
