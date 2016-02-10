@@ -500,7 +500,7 @@ Namespace App
 
                 Dim logFilePath As String
 #If Not PORTABLE Then
-                logFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                logFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
                                            Application.ProductName)
 #Else
                 logFilePath = Application.StartupPath
