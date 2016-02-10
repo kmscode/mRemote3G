@@ -298,7 +298,7 @@ Namespace UI
 
                     Return nTab
                 Catch ex As Exception
-                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "AddConnectionTab (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "AddConnectionTab (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
                 End Try
 
                 Return Nothing
@@ -377,7 +377,7 @@ Namespace UI
                 If Not frmMain.IsClosing And (
                         (MySettingsProperty.Settings.ConfirmCloseConnection = ConfirmClose.All And TabController.TabPages.Count > 0) Or
                         (MySettingsProperty.Settings.ConfirmCloseConnection = ConfirmClose.Multiple And TabController.TabPages.Count > 1)) Then
-                    Dim result As DialogResult = cTaskDialog.MessageBox(Me, My.Application.Info.ProductName, String.Format(Language.Language.strConfirmCloseConnectionPanelMainInstruction, Me.Text), "", "", "", Language.Language.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.YesNo, eSysIcons.Question, Nothing)
+                    Dim result As DialogResult = cTaskDialog.MessageBox(Me, Application.Info.ProductName, String.Format(Language.Language.strConfirmCloseConnectionPanelMainInstruction, Me.Text), "", "", "", Language.Language.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.YesNo, eSysIcons.Question, Nothing)
                     If cTaskDialog.VerificationChecked Then
                         MySettingsProperty.Settings.ConfirmCloseConnection =
                             MySettingsProperty.Settings.ConfirmCloseConnection - 1
@@ -396,7 +396,7 @@ Namespace UI
                         End If
                     Next
                 Catch ex As Exception
-                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "UI.Window.Connection.Connection_FormClosing() failed" & vbNewLine & ex.ToString(), True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "UI.Window.Connection.Connection_FormClosing() failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -427,7 +427,7 @@ Namespace UI
             Private Sub CloseConnectionTab()
                 Dim selectedTab As TabPage = TabController.SelectedTab
                 If MySettingsProperty.Settings.ConfirmCloseConnection = ConfirmClose.All Then
-                    Dim result As DialogResult = cTaskDialog.MessageBox(Me, My.Application.Info.ProductName, String.Format(Language.Language.strConfirmCloseConnectionMainInstruction, selectedTab.Title), "", "", "", Language.Language.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.YesNo, eSysIcons.Question, Nothing)
+                    Dim result As DialogResult = cTaskDialog.MessageBox(Me, Application.Info.ProductName, String.Format(Language.Language.strConfirmCloseConnectionMainInstruction, selectedTab.Title), "", "", "", Language.Language.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.YesNo, eSysIcons.Question, Nothing)
                     If cTaskDialog.VerificationChecked Then
                         MySettingsProperty.Settings.ConfirmCloseConnection =
                             MySettingsProperty.Settings.ConfirmCloseConnection - 1
@@ -445,7 +445,7 @@ Namespace UI
                         CloseTab(selectedTab)
                     End If
                 Catch ex As Exception
-                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "UI.Window.Connection.CloseConnectionTab() failed" & vbNewLine & ex.ToString(), True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "UI.Window.Connection.CloseConnectionTab() failed" & vbNewLine & ex.ToString(), True)
                 End Try
 
                 UpdateSelectedConnection()
@@ -544,7 +544,7 @@ Namespace UI
 
                     AddExternalApps()
                 Catch ex As Exception
-                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ShowHideMenuButtons (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "ShowHideMenuButtons (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -632,7 +632,7 @@ Namespace UI
                         End If
                     End If
                 Catch ex As Exception
-                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ToggleSmartSize (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "ToggleSmartSize (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -650,7 +650,7 @@ Namespace UI
                         End If
                     End If
                 Catch ex As Exception
-                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "TransferFile (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "TransferFile (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -668,7 +668,7 @@ Namespace UI
                     Runtime.Windows.sshtransferForm.Password = conI.Password
                     Runtime.Windows.sshtransferForm.Port = conI.Port
                 Catch ex As Exception
-                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SSHTransferFile (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "SSHTransferFile (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -678,7 +678,7 @@ Namespace UI
                     Dim vnc As VNC = IC.Protocol
                     vnc.StartFileTransfer()
                 Catch ex As Exception
-                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "VNCTransferFile (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "VNCTransferFile (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -697,7 +697,7 @@ Namespace UI
                         End If
                     End If
                 Catch ex As Exception
-                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ToggleViewOnly (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "ToggleViewOnly (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -714,7 +714,7 @@ Namespace UI
                         End If
                     End If
                 Catch ex As Exception
-                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "StartChat (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "StartChat (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -731,7 +731,7 @@ Namespace UI
                         End If
                     End If
                 Catch ex As Exception
-                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "RefreshScreen (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "RefreshScreen (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -748,7 +748,7 @@ Namespace UI
                         End If
                     End If
                 Catch ex As Exception
-                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SendSpecialKeys (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "SendSpecialKeys (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -765,7 +765,7 @@ Namespace UI
                         End If
                     End If
                 Catch ex As Exception
-                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ToggleFullscreen (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "ToggleFullscreen (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -783,7 +783,7 @@ Namespace UI
                         End If
                     End If
                 Catch ex As Exception
-                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ShowPuttySettingsDialog (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "ShowPuttySettingsDialog (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -812,7 +812,7 @@ Namespace UI
                         cmenTabExternalApps.DropDownItems.Add(nItem)
                     Next
                 Catch ex As Exception
-                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "cMenTreeTools_DropDownOpening failed (UI.Window.Tree)" & vbNewLine & ex.ToString(), True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "cMenTreeTools_DropDownOpening failed (UI.Window.Tree)" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -827,7 +827,7 @@ Namespace UI
                     End If
 
                 Catch ex As Exception
-                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "cmenTabExternalAppsEntry_Click failed (UI.Window.Tree)" & vbNewLine & ex.ToString(), True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "cmenTabExternalAppsEntry_Click failed (UI.Window.Tree)" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -841,7 +841,7 @@ Namespace UI
                         End If
                     End If
                 Catch ex As Exception
-                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "CloseTabMenu (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "CloseTabMenu (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -856,7 +856,7 @@ Namespace UI
                         End If
                     End If
                 Catch ex As Exception
-                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "DuplicateTab (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "DuplicateTab (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -873,7 +873,7 @@ Namespace UI
                         End If
                     End If
                 Catch ex As Exception
-                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Reconnect (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "Reconnect (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -886,7 +886,7 @@ Namespace UI
                         Me.TabController.SelectedTab.Title = nTitle.Replace("&", "&&")
                     End If
                 Catch ex As Exception
-                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "RenameTab (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "RenameTab (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -914,7 +914,7 @@ Namespace UI
                     Catch comEx As COMException
                         Me.TabController.Invoke(s, TabToBeClosed)
                     Catch ex As Exception
-                        App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't close tab" & vbNewLine & ex.ToString(), True)
+                        Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "Couldn't close tab" & vbNewLine & ex.ToString(), True)
                     End Try
                 Else
                     Try
@@ -923,7 +923,7 @@ Namespace UI
                     Catch comEx As COMException
                         CloseTab(TabToBeClosed)
                     Catch ex As Exception
-                        App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't close tab" & vbNewLine & ex.ToString(), True)
+                        Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "Couldn't close tab" & vbNewLine & ex.ToString(), True)
                     End Try
 
                     If Me.TabController.TabPages.Count = 0 Then
@@ -982,7 +982,7 @@ Namespace UI
                             cmenTab.Show(TabController, e.Location)
                     End Select
                 Catch ex As Exception
-                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "TabController_MouseUp (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "TabController_MouseUp (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -995,7 +995,7 @@ Namespace UI
                         End If
                     End If
                 Catch ex As Exception
-                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "FocusIC (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "FocusIC (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
@@ -1011,7 +1011,7 @@ Namespace UI
                         End If
                     End If
                 Catch ex As Exception
-                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "RefreshIC (UI.Window.Connection) failed" & vbNewLine & ex.ToString(), True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "RefreshIC (UI.Window.Connection) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
