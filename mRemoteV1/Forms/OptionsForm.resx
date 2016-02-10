@@ -208,7 +208,7 @@
     <value>PageListView</value>
   </data>
   <data name="&gt;&gt;PageListView.Type" xml:space="preserve">
-    <value>mRemoteNG.Controls.ListView, mRemoteNG, Version=1.72.5056.42837, Culture=neutral, PublicKeyToken=null</value>
+    <value>mRemote3G.Controls.ListView, mRemoteNG, Version=1.72.5056.42837, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;PageListView.Parent" xml:space="preserve">
     <value>$this</value>

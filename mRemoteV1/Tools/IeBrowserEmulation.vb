@@ -1,23 +1,31 @@
 ﻿Imports System.IO
+Imports System.Security.AccessControl
 Imports Microsoft.Win32
-Imports mRemoteNG.App.Runtime
+Imports mRemote3G.App
 
 Namespace Tools
     Public Class IeBrowserEmulation
-
         ' found this here:
         ' http://www.neowin.net/forum/topic/1077469-vbnet-webbrowser-control-does-not-load-javascript/#comment-596755046
 
         Private Shared Sub SetBrowserFeatureControlKey(feature As String, appName As String, value As UInteger)
             If Environment.Is64BitOperatingSystem Then
 
-                Using key As RegistryKey = Registry.CurrentUser.CreateSubKey([String].Concat("Software\Wow6432Node\Microsoft\Internet Explorer\Main\FeatureControl\", feature), RegistryKeyPermissionCheck.ReadWriteSubTree)
+                Using _
+                    key As RegistryKey =
+                        Registry.CurrentUser.CreateSubKey(
+                            [String].Concat("Software\Wow6432Node\Microsoft\Internet Explorer\Main\FeatureControl\",
+                                            feature), RegistryKeyPermissionCheck.ReadWriteSubTree)
                     key.SetValue(appName, value, RegistryValueKind.DWord)
                 End Using
             End If
 
 
-            Using key As RegistryKey = Registry.CurrentUser.CreateSubKey([String].Concat("Software\Microsoft\Internet Explorer\Main\FeatureControl\", feature), RegistryKeyPermissionCheck.ReadWriteSubTree)
+            Using _
+                key As RegistryKey =
+                    Registry.CurrentUser.CreateSubKey(
+                        [String].Concat("Software\Microsoft\Internet Explorer\Main\FeatureControl\", feature),
+                        RegistryKeyPermissionCheck.ReadWriteSubTree)
                 key.SetValue(appName, value, RegistryValueKind.DWord)
             End Using
         End Sub
@@ -25,13 +33,21 @@ Namespace Tools
         Private Shared Sub DeleteBrowserFeatureControlKey(feature As String, appName As String)
             If Environment.Is64BitOperatingSystem Then
 
-                Using key As RegistryKey = Registry.CurrentUser.OpenSubKey([String].Concat("Software\Wow6432Node\Microsoft\Internet Explorer\Main\FeatureControl\", feature), RegistryKeyPermissionCheck.ReadWriteSubTree)
+                Using _
+                    key As RegistryKey =
+                        Registry.CurrentUser.OpenSubKey(
+                            [String].Concat("Software\Wow6432Node\Microsoft\Internet Explorer\Main\FeatureControl\",
+                                            feature), RegistryKeyPermissionCheck.ReadWriteSubTree)
                     key.DeleteValue(appName)
                 End Using
             End If
 
 
-            Using key As RegistryKey = Registry.CurrentUser.CreateSubKey([String].Concat("Software\Microsoft\Internet Explorer\Main\FeatureControl\", feature), RegistryKeyPermissionCheck.ReadWriteSubTree)
+            Using _
+                key As RegistryKey =
+                    Registry.CurrentUser.CreateSubKey(
+                        [String].Concat("Software\Microsoft\Internet Explorer\Main\FeatureControl\", feature),
+                        RegistryKeyPermissionCheck.ReadWriteSubTree)
                 key.DeleteValue(appName)
             End Using
         End Sub
@@ -40,10 +56,12 @@ Namespace Tools
             ' http://msdn.microsoft.com/en-us/library/ee330720(v=vs.85).aspx
 
             ' FeatureControl settings are per-process
-            Dim fileName As String = System.IO.Path.GetFileName(Process.GetCurrentProcess().MainModule.FileName)
+            Dim fileName As String = Path.GetFileName(Process.GetCurrentProcess().MainModule.FileName)
 
             ' make the control is not running inside Visual Studio Designer
-            If [String].Compare(fileName, "devenv.exe", True) = 0 OrElse [String].Compare(fileName, "XDesProc.exe", True) = 0 Then
+            If _
+                [String].Compare(fileName, "devenv.exe", True) = 0 OrElse
+                [String].Compare(fileName, "XDesProc.exe", True) = 0 Then
                 Return
             End If
 
@@ -78,10 +96,12 @@ Namespace Tools
             ' http://msdn.microsoft.com/en-us/library/ee330720(v=vs.85).aspx
 
             ' FeatureControl settings are per-process
-            Dim fileName As String = System.IO.Path.GetFileName(Process.GetCurrentProcess().MainModule.FileName)
+            Dim fileName As String = Path.GetFileName(Process.GetCurrentProcess().MainModule.FileName)
 
             ' make the control is not running inside Visual Studio Designer
-            If [String].Compare(fileName, "devenv.exe", True) = 0 OrElse [String].Compare(fileName, "XDesProc.exe", True) = 0 Then
+            If _
+                [String].Compare(fileName, "devenv.exe", True) = 0 OrElse
+                [String].Compare(fileName, "XDesProc.exe", True) = 0 Then
                 Return
             End If
 
@@ -115,9 +135,12 @@ Namespace Tools
         Private Shared Function GetBrowserEmulationMode() As UInt32
             ' https://msdn.microsoft.com/en-us/library/ee330730%28v=vs.85%29.aspx
 
-            Dim browserVersion As Integer = 9 ' default to IE9.
+            Dim browserVersion = 9 ' default to IE9.
 
-            Using ieKey As RegistryKey = Registry.LocalMachine.OpenSubKey("SOFTWARE\Microsoft\Internet Explorer", RegistryKeyPermissionCheck.ReadSubTree, System.Security.AccessControl.RegistryRights.QueryValues)
+            Using _
+                ieKey As RegistryKey =
+                    Registry.LocalMachine.OpenSubKey("SOFTWARE\Microsoft\Internet Explorer",
+                                                     RegistryKeyPermissionCheck.ReadSubTree, RegistryRights.QueryValues)
                 Dim version As Object = ieKey.GetValue("svcVersion")
                 If Nothing = version Then
                     version = ieKey.GetValue("Version")
@@ -169,7 +192,7 @@ Namespace Tools
             Try
                 SetBrowserFeatureControl()
             Catch ex As Exception
-                MessageCollector.AddExceptionMessage("IeBrowserEmulation.Register() failed.", ex, , True)
+                Runtime.MessageCollector.AddExceptionMessage("IeBrowserEmulation.Register() failed.", ex, , True)
             End Try
         End Sub
 

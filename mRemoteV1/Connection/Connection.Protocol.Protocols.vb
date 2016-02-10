@@ -1,13 +1,15 @@
-Imports mRemoteNG.Tools.LocalizedAttributes
+
+Imports mRemote3G.Tools
 
 Namespace Connection
+
     Namespace Protocol
         Public Class Converter
-            Public Shared Function ProtocolToString(ByVal protocol As Protocols) As String
+            Public Shared Function ProtocolToString(protocol As Protocols) As String
                 Return protocol.ToString()
             End Function
 
-            Public Shared Function StringToProtocol(ByVal protocol As String) As Protocols
+            Public Shared Function StringToProtocol(protocol As String) As Protocols
                 Try
                     Return [Enum].Parse(GetType(Protocols), protocol, True)
                 Catch ex As Exception
@@ -20,26 +22,27 @@ Namespace Connection
         End Class
 
         Public Enum Protocols
-            <LocalizedDescription("strRDP")>
+            <LocalizedAttributes.LocalizedDescription("strRDP")>
             RDP = 0
-            <LocalizedDescription("strVnc")>
+            <LocalizedAttributes.LocalizedDescription("strVnc")>
             VNC = 1
-            <LocalizedDescription("strSsh1")>
+            <LocalizedAttributes.LocalizedDescription("strSsh1")>
             SSH1 = 2
-            <LocalizedDescription("strSsh2")>
+            <LocalizedAttributes.LocalizedDescription("strSsh2")>
             SSH2 = 3
-            <LocalizedDescription("strTelnet")>
+            <LocalizedAttributes.LocalizedDescription("strTelnet")>
             Telnet = 4
-            <LocalizedDescription("strRlogin")>
+            <LocalizedAttributes.LocalizedDescription("strRlogin")>
             Rlogin = 5
-            <LocalizedDescription("strRAW")>
+            <LocalizedAttributes.LocalizedDescription("strRAW")>
             RAW = 6
-            <LocalizedDescription("strHttp")>
+            <LocalizedAttributes.LocalizedDescription("strHttp")>
             HTTP = 7
-            <LocalizedDescription("strHttps")>
+            <LocalizedAttributes.LocalizedDescription("strHttps")>
             HTTPS = 8
-            <LocalizedDescription("strExtApp")>
+            <LocalizedAttributes.LocalizedDescription("strExtApp")>
             IntApp = 20
         End Enum
     End Namespace
+
 End Namespace
