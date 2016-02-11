@@ -44,192 +44,191 @@ Namespace UI
             Public WithEvents TabController As TabControl
 
             Private Sub InitializeComponent()
-                Me.components = New System.ComponentModel.Container()
+                components = New System.ComponentModel.Container()
                 Dim resources = New ComponentResourceManager(GetType(Connection))
-                Me.TabController = New TabControl()
-                Me.cmenTab = New ContextMenuStrip(Me.components)
-                Me.cmenTabFullscreen = New ToolStripMenuItem()
-                Me.cmenTabSmartSize = New ToolStripMenuItem()
-                Me.cmenTabViewOnly = New ToolStripMenuItem()
-                Me.ToolStripSeparator1 = New ToolStripSeparator()
-                Me.cmenTabScreenshot = New ToolStripMenuItem()
-                Me.cmenTabStartChat = New ToolStripMenuItem()
-                Me.cmenTabTransferFile = New ToolStripMenuItem()
-                Me.cmenTabRefreshScreen = New ToolStripMenuItem()
-                Me.cmenTabSendSpecialKeys = New ToolStripMenuItem()
-                Me.cmenTabSendSpecialKeysCtrlAltDel = New ToolStripMenuItem()
-                Me.cmenTabSendSpecialKeysCtrlEsc = New ToolStripMenuItem()
-                Me.cmenTabPuttySettings = New ToolStripMenuItem()
-                Me.cmenTabExternalApps = New ToolStripMenuItem()
-                Me.cmenTabSep1 = New ToolStripSeparator()
-                Me.cmenTabRenameTab = New ToolStripMenuItem()
-                Me.cmenTabDuplicateTab = New ToolStripMenuItem()
-                Me.cmenTabReconnect = New ToolStripMenuItem()
-                Me.cmenTabDisconnect = New ToolStripMenuItem()
-                Me.cmenTab.SuspendLayout()
-                Me.SuspendLayout()
+                TabController = New TabControl()
+                cmenTab = New ContextMenuStrip(components)
+                cmenTabFullscreen = New ToolStripMenuItem()
+                cmenTabSmartSize = New ToolStripMenuItem()
+                cmenTabViewOnly = New ToolStripMenuItem()
+                ToolStripSeparator1 = New ToolStripSeparator()
+                cmenTabScreenshot = New ToolStripMenuItem()
+                cmenTabStartChat = New ToolStripMenuItem()
+                cmenTabTransferFile = New ToolStripMenuItem()
+                cmenTabRefreshScreen = New ToolStripMenuItem()
+                cmenTabSendSpecialKeys = New ToolStripMenuItem()
+                cmenTabSendSpecialKeysCtrlAltDel = New ToolStripMenuItem()
+                cmenTabSendSpecialKeysCtrlEsc = New ToolStripMenuItem()
+                cmenTabPuttySettings = New ToolStripMenuItem()
+                cmenTabExternalApps = New ToolStripMenuItem()
+                cmenTabSep1 = New ToolStripSeparator()
+                cmenTabRenameTab = New ToolStripMenuItem()
+                cmenTabDuplicateTab = New ToolStripMenuItem()
+                cmenTabReconnect = New ToolStripMenuItem()
+                cmenTabDisconnect = New ToolStripMenuItem()
+                cmenTab.SuspendLayout()
+                SuspendLayout()
                 '
                 'TabController
                 '
-                Me.TabController.Anchor = CType((((AnchorStyles.Top Or AnchorStyles.Bottom) _
-                                                  Or AnchorStyles.Left) _
-                                                 Or AnchorStyles.Right),
-                                                AnchorStyles)
-                Me.TabController.Appearance = TabControl.VisualAppearance.MultiDocument
-                Me.TabController.Cursor = Cursors.Hand
-                Me.TabController.DragFromControl = False
-                Me.TabController.IDEPixelArea = False
-                Me.TabController.Location = New Point(0, -1)
-                Me.TabController.Name = "TabController"
-                Me.TabController.Size = New Size(632, 454)
-                Me.TabController.TabIndex = 0
+                TabController.Anchor = (((AnchorStyles.Top Or AnchorStyles.Bottom) _
+                                         Or AnchorStyles.Left) _
+                                        Or AnchorStyles.Right)
+                TabController.Appearance = TabControl.VisualAppearance.MultiDocument
+                TabController.Cursor = Cursors.Hand
+                TabController.DragFromControl = False
+                TabController.IDEPixelArea = False
+                TabController.Location = New Point(0, -1)
+                TabController.Name = "TabController"
+                TabController.Size = New Size(632, 454)
+                TabController.TabIndex = 0
                 '
                 'cmenTab
                 '
-                Me.cmenTab.ImageScalingSize = New Size(20, 20)
-                Me.cmenTab.Items.AddRange(New ToolStripItem() _
-                                             {Me.cmenTabFullscreen, Me.cmenTabSmartSize, Me.cmenTabViewOnly,
-                                              Me.ToolStripSeparator1, Me.cmenTabScreenshot, Me.cmenTabStartChat,
-                                              Me.cmenTabTransferFile, Me.cmenTabRefreshScreen, Me.cmenTabSendSpecialKeys,
-                                              Me.cmenTabPuttySettings, Me.cmenTabExternalApps, Me.cmenTabSep1,
-                                              Me.cmenTabRenameTab, Me.cmenTabDuplicateTab, Me.cmenTabReconnect,
-                                              Me.cmenTabDisconnect})
-                Me.cmenTab.Name = "cmenTab"
-                Me.cmenTab.RenderMode = ToolStripRenderMode.Professional
-                Me.cmenTab.Size = New Size(245, 380)
+                cmenTab.ImageScalingSize = New Size(20, 20)
+                cmenTab.Items.AddRange(New ToolStripItem() _
+                                             {cmenTabFullscreen, cmenTabSmartSize, cmenTabViewOnly,
+                                              ToolStripSeparator1, cmenTabScreenshot, cmenTabStartChat,
+                                              cmenTabTransferFile, cmenTabRefreshScreen, cmenTabSendSpecialKeys,
+                                              cmenTabPuttySettings, cmenTabExternalApps, cmenTabSep1,
+                                              cmenTabRenameTab, cmenTabDuplicateTab, cmenTabReconnect,
+                                              cmenTabDisconnect})
+                cmenTab.Name = "cmenTab"
+                cmenTab.RenderMode = ToolStripRenderMode.Professional
+                cmenTab.Size = New Size(245, 380)
                 '
                 'cmenTabFullscreen
                 '
-                Me.cmenTabFullscreen.Image = My.Resources.Resources.arrow_out
-                Me.cmenTabFullscreen.Name = "cmenTabFullscreen"
-                Me.cmenTabFullscreen.Size = New Size(244, 26)
-                Me.cmenTabFullscreen.Text = "Fullscreen (RDP)"
+                cmenTabFullscreen.Image = My.Resources.Resources.arrow_out
+                cmenTabFullscreen.Name = "cmenTabFullscreen"
+                cmenTabFullscreen.Size = New Size(244, 26)
+                cmenTabFullscreen.Text = "Fullscreen (RDP)"
                 '
                 'cmenTabSmartSize
                 '
-                Me.cmenTabSmartSize.Image = My.Resources.Resources.SmartSize
-                Me.cmenTabSmartSize.Name = "cmenTabSmartSize"
-                Me.cmenTabSmartSize.Size = New Size(244, 26)
-                Me.cmenTabSmartSize.Text = "SmartSize (RDP/VNC)"
+                cmenTabSmartSize.Image = My.Resources.Resources.SmartSize
+                cmenTabSmartSize.Name = "cmenTabSmartSize"
+                cmenTabSmartSize.Size = New Size(244, 26)
+                cmenTabSmartSize.Text = "SmartSize (RDP/VNC)"
                 '
                 'cmenTabViewOnly
                 '
-                Me.cmenTabViewOnly.Name = "cmenTabViewOnly"
-                Me.cmenTabViewOnly.Size = New Size(244, 26)
-                Me.cmenTabViewOnly.Text = "View Only (VNC)"
+                cmenTabViewOnly.Name = "cmenTabViewOnly"
+                cmenTabViewOnly.Size = New Size(244, 26)
+                cmenTabViewOnly.Text = "View Only (VNC)"
                 '
                 'ToolStripSeparator1
                 '
-                Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-                Me.ToolStripSeparator1.Size = New Size(241, 6)
+                ToolStripSeparator1.Name = "ToolStripSeparator1"
+                ToolStripSeparator1.Size = New Size(241, 6)
                 '
                 'cmenTabScreenshot
                 '
-                Me.cmenTabScreenshot.Image = My.Resources.Resources.Screenshot_Add
-                Me.cmenTabScreenshot.Name = "cmenTabScreenshot"
-                Me.cmenTabScreenshot.Size = New Size(244, 26)
-                Me.cmenTabScreenshot.Text = "Screenshot"
+                cmenTabScreenshot.Image = My.Resources.Resources.Screenshot_Add
+                cmenTabScreenshot.Name = "cmenTabScreenshot"
+                cmenTabScreenshot.Size = New Size(244, 26)
+                cmenTabScreenshot.Text = "Screenshot"
                 '
                 'cmenTabStartChat
                 '
-                Me.cmenTabStartChat.Image = My.Resources.Resources.Chat
-                Me.cmenTabStartChat.Name = "cmenTabStartChat"
-                Me.cmenTabStartChat.Size = New Size(244, 26)
-                Me.cmenTabStartChat.Text = "Start Chat (VNC)"
-                Me.cmenTabStartChat.Visible = False
+                cmenTabStartChat.Image = My.Resources.Resources.Chat
+                cmenTabStartChat.Name = "cmenTabStartChat"
+                cmenTabStartChat.Size = New Size(244, 26)
+                cmenTabStartChat.Text = "Start Chat (VNC)"
+                cmenTabStartChat.Visible = False
                 '
                 'cmenTabTransferFile
                 '
-                Me.cmenTabTransferFile.Image = My.Resources.Resources.SSHTransfer
-                Me.cmenTabTransferFile.Name = "cmenTabTransferFile"
-                Me.cmenTabTransferFile.Size = New Size(244, 26)
-                Me.cmenTabTransferFile.Text = "Transfer File (SSH)"
+                cmenTabTransferFile.Image = My.Resources.Resources.SSHTransfer
+                cmenTabTransferFile.Name = "cmenTabTransferFile"
+                cmenTabTransferFile.Size = New Size(244, 26)
+                cmenTabTransferFile.Text = "Transfer File (SSH)"
                 '
                 'cmenTabRefreshScreen
                 '
-                Me.cmenTabRefreshScreen.Image = My.Resources.Resources.Refresh
-                Me.cmenTabRefreshScreen.Name = "cmenTabRefreshScreen"
-                Me.cmenTabRefreshScreen.Size = New Size(244, 26)
-                Me.cmenTabRefreshScreen.Text = "Refresh Screen (VNC)"
+                cmenTabRefreshScreen.Image = My.Resources.Resources.Refresh
+                cmenTabRefreshScreen.Name = "cmenTabRefreshScreen"
+                cmenTabRefreshScreen.Size = New Size(244, 26)
+                cmenTabRefreshScreen.Text = "Refresh Screen (VNC)"
                 '
                 'cmenTabSendSpecialKeys
                 '
-                Me.cmenTabSendSpecialKeys.DropDownItems.AddRange(New ToolStripItem() _
-                                                                    {Me.cmenTabSendSpecialKeysCtrlAltDel,
-                                                                     Me.cmenTabSendSpecialKeysCtrlEsc})
-                Me.cmenTabSendSpecialKeys.Image = My.Resources.Resources.Keyboard
-                Me.cmenTabSendSpecialKeys.Name = "cmenTabSendSpecialKeys"
-                Me.cmenTabSendSpecialKeys.Size = New Size(244, 26)
-                Me.cmenTabSendSpecialKeys.Text = "Send special Keys (VNC)"
+                cmenTabSendSpecialKeys.DropDownItems.AddRange(New ToolStripItem() _
+                                                                    {cmenTabSendSpecialKeysCtrlAltDel,
+                                                                     cmenTabSendSpecialKeysCtrlEsc})
+                cmenTabSendSpecialKeys.Image = My.Resources.Resources.Keyboard
+                cmenTabSendSpecialKeys.Name = "cmenTabSendSpecialKeys"
+                cmenTabSendSpecialKeys.Size = New Size(244, 26)
+                cmenTabSendSpecialKeys.Text = "Send special Keys (VNC)"
                 '
                 'cmenTabSendSpecialKeysCtrlAltDel
                 '
-                Me.cmenTabSendSpecialKeysCtrlAltDel.Name = "cmenTabSendSpecialKeysCtrlAltDel"
-                Me.cmenTabSendSpecialKeysCtrlAltDel.Size = New Size(169, 26)
-                Me.cmenTabSendSpecialKeysCtrlAltDel.Text = "Ctrl+Alt+Del"
+                cmenTabSendSpecialKeysCtrlAltDel.Name = "cmenTabSendSpecialKeysCtrlAltDel"
+                cmenTabSendSpecialKeysCtrlAltDel.Size = New Size(169, 26)
+                cmenTabSendSpecialKeysCtrlAltDel.Text = "Ctrl+Alt+Del"
                 '
                 'cmenTabSendSpecialKeysCtrlEsc
                 '
-                Me.cmenTabSendSpecialKeysCtrlEsc.Name = "cmenTabSendSpecialKeysCtrlEsc"
-                Me.cmenTabSendSpecialKeysCtrlEsc.Size = New Size(169, 26)
-                Me.cmenTabSendSpecialKeysCtrlEsc.Text = "Ctrl+Esc"
+                cmenTabSendSpecialKeysCtrlEsc.Name = "cmenTabSendSpecialKeysCtrlEsc"
+                cmenTabSendSpecialKeysCtrlEsc.Size = New Size(169, 26)
+                cmenTabSendSpecialKeysCtrlEsc.Text = "Ctrl+Esc"
                 '
                 'cmenTabPuttySettings
                 '
-                Me.cmenTabPuttySettings.Name = "cmenTabPuttySettings"
-                Me.cmenTabPuttySettings.Size = New Size(244, 26)
-                Me.cmenTabPuttySettings.Text = "PuTTY Settings"
+                cmenTabPuttySettings.Name = "cmenTabPuttySettings"
+                cmenTabPuttySettings.Size = New Size(244, 26)
+                cmenTabPuttySettings.Text = "PuTTY Settings"
                 '
                 'cmenTabExternalApps
                 '
-                Me.cmenTabExternalApps.Image = CType(resources.GetObject("cmenTabExternalApps.Image"), Image)
-                Me.cmenTabExternalApps.Name = "cmenTabExternalApps"
-                Me.cmenTabExternalApps.Size = New Size(244, 26)
-                Me.cmenTabExternalApps.Text = "External Applications"
+                cmenTabExternalApps.Image = CType(resources.GetObject("cmenTabExternalApps.Image"), Image)
+                cmenTabExternalApps.Name = "cmenTabExternalApps"
+                cmenTabExternalApps.Size = New Size(244, 26)
+                cmenTabExternalApps.Text = "External Applications"
                 '
                 'cmenTabSep1
                 '
-                Me.cmenTabSep1.Name = "cmenTabSep1"
-                Me.cmenTabSep1.Size = New Size(241, 6)
+                cmenTabSep1.Name = "cmenTabSep1"
+                cmenTabSep1.Size = New Size(241, 6)
                 '
                 'cmenTabRenameTab
                 '
-                Me.cmenTabRenameTab.Image = My.Resources.Resources.Rename
-                Me.cmenTabRenameTab.Name = "cmenTabRenameTab"
-                Me.cmenTabRenameTab.Size = New Size(244, 26)
-                Me.cmenTabRenameTab.Text = "Rename Tab"
+                cmenTabRenameTab.Image = My.Resources.Resources.Rename
+                cmenTabRenameTab.Name = "cmenTabRenameTab"
+                cmenTabRenameTab.Size = New Size(244, 26)
+                cmenTabRenameTab.Text = "Rename Tab"
                 '
                 'cmenTabDuplicateTab
                 '
-                Me.cmenTabDuplicateTab.Name = "cmenTabDuplicateTab"
-                Me.cmenTabDuplicateTab.Size = New Size(244, 26)
-                Me.cmenTabDuplicateTab.Text = "Duplicate Tab"
+                cmenTabDuplicateTab.Name = "cmenTabDuplicateTab"
+                cmenTabDuplicateTab.Size = New Size(244, 26)
+                cmenTabDuplicateTab.Text = "Duplicate Tab"
                 '
                 'cmenTabReconnect
                 '
-                Me.cmenTabReconnect.Image = CType(resources.GetObject("cmenTabReconnect.Image"), Image)
-                Me.cmenTabReconnect.Name = "cmenTabReconnect"
-                Me.cmenTabReconnect.Size = New Size(244, 26)
-                Me.cmenTabReconnect.Text = "Reconnect"
+                cmenTabReconnect.Image = CType(resources.GetObject("cmenTabReconnect.Image"), Image)
+                cmenTabReconnect.Name = "cmenTabReconnect"
+                cmenTabReconnect.Size = New Size(244, 26)
+                cmenTabReconnect.Text = "Reconnect"
                 '
                 'cmenTabDisconnect
                 '
-                Me.cmenTabDisconnect.Image = My.Resources.Resources.Pause1
-                Me.cmenTabDisconnect.Name = "cmenTabDisconnect"
-                Me.cmenTabDisconnect.Size = New Size(244, 26)
-                Me.cmenTabDisconnect.Text = "Disconnect"
+                cmenTabDisconnect.Image = My.Resources.Resources.Pause1
+                cmenTabDisconnect.Name = "cmenTabDisconnect"
+                cmenTabDisconnect.Size = New Size(244, 26)
+                cmenTabDisconnect.Text = "Disconnect"
                 '
                 'Connection
                 '
-                Me.ClientSize = New Size(632, 453)
-                Me.Controls.Add(Me.TabController)
-                Me.Font = New Font("Microsoft Sans Serif", 8.25!, FontStyle.Regular, GraphicsUnit.Point, CType(0, Byte))
-                Me.Icon = My.Resources.Resources.mRemote_Icon
-                Me.Name = "Connection"
-                Me.TabText = "UI.Window.Connection"
-                Me.Text = "UI.Window.Connection"
-                Me.cmenTab.ResumeLayout(False)
-                Me.ResumeLayout(False)
+                ClientSize = New Size(632, 453)
+                Controls.Add(TabController)
+                Font = New Font("Microsoft Sans Serif", 8.25!, FontStyle.Regular, GraphicsUnit.Point, CType(0, Byte))
+                Icon = My.Resources.Resources.mRemote_Icon
+                Name = "Connection"
+                TabText = "UI.Window.Connection"
+                Text = "UI.Window.Connection"
+                cmenTab.ResumeLayout(False)
+                ResumeLayout(False)
             End Sub
 
 #End Region
@@ -242,11 +241,11 @@ Namespace UI
                     FormText = Language.Language.strNewPanel
                 End If
 
-                Me.WindowType = Type.Connection
-                Me.DockPnl = Panel
-                Me.InitializeComponent()
-                Me.Text = FormText
-                Me.TabText = FormText
+                WindowType = Type.Connection
+                DockPnl = Panel
+                InitializeComponent()
+                Text = FormText
+                TabText = FormText
             End Sub
 
             Public Function AddConnectionTab(conI As Info) As TabPage
@@ -282,15 +281,15 @@ Namespace UI
 
                     nTab.Title = nTab.Title.Replace("&", "&&")
 
-                    Dim conIcon As Drawing.Icon = Global.mRemote3G.Connection.Icon.FromString(conI.Icon)
+                    Dim conIcon As Drawing.Icon = mRemote3G.Connection.Icon.FromString(conI.Icon)
                     If conIcon IsNot Nothing Then
                         nTab.Icon = conIcon
                     End If
 
                     If MySettingsProperty.Settings.OpenTabsRightOfSelected Then
-                        Me.TabController.TabPages.Insert(Me.TabController.SelectedIndex + 1, nTab)
+                        TabController.TabPages.Insert(TabController.SelectedIndex + 1, nTab)
                     Else
-                        Me.TabController.TabPages.Add(nTab)
+                        TabController.TabPages.Add(nTab)
                     End If
 
                     nTab.Selected = True
@@ -377,7 +376,7 @@ Namespace UI
                 If Not frmMain.IsClosing And (
                         (MySettingsProperty.Settings.ConfirmCloseConnection = ConfirmClose.All And TabController.TabPages.Count > 0) Or
                         (MySettingsProperty.Settings.ConfirmCloseConnection = ConfirmClose.Multiple And TabController.TabPages.Count > 1)) Then
-                    Dim result As DialogResult = cTaskDialog.MessageBox(Me, Application.Info.ProductName, String.Format(Language.Language.strConfirmCloseConnectionPanelMainInstruction, Me.Text), "", "", "", Language.Language.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.YesNo, eSysIcons.Question, Nothing)
+                    Dim result As DialogResult = cTaskDialog.MessageBox(Me, Application.Info.ProductName, String.Format(Language.Language.strConfirmCloseConnectionPanelMainInstruction, Text), "", "", "", Language.Language.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.YesNo, eSysIcons.Question, Nothing)
                     If cTaskDialog.VerificationChecked Then
                         MySettingsProperty.Settings.ConfirmCloseConnection =
                             MySettingsProperty.Settings.ConfirmCloseConnection - 1
@@ -389,7 +388,7 @@ Namespace UI
                 End If
 
                 Try
-                    For Each tabP As TabPage In Me.TabController.TabPages
+                    For Each tabP As TabPage In TabController.TabPages
                         If tabP.Tag IsNot Nothing Then
                             Dim interfaceControl As InterfaceControl = tabP.Tag
                             interfaceControl.Protocol.Close()
@@ -417,11 +416,11 @@ Namespace UI
 #Region "TabController"
 
             Private Sub TabController_ClosePressed(sender As Object, e As EventArgs) Handles TabController.ClosePressed
-                If Me.TabController.SelectedTab Is Nothing Then
+                If TabController.SelectedTab Is Nothing Then
                     Exit Sub
                 End If
 
-                Me.CloseConnectionTab()
+                CloseConnectionTab()
             End Sub
 
             Private Sub CloseConnectionTab()
@@ -455,7 +454,7 @@ Namespace UI
                 Handles TabController.DoubleClickTab
                 _firstClickTicks = 0
                 If MySettingsProperty.Settings.DoubleClickOnTabClosesIt Then
-                    Me.CloseConnectionTab()
+                    CloseConnectionTab()
                 End If
             End Sub
 
@@ -486,11 +485,11 @@ Namespace UI
 
             Private Sub ShowHideMenuButtons()
                 Try
-                    If Me.TabController.SelectedTab Is Nothing Then
+                    If TabController.SelectedTab Is Nothing Then
                         Exit Sub
                     End If
 
-                    Dim IC As InterfaceControl = Me.TabController.SelectedTab.Tag
+                    Dim IC As InterfaceControl = TabController.SelectedTab.Tag
 
                     If IC Is Nothing Then
                         Exit Sub
@@ -513,33 +512,33 @@ Namespace UI
                     End If
 
                     If IC.Info.Protocol = Protocols.VNC Then
-                        Me.cmenTabSendSpecialKeys.Visible = True
-                        Me.cmenTabViewOnly.Visible = True
+                        cmenTabSendSpecialKeys.Visible = True
+                        cmenTabViewOnly.Visible = True
 
-                        Me.cmenTabSmartSize.Visible = True
-                        Me.cmenTabStartChat.Visible = True
-                        Me.cmenTabRefreshScreen.Visible = True
-                        Me.cmenTabTransferFile.Visible = False
+                        cmenTabSmartSize.Visible = True
+                        cmenTabStartChat.Visible = True
+                        cmenTabRefreshScreen.Visible = True
+                        cmenTabTransferFile.Visible = False
 
                         Dim vnc As VNC = IC.Protocol
-                        Me.cmenTabSmartSize.Checked = vnc.SmartSize
-                        Me.cmenTabViewOnly.Checked = vnc.ViewOnly
+                        cmenTabSmartSize.Checked = vnc.SmartSize
+                        cmenTabViewOnly.Checked = vnc.ViewOnly
                     Else
-                        Me.cmenTabSendSpecialKeys.Visible = False
-                        Me.cmenTabViewOnly.Visible = False
-                        Me.cmenTabStartChat.Visible = False
-                        Me.cmenTabRefreshScreen.Visible = False
-                        Me.cmenTabTransferFile.Visible = False
+                        cmenTabSendSpecialKeys.Visible = False
+                        cmenTabViewOnly.Visible = False
+                        cmenTabStartChat.Visible = False
+                        cmenTabRefreshScreen.Visible = False
+                        cmenTabTransferFile.Visible = False
                     End If
 
                     If IC.Info.Protocol = Protocols.SSH1 Or IC.Info.Protocol = Protocols.SSH2 Then
-                        Me.cmenTabTransferFile.Visible = True
+                        cmenTabTransferFile.Visible = True
                     End If
 
                     If TypeOf IC.Protocol Is PuttyBase Then
-                        Me.cmenTabPuttySettings.Visible = True
+                        cmenTabPuttySettings.Visible = True
                     Else
-                        Me.cmenTabPuttySettings.Visible = False
+                        cmenTabPuttySettings.Visible = False
                     End If
 
                     AddExternalApps()
@@ -555,45 +554,45 @@ Namespace UI
             End Sub
 
             Private Sub cmenTabSmartSize_Click(sender As Object, e As EventArgs) Handles cmenTabSmartSize.Click
-                Me.ToggleSmartSize()
+                ToggleSmartSize()
             End Sub
 
             Private Sub cmenTabReconnect_Click(sender As Object, e As EventArgs) Handles cmenTabReconnect.Click
-                Me.Reconnect()
+                Reconnect()
             End Sub
 
             Private Sub cmenTabTransferFile_Click(sender As Object, e As EventArgs) Handles cmenTabTransferFile.Click
-                Me.TransferFile()
+                TransferFile()
             End Sub
 
             Private Sub cmenTabViewOnly_Click(sender As Object, e As EventArgs) Handles cmenTabViewOnly.Click
-                Me.ToggleViewOnly()
+                ToggleViewOnly()
             End Sub
 
             Private Sub cmenTabStartChat_Click(sender As Object, e As EventArgs) Handles cmenTabStartChat.Click
-                Me.StartChat()
+                StartChat()
             End Sub
 
             Private Sub cmenTabRefreshScreen_Click(sender As Object, e As EventArgs) Handles cmenTabRefreshScreen.Click
-                Me.RefreshScreen()
+                RefreshScreen()
             End Sub
 
             Private Sub cmenTabSendSpecialKeysCtrlAltDel_Click(sender As Object, e As EventArgs) _
                 Handles cmenTabSendSpecialKeysCtrlAltDel.Click
-                Me.SendSpecialKeys(VNC.SpecialKeys.CtrlAltDel)
+                SendSpecialKeys(VNC.SpecialKeys.CtrlAltDel)
             End Sub
 
             Private Sub cmenTabSendSpecialKeysCtrlEsc_Click(sender As Object, e As EventArgs) _
                 Handles cmenTabSendSpecialKeysCtrlEsc.Click
-                Me.SendSpecialKeys(VNC.SpecialKeys.CtrlEsc)
+                SendSpecialKeys(VNC.SpecialKeys.CtrlEsc)
             End Sub
 
             Private Sub cmenTabFullscreen_Click(sender As Object, e As EventArgs) Handles cmenTabFullscreen.Click
-                Me.ToggleFullscreen()
+                ToggleFullscreen()
             End Sub
 
             Private Sub cmenTabPuttySettings_Click(sender As Object, e As EventArgs) Handles cmenTabPuttySettings.Click
-                Me.ShowPuttySettingsDialog()
+                ShowPuttySettingsDialog()
             End Sub
 
             Private Sub cmenTabExternalAppsEntry_Click(sender As Object, e As EventArgs)
@@ -601,15 +600,15 @@ Namespace UI
             End Sub
 
             Private Sub cmenTabDisconnect_Click(sender As Object, e As EventArgs) Handles cmenTabDisconnect.Click
-                Me.CloseTabMenu()
+                CloseTabMenu()
             End Sub
 
             Private Sub cmenTabDuplicateTab_Click(sender As Object, e As EventArgs) Handles cmenTabDuplicateTab.Click
-                Me.DuplicateTab()
+                DuplicateTab()
             End Sub
 
             Private Sub cmenTabRenameTab_Click(sender As Object, e As EventArgs) Handles cmenTabRenameTab.Click
-                Me.RenameTab()
+                RenameTab()
             End Sub
 
 #End Region
@@ -618,9 +617,9 @@ Namespace UI
 
             Private Sub ToggleSmartSize()
                 Try
-                    If Me.TabController.SelectedTab IsNot Nothing Then
-                        If TypeOf Me.TabController.SelectedTab.Tag Is InterfaceControl Then
-                            Dim IC As InterfaceControl = Me.TabController.SelectedTab.Tag
+                    If TabController.SelectedTab IsNot Nothing Then
+                        If TypeOf TabController.SelectedTab.Tag Is InterfaceControl Then
+                            Dim IC As InterfaceControl = TabController.SelectedTab.Tag
 
                             If TypeOf IC.Protocol Is RDP Then
                                 Dim rdp As RDP = IC.Protocol
@@ -638,9 +637,9 @@ Namespace UI
 
             Private Sub TransferFile()
                 Try
-                    If Me.TabController.SelectedTab IsNot Nothing Then
-                        If TypeOf Me.TabController.SelectedTab.Tag Is InterfaceControl Then
-                            Dim IC As InterfaceControl = Me.TabController.SelectedTab.Tag
+                    If TabController.SelectedTab IsNot Nothing Then
+                        If TypeOf TabController.SelectedTab.Tag Is InterfaceControl Then
+                            Dim IC As InterfaceControl = TabController.SelectedTab.Tag
 
                             If IC.Info.Protocol = Protocols.SSH1 Or IC.Info.Protocol = Protocols.SSH2 Then
                                 SSHTransferFile()
@@ -657,7 +656,7 @@ Namespace UI
             Private Sub SSHTransferFile()
                 Try
 
-                    Dim IC As InterfaceControl = Me.TabController.SelectedTab.Tag
+                    Dim IC As InterfaceControl = TabController.SelectedTab.Tag
 
                     Runtime.Windows.Show(Type.SSHTransfer)
 
@@ -674,7 +673,7 @@ Namespace UI
 
             Private Sub VNCTransferFile()
                 Try
-                    Dim IC As InterfaceControl = Me.TabController.SelectedTab.Tag
+                    Dim IC As InterfaceControl = TabController.SelectedTab.Tag
                     Dim vnc As VNC = IC.Protocol
                     vnc.StartFileTransfer()
                 Catch ex As Exception
@@ -684,9 +683,9 @@ Namespace UI
 
             Private Sub ToggleViewOnly()
                 Try
-                    If Me.TabController.SelectedTab IsNot Nothing Then
-                        If TypeOf Me.TabController.SelectedTab.Tag Is InterfaceControl Then
-                            Dim IC As InterfaceControl = Me.TabController.SelectedTab.Tag
+                    If TabController.SelectedTab IsNot Nothing Then
+                        If TypeOf TabController.SelectedTab.Tag Is InterfaceControl Then
+                            Dim IC As InterfaceControl = TabController.SelectedTab.Tag
 
                             If TypeOf IC.Protocol Is VNC Then
                                 cmenTabViewOnly.Checked = Not cmenTabViewOnly.Checked
@@ -703,9 +702,9 @@ Namespace UI
 
             Private Sub StartChat()
                 Try
-                    If Me.TabController.SelectedTab IsNot Nothing Then
-                        If TypeOf Me.TabController.SelectedTab.Tag Is InterfaceControl Then
-                            Dim IC As InterfaceControl = Me.TabController.SelectedTab.Tag
+                    If TabController.SelectedTab IsNot Nothing Then
+                        If TypeOf TabController.SelectedTab.Tag Is InterfaceControl Then
+                            Dim IC As InterfaceControl = TabController.SelectedTab.Tag
 
                             If TypeOf IC.Protocol Is VNC Then
                                 Dim vnc As VNC = IC.Protocol
@@ -720,9 +719,9 @@ Namespace UI
 
             Private Sub RefreshScreen()
                 Try
-                    If Me.TabController.SelectedTab IsNot Nothing Then
-                        If TypeOf Me.TabController.SelectedTab.Tag Is InterfaceControl Then
-                            Dim IC As InterfaceControl = Me.TabController.SelectedTab.Tag
+                    If TabController.SelectedTab IsNot Nothing Then
+                        If TypeOf TabController.SelectedTab.Tag Is InterfaceControl Then
+                            Dim IC As InterfaceControl = TabController.SelectedTab.Tag
 
                             If TypeOf IC.Protocol Is VNC Then
                                 Dim vnc As VNC = IC.Protocol
@@ -737,9 +736,9 @@ Namespace UI
 
             Private Sub SendSpecialKeys(Keys As VNC.SpecialKeys)
                 Try
-                    If Me.TabController.SelectedTab IsNot Nothing Then
-                        If TypeOf Me.TabController.SelectedTab.Tag Is InterfaceControl Then
-                            Dim IC As InterfaceControl = Me.TabController.SelectedTab.Tag
+                    If TabController.SelectedTab IsNot Nothing Then
+                        If TypeOf TabController.SelectedTab.Tag Is InterfaceControl Then
+                            Dim IC As InterfaceControl = TabController.SelectedTab.Tag
 
                             If TypeOf IC.Protocol Is VNC Then
                                 Dim vnc As VNC = IC.Protocol
@@ -754,9 +753,9 @@ Namespace UI
 
             Private Sub ToggleFullscreen()
                 Try
-                    If Me.TabController.SelectedTab IsNot Nothing Then
-                        If TypeOf Me.TabController.SelectedTab.Tag Is InterfaceControl Then
-                            Dim IC As InterfaceControl = Me.TabController.SelectedTab.Tag
+                    If TabController.SelectedTab IsNot Nothing Then
+                        If TypeOf TabController.SelectedTab.Tag Is InterfaceControl Then
+                            Dim IC As InterfaceControl = TabController.SelectedTab.Tag
 
                             If TypeOf IC.Protocol Is RDP Then
                                 Dim rdp As RDP = IC.Protocol
@@ -771,9 +770,9 @@ Namespace UI
 
             Private Sub ShowPuttySettingsDialog()
                 Try
-                    If Me.TabController.SelectedTab IsNot Nothing Then
-                        If TypeOf Me.TabController.SelectedTab.Tag Is InterfaceControl Then
-                            Dim objInterfaceControl As InterfaceControl = Me.TabController.SelectedTab.Tag
+                    If TabController.SelectedTab IsNot Nothing Then
+                        If TypeOf TabController.SelectedTab.Tag Is InterfaceControl Then
+                            Dim objInterfaceControl As InterfaceControl = TabController.SelectedTab.Tag
 
                             If TypeOf objInterfaceControl.Protocol Is PuttyBase Then
                                 Dim objPuttyBase As PuttyBase = objInterfaceControl.Protocol
@@ -818,9 +817,9 @@ Namespace UI
 
             Private Sub StartExternalApp(ExtA As ExternalTool)
                 Try
-                    If Me.TabController.SelectedTab IsNot Nothing Then
-                        If TypeOf Me.TabController.SelectedTab.Tag Is InterfaceControl Then
-                            Dim IC As InterfaceControl = Me.TabController.SelectedTab.Tag
+                    If TabController.SelectedTab IsNot Nothing Then
+                        If TypeOf TabController.SelectedTab.Tag Is InterfaceControl Then
+                            Dim IC As InterfaceControl = TabController.SelectedTab.Tag
 
                             ExtA.Start(IC.Info)
                         End If
@@ -833,9 +832,9 @@ Namespace UI
 
             Private Sub CloseTabMenu()
                 Try
-                    If Me.TabController.SelectedTab IsNot Nothing Then
-                        If TypeOf Me.TabController.SelectedTab.Tag Is InterfaceControl Then
-                            Dim IC As InterfaceControl = Me.TabController.SelectedTab.Tag
+                    If TabController.SelectedTab IsNot Nothing Then
+                        If TypeOf TabController.SelectedTab.Tag Is InterfaceControl Then
+                            Dim IC As InterfaceControl = TabController.SelectedTab.Tag
 
                             IC.Protocol.Close()
                         End If
@@ -847,9 +846,9 @@ Namespace UI
 
             Private Sub DuplicateTab()
                 Try
-                    If Me.TabController.SelectedTab IsNot Nothing Then
-                        If TypeOf Me.TabController.SelectedTab.Tag Is InterfaceControl Then
-                            Dim IC As InterfaceControl = Me.TabController.SelectedTab.Tag
+                    If TabController.SelectedTab IsNot Nothing Then
+                        If TypeOf TabController.SelectedTab.Tag Is InterfaceControl Then
+                            Dim IC As InterfaceControl = TabController.SelectedTab.Tag
 
                             Runtime.OpenConnection(IC.Info, Info.Force.DoNotJump)
                             _ignoreChangeSelectedTabClick = False
@@ -862,9 +861,9 @@ Namespace UI
 
             Private Sub Reconnect()
                 Try
-                    If Me.TabController.SelectedTab IsNot Nothing Then
-                        If TypeOf Me.TabController.SelectedTab.Tag Is InterfaceControl Then
-                            Dim IC As InterfaceControl = Me.TabController.SelectedTab.Tag
+                    If TabController.SelectedTab IsNot Nothing Then
+                        If TypeOf TabController.SelectedTab.Tag Is InterfaceControl Then
+                            Dim IC As InterfaceControl = TabController.SelectedTab.Tag
                             Dim conI As Info = IC.Info
 
                             IC.Protocol.Close()
@@ -880,10 +879,10 @@ Namespace UI
             Private Sub RenameTab()
                 Try
                     Dim nTitle As String = InputBox(Language.Language.strNewTitle & ":", ,
-                                                    Me.TabController.SelectedTab.Title.Replace("&&", "&"))
+                                                    TabController.SelectedTab.Title.Replace("&&", "&"))
 
                     If nTitle <> "" Then
-                        Me.TabController.SelectedTab.Title = nTitle.Replace("&", "&&")
+                        TabController.SelectedTab.Title = nTitle.Replace("&", "&&")
                     End If
                 Catch ex As Exception
                     Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "RenameTab (UI.Window.Connections) failed" & vbNewLine & ex.ToString(), True)
@@ -906,19 +905,19 @@ Namespace UI
             Private Delegate Sub CloseTabCB(TabToBeClosed As TabPage)
 
             Private Sub CloseTab(TabToBeClosed As TabPage)
-                If Me.TabController.InvokeRequired Then
+                If TabController.InvokeRequired Then
                     Dim s As New CloseTabCB(AddressOf CloseTab)
 
                     Try
-                        Me.TabController.Invoke(s, TabToBeClosed)
+                        TabController.Invoke(s, TabToBeClosed)
                     Catch comEx As COMException
-                        Me.TabController.Invoke(s, TabToBeClosed)
+                        TabController.Invoke(s, TabToBeClosed)
                     Catch ex As Exception
                         Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "Couldn't close tab" & vbNewLine & ex.ToString(), True)
                     End Try
                 Else
                     Try
-                        Me.TabController.TabPages.Remove(TabToBeClosed)
+                        TabController.TabPages.Remove(TabToBeClosed)
                         _ignoreChangeSelectedTabClick = False
                     Catch comEx As COMException
                         CloseTab(TabToBeClosed)
@@ -926,8 +925,8 @@ Namespace UI
                         Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "Couldn't close tab" & vbNewLine & ex.ToString(), True)
                     End Try
 
-                    If Me.TabController.TabPages.Count = 0 Then
-                        Me.Close()
+                    If TabController.TabPages.Count = 0 Then
+                        Close()
                     End If
                 End If
             End Sub
@@ -988,9 +987,9 @@ Namespace UI
 
             Private Sub FocusIC()
                 Try
-                    If Me.TabController.SelectedTab IsNot Nothing Then
-                        If TypeOf Me.TabController.SelectedTab.Tag Is InterfaceControl Then
-                            Dim IC As InterfaceControl = Me.TabController.SelectedTab.Tag
+                    If TabController.SelectedTab IsNot Nothing Then
+                        If TypeOf TabController.SelectedTab.Tag Is InterfaceControl Then
+                            Dim IC As InterfaceControl = TabController.SelectedTab.Tag
                             IC.Protocol.Focus()
                         End If
                     End If
@@ -1001,9 +1000,9 @@ Namespace UI
 
             Public Sub RefreshIC()
                 Try
-                    If Me.TabController.SelectedTab IsNot Nothing Then
-                        If TypeOf Me.TabController.SelectedTab.Tag Is InterfaceControl Then
-                            Dim IC As InterfaceControl = Me.TabController.SelectedTab.Tag
+                    If TabController.SelectedTab IsNot Nothing Then
+                        If TypeOf TabController.SelectedTab.Tag Is InterfaceControl Then
+                            Dim IC As InterfaceControl = TabController.SelectedTab.Tag
 
                             If IC.Info.Protocol = Protocols.VNC Then
                                 TryCast(IC.Protocol, VNC).RefreshScreen()
@@ -1019,7 +1018,7 @@ Namespace UI
 
 #Region "Window Overrides"
 
-            Protected Overloads Overrides Sub WndProc(ByRef m As System.Windows.Forms.Message)
+            Protected Overloads Overrides Sub WndProc(ByRef m As Windows.Forms.Message)
                 Try
                     If m.Msg = NativeMethods.WM_MOUSEACTIVATE Then
                         Dim selectedTab As TabPage = TabController.SelectedTab
