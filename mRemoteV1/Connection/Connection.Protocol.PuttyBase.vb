@@ -235,7 +235,7 @@ Namespace Connection
                 Try
                     If InterfaceControl.Size = Size.Empty Then Return
                     NativeMethods.MoveWindow(PuttyHandle, -SystemInformation.FrameBorderSize.Width,
-                                             (SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height),
+                                             -(SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height),
                                              InterfaceControl.Width + (SystemInformation.FrameBorderSize.Width * 2),
                                              InterfaceControl.Height + SystemInformation.CaptionHeight +
                                              (SystemInformation.FrameBorderSize.Height * 2), True)
