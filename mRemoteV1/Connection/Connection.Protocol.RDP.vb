@@ -547,7 +547,7 @@ Namespace Connection
             Public Enum Defaults
                 Colors = RDPColors.Colors16Bit
                 Sounds = RDPSounds.DoNotPlay
-                Resolution = RDPResolutions.SmartSize
+                Resolution = RDPResolutions.FitToWindow
                 Port = 3389
             End Enum
 
