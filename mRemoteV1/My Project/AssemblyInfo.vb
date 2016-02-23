@@ -10,7 +10,7 @@ Imports System.Runtime.InteropServices
 
 <Assembly: AssemblyTitle("mRemote3G")>
 <Assembly: AssemblyDescription("")>
-<Assembly: AssemblyCompany("")>
+<Assembly: AssemblyCompany("kmscode")>
 <Assembly: AssemblyProduct("mRemote3G")>
 <
     Assembly: AssemblyCopyright _
@@ -35,6 +35,6 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.94.2.*")>
+<Assembly: AssemblyVersion("1.94.3.*")>
 
 <Assembly: NeutralResourcesLanguage("en")>
