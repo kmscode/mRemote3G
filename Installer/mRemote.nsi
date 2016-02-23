@@ -102,6 +102,47 @@ Function .onInit
 	end:
 FunctionEnd
 
+; http://stackoverflow.com/questions/15227634/check-for-net4-5-with-nsis
+; returns a numeric value on the stack, ranging from 0 to 450, 451, 452 or 460. 0 means nothing found, the other values mean at least that version
+Function CheckForDotVersion45Up
+
+  ReadRegDWORD $0 HKLM "SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full" Release
+
+	; https://msdn.microsoft.com/en-us/library/hh925568%28v=vs.110%29.aspx#net_d
+	; Anything greater than 393295 is acceptable
+  IntCmp $0 393295 is46 isbelow46 is46
+
+  isbelow46:
+  IntCmp $0 379893 is452 isbelow452 is452
+
+  isbelow452:
+  IntCmp $0 378675 is451 isbelow451 is451
+
+  isbelow451:
+  IntCmp $0 378389 is45 isbelow45 is45
+
+  isbelow45:
+  Push 0
+  Return
+
+  is46:
+  Push 460
+  Return
+
+  is452:
+  Push 452
+  Return
+
+  is451:
+  Push 451
+  Return
+
+  is45:
+  Push 45
+  Return
+
+FunctionEnd
+
 Function SelectLanguage
 	;Language selection dialog
 	Push ""
@@ -128,6 +169,14 @@ Function SelectLanguage
 	Pop $LANGUAGE
 	StrCmp $LANGUAGE "cancel" 0 +2
 		Abort
+		
+	Call CheckForDotVersion45Up
+	Pop $0
+	${IfNot} $0 = 460
+		MessageBox MB_OK|MB_ICONEXCLAMATION "$(RequiresNetFramework)"
+		Quit
+	${EndIf}
+	
 FunctionEnd
 
 Section "" ; Install
@@ -167,9 +216,6 @@ Section "" ; Install
 SectionEnd
 
 Section "un.Uninstall"
-	; Unregister ActiveX components
-	UnregDLL "$INSTDIR\eolwtscom.dll"
-
 	; Delete Files
 	RMDIR /r $INSTDIR
 
