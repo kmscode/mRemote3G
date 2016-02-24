@@ -38,6 +38,9 @@ echo Building release version...
 echo Building portable version...
 %DEVENV% "%~dp0\mRemoteV1.sln" /build "Release Portable"
 
+echo Setting LARGEADDRESSAWARE
+editbin /LARGEADDRESSAWARE "%~dp0\mRemoteV1\bin\Release\mRemote3G.exe"
+
 rem echo Signing binaries...
 rem %SIGNCMD% ^
 rem	"%~dp0\mRemoteV1\bin\Release\de\mRemote3G.resources.dll" ^
